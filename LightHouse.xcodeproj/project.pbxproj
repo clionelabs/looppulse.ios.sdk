@@ -1,0 +1,545 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2455AD3D18FA2F0200EC9849 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2455AD3C18FA2F0200EC9849 /* Foundation.framework */; };
+		2455AD3F18FA2F0200EC9849 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2455AD3E18FA2F0200EC9849 /* CoreGraphics.framework */; };
+		2455AD4118FA2F0200EC9849 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2455AD4018FA2F0200EC9849 /* UIKit.framework */; };
+		2455AD4318FA2F0200EC9849 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2455AD4218FA2F0200EC9849 /* CoreData.framework */; };
+		2455AD4918FA2F0200EC9849 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2455AD4718FA2F0200EC9849 /* InfoPlist.strings */; };
+		2455AD4B18FA2F0200EC9849 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2455AD4A18FA2F0200EC9849 /* main.m */; };
+		2455AD4F18FA2F0200EC9849 /* CLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2455AD4E18FA2F0200EC9849 /* CLAppDelegate.m */; };
+		2455AD5218FA2F0200EC9849 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2455AD5018FA2F0200EC9849 /* Main.storyboard */; };
+		2455AD5518FA2F0300EC9849 /* LightHouse.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2455AD5318FA2F0300EC9849 /* LightHouse.xcdatamodeld */; };
+		2455AD5818FA2F0300EC9849 /* CLMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2455AD5718FA2F0300EC9849 /* CLMasterViewController.m */; };
+		2455AD5B18FA2F0300EC9849 /* CLDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2455AD5A18FA2F0300EC9849 /* CLDetailViewController.m */; };
+		2455AD5D18FA2F0300EC9849 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2455AD5C18FA2F0300EC9849 /* Images.xcassets */; };
+		2455AD6418FA2F0300EC9849 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2455AD6318FA2F0300EC9849 /* XCTest.framework */; };
+		2455AD6518FA2F0300EC9849 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2455AD3C18FA2F0200EC9849 /* Foundation.framework */; };
+		2455AD6618FA2F0300EC9849 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2455AD4018FA2F0200EC9849 /* UIKit.framework */; };
+		2455AD6718FA2F0300EC9849 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2455AD4218FA2F0200EC9849 /* CoreData.framework */; };
+		2455AD6F18FA2F0300EC9849 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2455AD6D18FA2F0300EC9849 /* InfoPlist.strings */; };
+		2455AD7118FA2F0300EC9849 /* LightHouseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2455AD7018FA2F0300EC9849 /* LightHouseTests.m */; };
+		2455AD7B18FAE44A00EC9849 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2455AD7A18FAE44A00EC9849 /* CoreBluetooth.framework */; };
+		2455AD7D18FAE45400EC9849 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2455AD7C18FAE45400EC9849 /* CoreLocation.framework */; };
+		245CDFC619080F0B0018C382 /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 245CDFC519080F0B0018C382 /* Firebase.framework */; };
+		245CDFC819080F270018C382 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 245CDFC719080F270018C382 /* CFNetwork.framework */; };
+		245CDFCA19080F2E0018C382 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 245CDFC919080F2E0018C382 /* Security.framework */; };
+		245CDFCC19080F380018C382 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 245CDFCB19080F380018C382 /* libicucore.dylib */; };
+		245CDFCE19080F410018C382 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 245CDFCD19080F410018C382 /* libc++.dylib */; };
+		245CDFD019080F4A0018C382 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 245CDFCF19080F4A0018C382 /* SystemConfiguration.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2455AD6818FA2F0300EC9849 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2455AD3118FA2F0200EC9849 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2455AD3818FA2F0200EC9849;
+			remoteInfo = LightHouse;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2455AD3918FA2F0200EC9849 /* LightHouse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LightHouse.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2455AD3C18FA2F0200EC9849 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		2455AD3E18FA2F0200EC9849 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		2455AD4018FA2F0200EC9849 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		2455AD4218FA2F0200EC9849 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		2455AD4618FA2F0200EC9849 /* LightHouse-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LightHouse-Info.plist"; sourceTree = "<group>"; };
+		2455AD4818FA2F0200EC9849 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2455AD4A18FA2F0200EC9849 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2455AD4C18FA2F0200EC9849 /* LightHouse-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LightHouse-Prefix.pch"; sourceTree = "<group>"; };
+		2455AD4D18FA2F0200EC9849 /* CLAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLAppDelegate.h; sourceTree = "<group>"; };
+		2455AD4E18FA2F0200EC9849 /* CLAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLAppDelegate.m; sourceTree = "<group>"; };
+		2455AD5118FA2F0200EC9849 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2455AD5418FA2F0300EC9849 /* LightHouse.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LightHouse.xcdatamodel; sourceTree = "<group>"; };
+		2455AD5618FA2F0300EC9849 /* CLMasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLMasterViewController.h; sourceTree = "<group>"; };
+		2455AD5718FA2F0300EC9849 /* CLMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLMasterViewController.m; sourceTree = "<group>"; };
+		2455AD5918FA2F0300EC9849 /* CLDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLDetailViewController.h; sourceTree = "<group>"; };
+		2455AD5A18FA2F0300EC9849 /* CLDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLDetailViewController.m; sourceTree = "<group>"; };
+		2455AD5C18FA2F0300EC9849 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		2455AD6218FA2F0300EC9849 /* LightHouseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LightHouseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2455AD6318FA2F0300EC9849 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		2455AD6C18FA2F0300EC9849 /* LightHouseTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LightHouseTests-Info.plist"; sourceTree = "<group>"; };
+		2455AD6E18FA2F0300EC9849 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2455AD7018FA2F0300EC9849 /* LightHouseTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LightHouseTests.m; sourceTree = "<group>"; };
+		2455AD7A18FAE44A00EC9849 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		2455AD7C18FAE45400EC9849 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		245CDFC519080F0B0018C382 /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
+		245CDFC719080F270018C382 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		245CDFC919080F2E0018C382 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		245CDFCB19080F380018C382 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		245CDFCD19080F410018C382 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		245CDFCF19080F4A0018C382 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2455AD3618FA2F0200EC9849 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				245CDFD019080F4A0018C382 /* SystemConfiguration.framework in Frameworks */,
+				245CDFCE19080F410018C382 /* libc++.dylib in Frameworks */,
+				245CDFCC19080F380018C382 /* libicucore.dylib in Frameworks */,
+				245CDFCA19080F2E0018C382 /* Security.framework in Frameworks */,
+				245CDFC819080F270018C382 /* CFNetwork.framework in Frameworks */,
+				2455AD7D18FAE45400EC9849 /* CoreLocation.framework in Frameworks */,
+				2455AD7B18FAE44A00EC9849 /* CoreBluetooth.framework in Frameworks */,
+				2455AD3F18FA2F0200EC9849 /* CoreGraphics.framework in Frameworks */,
+				245CDFC619080F0B0018C382 /* Firebase.framework in Frameworks */,
+				2455AD4318FA2F0200EC9849 /* CoreData.framework in Frameworks */,
+				2455AD4118FA2F0200EC9849 /* UIKit.framework in Frameworks */,
+				2455AD3D18FA2F0200EC9849 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2455AD5F18FA2F0300EC9849 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2455AD6418FA2F0300EC9849 /* XCTest.framework in Frameworks */,
+				2455AD6718FA2F0300EC9849 /* CoreData.framework in Frameworks */,
+				2455AD6618FA2F0300EC9849 /* UIKit.framework in Frameworks */,
+				2455AD6518FA2F0300EC9849 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2455AD3018FA2F0200EC9849 = {
+			isa = PBXGroup;
+			children = (
+				2455AD4418FA2F0200EC9849 /* LightHouse */,
+				2455AD6A18FA2F0300EC9849 /* LightHouseTests */,
+				2455AD3B18FA2F0200EC9849 /* Frameworks */,
+				2455AD3A18FA2F0200EC9849 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2455AD3A18FA2F0200EC9849 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2455AD3918FA2F0200EC9849 /* LightHouse.app */,
+				2455AD6218FA2F0300EC9849 /* LightHouseTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2455AD3B18FA2F0200EC9849 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				245CDFCF19080F4A0018C382 /* SystemConfiguration.framework */,
+				245CDFCD19080F410018C382 /* libc++.dylib */,
+				245CDFCB19080F380018C382 /* libicucore.dylib */,
+				245CDFC919080F2E0018C382 /* Security.framework */,
+				245CDFC719080F270018C382 /* CFNetwork.framework */,
+				245CDFC519080F0B0018C382 /* Firebase.framework */,
+				2455AD7C18FAE45400EC9849 /* CoreLocation.framework */,
+				2455AD7A18FAE44A00EC9849 /* CoreBluetooth.framework */,
+				2455AD3C18FA2F0200EC9849 /* Foundation.framework */,
+				2455AD3E18FA2F0200EC9849 /* CoreGraphics.framework */,
+				2455AD4018FA2F0200EC9849 /* UIKit.framework */,
+				2455AD4218FA2F0200EC9849 /* CoreData.framework */,
+				2455AD6318FA2F0300EC9849 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2455AD4418FA2F0200EC9849 /* LightHouse */ = {
+			isa = PBXGroup;
+			children = (
+				2455AD5018FA2F0200EC9849 /* Main.storyboard */,
+				2455AD4D18FA2F0200EC9849 /* CLAppDelegate.h */,
+				2455AD4E18FA2F0200EC9849 /* CLAppDelegate.m */,
+				2455AD5618FA2F0300EC9849 /* CLMasterViewController.h */,
+				2455AD5718FA2F0300EC9849 /* CLMasterViewController.m */,
+				2455AD5918FA2F0300EC9849 /* CLDetailViewController.h */,
+				2455AD5A18FA2F0300EC9849 /* CLDetailViewController.m */,
+				2455AD5C18FA2F0300EC9849 /* Images.xcassets */,
+				2455AD5318FA2F0300EC9849 /* LightHouse.xcdatamodeld */,
+				2455AD4518FA2F0200EC9849 /* Supporting Files */,
+			);
+			path = LightHouse;
+			sourceTree = "<group>";
+		};
+		2455AD4518FA2F0200EC9849 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2455AD4618FA2F0200EC9849 /* LightHouse-Info.plist */,
+				2455AD4718FA2F0200EC9849 /* InfoPlist.strings */,
+				2455AD4A18FA2F0200EC9849 /* main.m */,
+				2455AD4C18FA2F0200EC9849 /* LightHouse-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2455AD6A18FA2F0300EC9849 /* LightHouseTests */ = {
+			isa = PBXGroup;
+			children = (
+				2455AD7018FA2F0300EC9849 /* LightHouseTests.m */,
+				2455AD6B18FA2F0300EC9849 /* Supporting Files */,
+			);
+			path = LightHouseTests;
+			sourceTree = "<group>";
+		};
+		2455AD6B18FA2F0300EC9849 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2455AD6C18FA2F0300EC9849 /* LightHouseTests-Info.plist */,
+				2455AD6D18FA2F0300EC9849 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2455AD3818FA2F0200EC9849 /* LightHouse */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2455AD7418FA2F0300EC9849 /* Build configuration list for PBXNativeTarget "LightHouse" */;
+			buildPhases = (
+				2455AD3518FA2F0200EC9849 /* Sources */,
+				2455AD3618FA2F0200EC9849 /* Frameworks */,
+				2455AD3718FA2F0200EC9849 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LightHouse;
+			productName = LightHouse;
+			productReference = 2455AD3918FA2F0200EC9849 /* LightHouse.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2455AD6118FA2F0300EC9849 /* LightHouseTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2455AD7718FA2F0300EC9849 /* Build configuration list for PBXNativeTarget "LightHouseTests" */;
+			buildPhases = (
+				2455AD5E18FA2F0300EC9849 /* Sources */,
+				2455AD5F18FA2F0300EC9849 /* Frameworks */,
+				2455AD6018FA2F0300EC9849 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2455AD6918FA2F0300EC9849 /* PBXTargetDependency */,
+			);
+			name = LightHouseTests;
+			productName = LightHouseTests;
+			productReference = 2455AD6218FA2F0300EC9849 /* LightHouseTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2455AD3118FA2F0200EC9849 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = CL;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Clione Labs";
+				TargetAttributes = {
+					2455AD6118FA2F0300EC9849 = {
+						TestTargetID = 2455AD3818FA2F0200EC9849;
+					};
+				};
+			};
+			buildConfigurationList = 2455AD3418FA2F0200EC9849 /* Build configuration list for PBXProject "LightHouse" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2455AD3018FA2F0200EC9849;
+			productRefGroup = 2455AD3A18FA2F0200EC9849 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2455AD3818FA2F0200EC9849 /* LightHouse */,
+				2455AD6118FA2F0300EC9849 /* LightHouseTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2455AD3718FA2F0200EC9849 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2455AD5D18FA2F0300EC9849 /* Images.xcassets in Resources */,
+				2455AD4918FA2F0200EC9849 /* InfoPlist.strings in Resources */,
+				2455AD5218FA2F0200EC9849 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2455AD6018FA2F0300EC9849 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2455AD6F18FA2F0300EC9849 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2455AD3518FA2F0200EC9849 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2455AD4B18FA2F0200EC9849 /* main.m in Sources */,
+				2455AD5818FA2F0300EC9849 /* CLMasterViewController.m in Sources */,
+				2455AD5B18FA2F0300EC9849 /* CLDetailViewController.m in Sources */,
+				2455AD4F18FA2F0200EC9849 /* CLAppDelegate.m in Sources */,
+				2455AD5518FA2F0300EC9849 /* LightHouse.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2455AD5E18FA2F0300EC9849 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2455AD7118FA2F0300EC9849 /* LightHouseTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2455AD6918FA2F0300EC9849 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2455AD3818FA2F0200EC9849 /* LightHouse */;
+			targetProxy = 2455AD6818FA2F0300EC9849 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		2455AD4718FA2F0200EC9849 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2455AD4818FA2F0200EC9849 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		2455AD5018FA2F0200EC9849 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2455AD5118FA2F0200EC9849 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		2455AD6D18FA2F0300EC9849 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2455AD6E18FA2F0300EC9849 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2455AD7218FA2F0300EC9849 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		2455AD7318FA2F0300EC9849 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				OTHER_LDFLAGS = "-ObjC";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2455AD7518FA2F0300EC9849 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LightHouse/LightHouse-Prefix.pch";
+				INFOPLIST_FILE = "LightHouse/LightHouse-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		2455AD7618FA2F0300EC9849 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LightHouse/LightHouse-Prefix.pch";
+				INFOPLIST_FILE = "LightHouse/LightHouse-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		2455AD7818FA2F0300EC9849 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/LightHouse.app/LightHouse";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LightHouse/LightHouse-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "LightHouseTests/LightHouseTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		2455AD7918FA2F0300EC9849 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/LightHouse.app/LightHouse";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LightHouse/LightHouse-Prefix.pch";
+				INFOPLIST_FILE = "LightHouseTests/LightHouseTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2455AD3418FA2F0200EC9849 /* Build configuration list for PBXProject "LightHouse" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2455AD7218FA2F0300EC9849 /* Debug */,
+				2455AD7318FA2F0300EC9849 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2455AD7418FA2F0300EC9849 /* Build configuration list for PBXNativeTarget "LightHouse" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2455AD7518FA2F0300EC9849 /* Debug */,
+				2455AD7618FA2F0300EC9849 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2455AD7718FA2F0300EC9849 /* Build configuration list for PBXNativeTarget "LightHouseTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2455AD7818FA2F0300EC9849 /* Debug */,
+				2455AD7918FA2F0300EC9849 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		2455AD5318FA2F0300EC9849 /* LightHouse.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				2455AD5418FA2F0300EC9849 /* LightHouse.xcdatamodel */,
+			);
+			currentVersion = 2455AD5418FA2F0300EC9849 /* LightHouse.xcdatamodel */;
+			path = LightHouse.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 2455AD3118FA2F0200EC9849 /* Project object */;
+}
