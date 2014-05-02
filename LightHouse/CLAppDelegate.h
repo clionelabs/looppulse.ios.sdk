@@ -18,6 +18,5 @@
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
-- (void)startRangingAllRegions;
 
 @end

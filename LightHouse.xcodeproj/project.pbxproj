@@ -34,6 +34,7 @@
 		245CDFCE19080F410018C382 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 245CDFCD19080F410018C382 /* libc++.dylib */; };
 		245CDFD019080F4A0018C382 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 245CDFCF19080F4A0018C382 /* SystemConfiguration.framework */; };
 		247132C51912ADAF003A99E3 /* LoopPulse.m in Sources */ = {isa = PBXBuildFile; fileRef = 247132C41912ADAF003A99E3 /* LoopPulse.m */; };
+		247132C81913520E003A99E3 /* LPLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 247132C71913520E003A99E3 /* LPLocationManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,8 @@
 		245CDFCF19080F4A0018C382 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		247132C31912ADAF003A99E3 /* LoopPulse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopPulse.h; sourceTree = SOURCE_ROOT; };
 		247132C41912ADAF003A99E3 /* LoopPulse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopPulse.m; sourceTree = SOURCE_ROOT; };
+		247132C61913520E003A99E3 /* LPLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPLocationManager.h; sourceTree = SOURCE_ROOT; };
+		247132C71913520E003A99E3 /* LPLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPLocationManager.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -207,6 +210,8 @@
 			children = (
 				247132C31912ADAF003A99E3 /* LoopPulse.h */,
 				247132C41912ADAF003A99E3 /* LoopPulse.m */,
+				247132C61913520E003A99E3 /* LPLocationManager.h */,
+				247132C71913520E003A99E3 /* LPLocationManager.m */,
 			);
 			name = LoopPulse;
 			sourceTree = "<group>";
@@ -314,6 +319,7 @@
 				2455AD5B18FA2F0300EC9849 /* CLDetailViewController.m in Sources */,
 				247132C51912ADAF003A99E3 /* LoopPulse.m in Sources */,
 				2455AD4F18FA2F0200EC9849 /* CLAppDelegate.m in Sources */,
+				247132C81913520E003A99E3 /* LPLocationManager.m in Sources */,
 				2455AD5518FA2F0300EC9849 /* LightHouse.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,7 +7,34 @@
 //
 
 #import "LoopPulse.h"
+#import "LPLocationManager.h"
+
+@interface LoopPulse ()
+@property (nonatomic, retain) NSString *token;
+@property (nonatomic, retain) LPLocationManager *locationManager;
+@end
 
 @implementation LoopPulse
+
+- (id)initWithToken:(NSString *)token
+{
+    self = [[LoopPulse alloc] init];
+    self.token = token;
+    self.locationManager = [[LPLocationManager alloc] init];
+    self.locationManager.delegate = self.locationManager;
+    return self;
+}
+
+- (void)startLocationMonitoring
+{
+    [self.locationManager startMonitoringForAllRegions];
+}
+
+- (void)stopLocationMonitoringAndRanging
+{
+    [self.locationManager stopRangingBeaconsInAllRegions];
+    [self.locationManager stopMonitoringForAllRegions];
+}
+
 
 @end

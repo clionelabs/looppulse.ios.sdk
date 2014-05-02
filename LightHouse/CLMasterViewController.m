@@ -58,8 +58,8 @@
 }
 
 - (void)startRanging:(id)sender {
-    CLAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    [appDelegate startRangingAllRegions];
+//    CLAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+//    [appDelegate startRangingAllRegions];
 }
 
 #pragma mark - Table View

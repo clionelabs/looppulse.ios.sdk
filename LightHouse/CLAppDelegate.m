@@ -8,11 +8,13 @@
 
 #import "CLAppDelegate.h"
 #import "CLMasterViewController.h"
-#import <Firebase/Firebase.h>
-@import CoreLocation;
+//#import <Firebase/Firebase.h>
+//@import CoreLocation;
+#import "LoopPulse.h"
 
-@interface CLAppDelegate () <UIApplicationDelegate, CLLocationManagerDelegate>
-@property CLLocationManager *locationManager;
+@interface CLAppDelegate () <UIApplicationDelegate>
+//@property CLLocationManager *locationManager;
+@property (nonatomic, retain) LoopPulse *loopPulse;
 @end
 
 @implementation CLAppDelegate
@@ -28,9 +30,12 @@
     CLMasterViewController *controller = (CLMasterViewController *)navigationController.topViewController;
     controller.managedObjectContext = self.managedObjectContext;
 
-    self.locationManager = [[CLLocationManager alloc] init];
-    self.locationManager.delegate = self;
-    [self startMonitoringAllRegions];
+//    self.locationManager = [[CLLocationManager alloc] init];
+//    self.locationManager.delegate = self;
+//    [self startMonitoringAllRegions];
+    self.loopPulse = [[LoopPulse alloc] initWithToken:@"testing"];
+    [self.loopPulse startLocationMonitoring];
+    
     return YES;
 }
 							
@@ -84,6 +89,7 @@
 }
 
 #pragma mark - Light House iBeacon stack
+#if 0
 - (CLBeaconRegion *) beaconRegion
 {
     NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:@"B9407F30-F5F8-466E-AFF9-25556B57FE6D"];
@@ -236,6 +242,8 @@
 
     return [result firstObject];
 }
+
+#endif
 
 #pragma mark - Core Data stack
 

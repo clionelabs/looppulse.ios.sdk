@@ -10,4 +10,8 @@
 
 @interface LoopPulse : NSObject
 
+- (id)initWithToken:(NSString*)token;
+- (void)startLocationMonitoring;
+- (void)stopLocationMonitoringAndRanging;
+
 @end
