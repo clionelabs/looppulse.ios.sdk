@@ -17,9 +17,22 @@
 
 - (NSArray *)beaconRegions
 {
+    // Estimote
     NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:@"B9407F30-F5F8-466E-AFF9-25556B57FE6D"];
-    CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:@"LoopPulse-Generic"];
-    return @[beaconRegion];
+    CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid
+                                                                      identifier:@"LoopPulse-Generic"];
+
+    // iTouch
+    NSUUID *uuid2 = [[NSUUID alloc] initWithUUIDString:@"74278BDA-B644-4520-8F0C-720EAF059935"];
+    CLBeaconRegion *beaconRegion2 = [[CLBeaconRegion alloc] initWithProximityUUID:uuid2
+                                                                       identifier:@"LoopPulse-Generic2"];
+
+    // xBeacon
+    NSUUID *uuid3 = [[NSUUID alloc] initWithUUIDString:@"E2C56DB5-DFFB-48D2-B060-D0F5A71096E0"];
+    CLBeaconRegion *beaconRegion3 = [[CLBeaconRegion alloc] initWithProximityUUID:uuid3
+                                                                       identifier:@"LoopPulse-Generic3"];
+
+    return @[beaconRegion, beaconRegion2, beaconRegion3];
 }
 
 - (void)startMonitoringForAllRegions
@@ -115,6 +128,8 @@
         return @"Green";
     } else if ([major isEqualToNumber:@100]) {
         return @"Red";
+    } else if ([major isEqualToNumber:@10]) {
+        return @"White";
     }
     return @"Unknown";
 }
