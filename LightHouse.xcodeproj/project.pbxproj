@@ -33,6 +33,7 @@
 		245CDFCC19080F380018C382 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 245CDFCB19080F380018C382 /* libicucore.dylib */; };
 		245CDFCE19080F410018C382 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 245CDFCD19080F410018C382 /* libc++.dylib */; };
 		245CDFD019080F4A0018C382 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 245CDFCF19080F4A0018C382 /* SystemConfiguration.framework */; };
+		247132C51912ADAF003A99E3 /* LoopPulse.m in Sources */ = {isa = PBXBuildFile; fileRef = 247132C41912ADAF003A99E3 /* LoopPulse.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,8 @@
 		245CDFCB19080F380018C382 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		245CDFCD19080F410018C382 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		245CDFCF19080F4A0018C382 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		247132C31912ADAF003A99E3 /* LoopPulse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopPulse.h; sourceTree = SOURCE_ROOT; };
+		247132C41912ADAF003A99E3 /* LoopPulse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopPulse.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +158,7 @@
 		2455AD4418FA2F0200EC9849 /* LightHouse */ = {
 			isa = PBXGroup;
 			children = (
+				247132C21912AD42003A99E3 /* LoopPulse */,
 				2455AD5018FA2F0200EC9849 /* Main.storyboard */,
 				2455AD4D18FA2F0200EC9849 /* CLAppDelegate.h */,
 				2455AD4E18FA2F0200EC9849 /* CLAppDelegate.m */,
@@ -196,6 +200,15 @@
 				2455AD6D18FA2F0300EC9849 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		247132C21912AD42003A99E3 /* LoopPulse */ = {
+			isa = PBXGroup;
+			children = (
+				247132C31912ADAF003A99E3 /* LoopPulse.h */,
+				247132C41912ADAF003A99E3 /* LoopPulse.m */,
+			);
+			name = LoopPulse;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -299,6 +312,7 @@
 				2455AD4B18FA2F0200EC9849 /* main.m in Sources */,
 				2455AD5818FA2F0300EC9849 /* CLMasterViewController.m in Sources */,
 				2455AD5B18FA2F0300EC9849 /* CLDetailViewController.m in Sources */,
+				247132C51912ADAF003A99E3 /* LoopPulse.m in Sources */,
 				2455AD4F18FA2F0200EC9849 /* CLAppDelegate.m in Sources */,
 				2455AD5518FA2F0300EC9849 /* LightHouse.xcdatamodeld in Sources */,
 			);
