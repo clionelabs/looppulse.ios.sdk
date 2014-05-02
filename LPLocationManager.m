@@ -7,6 +7,7 @@
 //
 
 #import "LPLocationManager.h"
+#import "CLRegion+LoopPulseHelpers.h"
 
 @interface LPLocationManager ()
 @property (readonly) NSArray *beaconRegions;
@@ -49,53 +50,34 @@
     }
 }
 
-- (void)locationManager:(CLLocationManager *)manager didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region
-{
-    if ([region.identifier hasPrefix:@"LoopPulse"]) {
-        if ([region isKindOfClass:[CLBeaconRegion class]]) {
-            CLBeaconRegion *beaconRegion = (CLBeaconRegion *)region;
-            if (state==CLRegionStateInside) {
-                [self startRangingBeaconsInRegion:beaconRegion];
-            }
-            else if (state==CLRegionStateOutside) {
-                [self stopRangingBeaconsInRegion:beaconRegion];
-            }
-        }
-    }
-}
-
-
 - (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region
 {
-    if ([region.identifier hasPrefix:@"LoopPulse"]) {
-        if ([region isKindOfClass:[CLBeaconRegion class]]) {
-            CLBeaconRegion *beaconRegion = (CLBeaconRegion *)region;
-            if (beaconRegion.major && beaconRegion.minor) {
-                [self notifyLocally:[NSString stringWithFormat:@"didEnterRegion %@", [self colorForMajor:beaconRegion.major]]];
-            } else {
-                [self startRangingBeaconsInRegion:beaconRegion];
-            }
+    if ([region isLoopPulseBeaconRegion]) {
+        CLBeaconRegion *beaconRegion = (CLBeaconRegion *)region;
+        if (beaconRegion.major && beaconRegion.minor) {
+            [self notifyLocally:[NSString stringWithFormat:@"didEnterRegion %@", [self colorForMajor:beaconRegion.major]]];
+        } else {
+            [self startRangingBeaconsInRegion:beaconRegion];
         }
     }
 }
 
 - (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region
 {
-    if ([region.identifier hasPrefix:@"LoopPulse"]) {
-        if ([region isKindOfClass:[CLBeaconRegion class]]) {
-            CLBeaconRegion *beaconRegion = (CLBeaconRegion *)region;
-            if (beaconRegion.major && beaconRegion.minor) {
-                [self notifyLocally:[NSString stringWithFormat:@"didExitRegion %@", [self colorForMajor:beaconRegion.major]]];
+    if ([region isLoopPulseBeaconRegion]) {
+        CLBeaconRegion *beaconRegion = (CLBeaconRegion *)region;
+        if (beaconRegion.major && beaconRegion.minor) {
+            [self notifyLocally:[NSString stringWithFormat:@"didExitRegion %@", [self colorForMajor:beaconRegion.major]]];
 
-                [self stopRangingBeaconsInRegion:beaconRegion];
-            }
+            [self stopRangingBeaconsInRegion:beaconRegion];
+            [self stopMonitoringForRegion:beaconRegion];
         }
     }
 }
 
 - (void)locationManager:(CLLocationManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region
 {
-    if ([region.identifier hasPrefix:@"LoopPulse"]) {
+    if ([region isLoopPulseBeaconRegion]) {
         if ([beacons count]==0) {
             //[self notifyLocally:@"No beacon detected. stopRangingBeaconsInRegion"];
             [manager stopRangingBeaconsInRegion:region];
@@ -116,6 +98,8 @@
     }
 }
 
+#pragma mark - Debug Helpers
+
 - (void)notifyLocally:(NSString *)string
 {
     UILocalNotification *notification = [[UILocalNotification alloc] init];
@@ -129,6 +113,8 @@
         return @"Blue";
     } else if ([major isEqualToNumber:@54330]) {
         return @"Green";
+    } else if ([major isEqualToNumber:@100]) {
+        return @"Red";
     }
     return @"Unknown";
 }
