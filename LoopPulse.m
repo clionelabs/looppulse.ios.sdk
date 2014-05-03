@@ -20,7 +20,7 @@
 {
     self = [[LoopPulse alloc] init];
     self.token = token;
-    self.locationManager = [[LPLocationManager alloc] init];
+    self.locationManager = [[LPLocationManager alloc] initWithToken:token];
     self.locationManager.delegate = self.locationManager;
     return self;
 }

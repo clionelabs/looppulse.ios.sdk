@@ -9,6 +9,7 @@
 #import <CoreLocation/CoreLocation.h>
 
 @interface LPLocationManager : CLLocationManager <CLLocationManagerDelegate>
+- (id)initWithToken:(NSString *)token;
 - (void)startMonitoringForAllRegions;
 - (void)stopMonitoringForAllRegions;
 - (void)startRangingBeaconsInAllRegions;
