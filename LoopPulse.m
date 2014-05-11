@@ -29,6 +29,9 @@
         _visitor = [[LPVisitor alloc] initWithDataStore:_dataStore];
         _locationManager = [[LPLocationManager alloc] initWithDataStore:_dataStore];
         _locationManager.delegate = _locationManager;
+
+        // We may need the LPVisitor object when writing data.
+        _dataStore.visitor = _visitor;
     }
     return self;
 }

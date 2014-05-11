@@ -10,7 +10,6 @@
 #import "LPDataStore+LPVisitor.h"
 
 @interface LPVisitor ()
-@property (readonly, retain) NSUUID *uuid;
 @property (readonly, retain) LPDataStore *dataStore;
 @end
 

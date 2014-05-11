@@ -9,6 +9,7 @@
 #import "LPDataStore+LPLocationManager.h"
 #import "CLBeacon+FirebaseDictionary.h"
 #import "CLBeaconRegion+FirebaseDictionary.h"
+#import "LPVisitor.h"
 
 @implementation LPDataStore (LPLocationManager)
 
@@ -36,7 +37,8 @@
     // TODO: Firebase cannot deal with NSDate object. They should call #description on input.
     NSMutableDictionary *beaconInfoAndEvent = [NSMutableDictionary dictionaryWithDictionary:beaconInfo];
     [beaconInfoAndEvent setValue:event forKey:@"event"];
-    [beaconInfoAndEvent setValue:[createdAt description] forKey:@"createdAt"];
+    [beaconInfoAndEvent setValue:[createdAt description] forKey:@"created_at"];
+    [beaconInfoAndEvent setValue:[self.visitor.uuid UUIDString] forKey:@"visitor_id"];
 
     // Watch out for allowable characters for a Firebase location
     // https://www.firebase.com/docs/creating-references.html

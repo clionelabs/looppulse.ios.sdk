@@ -14,4 +14,5 @@
 - (id)initWithDataStore:(LPDataStore *)dataStore;
 - (void)identifyWithExternalID:(NSString *)externalID;
 
+@property (readonly, retain) NSUUID *uuid;
 @end
