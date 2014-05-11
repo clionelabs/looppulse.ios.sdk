@@ -34,6 +34,7 @@
 		245CDFCE19080F410018C382 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 245CDFCD19080F410018C382 /* libc++.dylib */; };
 		245CDFD019080F4A0018C382 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 245CDFCF19080F4A0018C382 /* SystemConfiguration.framework */; };
 		24613641191F6C6100629A4A /* LPDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 24613640191F6C6100629A4A /* LPDataStore.m */; };
+		24613647191F749100629A4A /* LPDataStore+LPLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 24613646191F749100629A4A /* LPDataStore+LPLocationManager.m */; };
 		247132C51912ADAF003A99E3 /* LoopPulse.m in Sources */ = {isa = PBXBuildFile; fileRef = 247132C41912ADAF003A99E3 /* LoopPulse.m */; };
 		247132C81913520E003A99E3 /* LPLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 247132C71913520E003A99E3 /* LPLocationManager.m */; };
 		247132D119139E06003A99E3 /* CLRegion+LoopPulseHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 247132D019139E06003A99E3 /* CLRegion+LoopPulseHelpers.m */; };
@@ -86,6 +87,8 @@
 		245CDFCF19080F4A0018C382 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		2461363F191F6C6100629A4A /* LPDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPDataStore.h; sourceTree = SOURCE_ROOT; };
 		24613640191F6C6100629A4A /* LPDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPDataStore.m; sourceTree = SOURCE_ROOT; };
+		24613645191F749100629A4A /* LPDataStore+LPLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LPDataStore+LPLocationManager.h"; sourceTree = SOURCE_ROOT; };
+		24613646191F749100629A4A /* LPDataStore+LPLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "LPDataStore+LPLocationManager.m"; sourceTree = SOURCE_ROOT; };
 		247132C31912ADAF003A99E3 /* LoopPulse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopPulse.h; sourceTree = SOURCE_ROOT; };
 		247132C41912ADAF003A99E3 /* LoopPulse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopPulse.m; sourceTree = SOURCE_ROOT; };
 		247132C61913520E003A99E3 /* LPLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPLocationManager.h; sourceTree = SOURCE_ROOT; };
@@ -227,6 +230,8 @@
 				247132C41912ADAF003A99E3 /* LoopPulse.m */,
 				2461363F191F6C6100629A4A /* LPDataStore.h */,
 				24613640191F6C6100629A4A /* LPDataStore.m */,
+				24613645191F749100629A4A /* LPDataStore+LPLocationManager.h */,
+				24613646191F749100629A4A /* LPDataStore+LPLocationManager.m */,
 				24DDD515191F60EC005D0BA9 /* LPUser.h */,
 				24DDD516191F60EC005D0BA9 /* LPUser.m */,
 				247132C61913520E003A99E3 /* LPLocationManager.h */,
@@ -345,6 +350,7 @@
 				24613641191F6C6100629A4A /* LPDataStore.m in Sources */,
 				247132DA1914E409003A99E3 /* CLBeaconRegion+FirebaseDictionary.m in Sources */,
 				247132DD1914E478003A99E3 /* CLBeacon+FirebaseDictionary.m in Sources */,
+				24613647191F749100629A4A /* LPDataStore+LPLocationManager.m in Sources */,
 				247132D119139E06003A99E3 /* CLRegion+LoopPulseHelpers.m in Sources */,
 				2455AD5B18FA2F0300EC9849 /* CLDetailViewController.m in Sources */,
 				247132C51912ADAF003A99E3 /* LoopPulse.m in Sources */,

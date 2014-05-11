@@ -7,14 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <CoreLocation/CoreLocation.h>
+#import <Firebase/Firebase.h>
 
 @interface LPDataStore : NSObject
 
 - (id)initWithToken:(NSString *)token;
 
-// Location
-- (void)registerEvent:(NSString *)event withBeacon:(CLBeacon *)beacon atTime:(NSDate *)createdAt;
-- (void)registerEvent:(NSString *)event withBeaconRegion:(CLBeaconRegion *)region atTime:(NSDate *)createdAt;
+@property (readonly, retain) NSString *token;
+@property (readonly, retain) Firebase *firebase;
 
 @end

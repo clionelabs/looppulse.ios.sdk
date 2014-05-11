@@ -8,7 +8,7 @@
 
 #import "LPLocationManager.h"
 #import "CLRegion+LoopPulseHelpers.h"
-#import "LPDataStore.h"
+#import "LPDataStore+LPLocationManager.h"
 
 @interface LPLocationManager ()
 @property (readonly) NSArray *beaconRegions;
@@ -80,7 +80,7 @@
     if ([region isLoopPulseBeaconRegion]) {
         CLBeaconRegion *beaconRegion = (CLBeaconRegion *)region;
         if (beaconRegion.major && beaconRegion.minor) {
-            [self.dataStore registerEvent:@"didEnterRegion" withBeaconRegion:beaconRegion atTime:[NSDate date]];
+            [self.dataStore logEvent:@"didEnterRegion" withBeaconRegion:beaconRegion atTime:[NSDate date]];
         } else {
             [self startRangingBeaconsInRegion:beaconRegion];
         }
@@ -92,7 +92,7 @@
     if ([region isLoopPulseBeaconRegion]) {
         CLBeaconRegion *beaconRegion = (CLBeaconRegion *)region;
         if (beaconRegion.major && beaconRegion.minor) {
-            [self.dataStore registerEvent:@"didExitRegion" withBeaconRegion:beaconRegion atTime:[NSDate date]];
+            [self.dataStore logEvent:@"didExitRegion" withBeaconRegion:beaconRegion atTime:[NSDate date]];
             [self stopRangingBeaconsInRegion:beaconRegion];
             [self stopMonitoringForRegion:beaconRegion];
         }
@@ -108,7 +108,7 @@
         }
 
         for (CLBeacon *beacon in beacons) {
-            [self.dataStore registerEvent:@"didRange" withBeacon:beacon atTime:[NSDate date]];
+            [self.dataStore logEvent:@"didRange" withBeacon:beacon atTime:[NSDate date]];
 
             // Monitor specific beacons
             NSString *identifier = [NSString stringWithFormat:@"LoopPulse-%@:%@", beacon.major, beacon.minor];
