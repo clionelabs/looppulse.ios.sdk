@@ -1,5 +1,5 @@
 //
-//  LPUser.h
+//  LPVisitor.h
 //  LightHouse
 //
 //  Created by Thomas Pun on 5/11/14.
@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "LPDataStore.h"
 
-@interface LPUser : NSObject
+@interface LPVisitor : NSObject
 
 - (id)initWithDataStore:(LPDataStore *)dataStore;
 

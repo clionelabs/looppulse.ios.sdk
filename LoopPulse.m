@@ -7,14 +7,14 @@
 //
 
 #import "LoopPulse.h"
-#import "LPUser.h"
+#import "LPVisitor.h"
 #import "LPLocationManager.h"
 #import "LPDataStore.h"
 
 @interface LoopPulse ()
 @property (readonly, retain) NSString *token;
 @property (readonly, retain) LPDataStore *dataStore;
-@property (readonly, retain) LPUser *user;
+@property (readonly, retain) LPVisitor *visitor;
 @property (readonly, retain) LPLocationManager *locationManager;
 @end
 
@@ -26,7 +26,7 @@
     if (self) {
         _token = token;
         _dataStore = [[LPDataStore alloc] initWithToken:token];
-        _user = [[LPUser alloc] init];
+        _visitor = [[LPVisitor alloc] init];
         _locationManager = [[LPLocationManager alloc] initWithDataStore:self.dataStore];
         _locationManager.delegate = _locationManager;
     }
