@@ -7,7 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
 
 @interface LPDataStore : NSObject
+
 - (id)initWithToken:(NSString *)token;
+
+// Location
+- (void)registerEvent:(NSString *)event withBeacon:(CLBeacon *)beacon atTime:(NSDate *)createdAt;
+- (void)registerEvent:(NSString *)event withBeaconRegion:(CLBeaconRegion *)region atTime:(NSDate *)createdAt;
+
 @end

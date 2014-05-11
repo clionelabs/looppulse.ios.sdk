@@ -7,27 +7,21 @@
 //
 
 #import "LPLocationManager.h"
-#import <Firebase/Firebase.h>
 #import "CLRegion+LoopPulseHelpers.h"
-#import "CLBeacon+FirebaseDictionary.h"
-#import "CLBeaconRegion+FirebaseDictionary.h"
+#import "LPDataStore.h"
 
 @interface LPLocationManager ()
 @property (readonly) NSArray *beaconRegions;
-@property (nonatomic, retain) NSString *token;
-@property (nonatomic, retain) LPUser *user;
-@property (nonatomic, retain) Firebase *firebase;
+@property (readonly, retain) LPDataStore *dataStore;
 @end
 
 @implementation LPLocationManager
 
-- (id)initWithToken:(NSString *)token andUser:(LPUser *)user
+- (id)initWithDataStore:(LPDataStore *)dataStore
 {
     self = [super init];
     if (self) {
-        // TODO: autherication with given token
-        self.user = user;
-        self.firebase = [[Firebase alloc] initWithUrl:@"https://looppulse-dev.firebaseio.com"];
+        _dataStore = dataStore;
         self.delegate = self;
     }
     return self;
@@ -86,7 +80,7 @@
     if ([region isLoopPulseBeaconRegion]) {
         CLBeaconRegion *beaconRegion = (CLBeaconRegion *)region;
         if (beaconRegion.major && beaconRegion.minor) {
-            [self registerEvent:@"didEnterRegion" withBeaconRegion:beaconRegion atTime:[NSDate date]];
+            [self.dataStore registerEvent:@"didEnterRegion" withBeaconRegion:beaconRegion atTime:[NSDate date]];
         } else {
             [self startRangingBeaconsInRegion:beaconRegion];
         }
@@ -98,7 +92,7 @@
     if ([region isLoopPulseBeaconRegion]) {
         CLBeaconRegion *beaconRegion = (CLBeaconRegion *)region;
         if (beaconRegion.major && beaconRegion.minor) {
-            [self registerEvent:@"didExitRegion" withBeaconRegion:beaconRegion atTime:[NSDate date]];
+            [self.dataStore registerEvent:@"didExitRegion" withBeaconRegion:beaconRegion atTime:[NSDate date]];
             [self stopRangingBeaconsInRegion:beaconRegion];
             [self stopMonitoringForRegion:beaconRegion];
         }
@@ -114,7 +108,7 @@
         }
 
         for (CLBeacon *beacon in beacons) {
-            [self registerEvent:@"didRange" withBeacon:beacon atTime:[NSDate date]];
+            [self.dataStore registerEvent:@"didRange" withBeacon:beacon atTime:[NSDate date]];
 
             // Monitor specific beacons
             NSString *identifier = [NSString stringWithFormat:@"LoopPulse-%@:%@", beacon.major, beacon.minor];
@@ -129,47 +123,6 @@
     }
 }
 
-#pragma mark - Firebase Helpers
-- (void)registerEvent:(NSString *)event withBeacon:(CLBeacon *)beacon atTime:(NSDate *)createdAt
-{
-    [self registerEvent:event
-         withDictionary:[beacon firebaseDictionary]
-                 atTime:createdAt];
-}
-
-- (void)registerEvent:(NSString *)event withBeaconRegion:(CLBeaconRegion *)region atTime:(NSDate *)createdAt
-{
-    [self registerEvent:event
-         withDictionary:[region firebaseDictionary]
-                 atTime:createdAt];
-}
-
-- (void)registerEvent:(NSString *)event withDictionary:(NSDictionary *)beaconInfo atTime:(NSDate *)createdAt
-{
-    NSString *uuid = [[beaconInfo valueForKey:@"proximityUUID"] description];
-    NSString *major = [[beaconInfo valueForKey:@"major"] description];
-    NSString *minor = [[beaconInfo valueForKey:@"minor"] description];
-    NSNumber *priority = @([createdAt timeIntervalSince1970]);
-
-    // TODO: Firebase cannot deal with NSDate object. They should call #description on input.
-    NSMutableDictionary *beaconInfoAndEvent = [NSMutableDictionary dictionaryWithDictionary:beaconInfo];
-    [beaconInfoAndEvent setValue:event forKey:@"event"];
-    [beaconInfoAndEvent setValue:[createdAt description] forKey:@"createdAt"];
-
-    // Watch out for allowable characters for a Firebase location
-    // https://www.firebase.com/docs/creating-references.html
-    NSString *beacon_id = [NSString stringWithFormat:@"%@:%@:%@", uuid, major, minor];
-
-    // Write to /events/:id
-    Firebase *event_ref = [[self.firebase childByAppendingPath:@"events"] childByAutoId];
-    [event_ref setValue:beaconInfoAndEvent andPriority:priority];
-
-    // Write to /beacons/:beacon_id/events/:event_id
-    Firebase *beacon_ref = [[self.firebase childByAppendingPath:@"beacons"] childByAppendingPath:beacon_id];
-    NSString *event_ref_id = [event_ref name];
-    Firebase *beacon_event_ref = [[beacon_ref childByAppendingPath:@"events"] childByAppendingPath:event_ref_id];
-    [beacon_event_ref setValue:@(true) andPriority:priority];
-}
 
 #pragma mark - Debug Helpers
 

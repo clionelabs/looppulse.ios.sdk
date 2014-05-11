@@ -7,12 +7,14 @@
 //
 
 #import <CoreLocation/CoreLocation.h>
-#import "LPUser.h"
+#import "LPDataStore.h"
 
 @interface LPLocationManager : CLLocationManager <CLLocationManagerDelegate>
-- (id)initWithToken:(NSString *)token andUser:(LPUser *)user;
+
+- (id)initWithDataStore:(LPDataStore *)dataStore;
 - (void)startMonitoringForAllRegions;
 - (void)stopMonitoringForAllRegions;
 - (void)startRangingBeaconsInAllRegions;
 - (void)stopRangingBeaconsInAllRegions;
+
 @end

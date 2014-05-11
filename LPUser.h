@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LPDataStore.h"
 
 @interface LPUser : NSObject
-- (id)initWithToken:(NSString *)token;
+
+- (id)initWithDataStore:(LPDataStore *)dataStore;
+
 @end

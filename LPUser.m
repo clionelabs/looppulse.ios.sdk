@@ -9,17 +9,17 @@
 #import "LPUser.h"
 
 @interface LPUser ()
-@property (nonatomic, retain) NSString *token;
-@property (nonatomic, retain) NSUUID *uuid;
+@property (readonly, retain) NSUUID *uuid;
+@property (readonly, retain) LPDataStore *dataStore;
 @end
 
 @implementation LPUser
-- (id)initWithToken:(NSString *)token
+- (id)initWithDataStore:(LPDataStore *)dataStore
 {
     self = [super init];
     if (self) {
-        self.token = token;
-        self.uuid = [[UIDevice currentDevice] identifierForVendor];
+        _uuid = [[UIDevice currentDevice] identifierForVendor];
+        _dataStore = dataStore;
     }
     return self;
 }

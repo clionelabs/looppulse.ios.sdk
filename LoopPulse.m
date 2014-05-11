@@ -12,10 +12,10 @@
 #import "LPDataStore.h"
 
 @interface LoopPulse ()
-@property (nonatomic, retain) NSString *token;
-@property (nonatomic, retain) LPDataStore *dataStore;
-@property (nonatomic, retain) LPUser *user;
-@property (nonatomic, retain) LPLocationManager *locationManager;
+@property (readonly, retain) NSString *token;
+@property (readonly, retain) LPDataStore *dataStore;
+@property (readonly, retain) LPUser *user;
+@property (readonly, retain) LPLocationManager *locationManager;
 @end
 
 @implementation LoopPulse
@@ -24,11 +24,11 @@
 {
     self = [super init];
     if (self) {
-        self.token = token;
-        self.dataStore = [[LPDataStore alloc] initWithToken:token];
-        self.user = [[LPUser alloc] initWithToken:token];
-        self.locationManager = [[LPLocationManager alloc] initWithToken:token andUser:self.user];
-        self.locationManager.delegate = self.locationManager;
+        _token = token;
+        _dataStore = [[LPDataStore alloc] initWithToken:token];
+        _user = [[LPUser alloc] init];
+        _locationManager = [[LPLocationManager alloc] initWithDataStore:self.dataStore];
+        _locationManager.delegate = _locationManager;
     }
     return self;
 }
