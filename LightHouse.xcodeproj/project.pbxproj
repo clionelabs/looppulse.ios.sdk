@@ -38,6 +38,7 @@
 		247132D119139E06003A99E3 /* CLRegion+LoopPulseHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 247132D019139E06003A99E3 /* CLRegion+LoopPulseHelpers.m */; };
 		247132DA1914E409003A99E3 /* CLBeaconRegion+FirebaseDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 247132D91914E409003A99E3 /* CLBeaconRegion+FirebaseDictionary.m */; };
 		247132DD1914E478003A99E3 /* CLBeacon+FirebaseDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 247132DC1914E478003A99E3 /* CLBeacon+FirebaseDictionary.m */; };
+		24DDD517191F60EC005D0BA9 /* LPUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DDD516191F60EC005D0BA9 /* LPUser.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +93,8 @@
 		247132D91914E409003A99E3 /* CLBeaconRegion+FirebaseDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLBeaconRegion+FirebaseDictionary.m"; sourceTree = SOURCE_ROOT; };
 		247132DB1914E478003A99E3 /* CLBeacon+FirebaseDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLBeacon+FirebaseDictionary.h"; sourceTree = SOURCE_ROOT; };
 		247132DC1914E478003A99E3 /* CLBeacon+FirebaseDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLBeacon+FirebaseDictionary.m"; sourceTree = SOURCE_ROOT; };
+		24DDD515191F60EC005D0BA9 /* LPUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPUser.h; sourceTree = SOURCE_ROOT; };
+		24DDD516191F60EC005D0BA9 /* LPUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPUser.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,6 +222,8 @@
 			children = (
 				247132C31912ADAF003A99E3 /* LoopPulse.h */,
 				247132C41912ADAF003A99E3 /* LoopPulse.m */,
+				24DDD515191F60EC005D0BA9 /* LPUser.h */,
+				24DDD516191F60EC005D0BA9 /* LPUser.m */,
 				247132C61913520E003A99E3 /* LPLocationManager.h */,
 				247132C71913520E003A99E3 /* LPLocationManager.m */,
 				247132DB1914E478003A99E3 /* CLBeacon+FirebaseDictionary.h */,
@@ -331,6 +336,7 @@
 			files = (
 				2455AD4B18FA2F0200EC9849 /* main.m in Sources */,
 				2455AD5818FA2F0300EC9849 /* CLMasterViewController.m in Sources */,
+				24DDD517191F60EC005D0BA9 /* LPUser.m in Sources */,
 				247132DA1914E409003A99E3 /* CLBeaconRegion+FirebaseDictionary.m in Sources */,
 				247132DD1914E478003A99E3 /* CLBeacon+FirebaseDictionary.m in Sources */,
 				247132D119139E06003A99E3 /* CLRegion+LoopPulseHelpers.m in Sources */,

@@ -15,16 +15,18 @@
 @interface LPLocationManager ()
 @property (readonly) NSArray *beaconRegions;
 @property (nonatomic, retain) NSString *token;
+@property (nonatomic, retain) LPUser *user;
 @property (nonatomic, retain) Firebase *firebase;
 @end
 
 @implementation LPLocationManager
 
-- (id)initWithToken:(NSString *)token
+- (id)initWithToken:(NSString *)token andUser:(LPUser *)user
 {
     self = [super init];
     if (self) {
         // TODO: autherication with given token
+        self.user = user;
         self.firebase = [[Firebase alloc] initWithUrl:@"https://looppulse-dev.firebaseio.com"];
         self.delegate = self;
     }
