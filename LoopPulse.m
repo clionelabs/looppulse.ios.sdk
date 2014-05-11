@@ -26,8 +26,8 @@
     if (self) {
         _token = token;
         _dataStore = [[LPDataStore alloc] initWithToken:token];
-        _visitor = [[LPVisitor alloc] init];
-        _locationManager = [[LPLocationManager alloc] initWithDataStore:self.dataStore];
+        _visitor = [[LPVisitor alloc] initWithDataStore:_dataStore];
+        _locationManager = [[LPLocationManager alloc] initWithDataStore:_dataStore];
         _locationManager.delegate = _locationManager;
     }
     return self;

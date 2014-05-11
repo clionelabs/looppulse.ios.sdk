@@ -36,6 +36,7 @@
 		24613641191F6C6100629A4A /* LPDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 24613640191F6C6100629A4A /* LPDataStore.m */; };
 		24613647191F749100629A4A /* LPDataStore+LPLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 24613646191F749100629A4A /* LPDataStore+LPLocationManager.m */; };
 		2461364A191F9EA400629A4A /* LPVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 24613648191F9EA400629A4A /* LPVisitor.m */; };
+		2461364D191FA0C600629A4A /* LPDataStore+LPVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2461364C191FA0C600629A4A /* LPDataStore+LPVisitor.m */; };
 		247132C51912ADAF003A99E3 /* LoopPulse.m in Sources */ = {isa = PBXBuildFile; fileRef = 247132C41912ADAF003A99E3 /* LoopPulse.m */; };
 		247132C81913520E003A99E3 /* LPLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 247132C71913520E003A99E3 /* LPLocationManager.m */; };
 		247132D119139E06003A99E3 /* CLRegion+LoopPulseHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 247132D019139E06003A99E3 /* CLRegion+LoopPulseHelpers.m */; };
@@ -91,6 +92,8 @@
 		24613646191F749100629A4A /* LPDataStore+LPLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "LPDataStore+LPLocationManager.m"; sourceTree = SOURCE_ROOT; };
 		24613648191F9EA400629A4A /* LPVisitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPVisitor.m; sourceTree = SOURCE_ROOT; };
 		24613649191F9EA400629A4A /* LPVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPVisitor.h; sourceTree = SOURCE_ROOT; };
+		2461364B191FA0C600629A4A /* LPDataStore+LPVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LPDataStore+LPVisitor.h"; sourceTree = SOURCE_ROOT; };
+		2461364C191FA0C600629A4A /* LPDataStore+LPVisitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "LPDataStore+LPVisitor.m"; sourceTree = SOURCE_ROOT; };
 		247132C31912ADAF003A99E3 /* LoopPulse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopPulse.h; sourceTree = SOURCE_ROOT; };
 		247132C41912ADAF003A99E3 /* LoopPulse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopPulse.m; sourceTree = SOURCE_ROOT; };
 		247132C61913520E003A99E3 /* LPLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPLocationManager.h; sourceTree = SOURCE_ROOT; };
@@ -230,6 +233,8 @@
 				247132C41912ADAF003A99E3 /* LoopPulse.m */,
 				2461363F191F6C6100629A4A /* LPDataStore.h */,
 				24613640191F6C6100629A4A /* LPDataStore.m */,
+				2461364B191FA0C600629A4A /* LPDataStore+LPVisitor.h */,
+				2461364C191FA0C600629A4A /* LPDataStore+LPVisitor.m */,
 				24613645191F749100629A4A /* LPDataStore+LPLocationManager.h */,
 				24613646191F749100629A4A /* LPDataStore+LPLocationManager.m */,
 				24613649191F9EA400629A4A /* LPVisitor.h */,
@@ -354,6 +359,7 @@
 				247132D119139E06003A99E3 /* CLRegion+LoopPulseHelpers.m in Sources */,
 				2455AD5B18FA2F0300EC9849 /* CLDetailViewController.m in Sources */,
 				247132C51912ADAF003A99E3 /* LoopPulse.m in Sources */,
+				2461364D191FA0C600629A4A /* LPDataStore+LPVisitor.m in Sources */,
 				2455AD4F18FA2F0200EC9849 /* CLAppDelegate.m in Sources */,
 				247132C81913520E003A99E3 /* LPLocationManager.m in Sources */,
 				2455AD5518FA2F0300EC9849 /* LightHouse.xcdatamodeld in Sources */,

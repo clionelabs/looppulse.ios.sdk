@@ -12,5 +12,6 @@
 @interface LPVisitor : NSObject
 
 - (id)initWithDataStore:(LPDataStore *)dataStore;
+- (void)identifyWithExternalID:(NSString *)externalID;
 
 @end

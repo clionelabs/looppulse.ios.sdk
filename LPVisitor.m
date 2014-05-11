@@ -7,6 +7,7 @@
 //
 
 #import "LPVisitor.h"
+#import "LPDataStore+LPVisitor.h"
 
 @interface LPVisitor ()
 @property (readonly, retain) NSUUID *uuid;
@@ -14,13 +15,26 @@
 @end
 
 @implementation LPVisitor
+
 - (id)initWithDataStore:(LPDataStore *)dataStore
 {
     self = [super init];
     if (self) {
         _uuid = [[UIDevice currentDevice] identifierForVendor];
         _dataStore = dataStore;
+        [self register];
     }
     return self;
 }
+
+- (void)register
+{
+    [self.dataStore registerVisitor:self.uuid];
+}
+
+- (void)identifyWithExternalID:(NSString *)externalID
+{
+    [self.dataStore identifyVisitor:self.uuid withExternalID:externalID];
+}
+
 @end
