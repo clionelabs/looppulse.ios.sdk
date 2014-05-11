@@ -18,10 +18,12 @@
 
 - (id)initWithToken:(NSString *)token
 {
-    self = [[LoopPulse alloc] init];
-    self.token = token;
-    self.locationManager = [[LPLocationManager alloc] initWithToken:token];
-    self.locationManager.delegate = self.locationManager;
+    self = [super init];
+    if (self) {
+        self.token = token;
+        self.locationManager = [[LPLocationManager alloc] initWithToken:token];
+        self.locationManager.delegate = self.locationManager;
+    }
     return self;
 }
 
