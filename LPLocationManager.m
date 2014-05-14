@@ -108,7 +108,7 @@
         }
 
         for (CLBeacon *beacon in beacons) {
-            [self.dataStore logEvent:@"didRange" withBeacon:beacon atTime:[NSDate date]];
+            [self.dataStore logEvent:@"didRangeBeacons" withBeacon:beacon atTime:[NSDate date]];
 
             // Monitor specific beacons
             NSString *identifier = [NSString stringWithFormat:@"LoopPulse-%@:%@", beacon.major, beacon.minor];
