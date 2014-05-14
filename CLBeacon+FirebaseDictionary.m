@@ -17,9 +17,9 @@
                                                   @(CLProximityNear).stringValue: @"near",
                                                   @(CLProximityImmediate).stringValue: @"immediate"};
     
-    return @{@"proximityUUID": [self.proximityUUID UUIDString],
-             @"major": [self.major description],
-             @"minor": [self.minor description],
+    return @{@"uuid": [self.proximityUUID UUIDString],
+             @"major": self.major,
+             @"minor": self.minor,
              @"proximity": CLProximityToNSString[@(self.proximity).stringValue],
              @"accuracy": @(self.accuracy),
              @"rssi": @(self.rssi)};

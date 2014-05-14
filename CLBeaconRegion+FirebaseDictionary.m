@@ -11,8 +11,8 @@
 @implementation CLBeaconRegion (FirebaseDictionary)
 - (NSDictionary *)firebaseDictionary
 {
-    return @{@"proximityUUID": [self.proximityUUID UUIDString],
-             @"major": [self.major description],
-             @"minor": [self.minor description]};
+    return @{@"uuid": [self.proximityUUID UUIDString],
+             @"major": self.major,
+             @"minor": self.minor};
 }
 @end
