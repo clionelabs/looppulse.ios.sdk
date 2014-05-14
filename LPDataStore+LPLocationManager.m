@@ -33,12 +33,11 @@
     NSDictionary *eventInfo = @{@"type": eventType,
                                 @"visitor_uuid": [self.visitor.uuid UUIDString],
                                 @"created_at": [createdAt description]};
+    NSMutableDictionary *beaconInfoAndEvent = [[NSMutableDictionary alloc] initWithDictionary:beaconInfo];
+    [beaconInfoAndEvent addEntriesFromDictionary:eventInfo];
 
     Firebase *beacon_event_ref = [[self.firebase childByAppendingPath:@"beacon_events"] childByAutoId];
-    [beacon_event_ref setValue:eventInfo andPriority:priority];
-
-    Firebase *beacon_ref = [beacon_event_ref childByAppendingPath:@"beacon"];
-    [beacon_ref setValue:beaconInfo];
+    [beacon_event_ref setValue:beaconInfoAndEvent andPriority:priority];
 }
 
 
