@@ -38,7 +38,13 @@
 
     Firebase *beacon_event_ref = [[self.firebase childByAppendingPath:@"beacon_events"] childByAutoId];
     [beacon_event_ref setValue:beaconInfoAndEvent andPriority:priority];
+
+    [self postNotification:eventType withDictionary:beaconInfoAndEvent];
 }
 
+- (void)postNotification:(NSString *)eventType withDictionary:(NSDictionary *)eventInfo
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:eventType object:self userInfo:eventInfo];
+}
 
 @end
