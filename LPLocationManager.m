@@ -47,6 +47,11 @@
     return @[beaconRegion, beaconRegion2, beaconRegion3];
 }
 
+- (NSArray *)ignoredProximity
+{
+    return @[@(CLProximityUnknown), @(CLProximityFar), @(CLProximityNear)];
+}
+
 - (void)startMonitoringForAllRegions
 {
     for (CLBeaconRegion *region in self.beaconRegions) {
@@ -108,6 +113,11 @@
         }
 
         for (CLBeacon *beacon in beacons) {
+            // Ignore beacons with unknown proximity
+            if ([[self ignoredProximity] containsObject:@(beacon.proximity)]) {
+                continue;
+            }
+
             [self.dataStore logEvent:@"didRangeBeacons" withBeacon:beacon atTime:[NSDate date]];
 
             // Monitor specific beacons
