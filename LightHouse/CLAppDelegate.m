@@ -37,6 +37,11 @@
     return YES;
 }
 
+- (void)startRangingAllRegions
+{
+    [self.loopPulse startLocationMonitoringAndRanging];
+}
+
 - (void)observeLoopPulseNotification
 {
     for (NSString *name in self.loopPulse.availableNotifications) {

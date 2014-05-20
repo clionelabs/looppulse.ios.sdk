@@ -58,8 +58,8 @@
 }
 
 - (void)startRanging:(id)sender {
-//    CLAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-//    [appDelegate startRangingAllRegions];
+    CLAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    [appDelegate startRangingAllRegions];
 }
 
 #pragma mark - Table View
@@ -218,15 +218,32 @@
 }
  */
 
-- (UIColor *)colorForMajor:(NSNumber*)major
+- (NSDictionary *)descriptionForMajor:(NSNumber *)major andMinor:(NSNumber *)minor
 {
+    UIColor *color;
+    NSString *text;
     if ([major isEqualToNumber:@28364]) {
-        return [UIColor colorWithRed:0 green:0 blue:1 alpha:1];
+        text = @"Blue Zone   ";
+        color = [UIColor colorWithRed:0 green:0 blue:1 alpha:1];
     } else if ([major isEqualToNumber:@54330]) {
-        return [UIColor colorWithRed:0 green:1 blue:0 alpha:1];
+        text = @"Green Zone  ";
+        color = [UIColor colorWithRed:0 green:1 blue:0 alpha:1];
+    } else if ([major isEqualToNumber:@58020]) {
+        text = @"Purple Zone ";
+        color = [UIColor colorWithRed:0.8 green:0 blue:1 alpha:1];
+    } else if ([major isEqualToNumber:@100]) {
+        text = @"Red Zone    ";
+        color = [UIColor colorWithRed:1 green:0 blue:0 alpha:1];
+    } else if ([major isEqualToNumber:@10]) {
+        text = @"White Zone  ";
+        color = [UIColor colorWithRed:0 green:0 blue:0 alpha:1]; // black
+    } else {
+        text = @"Unknown Zone";
+        color = [UIColor blackColor];
     }
 
-    return [UIColor darkGrayColor];
+    return @{@"color": color, @"text": text};
+
 }
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
@@ -236,9 +253,12 @@
     NSDate *lastSeenAt = [object valueForKey:@"lastSeenAt"];
     NSNumber *major = [object valueForKey:@"major"];
     NSNumber *minor = [object valueForKey:@"minor"];
+    NSDictionary *description = [self descriptionForMajor:major andMinor:minor];
+
+
     NSTimeInterval interval = [lastSeenAt timeIntervalSinceDate:createdAt];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@.%@:   %.0f seconds", major, minor, interval];
-    cell.textLabel.textColor = [self colorForMajor:major];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@  %.0fs", [description objectForKey:@"text"], interval];
+    cell.textLabel.textColor = [description objectForKey:@"color"];
 }
 
 @end

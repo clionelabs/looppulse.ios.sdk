@@ -15,4 +15,5 @@
 - (void)stopLocationMonitoringAndRanging;
 - (NSArray *)availableNotifications;
 
+- (void)startLocationMonitoringAndRanging; // debug
 @end
