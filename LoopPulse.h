@@ -13,5 +13,7 @@
 - (id)initWithToken:(NSString*)token;
 - (void)startLocationMonitoring;
 - (void)stopLocationMonitoringAndRanging;
+- (NSArray *)availableNotifications;
 
+- (void)startLocationMonitoringAndRanging; // debug
 @end

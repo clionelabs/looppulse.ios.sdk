@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5063" systemVersion="13C64" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13C1021" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="BeaconEvent">
         <attribute name="createdAt" optional="YES" attributeType="Date">
             <userInfo/>
@@ -7,9 +7,10 @@
         <attribute name="lastSeenAt" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="major" optional="YES" attributeType="Decimal" defaultValueString="0" syncable="YES"/>
         <attribute name="minor" optional="YES" attributeType="Decimal" defaultValueString="0" syncable="YES"/>
+        <attribute name="uuid" optional="YES" attributeType="String" syncable="YES"/>
         <userInfo/>
     </entity>
     <elements>
-        <element name="BeaconEvent" positionX="261" positionY="189" width="128" height="105"/>
+        <element name="BeaconEvent" positionX="261" positionY="189" width="128" height="120"/>
     </elements>
 </model>

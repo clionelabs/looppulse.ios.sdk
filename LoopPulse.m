@@ -47,5 +47,15 @@
     [self.locationManager stopMonitoringForAllRegions];
 }
 
+- (NSArray *)availableNotifications{
+    return @[@"didEnterRegion", @"didExitRegion", @"didRangeBeacons"];
+}
+
+- (void)startLocationMonitoringAndRanging
+{
+    [self.locationManager startMonitoringForAllRegions];
+    [self.locationManager startRangingBeaconsInAllRegions];
+}
+
 
 @end

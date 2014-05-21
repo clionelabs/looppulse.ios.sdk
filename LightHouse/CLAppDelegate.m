@@ -30,13 +30,40 @@
     CLMasterViewController *controller = (CLMasterViewController *)navigationController.topViewController;
     controller.managedObjectContext = self.managedObjectContext;
 
-//    self.locationManager = [[CLLocationManager alloc] init];
-//    self.locationManager.delegate = self;
-//    [self startMonitoringAllRegions];
     self.loopPulse = [[LoopPulse alloc] initWithToken:@"testing"];
     [self.loopPulse startLocationMonitoring];
-    
+
+    [self observeLoopPulseNotification];
     return YES;
+}
+
+- (void)startRangingAllRegions
+{
+    [self.loopPulse startLocationMonitoringAndRanging];
+}
+
+- (void)observeLoopPulseNotification
+{
+    for (NSString *name in self.loopPulse.availableNotifications) {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(handleLoopPulseNotification:)
+                                                     name:name
+                                                   object:nil];
+    }
+}
+
+- (void)stopObservingLoopPulseNotification
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:nil object:nil];
+}
+
+- (void)handleLoopPulseNotification:(NSNotification *)lpNotificaiton
+{
+    NSLog(@"%@, %@", lpNotificaiton.name, lpNotificaiton.userInfo);
+    NSDictionary *beacon = @{@"uuid": [lpNotificaiton.userInfo objectForKey:@"uuid"],
+                             @"major":[lpNotificaiton.userInfo objectForKey:@"major"],
+                             @"minor":[lpNotificaiton.userInfo objectForKey:@"minor"]};
+    [self updateBeacon:beacon];
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -65,6 +92,8 @@
 {
     // Saves changes in the application's managed object context before the application terminates.
     [self saveContext];
+
+    [self stopObservingLoopPulseNotification];
 }
 
 - (void)saveContext
@@ -89,142 +118,49 @@
 }
 
 #pragma mark - Light House iBeacon stack
-#if 0
-- (CLBeaconRegion *) beaconRegion
+- (void)updateBeacon:(NSDictionary *)beacon
 {
-    NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:@"B9407F30-F5F8-466E-AFF9-25556B57FE6D"];
-    return [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:@"LoopPulseGeneric"];
-}
-
-- (void)startMonitoringAllRegions
-{
-    [self.locationManager startMonitoringForRegion:[self beaconRegion]];
-}
-
-- (void)startRangingAllRegions
-{
-    [self.locationManager startRangingBeaconsInRegion:[self beaconRegion]];
-}
-
-- (void)locationManager:(CLLocationManager *)manager didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region
-{
-    if(state==CLRegionStateInside) {
-        [self.locationManager startRangingBeaconsInRegion:[self beaconRegion]];
-    }
-}
-
-- (void)locationManager:(CLLocationManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region
-{
-    if ([region.identifier hasPrefix:@"LoopPulse"]) {
-        if ([beacons count]==0) {
-            //[self notifyLocally:@"No beacon detected. stopRangingBeaconsInRegion"];
-            [manager stopRangingBeaconsInRegion:region];
-            return;
-        }
-
-        for (CLBeacon *beacon in beacons) {
-            [self updateBeacon:beacon];
-
-            // Monitor specific beacons
-            NSString *identifier = [NSString stringWithFormat:@"LoopPulse-%@:%@", beacon.major, beacon.minor];
-            CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:region.proximityUUID
-                                                                                   major:[beacon.major integerValue]
-                                                                                   minor:[beacon.minor integerValue]
-                                                                              identifier:identifier];
-            if (![self.locationManager.monitoredRegions containsObject:beaconRegion]) {
-                [self.locationManager startMonitoringForRegion:beaconRegion];
-            }
-        }
-    }
-}
-
-- (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region
-{
-    NSLog(@"didEnterRegion: %@", region);
-
-    if ([region.identifier hasPrefix:@"LoopPulse"]) {
-        if ([region isKindOfClass:[CLBeaconRegion class]]) {
-            CLBeaconRegion *beaconRegion = (CLBeaconRegion *)region;
-            if (beaconRegion.major && beaconRegion.minor) {
-                [self notifyLocally:[NSString stringWithFormat:@"didEnterRegion %@", [self colorForMajor:beaconRegion.major]]];
-            } else {
-                [self startRangingAllRegions];
-            }
-        }
-    }
-}
-
-- (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region
-{
-    NSLog(@"didExitRegion: %@", region);
-
-    if ([region.identifier hasPrefix:@"LoopPulse"]) {
-        if ([region isKindOfClass:[CLBeaconRegion class]]) {
-            CLBeaconRegion *beaconRegion = (CLBeaconRegion *)region;
-            if (beaconRegion.major && beaconRegion.minor) {
-                [self notifyLocally:[NSString stringWithFormat:@"didExitRegion %@", [self colorForMajor:beaconRegion.major]]];
-            }
-        }
-    }
-}
-
-- (void)updateBeacon:(CLBeacon *)beacon
-{
-    NSLog(@"Major: %@, Minor %@, Proximity: %d", beacon.major, beacon.minor, (int)beacon.proximity);
-    if (CLProximityImmediate==beacon.proximity) {
-        NSError *error=nil;
-        NSManagedObject *beaconEvent = [self latestBeaconEvent:beacon];
-        if (beaconEvent) {
-            NSDate *nowDate = [NSDate date];
-            NSDate *lastSeenAt = [beaconEvent valueForKey:@"lastSeenAt"];
-            NSTimeInterval interval = [nowDate timeIntervalSinceDate:lastSeenAt];
-            if (interval < 5) {
-                [beaconEvent setValue:nowDate forKey:@"lastSeenAt"];
-                [self.managedObjectContext save:&error];
-            } else {
-                [self createBeaconEvent:beacon];
-            }
+    NSError *error=nil;
+    NSManagedObject *beaconEvent = [self latestBeaconEvent:beacon];
+    if (beaconEvent) {
+        NSDate *nowDate = [NSDate date];
+        NSDate *lastSeenAt = [beaconEvent valueForKey:@"lastSeenAt"];
+        NSTimeInterval interval = [nowDate timeIntervalSinceDate:lastSeenAt];
+        if (interval < 5) {
+            [beaconEvent setValue:nowDate forKey:@"lastSeenAt"];
+            [self.managedObjectContext save:&error];
         } else {
             [self createBeaconEvent:beacon];
         }
+    } else {
+        [self createBeaconEvent:beacon];
     }
 }
 
-- (NSString *)colorForMajor:(NSNumber *)major
+- (void)createBeaconEvent:(NSDictionary *)beacon
 {
-    if ([major isEqualToNumber:@28364]) {
-        return @"Blue";
-    } else if ([major isEqualToNumber:@54330]) {
-        return @"Green";
-    }
-    return @"Unknown";
-}
+    NSUUID *uuid = [beacon objectForKey:@"uuid"];
+    NSNumber *major = [beacon objectForKey:@"major"];
+    NSNumber *minor = [beacon objectForKey:@"minor"];
 
-- (void)createBeaconEvent:(CLBeacon *)beacon
-{
-    NSLog(@"createBeaconEvent: %@", beacon);
     NSManagedObject *newBeaconEvent = [NSEntityDescription insertNewObjectForEntityForName:@"BeaconEvent" inManagedObjectContext:self.managedObjectContext];
-    [newBeaconEvent setValue:beacon.major forKey:@"major"];
-    [newBeaconEvent setValue:beacon.minor forKey:@"minor"];
+    [newBeaconEvent setValue:uuid forKey:@"uuid"];
+    [newBeaconEvent setValue:major forKey:@"major"];
+    [newBeaconEvent setValue:minor forKey:@"minor"];
     NSDate *nowDate = [NSDate date];
     [newBeaconEvent setValue:nowDate forKey:@"createdAt"];
     [newBeaconEvent setValue:nowDate forKey:@"lastSeenAt"];
 
     NSError *error=nil;
     [self.managedObjectContext save:&error];
-
-    Firebase *fb = [[Firebase alloc] initWithUrl:@"https://looppulse.firebaseio.com"];
-    Firebase *event = [[fb childByAppendingPath:@"events"] childByAutoId];
-    NSMutableDictionary *eventDictionary = [[NSMutableDictionary alloc] init];
-    [eventDictionary setValue:[beacon.proximityUUID UUIDString] forKey:@"uuid"];
-    [eventDictionary setValue:[beacon.major description] forKey:@"major"];
-    [eventDictionary setValue:[beacon.minor description] forKey:@"minor"];
-    [eventDictionary setValue:[nowDate description] forKey:@"created_at"];
-    [event setValue:eventDictionary];
 }
 
-- (NSManagedObject *)latestBeaconEvent:(CLBeacon *)beacon
+- (NSManagedObject *)latestBeaconEvent:(NSDictionary *)beacon
 {
+    NSUUID *uuid = [beacon objectForKey:@"uuid"];
+    NSNumber *major = [beacon objectForKey:@"major"];
+    NSNumber *minor = [beacon objectForKey:@"minor"];
+
     NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"BeaconEvent" inManagedObjectContext:self.managedObjectContext];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:entityDescription];
@@ -232,9 +168,10 @@
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:NO];
     [request setSortDescriptors:@[sortDescriptor]];
 
-    NSPredicate *majorPredicate = [NSPredicate predicateWithFormat:@"major == %@", beacon.major];
-    NSPredicate *minorPredicate = [NSPredicate predicateWithFormat:@"minor == %@", beacon.minor];
-    NSPredicate *predicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[majorPredicate, minorPredicate]];
+    NSPredicate *uuidPredicate = [NSPredicate predicateWithFormat:@"uuid == %@", uuid];
+    NSPredicate *majorPredicate = [NSPredicate predicateWithFormat:@"major == %@", major];
+    NSPredicate *minorPredicate = [NSPredicate predicateWithFormat:@"minor == %@", minor];
+    NSPredicate *predicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[uuidPredicate, majorPredicate, minorPredicate]];
     [request setPredicate:predicate];
 
     NSError *error;
@@ -242,8 +179,6 @@
 
     return [result firstObject];
 }
-
-#endif
 
 #pragma mark - Core Data stack
 

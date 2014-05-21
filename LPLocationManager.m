@@ -23,6 +23,7 @@
     if (self) {
         _dataStore = dataStore;
         self.delegate = self;
+        [self requestStateForAllRegions];
     }
     return self;
 }
@@ -77,6 +78,23 @@
 {
     for (CLBeaconRegion *region in self.rangedRegions) {
         [self stopRangingBeaconsInRegion:region];
+    }
+}
+
+- (void)requestStateForAllRegions
+{
+    for (CLBeaconRegion *beaconRegion in [self beaconRegions]) {
+        [self requestStateForRegion:beaconRegion];
+    }
+}
+
+- (void)locationManager:(CLLocationManager *)manager didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region
+{
+    if (state==CLRegionStateInside) {
+        if ([region isLoopPulseBeaconRegion]) {
+            CLBeaconRegion *beaconRegion = (CLBeaconRegion *)region;
+            [self startRangingBeaconsInRegion:beaconRegion];
+        }
     }
 }
 
