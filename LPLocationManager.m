@@ -151,29 +151,4 @@
     }
 }
 
-
-#pragma mark - Debug Helpers
-
-- (void)notifyLocally:(NSString *)string
-{
-    UILocalNotification *notification = [[UILocalNotification alloc] init];
-    notification.alertBody = string;
-    [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
-}
-
-- (NSString *)colorForMajor:(NSNumber *)major
-{
-    if ([major isEqualToNumber:@28364]) {
-        return @"Blue";
-    } else if ([major isEqualToNumber:@54330]) {
-        return @"Green";
-    } else if ([major isEqualToNumber:@100]) {
-        return @"Red";
-    } else if ([major isEqualToNumber:@10]) {
-        return @"White";
-    }
-    return @"Unknown";
-}
-
-
 @end
