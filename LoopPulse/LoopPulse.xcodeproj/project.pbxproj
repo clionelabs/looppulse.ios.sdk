@@ -1,0 +1,591 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		F42E8715192DFC0E007EDC30 /* Framework */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = F42E8716192DFC0E007EDC30 /* Build configuration list for PBXAggregateTarget "Framework" */;
+			buildPhases = (
+				F42E871B192DFC2E007EDC30 /* MultiPlatform Build */,
+			);
+			dependencies = (
+				F42E871A192DFC1B007EDC30 /* PBXTargetDependency */,
+			);
+			name = Framework;
+			productName = Framework;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		F42E86B2192DF644007EDC30 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F42E86B1192DF644007EDC30 /* Foundation.framework */; };
+		F42E86C0192DF644007EDC30 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F42E86BF192DF644007EDC30 /* XCTest.framework */; };
+		F42E86C1192DF644007EDC30 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F42E86B1192DF644007EDC30 /* Foundation.framework */; };
+		F42E86C6192DF644007EDC30 /* libLoopPulse.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F42E86AE192DF644007EDC30 /* libLoopPulse.a */; };
+		F42E86CC192DF644007EDC30 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F42E86CA192DF644007EDC30 /* InfoPlist.strings */; };
+		F42E86CE192DF644007EDC30 /* LoopPulseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F42E86CD192DF644007EDC30 /* LoopPulseTests.m */; };
+		F42E86E9192DF6A1007EDC30 /* LPVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = F42E86D7192DF6A1007EDC30 /* LPVisitor.m */; };
+		F42E86EA192DF6A1007EDC30 /* LPLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F42E86D9192DF6A1007EDC30 /* LPLocationManager.m */; };
+		F42E86EB192DF6A1007EDC30 /* LPDataStore+LPVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = F42E86DB192DF6A1007EDC30 /* LPDataStore+LPVisitor.m */; };
+		F42E86EC192DF6A1007EDC30 /* LPDataStore+LPLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F42E86DD192DF6A1007EDC30 /* LPDataStore+LPLocationManager.m */; };
+		F42E86ED192DF6A1007EDC30 /* LPDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = F42E86DF192DF6A1007EDC30 /* LPDataStore.m */; };
+		F42E86EE192DF6A1007EDC30 /* LoopPulse.m in Sources */ = {isa = PBXBuildFile; fileRef = F42E86E1192DF6A1007EDC30 /* LoopPulse.m */; };
+		F42E86EF192DF6A1007EDC30 /* CLRegion+LoopPulseHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = F42E86E3192DF6A1007EDC30 /* CLRegion+LoopPulseHelpers.m */; };
+		F42E86F0192DF6A1007EDC30 /* CLBeaconRegion+FirebaseDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = F42E86E5192DF6A1007EDC30 /* CLBeaconRegion+FirebaseDictionary.m */; };
+		F42E86F1192DF6A1007EDC30 /* CLBeacon+FirebaseDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = F42E86E7192DF6A1007EDC30 /* CLBeacon+FirebaseDictionary.m */; };
+		F42E86F3192DF6CB007EDC30 /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F42E86F2192DF6CB007EDC30 /* Firebase.framework */; };
+		F42E86F5192DF717007EDC30 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F42E86F4192DF717007EDC30 /* UIKit.framework */; };
+		F42E86F7192DF720007EDC30 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F42E86F6192DF720007EDC30 /* CoreBluetooth.framework */; };
+		F42E86F9192DF728007EDC30 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F42E86F8192DF728007EDC30 /* CFNetwork.framework */; };
+		F42E86FB192DF808007EDC30 /* LoopPulse.h in Headers */ = {isa = PBXBuildFile; fileRef = F42E86E2192DF6A1007EDC30 /* LoopPulse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F42E86C4192DF644007EDC30 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F42E86A6192DF644007EDC30 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F42E86AD192DF644007EDC30;
+			remoteInfo = LoopPulse;
+		};
+		F42E8719192DFC1B007EDC30 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F42E86A6192DF644007EDC30 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F42E86AD192DF644007EDC30;
+			remoteInfo = LoopPulse;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F42E86AC192DF644007EDC30 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		F42E86AE192DF644007EDC30 /* libLoopPulse.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLoopPulse.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		F42E86B1192DF644007EDC30 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		F42E86B5192DF644007EDC30 /* LoopPulse-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LoopPulse-Prefix.pch"; sourceTree = "<group>"; };
+		F42E86BE192DF644007EDC30 /* LoopPulseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LoopPulseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F42E86BF192DF644007EDC30 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		F42E86C9192DF644007EDC30 /* LoopPulseTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LoopPulseTests-Info.plist"; sourceTree = "<group>"; };
+		F42E86CB192DF644007EDC30 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F42E86CD192DF644007EDC30 /* LoopPulseTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoopPulseTests.m; sourceTree = "<group>"; };
+		F42E86D7192DF6A1007EDC30 /* LPVisitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPVisitor.m; sourceTree = "<group>"; };
+		F42E86D8192DF6A1007EDC30 /* LPVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPVisitor.h; sourceTree = "<group>"; };
+		F42E86D9192DF6A1007EDC30 /* LPLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPLocationManager.m; sourceTree = "<group>"; };
+		F42E86DA192DF6A1007EDC30 /* LPLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPLocationManager.h; sourceTree = "<group>"; };
+		F42E86DB192DF6A1007EDC30 /* LPDataStore+LPVisitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "LPDataStore+LPVisitor.m"; sourceTree = "<group>"; };
+		F42E86DC192DF6A1007EDC30 /* LPDataStore+LPVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LPDataStore+LPVisitor.h"; sourceTree = "<group>"; };
+		F42E86DD192DF6A1007EDC30 /* LPDataStore+LPLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "LPDataStore+LPLocationManager.m"; sourceTree = "<group>"; };
+		F42E86DE192DF6A1007EDC30 /* LPDataStore+LPLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LPDataStore+LPLocationManager.h"; sourceTree = "<group>"; };
+		F42E86DF192DF6A1007EDC30 /* LPDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPDataStore.m; sourceTree = "<group>"; };
+		F42E86E0192DF6A1007EDC30 /* LPDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPDataStore.h; sourceTree = "<group>"; };
+		F42E86E1192DF6A1007EDC30 /* LoopPulse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopPulse.m; sourceTree = "<group>"; };
+		F42E86E2192DF6A1007EDC30 /* LoopPulse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopPulse.h; sourceTree = "<group>"; };
+		F42E86E3192DF6A1007EDC30 /* CLRegion+LoopPulseHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLRegion+LoopPulseHelpers.m"; sourceTree = "<group>"; };
+		F42E86E4192DF6A1007EDC30 /* CLRegion+LoopPulseHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLRegion+LoopPulseHelpers.h"; sourceTree = "<group>"; };
+		F42E86E5192DF6A1007EDC30 /* CLBeaconRegion+FirebaseDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLBeaconRegion+FirebaseDictionary.m"; sourceTree = "<group>"; };
+		F42E86E6192DF6A1007EDC30 /* CLBeaconRegion+FirebaseDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLBeaconRegion+FirebaseDictionary.h"; sourceTree = "<group>"; };
+		F42E86E7192DF6A1007EDC30 /* CLBeacon+FirebaseDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLBeacon+FirebaseDictionary.m"; sourceTree = "<group>"; };
+		F42E86E8192DF6A1007EDC30 /* CLBeacon+FirebaseDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLBeacon+FirebaseDictionary.h"; sourceTree = "<group>"; };
+		F42E86F2192DF6CB007EDC30 /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Firebase.framework; path = ../Firebase.framework; sourceTree = "<group>"; };
+		F42E86F4192DF717007EDC30 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		F42E86F6192DF720007EDC30 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		F42E86F8192DF728007EDC30 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F42E86AB192DF644007EDC30 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F42E86F9192DF728007EDC30 /* CFNetwork.framework in Frameworks */,
+				F42E86F7192DF720007EDC30 /* CoreBluetooth.framework in Frameworks */,
+				F42E86F5192DF717007EDC30 /* UIKit.framework in Frameworks */,
+				F42E86B2192DF644007EDC30 /* Foundation.framework in Frameworks */,
+				F42E86F3192DF6CB007EDC30 /* Firebase.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F42E86BB192DF644007EDC30 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F42E86C0192DF644007EDC30 /* XCTest.framework in Frameworks */,
+				F42E86C1192DF644007EDC30 /* Foundation.framework in Frameworks */,
+				F42E86C6192DF644007EDC30 /* libLoopPulse.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F42E86A5192DF644007EDC30 = {
+			isa = PBXGroup;
+			children = (
+				F42E86B3192DF644007EDC30 /* LoopPulse */,
+				F42E86C7192DF644007EDC30 /* LoopPulseTests */,
+				F42E86B0192DF644007EDC30 /* Frameworks */,
+				F42E86AF192DF644007EDC30 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F42E86AF192DF644007EDC30 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F42E86AE192DF644007EDC30 /* libLoopPulse.a */,
+				F42E86BE192DF644007EDC30 /* LoopPulseTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F42E86B0192DF644007EDC30 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F42E86F8192DF728007EDC30 /* CFNetwork.framework */,
+				F42E86F6192DF720007EDC30 /* CoreBluetooth.framework */,
+				F42E86F4192DF717007EDC30 /* UIKit.framework */,
+				F42E86F2192DF6CB007EDC30 /* Firebase.framework */,
+				F42E86B1192DF644007EDC30 /* Foundation.framework */,
+				F42E86BF192DF644007EDC30 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F42E86B3192DF644007EDC30 /* LoopPulse */ = {
+			isa = PBXGroup;
+			children = (
+				F42E86E1192DF6A1007EDC30 /* LoopPulse.m */,
+				F42E86E2192DF6A1007EDC30 /* LoopPulse.h */,
+				F42E86D7192DF6A1007EDC30 /* LPVisitor.m */,
+				F42E86D8192DF6A1007EDC30 /* LPVisitor.h */,
+				F42E86D9192DF6A1007EDC30 /* LPLocationManager.m */,
+				F42E86DA192DF6A1007EDC30 /* LPLocationManager.h */,
+				F42E86DB192DF6A1007EDC30 /* LPDataStore+LPVisitor.m */,
+				F42E86DC192DF6A1007EDC30 /* LPDataStore+LPVisitor.h */,
+				F42E86DD192DF6A1007EDC30 /* LPDataStore+LPLocationManager.m */,
+				F42E86DE192DF6A1007EDC30 /* LPDataStore+LPLocationManager.h */,
+				F42E86DF192DF6A1007EDC30 /* LPDataStore.m */,
+				F42E86E0192DF6A1007EDC30 /* LPDataStore.h */,
+				F42E86E3192DF6A1007EDC30 /* CLRegion+LoopPulseHelpers.m */,
+				F42E86E4192DF6A1007EDC30 /* CLRegion+LoopPulseHelpers.h */,
+				F42E86E5192DF6A1007EDC30 /* CLBeaconRegion+FirebaseDictionary.m */,
+				F42E86E6192DF6A1007EDC30 /* CLBeaconRegion+FirebaseDictionary.h */,
+				F42E86E7192DF6A1007EDC30 /* CLBeacon+FirebaseDictionary.m */,
+				F42E86E8192DF6A1007EDC30 /* CLBeacon+FirebaseDictionary.h */,
+				F42E86B4192DF644007EDC30 /* Supporting Files */,
+			);
+			path = LoopPulse;
+			sourceTree = "<group>";
+		};
+		F42E86B4192DF644007EDC30 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F42E86B5192DF644007EDC30 /* LoopPulse-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F42E86C7192DF644007EDC30 /* LoopPulseTests */ = {
+			isa = PBXGroup;
+			children = (
+				F42E86CD192DF644007EDC30 /* LoopPulseTests.m */,
+				F42E86C8192DF644007EDC30 /* Supporting Files */,
+			);
+			path = LoopPulseTests;
+			sourceTree = "<group>";
+		};
+		F42E86C8192DF644007EDC30 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F42E86C9192DF644007EDC30 /* LoopPulseTests-Info.plist */,
+				F42E86CA192DF644007EDC30 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		F42E86FA192DF7EA007EDC30 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F42E86FB192DF808007EDC30 /* LoopPulse.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		F42E86AD192DF644007EDC30 /* LoopPulse */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F42E86D1192DF644007EDC30 /* Build configuration list for PBXNativeTarget "LoopPulse" */;
+			buildPhases = (
+				F42E86AA192DF644007EDC30 /* Sources */,
+				F42E86AB192DF644007EDC30 /* Frameworks */,
+				F42E86AC192DF644007EDC30 /* CopyFiles */,
+				F42E86FA192DF7EA007EDC30 /* Headers */,
+				F42E8714192DFB24007EDC30 /* Build Framework */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LoopPulse;
+			productName = LoopPulse;
+			productReference = F42E86AE192DF644007EDC30 /* libLoopPulse.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		F42E86BD192DF644007EDC30 /* LoopPulseTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F42E86D4192DF644007EDC30 /* Build configuration list for PBXNativeTarget "LoopPulseTests" */;
+			buildPhases = (
+				F42E86BA192DF644007EDC30 /* Sources */,
+				F42E86BB192DF644007EDC30 /* Frameworks */,
+				F42E86BC192DF644007EDC30 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F42E86C5192DF644007EDC30 /* PBXTargetDependency */,
+			);
+			name = LoopPulseTests;
+			productName = LoopPulseTests;
+			productReference = F42E86BE192DF644007EDC30 /* LoopPulseTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F42E86A6192DF644007EDC30 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Clione Labs";
+			};
+			buildConfigurationList = F42E86A9192DF644007EDC30 /* Build configuration list for PBXProject "LoopPulse" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = F42E86A5192DF644007EDC30;
+			productRefGroup = F42E86AF192DF644007EDC30 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F42E86AD192DF644007EDC30 /* LoopPulse */,
+				F42E86BD192DF644007EDC30 /* LoopPulseTests */,
+				F42E8715192DFC0E007EDC30 /* Framework */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F42E86BC192DF644007EDC30 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F42E86CC192DF644007EDC30 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		F42E8714192DFB24007EDC30 /* Build Framework */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Build Framework";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\nexport FRAMEWORK_LOCN=\"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework\"\n\n# Create the path to the real Headers die\nmkdir -p \"${FRAMEWORK_LOCN}/Versions/A/Headers\"\n\n# Create the required symlinks\n/bin/ln -sfh A \"${FRAMEWORK_LOCN}/Versions/Current\"\n/bin/ln -sfh Versions/Current/Headers \"${FRAMEWORK_LOCN}/Headers\"\n/bin/ln -sfh \"Versions/Current/${PRODUCT_NAME}\" \\\n\"${FRAMEWORK_LOCN}/${PRODUCT_NAME}\"\n\n# Copy the public headers into the framework\n/bin/cp -a \"${TARGET_BUILD_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}/\" \\\n\"${FRAMEWORK_LOCN}/Versions/A/Headers\"";
+		};
+		F42E871B192DFC2E007EDC30 /* MultiPlatform Build */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "MultiPlatform Build";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\n# If we're already inside this script then die\nif [ -n \"$RW_MULTIPLATFORM_BUILD_IN_PROGRESS\" ]; then\nexit 0\nfi\nexport RW_MULTIPLATFORM_BUILD_IN_PROGRESS=1\n\nRW_FRAMEWORK_NAME=${PROJECT_NAME}\nRW_INPUT_STATIC_LIB=\"lib${PROJECT_NAME}.a\"\nRW_FRAMEWORK_LOCATION=\"${BUILT_PRODUCTS_DIR}/${RW_FRAMEWORK_NAME}.framework\"\n\nfunction build_static_library {\n    # Will rebuild the static library as specified\n    #     build_static_library sdk\n    xcrun xcodebuild -project \"${PROJECT_FILE_PATH}\" \\\n    -target \"${TARGET_NAME}\" \\\n    -configuration \"${CONFIGURATION}\" \\\n    -sdk \"${1}\" \\\n    ONLY_ACTIVE_ARCH=NO \\\n    BUILD_DIR=\"${BUILD_DIR}\" \\\n    OBJROOT=\"${OBJROOT}\" \\\n    BUILD_ROOT=\"${BUILD_ROOT}\" \\\n    SYMROOT=\"${SYMROOT}\" $ACTION\n}\n\nfunction make_fat_library {\n    # Will smash 2 static libs together\n    #     make_fat_library in1 in2 out\n    xcrun lipo -create \"${1}\" \"${2}\" -output \"${3}\"\n}\n\n# 1 - Extract the platform (iphoneos/iphonesimulator) from the SDK name\nif [[ \"$SDK_NAME\" =~ ([A-Za-z]+) ]]; then\n  RW_SDK_PLATFORM=${BASH_REMATCH[1]}\nelse\n  echo \"Could not find platform name from SDK_NAME: $SDK_NAME\"\n  exit 1\nfi\n\n# 2 - Extract the version from the SDK\nif [[ \"$SDK_NAME\" =~ ([0-9]+.*$) ]]; then\n  RW_SDK_VERSION=${BASH_REMATCH[1]}\nelse\n  echo \"Could not find sdk version from SDK_NAME: $SDK_NAME\"\nexit 1\nfi\n\n# 3 - Determine the other platform\nif [ \"$RW_SDK_PLATFORM\" == \"iphoneos\" ]; then\n  RW_OTHER_PLATFORM=iphonesimulator\nelse\n  RW_OTHER_PLATFORM=iphoneos\nfi\n\n# 4 - Find the build directory\nif [[ \"$BUILT_PRODUCTS_DIR\" =~ (.*)$RW_SDK_PLATFORM$ ]]; then\n  RW_OTHER_BUILT_PRODUCTS_DIR=\"${BASH_REMATCH[1]}${RW_OTHER_PLATFORM}\"\nelse\n  echo \"Could not find other platform build directory.\"\n  exit 1\nfi\n\n# Build the other platform.\nbuild_static_library \"${RW_OTHER_PLATFORM}${RW_SDK_VERSION}\"\n\n# If we're currently building for iphonesimulator, then need to rebuild\n#   to ensure that we get both i386 and x86_64\nif [ \"$RW_SDK_PLATFORM\" == \"iphonesimulator\" ]; then\n  build_static_library \"${SDK_NAME}\"\nfi\n\n# Join the 2 static libs into 1 and push into the .framework\nmake_fat_library \"${BUILT_PRODUCTS_DIR}/${RW_INPUT_STATIC_LIB}\" \\\n  \"${RW_OTHER_BUILT_PRODUCTS_DIR}/${RW_INPUT_STATIC_LIB}\" \\\n  \"${RW_FRAMEWORK_LOCATION}/Versions/A/${RW_FRAMEWORK_NAME}\"\n\n# Ensure that the framework is present in both platform's build directories\ncp -a \"${RW_FRAMEWORK_LOCATION}/Versions/A/${RW_FRAMEWORK_NAME}\" \\\n  \"${RW_OTHER_BUILT_PRODUCTS_DIR}/${RW_FRAMEWORK_NAME}.framework/Versions/A/${RW_FRAMEWORK_NAME}\"\n\n# Copy the framework to the root project folder\ntouch \"${SRCROOT}/../${RW_FRAMEWORK_NAME}.framework\" && rm -r \"${SRCROOT}/../${RW_FRAMEWORK_NAME}.framework\"\nditto \"${RW_FRAMEWORK_LOCATION}\" \"${SRCROOT}/../${RW_FRAMEWORK_NAME}.framework\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F42E86AA192DF644007EDC30 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F42E86EC192DF6A1007EDC30 /* LPDataStore+LPLocationManager.m in Sources */,
+				F42E86EB192DF6A1007EDC30 /* LPDataStore+LPVisitor.m in Sources */,
+				F42E86ED192DF6A1007EDC30 /* LPDataStore.m in Sources */,
+				F42E86F0192DF6A1007EDC30 /* CLBeaconRegion+FirebaseDictionary.m in Sources */,
+				F42E86EE192DF6A1007EDC30 /* LoopPulse.m in Sources */,
+				F42E86F1192DF6A1007EDC30 /* CLBeacon+FirebaseDictionary.m in Sources */,
+				F42E86EF192DF6A1007EDC30 /* CLRegion+LoopPulseHelpers.m in Sources */,
+				F42E86EA192DF6A1007EDC30 /* LPLocationManager.m in Sources */,
+				F42E86E9192DF6A1007EDC30 /* LPVisitor.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F42E86BA192DF644007EDC30 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F42E86CE192DF644007EDC30 /* LoopPulseTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F42E86C5192DF644007EDC30 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F42E86AD192DF644007EDC30 /* LoopPulse */;
+			targetProxy = F42E86C4192DF644007EDC30 /* PBXContainerItemProxy */;
+		};
+		F42E871A192DFC1B007EDC30 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F42E86AD192DF644007EDC30 /* LoopPulse */;
+			targetProxy = F42E8719192DFC1B007EDC30 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F42E86CA192DF644007EDC30 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F42E86CB192DF644007EDC30 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F42E86CF192DF644007EDC30 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		F42E86D0192DF644007EDC30 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F42E86D2192DF644007EDC30 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = NO;
+				DSTROOT = /tmp/LoopPulse.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/simon/Documents/looppulse/looppulse.ios.sdk,
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LoopPulse/LoopPulse-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PROJECT_NAME)";
+				SKIP_INSTALL = YES;
+				STRIP_STYLE = "non-global";
+			};
+			name = Debug;
+		};
+		F42E86D3192DF644007EDC30 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = NO;
+				DSTROOT = /tmp/LoopPulse.dst;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/simon/Documents/looppulse/looppulse.ios.sdk,
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LoopPulse/LoopPulse-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PROJECT_NAME)";
+				SKIP_INSTALL = YES;
+				STRIP_STYLE = "non-global";
+			};
+			name = Release;
+		};
+		F42E86D5192DF644007EDC30 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LoopPulse/LoopPulse-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "LoopPulseTests/LoopPulseTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		F42E86D6192DF644007EDC30 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LoopPulse/LoopPulse-Prefix.pch";
+				INFOPLIST_FILE = "LoopPulseTests/LoopPulseTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+		F42E8717192DFC0E007EDC30 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F42E8718192DFC0E007EDC30 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F42E86A9192DF644007EDC30 /* Build configuration list for PBXProject "LoopPulse" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F42E86CF192DF644007EDC30 /* Debug */,
+				F42E86D0192DF644007EDC30 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F42E86D1192DF644007EDC30 /* Build configuration list for PBXNativeTarget "LoopPulse" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F42E86D2192DF644007EDC30 /* Debug */,
+				F42E86D3192DF644007EDC30 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F42E86D4192DF644007EDC30 /* Build configuration list for PBXNativeTarget "LoopPulseTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F42E86D5192DF644007EDC30 /* Debug */,
+				F42E86D6192DF644007EDC30 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F42E8716192DFC0E007EDC30 /* Build configuration list for PBXAggregateTarget "Framework" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F42E8717192DFC0E007EDC30 /* Debug */,
+				F42E8718192DFC0E007EDC30 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F42E86A6192DF644007EDC30 /* Project object */;
+}

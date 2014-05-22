@@ -32,16 +32,8 @@
 		245CDFCC19080F380018C382 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 245CDFCB19080F380018C382 /* libicucore.dylib */; };
 		245CDFCE19080F410018C382 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 245CDFCD19080F410018C382 /* libc++.dylib */; };
 		245CDFD019080F4A0018C382 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 245CDFCF19080F4A0018C382 /* SystemConfiguration.framework */; };
-		24613641191F6C6100629A4A /* LPDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 24613640191F6C6100629A4A /* LPDataStore.m */; };
-		24613647191F749100629A4A /* LPDataStore+LPLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 24613646191F749100629A4A /* LPDataStore+LPLocationManager.m */; };
-		2461364A191F9EA400629A4A /* LPVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 24613648191F9EA400629A4A /* LPVisitor.m */; };
-		2461364D191FA0C600629A4A /* LPDataStore+LPVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 2461364C191FA0C600629A4A /* LPDataStore+LPVisitor.m */; };
-		247132C51912ADAF003A99E3 /* LoopPulse.m in Sources */ = {isa = PBXBuildFile; fileRef = 247132C41912ADAF003A99E3 /* LoopPulse.m */; };
-		247132C81913520E003A99E3 /* LPLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 247132C71913520E003A99E3 /* LPLocationManager.m */; };
-		247132D119139E06003A99E3 /* CLRegion+LoopPulseHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 247132D019139E06003A99E3 /* CLRegion+LoopPulseHelpers.m */; };
-		247132DA1914E409003A99E3 /* CLBeaconRegion+FirebaseDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 247132D91914E409003A99E3 /* CLBeaconRegion+FirebaseDictionary.m */; };
-		247132DD1914E478003A99E3 /* CLBeacon+FirebaseDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 247132DC1914E478003A99E3 /* CLBeacon+FirebaseDictionary.m */; };
 		F42E86A4192DD9C3007EDC30 /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F42E86A3192DD9C3007EDC30 /* Firebase.framework */; };
+		F42E8722192E01BC007EDC30 /* LoopPulse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F42E8721192E01BC007EDC30 /* LoopPulse.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +43,27 @@
 			proxyType = 1;
 			remoteGlobalIDString = 2455AD3818FA2F0200EC9849;
 			remoteInfo = LightHouse;
+		};
+		F42E8710192DFAD5007EDC30 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F42E86FC192DF962007EDC30 /* LoopPulse.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F42E86AE192DF644007EDC30;
+			remoteInfo = LoopPulse;
+		};
+		F42E8712192DFAD5007EDC30 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F42E86FC192DF962007EDC30 /* LoopPulse.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F42E86BE192DF644007EDC30;
+			remoteInfo = LoopPulseTests;
+		};
+		F42E871D192E0168007EDC30 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F42E86FC192DF962007EDC30 /* LoopPulse.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = F42E8715192DFC0E007EDC30;
+			remoteInfo = Framework;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -85,25 +98,9 @@
 		245CDFCB19080F380018C382 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		245CDFCD19080F410018C382 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		245CDFCF19080F4A0018C382 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		2461363F191F6C6100629A4A /* LPDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPDataStore.h; sourceTree = SOURCE_ROOT; };
-		24613640191F6C6100629A4A /* LPDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPDataStore.m; sourceTree = SOURCE_ROOT; };
-		24613645191F749100629A4A /* LPDataStore+LPLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LPDataStore+LPLocationManager.h"; sourceTree = SOURCE_ROOT; };
-		24613646191F749100629A4A /* LPDataStore+LPLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "LPDataStore+LPLocationManager.m"; sourceTree = SOURCE_ROOT; };
-		24613648191F9EA400629A4A /* LPVisitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPVisitor.m; sourceTree = SOURCE_ROOT; };
-		24613649191F9EA400629A4A /* LPVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPVisitor.h; sourceTree = SOURCE_ROOT; };
-		2461364B191FA0C600629A4A /* LPDataStore+LPVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LPDataStore+LPVisitor.h"; sourceTree = SOURCE_ROOT; };
-		2461364C191FA0C600629A4A /* LPDataStore+LPVisitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "LPDataStore+LPVisitor.m"; sourceTree = SOURCE_ROOT; };
-		247132C31912ADAF003A99E3 /* LoopPulse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopPulse.h; sourceTree = SOURCE_ROOT; };
-		247132C41912ADAF003A99E3 /* LoopPulse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoopPulse.m; sourceTree = SOURCE_ROOT; };
-		247132C61913520E003A99E3 /* LPLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPLocationManager.h; sourceTree = SOURCE_ROOT; };
-		247132C71913520E003A99E3 /* LPLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPLocationManager.m; sourceTree = SOURCE_ROOT; };
-		247132CF19139E06003A99E3 /* CLRegion+LoopPulseHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLRegion+LoopPulseHelpers.h"; sourceTree = SOURCE_ROOT; };
-		247132D019139E06003A99E3 /* CLRegion+LoopPulseHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLRegion+LoopPulseHelpers.m"; sourceTree = SOURCE_ROOT; };
-		247132D81914E409003A99E3 /* CLBeaconRegion+FirebaseDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLBeaconRegion+FirebaseDictionary.h"; sourceTree = SOURCE_ROOT; };
-		247132D91914E409003A99E3 /* CLBeaconRegion+FirebaseDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLBeaconRegion+FirebaseDictionary.m"; sourceTree = SOURCE_ROOT; };
-		247132DB1914E478003A99E3 /* CLBeacon+FirebaseDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLBeacon+FirebaseDictionary.h"; sourceTree = SOURCE_ROOT; };
-		247132DC1914E478003A99E3 /* CLBeacon+FirebaseDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLBeacon+FirebaseDictionary.m"; sourceTree = SOURCE_ROOT; };
 		F42E86A3192DD9C3007EDC30 /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Firebase.framework; path = ../Firebase.framework; sourceTree = "<group>"; };
+		F42E86FC192DF962007EDC30 /* LoopPulse.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LoopPulse.xcodeproj; path = ../../LoopPulse/LoopPulse.xcodeproj; sourceTree = "<group>"; };
+		F42E8721192E01BC007EDC30 /* LoopPulse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LoopPulse.framework; path = ../LoopPulse.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +113,7 @@
 				245CDFCC19080F380018C382 /* libicucore.dylib in Frameworks */,
 				245CDFCA19080F2E0018C382 /* Security.framework in Frameworks */,
 				245CDFC819080F270018C382 /* CFNetwork.framework in Frameworks */,
+				F42E8722192E01BC007EDC30 /* LoopPulse.framework in Frameworks */,
 				2455AD7D18FAE45400EC9849 /* CoreLocation.framework in Frameworks */,
 				2455AD7B18FAE44A00EC9849 /* CoreBluetooth.framework in Frameworks */,
 				F42E86A4192DD9C3007EDC30 /* Firebase.framework in Frameworks */,
@@ -162,6 +160,7 @@
 		2455AD3B18FA2F0200EC9849 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F42E8721192E01BC007EDC30 /* LoopPulse.framework */,
 				F42E86A3192DD9C3007EDC30 /* Firebase.framework */,
 				245CDFCF19080F4A0018C382 /* SystemConfiguration.framework */,
 				245CDFCD19080F410018C382 /* libc++.dylib */,
@@ -182,7 +181,7 @@
 		2455AD4418FA2F0200EC9849 /* LightHouse */ = {
 			isa = PBXGroup;
 			children = (
-				247132C21912AD42003A99E3 /* LoopPulse */,
+				F42E86FC192DF962007EDC30 /* LoopPulse.xcodeproj */,
 				2455AD5018FA2F0200EC9849 /* Main.storyboard */,
 				2455AD4D18FA2F0200EC9849 /* CLAppDelegate.h */,
 				2455AD4E18FA2F0200EC9849 /* CLAppDelegate.m */,
@@ -226,29 +225,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		247132C21912AD42003A99E3 /* LoopPulse */ = {
+		F42E870C192DFAD5007EDC30 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				247132C31912ADAF003A99E3 /* LoopPulse.h */,
-				247132C41912ADAF003A99E3 /* LoopPulse.m */,
-				2461363F191F6C6100629A4A /* LPDataStore.h */,
-				24613640191F6C6100629A4A /* LPDataStore.m */,
-				2461364B191FA0C600629A4A /* LPDataStore+LPVisitor.h */,
-				2461364C191FA0C600629A4A /* LPDataStore+LPVisitor.m */,
-				24613645191F749100629A4A /* LPDataStore+LPLocationManager.h */,
-				24613646191F749100629A4A /* LPDataStore+LPLocationManager.m */,
-				24613649191F9EA400629A4A /* LPVisitor.h */,
-				24613648191F9EA400629A4A /* LPVisitor.m */,
-				247132C61913520E003A99E3 /* LPLocationManager.h */,
-				247132C71913520E003A99E3 /* LPLocationManager.m */,
-				247132DB1914E478003A99E3 /* CLBeacon+FirebaseDictionary.h */,
-				247132DC1914E478003A99E3 /* CLBeacon+FirebaseDictionary.m */,
-				247132D81914E409003A99E3 /* CLBeaconRegion+FirebaseDictionary.h */,
-				247132D91914E409003A99E3 /* CLBeaconRegion+FirebaseDictionary.m */,
-				247132CF19139E06003A99E3 /* CLRegion+LoopPulseHelpers.h */,
-				247132D019139E06003A99E3 /* CLRegion+LoopPulseHelpers.m */,
+				F42E8711192DFAD5007EDC30 /* libLoopPulse.a */,
+				F42E8713192DFAD5007EDC30 /* LoopPulseTests.xctest */,
 			);
-			name = LoopPulse;
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -265,6 +248,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				F42E871E192E0168007EDC30 /* PBXTargetDependency */,
 			);
 			name = LightHouse;
 			productName = LightHouse;
@@ -315,6 +299,12 @@
 			mainGroup = 2455AD3018FA2F0200EC9849;
 			productRefGroup = 2455AD3A18FA2F0200EC9849 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = F42E870C192DFAD5007EDC30 /* Products */;
+					ProjectRef = F42E86FC192DF962007EDC30 /* LoopPulse.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				2455AD3818FA2F0200EC9849 /* LightHouse */,
@@ -322,6 +312,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		F42E8711192DFAD5007EDC30 /* libLoopPulse.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libLoopPulse.a;
+			remoteRef = F42E8710192DFAD5007EDC30 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F42E8713192DFAD5007EDC30 /* LoopPulseTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = LoopPulseTests.xctest;
+			remoteRef = F42E8712192DFAD5007EDC30 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		2455AD3718FA2F0200EC9849 /* Resources */ = {
@@ -349,19 +356,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2461364A191F9EA400629A4A /* LPVisitor.m in Sources */,
 				2455AD4B18FA2F0200EC9849 /* main.m in Sources */,
 				2455AD5818FA2F0300EC9849 /* CLMasterViewController.m in Sources */,
-				24613641191F6C6100629A4A /* LPDataStore.m in Sources */,
-				247132DA1914E409003A99E3 /* CLBeaconRegion+FirebaseDictionary.m in Sources */,
-				247132DD1914E478003A99E3 /* CLBeacon+FirebaseDictionary.m in Sources */,
-				24613647191F749100629A4A /* LPDataStore+LPLocationManager.m in Sources */,
-				247132D119139E06003A99E3 /* CLRegion+LoopPulseHelpers.m in Sources */,
 				2455AD5B18FA2F0300EC9849 /* CLDetailViewController.m in Sources */,
-				247132C51912ADAF003A99E3 /* LoopPulse.m in Sources */,
-				2461364D191FA0C600629A4A /* LPDataStore+LPVisitor.m in Sources */,
 				2455AD4F18FA2F0200EC9849 /* CLAppDelegate.m in Sources */,
-				247132C81913520E003A99E3 /* LPLocationManager.m in Sources */,
 				2455AD5518FA2F0300EC9849 /* LightHouse.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -381,6 +379,11 @@
 			isa = PBXTargetDependency;
 			target = 2455AD3818FA2F0200EC9849 /* LightHouse */;
 			targetProxy = 2455AD6818FA2F0300EC9849 /* PBXContainerItemProxy */;
+		};
+		F42E871E192E0168007EDC30 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Framework;
+			targetProxy = F42E871D192E0168007EDC30 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -498,6 +501,10 @@
 				GCC_PREFIX_HEADER = "LightHouse/LightHouse-Prefix.pch";
 				INFOPLIST_FILE = "LightHouse/LightHouse-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/LightHouse-drjphnyypmezjmhkdsyfyvxolriq/Build/Products/Debug-iphoneos",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -517,6 +524,10 @@
 				GCC_PREFIX_HEADER = "LightHouse/LightHouse-Prefix.pch";
 				INFOPLIST_FILE = "LightHouse/LightHouse-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/LightHouse-drjphnyypmezjmhkdsyfyvxolriq/Build/Products/Debug-iphoneos",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

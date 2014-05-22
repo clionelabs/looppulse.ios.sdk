@@ -10,7 +10,7 @@
 #import "CLMasterViewController.h"
 //#import <Firebase/Firebase.h>
 //@import CoreLocation;
-#import "LoopPulse.h"
+#import "LoopPulse/LoopPulse.h"
 
 @interface CLAppDelegate () <UIApplicationDelegate>
 //@property CLLocationManager *locationManager;
