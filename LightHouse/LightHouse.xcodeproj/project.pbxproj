@@ -27,7 +27,6 @@
 		2455AD7118FA2F0300EC9849 /* LightHouseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2455AD7018FA2F0300EC9849 /* LightHouseTests.m */; };
 		2455AD7B18FAE44A00EC9849 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2455AD7A18FAE44A00EC9849 /* CoreBluetooth.framework */; };
 		2455AD7D18FAE45400EC9849 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2455AD7C18FAE45400EC9849 /* CoreLocation.framework */; };
-		245CDFC619080F0B0018C382 /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 245CDFC519080F0B0018C382 /* Firebase.framework */; };
 		245CDFC819080F270018C382 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 245CDFC719080F270018C382 /* CFNetwork.framework */; };
 		245CDFCA19080F2E0018C382 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 245CDFC919080F2E0018C382 /* Security.framework */; };
 		245CDFCC19080F380018C382 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 245CDFCB19080F380018C382 /* libicucore.dylib */; };
@@ -42,6 +41,7 @@
 		247132D119139E06003A99E3 /* CLRegion+LoopPulseHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 247132D019139E06003A99E3 /* CLRegion+LoopPulseHelpers.m */; };
 		247132DA1914E409003A99E3 /* CLBeaconRegion+FirebaseDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 247132D91914E409003A99E3 /* CLBeaconRegion+FirebaseDictionary.m */; };
 		247132DD1914E478003A99E3 /* CLBeacon+FirebaseDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 247132DC1914E478003A99E3 /* CLBeacon+FirebaseDictionary.m */; };
+		F42E86A4192DD9C3007EDC30 /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F42E86A3192DD9C3007EDC30 /* Firebase.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,7 +80,6 @@
 		2455AD7018FA2F0300EC9849 /* LightHouseTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LightHouseTests.m; sourceTree = "<group>"; };
 		2455AD7A18FAE44A00EC9849 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		2455AD7C18FAE45400EC9849 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		245CDFC519080F0B0018C382 /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
 		245CDFC719080F270018C382 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		245CDFC919080F2E0018C382 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		245CDFCB19080F380018C382 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
@@ -104,6 +103,7 @@
 		247132D91914E409003A99E3 /* CLBeaconRegion+FirebaseDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLBeaconRegion+FirebaseDictionary.m"; sourceTree = SOURCE_ROOT; };
 		247132DB1914E478003A99E3 /* CLBeacon+FirebaseDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLBeacon+FirebaseDictionary.h"; sourceTree = SOURCE_ROOT; };
 		247132DC1914E478003A99E3 /* CLBeacon+FirebaseDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLBeacon+FirebaseDictionary.m"; sourceTree = SOURCE_ROOT; };
+		F42E86A3192DD9C3007EDC30 /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Firebase.framework; path = ../Firebase.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,8 +118,8 @@
 				245CDFC819080F270018C382 /* CFNetwork.framework in Frameworks */,
 				2455AD7D18FAE45400EC9849 /* CoreLocation.framework in Frameworks */,
 				2455AD7B18FAE44A00EC9849 /* CoreBluetooth.framework in Frameworks */,
+				F42E86A4192DD9C3007EDC30 /* Firebase.framework in Frameworks */,
 				2455AD3F18FA2F0200EC9849 /* CoreGraphics.framework in Frameworks */,
-				245CDFC619080F0B0018C382 /* Firebase.framework in Frameworks */,
 				2455AD4318FA2F0200EC9849 /* CoreData.framework in Frameworks */,
 				2455AD4118FA2F0200EC9849 /* UIKit.framework in Frameworks */,
 				2455AD3D18FA2F0200EC9849 /* Foundation.framework in Frameworks */,
@@ -162,12 +162,12 @@
 		2455AD3B18FA2F0200EC9849 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F42E86A3192DD9C3007EDC30 /* Firebase.framework */,
 				245CDFCF19080F4A0018C382 /* SystemConfiguration.framework */,
 				245CDFCD19080F410018C382 /* libc++.dylib */,
 				245CDFCB19080F380018C382 /* libicucore.dylib */,
 				245CDFC919080F2E0018C382 /* Security.framework */,
 				245CDFC719080F270018C382 /* CFNetwork.framework */,
-				245CDFC519080F0B0018C382 /* Firebase.framework */,
 				2455AD7C18FAE45400EC9849 /* CoreLocation.framework */,
 				2455AD7A18FAE44A00EC9849 /* CoreBluetooth.framework */,
 				2455AD3C18FA2F0200EC9849 /* Foundation.framework */,
@@ -492,10 +492,12 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					/Users/simon/Documents/looppulse/looppulse.ios.sdk,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LightHouse/LightHouse-Prefix.pch";
 				INFOPLIST_FILE = "LightHouse/LightHouse-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -509,10 +511,12 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					/Users/simon/Documents/looppulse/looppulse.ios.sdk,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LightHouse/LightHouse-Prefix.pch";
 				INFOPLIST_FILE = "LightHouse/LightHouse-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
