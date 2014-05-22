@@ -495,7 +495,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					/Users/simon/Documents/looppulse/looppulse.ios.sdk,
+					../,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LightHouse/LightHouse-Prefix.pch";
@@ -518,7 +518,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					/Users/simon/Documents/looppulse/looppulse.ios.sdk,
+					../,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LightHouse/LightHouse-Prefix.pch";

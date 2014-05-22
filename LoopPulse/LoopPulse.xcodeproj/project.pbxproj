@@ -465,7 +465,7 @@
 				DSTROOT = /tmp/LoopPulse.dst;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/simon/Documents/looppulse/looppulse.ios.sdk,
+					../,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LoopPulse/LoopPulse-Prefix.pch";
@@ -485,7 +485,7 @@
 				DSTROOT = /tmp/LoopPulse.dst;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/simon/Documents/looppulse/looppulse.ios.sdk,
+					../,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LoopPulse/LoopPulse-Prefix.pch";
@@ -584,6 +584,7 @@
 				F42E8718192DFC0E007EDC30 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
