@@ -10,12 +10,22 @@
 
 @implementation LPDataStore
 
-- (id)initWithToken:(NSString *)token
+- (id)initWithToken:(NSString *)token clientID:(NSString *)clientID
 {
     self = [super init];
     if (self) {
+        
+        if (token.length == 0) {
+            [NSException raise:@"Invalid token value" format:@"The token parameter must be provided."];
+        }
+        if (clientID.length == 0) {
+            [NSException raise:@"Invalid clientID value" format:@"The clientID parameter must be provided."];
+        }
+        
         _token = token;
-        _firebase = [[Firebase alloc] initWithUrl:@"https://looppulse-dev.firebaseio.com"];
+        _clientID = clientID;
+        NSString *url = [NSString stringWithFormat:@"https://looppulse-dev.firebaseio.com/clients/%@", clientID];
+        _firebase = [[Firebase alloc] initWithUrl:url];
     }
     return self;
 }

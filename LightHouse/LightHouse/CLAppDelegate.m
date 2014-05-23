@@ -30,7 +30,7 @@
     CLMasterViewController *controller = (CLMasterViewController *)navigationController.topViewController;
     controller.managedObjectContext = self.managedObjectContext;
 
-    self.loopPulse = [[LoopPulse alloc] initWithToken:@"testing"];
+    self.loopPulse = [[LoopPulse alloc] initWithToken:@"testing" clientID:@"loop_pulse"];
     [self.loopPulse startLocationMonitoring];
 
     [self observeLoopPulseNotification];

@@ -13,6 +13,7 @@
 
 @interface LoopPulse ()
 @property (readonly, retain) NSString *token;
+@property (readonly, retain) NSString *clientID;
 @property (readonly, retain) LPDataStore *dataStore;
 @property (readonly, retain) LPVisitor *visitor;
 @property (readonly, retain) LPLocationManager *locationManager;
@@ -20,12 +21,13 @@
 
 @implementation LoopPulse
 
-- (id)initWithToken:(NSString *)token
+- (id)initWithToken:(NSString*)token clientID:(NSString *)clientID
 {
     self = [super init];
     if (self) {
         _token = token;
-        _dataStore = [[LPDataStore alloc] initWithToken:token];
+        _clientID = token;
+        _dataStore = [[LPDataStore alloc] initWithToken:token clientID:clientID];
         _visitor = [[LPVisitor alloc] initWithDataStore:_dataStore];
         _locationManager = [[LPLocationManager alloc] initWithDataStore:_dataStore];
         _locationManager.delegate = _locationManager;
