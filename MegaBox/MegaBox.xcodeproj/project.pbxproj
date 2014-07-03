@@ -16,8 +16,7 @@
 		F49DC171196532C4008D7EEB /* MBAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DC170196532C4008D7EEB /* MBAppDelegate.m */; };
 		F49DC174196532C4008D7EEB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F49DC172196532C4008D7EEB /* Main.storyboard */; };
 		F49DC177196532C4008D7EEB /* MegaBox.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F49DC175196532C4008D7EEB /* MegaBox.xcdatamodeld */; };
-		F49DC17A196532C4008D7EEB /* MBMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DC179196532C4008D7EEB /* MBMasterViewController.m */; };
-		F49DC17D196532C4008D7EEB /* MBDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DC17C196532C4008D7EEB /* MBDetailViewController.m */; };
+		F49DC17A196532C4008D7EEB /* MBLogsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DC179196532C4008D7EEB /* MBLogsViewController.m */; };
 		F49DC17F196532C4008D7EEB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F49DC17E196532C4008D7EEB /* Images.xcassets */; };
 		F49DC186196532C4008D7EEB /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49DC185196532C4008D7EEB /* XCTest.framework */; };
 		F49DC187196532C4008D7EEB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49DC15E196532C4008D7EEB /* Foundation.framework */; };
@@ -29,6 +28,13 @@
 		F49DC1BF196533C7008D7EEB /* LoopPulse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49DC1BE196533C7008D7EEB /* LoopPulse.framework */; };
 		F49DC1C219653403008D7EEB /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49DC1C119653403008D7EEB /* SystemConfiguration.framework */; };
 		F49DC1C5196535BF008D7EEB /* MBManagedLog.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DC1C4196535BF008D7EEB /* MBManagedLog.m */; };
+		F49DC1CD196539AC008D7EEB /* MBCoreDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DC1CC196539AC008D7EEB /* MBCoreDataController.m */; };
+		F49DC1D019653A87008D7EEB /* MBLogController.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DC1CF19653A87008D7EEB /* MBLogController.m */; };
+		F49DC1D219653B93008D7EEB /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F49DC1D119653B93008D7EEB /* libc++.dylib */; };
+		F49DC1D419653B99008D7EEB /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F49DC1D319653B99008D7EEB /* libicucore.dylib */; };
+		F49DC1D619653BA0008D7EEB /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49DC1D519653BA0008D7EEB /* Security.framework */; };
+		F49DC1D819653BAB008D7EEB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49DC1D719653BAB008D7EEB /* CoreLocation.framework */; };
+		F49DC1DA19653BB0008D7EEB /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49DC1D919653BB0008D7EEB /* CoreBluetooth.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,10 +82,8 @@
 		F49DC170196532C4008D7EEB /* MBAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MBAppDelegate.m; sourceTree = "<group>"; };
 		F49DC173196532C4008D7EEB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F49DC176196532C4008D7EEB /* MegaBox.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MegaBox.xcdatamodel; sourceTree = "<group>"; };
-		F49DC178196532C4008D7EEB /* MBMasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MBMasterViewController.h; sourceTree = "<group>"; };
-		F49DC179196532C4008D7EEB /* MBMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MBMasterViewController.m; sourceTree = "<group>"; };
-		F49DC17B196532C4008D7EEB /* MBDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MBDetailViewController.h; sourceTree = "<group>"; };
-		F49DC17C196532C4008D7EEB /* MBDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MBDetailViewController.m; sourceTree = "<group>"; };
+		F49DC178196532C4008D7EEB /* MBLogsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MBLogsViewController.h; sourceTree = "<group>"; };
+		F49DC179196532C4008D7EEB /* MBLogsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MBLogsViewController.m; sourceTree = "<group>"; };
 		F49DC17E196532C4008D7EEB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		F49DC184196532C4008D7EEB /* MegaBoxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MegaBoxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F49DC185196532C4008D7EEB /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -92,6 +96,15 @@
 		F49DC1C119653403008D7EEB /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		F49DC1C3196535BF008D7EEB /* MBManagedLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBManagedLog.h; sourceTree = "<group>"; };
 		F49DC1C4196535BF008D7EEB /* MBManagedLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBManagedLog.m; sourceTree = "<group>"; };
+		F49DC1CB196539AC008D7EEB /* MBCoreDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBCoreDataController.h; sourceTree = "<group>"; };
+		F49DC1CC196539AC008D7EEB /* MBCoreDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBCoreDataController.m; sourceTree = "<group>"; };
+		F49DC1CE19653A87008D7EEB /* MBLogController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBLogController.h; sourceTree = "<group>"; };
+		F49DC1CF19653A87008D7EEB /* MBLogController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBLogController.m; sourceTree = "<group>"; };
+		F49DC1D119653B93008D7EEB /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		F49DC1D319653B99008D7EEB /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		F49DC1D519653BA0008D7EEB /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		F49DC1D719653BAB008D7EEB /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		F49DC1D919653BB0008D7EEB /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +112,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F49DC1DA19653BB0008D7EEB /* CoreBluetooth.framework in Frameworks */,
+				F49DC1D819653BAB008D7EEB /* CoreLocation.framework in Frameworks */,
+				F49DC1D619653BA0008D7EEB /* Security.framework in Frameworks */,
+				F49DC1D419653B99008D7EEB /* libicucore.dylib in Frameworks */,
+				F49DC1D219653B93008D7EEB /* libc++.dylib in Frameworks */,
 				F49DC1C219653403008D7EEB /* SystemConfiguration.framework in Frameworks */,
 				F49DC1BF196533C7008D7EEB /* LoopPulse.framework in Frameworks */,
 				F49DC19D196532FE008D7EEB /* Firebase.framework in Frameworks */,
@@ -145,6 +163,11 @@
 		F49DC15D196532C4008D7EEB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F49DC1D919653BB0008D7EEB /* CoreBluetooth.framework */,
+				F49DC1D719653BAB008D7EEB /* CoreLocation.framework */,
+				F49DC1D519653BA0008D7EEB /* Security.framework */,
+				F49DC1D319653B99008D7EEB /* libicucore.dylib */,
+				F49DC1D119653B93008D7EEB /* libc++.dylib */,
 				F49DC1C119653403008D7EEB /* SystemConfiguration.framework */,
 				F49DC1BE196533C7008D7EEB /* LoopPulse.framework */,
 				F49DC19C196532FE008D7EEB /* Firebase.framework */,
@@ -161,17 +184,13 @@
 			isa = PBXGroup;
 			children = (
 				F49DC1B219653395008D7EEB /* LoopPulse.xcodeproj */,
+				F49DC175196532C4008D7EEB /* MegaBox.xcdatamodeld */,
+				F49DC172196532C4008D7EEB /* Main.storyboard */,
+				F49DC17E196532C4008D7EEB /* Images.xcassets */,
 				F49DC16F196532C4008D7EEB /* MBAppDelegate.h */,
 				F49DC170196532C4008D7EEB /* MBAppDelegate.m */,
-				F49DC1C3196535BF008D7EEB /* MBManagedLog.h */,
-				F49DC1C4196535BF008D7EEB /* MBManagedLog.m */,
-				F49DC172196532C4008D7EEB /* Main.storyboard */,
-				F49DC178196532C4008D7EEB /* MBMasterViewController.h */,
-				F49DC179196532C4008D7EEB /* MBMasterViewController.m */,
-				F49DC17B196532C4008D7EEB /* MBDetailViewController.h */,
-				F49DC17C196532C4008D7EEB /* MBDetailViewController.m */,
-				F49DC17E196532C4008D7EEB /* Images.xcassets */,
-				F49DC175196532C4008D7EEB /* MegaBox.xcdatamodeld */,
+				F49DC1C619653670008D7EEB /* Models */,
+				F49DC1C71965368A008D7EEB /* View Controllers */,
 				F49DC167196532C4008D7EEB /* Supporting Files */,
 			);
 			path = MegaBox;
@@ -215,6 +234,28 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		F49DC1C619653670008D7EEB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F49DC1CE19653A87008D7EEB /* MBLogController.h */,
+				F49DC1CF19653A87008D7EEB /* MBLogController.m */,
+				F49DC1C3196535BF008D7EEB /* MBManagedLog.h */,
+				F49DC1C4196535BF008D7EEB /* MBManagedLog.m */,
+				F49DC1CB196539AC008D7EEB /* MBCoreDataController.h */,
+				F49DC1CC196539AC008D7EEB /* MBCoreDataController.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		F49DC1C71965368A008D7EEB /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F49DC178196532C4008D7EEB /* MBLogsViewController.h */,
+				F49DC179196532C4008D7EEB /* MBLogsViewController.m */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -223,8 +264,8 @@
 			buildConfigurationList = F49DC196196532C4008D7EEB /* Build configuration list for PBXNativeTarget "MegaBox" */;
 			buildPhases = (
 				F49DC157196532C4008D7EEB /* Sources */,
-				F49DC158196532C4008D7EEB /* Frameworks */,
 				F49DC159196532C4008D7EEB /* Resources */,
+				F49DC158196532C4008D7EEB /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -338,11 +379,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				F49DC16D196532C4008D7EEB /* main.m in Sources */,
-				F49DC17A196532C4008D7EEB /* MBMasterViewController.m in Sources */,
+				F49DC1D019653A87008D7EEB /* MBLogController.m in Sources */,
+				F49DC17A196532C4008D7EEB /* MBLogsViewController.m in Sources */,
 				F49DC177196532C4008D7EEB /* MegaBox.xcdatamodeld in Sources */,
 				F49DC1C5196535BF008D7EEB /* MBManagedLog.m in Sources */,
-				F49DC17D196532C4008D7EEB /* MBDetailViewController.m in Sources */,
 				F49DC171196532C4008D7EEB /* MBAppDelegate.m in Sources */,
+				F49DC1CD196539AC008D7EEB /* MBCoreDataController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -481,6 +523,7 @@
 				GCC_PREFIX_HEADER = "MegaBox/MegaBox-Prefix.pch";
 				INFOPLIST_FILE = "MegaBox/MegaBox-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -500,6 +543,7 @@
 				GCC_PREFIX_HEADER = "MegaBox/MegaBox-Prefix.pch";
 				INFOPLIST_FILE = "MegaBox/MegaBox-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

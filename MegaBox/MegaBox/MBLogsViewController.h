@@ -1,5 +1,5 @@
 //
-//  MBMasterViewController.h
+//  MBLogsViewController.h
 //  MegaBox
 //
 //  Created by Simon Pang on 3/7/14.
@@ -10,9 +10,8 @@
 
 #import <CoreData/CoreData.h>
 
-@interface MBMasterViewController : UITableViewController <NSFetchedResultsControllerDelegate>
+@interface MBLogsViewController : UITableViewController <NSFetchedResultsControllerDelegate>
 
-@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @end

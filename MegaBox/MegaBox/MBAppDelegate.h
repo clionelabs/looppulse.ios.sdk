@@ -8,15 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@class MBCoreDataController, MBLogController, LoopPulse;
+
 @interface MBAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
-@property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
-@property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
-@property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-
-- (void)saveContext;
-- (NSURL *)applicationDocumentsDirectory;
+@property (readonly, strong, nonatomic) LoopPulse *loopPulse;
+@property (readonly, strong, nonatomic) MBCoreDataController *coreDataController;
+@property (readonly, strong, nonatomic) MBLogController *logController;
 
 @end
