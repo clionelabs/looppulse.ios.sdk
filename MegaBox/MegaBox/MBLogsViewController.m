@@ -7,6 +7,8 @@
 //
 
 #import "MBLogsViewController.h"
+#import "MBLogsTableViewCell.h"
+#import "MBManagedLog.h"
 
 @interface MBLogsViewController ()
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
@@ -23,9 +25,6 @@
 {
     [super viewDidLoad];
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
-
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-    self.navigationItem.rightBarButtonItem = addButton;
 }
 
 - (void)didReceiveMemoryWarning
@@ -139,10 +138,48 @@
 }
  */
 
+- (NSDictionary *)descriptionForObject:(MBManagedLog *)log
+{
+    NSMutableDictionary *description = [NSMutableDictionary new];
+    if ([log.type isEqualToString:@"visit"]) {
+        description[@"iconImage"] = [UIImage imageNamed:@"icon-pin"];
+    }
+    else if ([log.type isEqualToString:@"suggestion"]) {
+        description[@"iconImage"] = [UIImage imageNamed:@"icon-star"];
+    }
+    if (log.enteredAt) {
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        formatter.dateStyle = NSDateFormatterMediumStyle;
+        formatter.timeStyle = NSDateFormatterMediumStyle;
+        description[@"time"] = [formatter stringFromDate:log.enteredAt];
+    }
+    if (log.durationInSeconds) {
+        if (log.durationInSeconds.floatValue >= 60) {
+            description[@"duration"] = [NSString stringWithFormat:@"%.0f", log.durationInSeconds.floatValue / 60.0];
+            description[@"unit"] = @"minutes";
+        }
+        else {
+            description[@"duration"] = [NSString stringWithFormat:@"%.0f", log.durationInSeconds.floatValue];
+            description[@"unit"] = @"seconds";
+        }
+    }
+    if (log.location) {
+        description[@"title"] = log.location;
+    }
+    return description;
+}
+
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = [[object valueForKey:@"name"] description];
+    NSDictionary *description = [self descriptionForObject: (MBManagedLog *)object];
+    
+    MBLogsTableViewCell *logCell = (id) cell;
+    logCell.iconImageView.image = description[@"iconImage"];
+    logCell.titleLabel.text = description[@"title"];
+    logCell.timeLabel.text = description[@"time"];
+    logCell.durationLabel.text = description[@"duration"];
+    logCell.durationUnitLabel.text = description[@"unit"];
 }
 
 @end

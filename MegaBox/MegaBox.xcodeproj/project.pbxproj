@@ -35,6 +35,7 @@
 		F49DC1D619653BA0008D7EEB /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49DC1D519653BA0008D7EEB /* Security.framework */; };
 		F49DC1D819653BAB008D7EEB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49DC1D719653BAB008D7EEB /* CoreLocation.framework */; };
 		F49DC1DA19653BB0008D7EEB /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49DC1D919653BB0008D7EEB /* CoreBluetooth.framework */; };
+		F49DC1DD1965575A008D7EEB /* MBLogsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DC1DC1965575A008D7EEB /* MBLogsTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +106,8 @@
 		F49DC1D519653BA0008D7EEB /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		F49DC1D719653BAB008D7EEB /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		F49DC1D919653BB0008D7EEB /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		F49DC1DB1965575A008D7EEB /* MBLogsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBLogsTableViewCell.h; sourceTree = "<group>"; };
+		F49DC1DC1965575A008D7EEB /* MBLogsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBLogsTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -250,6 +253,8 @@
 		F49DC1C71965368A008D7EEB /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				F49DC1DB1965575A008D7EEB /* MBLogsTableViewCell.h */,
+				F49DC1DC1965575A008D7EEB /* MBLogsTableViewCell.m */,
 				F49DC178196532C4008D7EEB /* MBLogsViewController.h */,
 				F49DC179196532C4008D7EEB /* MBLogsViewController.m */,
 			);
@@ -385,6 +390,7 @@
 				F49DC1C5196535BF008D7EEB /* MBManagedLog.m in Sources */,
 				F49DC171196532C4008D7EEB /* MBAppDelegate.m in Sources */,
 				F49DC1CD196539AC008D7EEB /* MBCoreDataController.m in Sources */,
+				F49DC1DD1965575A008D7EEB /* MBLogsTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
