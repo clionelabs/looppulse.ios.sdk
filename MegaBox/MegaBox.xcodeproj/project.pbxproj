@@ -237,12 +237,12 @@
 		F49DC1C619653670008D7EEB /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				F49DC1CB196539AC008D7EEB /* MBCoreDataController.h */,
+				F49DC1CC196539AC008D7EEB /* MBCoreDataController.m */,
 				F49DC1CE19653A87008D7EEB /* MBLogController.h */,
 				F49DC1CF19653A87008D7EEB /* MBLogController.m */,
 				F49DC1C3196535BF008D7EEB /* MBManagedLog.h */,
 				F49DC1C4196535BF008D7EEB /* MBManagedLog.m */,
-				F49DC1CB196539AC008D7EEB /* MBCoreDataController.h */,
-				F49DC1CC196539AC008D7EEB /* MBCoreDataController.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";

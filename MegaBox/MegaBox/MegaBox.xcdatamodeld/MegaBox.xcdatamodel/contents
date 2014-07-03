@@ -3,7 +3,7 @@
     <entity name="MBManagedLog" representedClassName="MBManagedLog">
         <attribute name="durationInSeconds" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="enteredAt" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="exitedAt" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="exitedAt" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" attributeType="String" indexed="YES">
             <userInfo/>

@@ -12,4 +12,7 @@
 
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
+- (void)startLogMonitoring;
+- (void)stopLogMonitoring;
+
 @end

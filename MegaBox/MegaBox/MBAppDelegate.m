@@ -24,9 +24,12 @@
 {
 
     self.coreDataController = [[MBCoreDataController alloc] init];
+    
     self.loopPulse = [[LoopPulse alloc] initWithToken:@"testing"];
+
     self.logController = [[MBLogController alloc] init];
     self.logController.managedObjectContext = self.coreDataController.managedObjectContext;
+    [self.logController startLogMonitoring];
 
     UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
     MBLogsViewController *controller = (MBLogsViewController *)navigationController.topViewController;
