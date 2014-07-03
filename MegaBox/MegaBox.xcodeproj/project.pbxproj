@@ -1,0 +1,592 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F49DC15F196532C4008D7EEB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49DC15E196532C4008D7EEB /* Foundation.framework */; };
+		F49DC161196532C4008D7EEB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49DC160196532C4008D7EEB /* CoreGraphics.framework */; };
+		F49DC163196532C4008D7EEB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49DC162196532C4008D7EEB /* UIKit.framework */; };
+		F49DC165196532C4008D7EEB /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49DC164196532C4008D7EEB /* CoreData.framework */; };
+		F49DC16B196532C4008D7EEB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F49DC169196532C4008D7EEB /* InfoPlist.strings */; };
+		F49DC16D196532C4008D7EEB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DC16C196532C4008D7EEB /* main.m */; };
+		F49DC171196532C4008D7EEB /* MBAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DC170196532C4008D7EEB /* MBAppDelegate.m */; };
+		F49DC174196532C4008D7EEB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F49DC172196532C4008D7EEB /* Main.storyboard */; };
+		F49DC177196532C4008D7EEB /* MegaBox.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F49DC175196532C4008D7EEB /* MegaBox.xcdatamodeld */; };
+		F49DC17A196532C4008D7EEB /* MBMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DC179196532C4008D7EEB /* MBMasterViewController.m */; };
+		F49DC17D196532C4008D7EEB /* MBDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DC17C196532C4008D7EEB /* MBDetailViewController.m */; };
+		F49DC17F196532C4008D7EEB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F49DC17E196532C4008D7EEB /* Images.xcassets */; };
+		F49DC186196532C4008D7EEB /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49DC185196532C4008D7EEB /* XCTest.framework */; };
+		F49DC187196532C4008D7EEB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49DC15E196532C4008D7EEB /* Foundation.framework */; };
+		F49DC188196532C4008D7EEB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49DC162196532C4008D7EEB /* UIKit.framework */; };
+		F49DC189196532C4008D7EEB /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49DC164196532C4008D7EEB /* CoreData.framework */; };
+		F49DC191196532C4008D7EEB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F49DC18F196532C4008D7EEB /* InfoPlist.strings */; };
+		F49DC193196532C4008D7EEB /* MegaBoxTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DC192196532C4008D7EEB /* MegaBoxTests.m */; };
+		F49DC19D196532FE008D7EEB /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49DC19C196532FE008D7EEB /* Firebase.framework */; };
+		F49DC1BF196533C7008D7EEB /* LoopPulse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49DC1BE196533C7008D7EEB /* LoopPulse.framework */; };
+		F49DC1C219653403008D7EEB /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49DC1C119653403008D7EEB /* SystemConfiguration.framework */; };
+		F49DC1C5196535BF008D7EEB /* MBManagedLog.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DC1C4196535BF008D7EEB /* MBManagedLog.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F49DC18A196532C4008D7EEB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F49DC153196532C4008D7EEB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F49DC15A196532C4008D7EEB;
+			remoteInfo = MegaBox;
+		};
+		F49DC1B819653395008D7EEB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F49DC1B219653395008D7EEB /* LoopPulse.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F42E86AE192DF644007EDC30;
+			remoteInfo = LoopPulse;
+		};
+		F49DC1BA19653395008D7EEB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F49DC1B219653395008D7EEB /* LoopPulse.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F42E86BE192DF644007EDC30;
+			remoteInfo = LoopPulseTests;
+		};
+		F49DC1BC196533B7008D7EEB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F49DC1B219653395008D7EEB /* LoopPulse.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = F42E8715192DFC0E007EDC30;
+			remoteInfo = Framework;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F49DC15B196532C4008D7EEB /* MegaBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MegaBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F49DC15E196532C4008D7EEB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		F49DC160196532C4008D7EEB /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		F49DC162196532C4008D7EEB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		F49DC164196532C4008D7EEB /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		F49DC168196532C4008D7EEB /* MegaBox-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MegaBox-Info.plist"; sourceTree = "<group>"; };
+		F49DC16A196532C4008D7EEB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F49DC16C196532C4008D7EEB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F49DC16E196532C4008D7EEB /* MegaBox-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MegaBox-Prefix.pch"; sourceTree = "<group>"; };
+		F49DC16F196532C4008D7EEB /* MBAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MBAppDelegate.h; sourceTree = "<group>"; };
+		F49DC170196532C4008D7EEB /* MBAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MBAppDelegate.m; sourceTree = "<group>"; };
+		F49DC173196532C4008D7EEB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F49DC176196532C4008D7EEB /* MegaBox.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MegaBox.xcdatamodel; sourceTree = "<group>"; };
+		F49DC178196532C4008D7EEB /* MBMasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MBMasterViewController.h; sourceTree = "<group>"; };
+		F49DC179196532C4008D7EEB /* MBMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MBMasterViewController.m; sourceTree = "<group>"; };
+		F49DC17B196532C4008D7EEB /* MBDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MBDetailViewController.h; sourceTree = "<group>"; };
+		F49DC17C196532C4008D7EEB /* MBDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MBDetailViewController.m; sourceTree = "<group>"; };
+		F49DC17E196532C4008D7EEB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		F49DC184196532C4008D7EEB /* MegaBoxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MegaBoxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F49DC185196532C4008D7EEB /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		F49DC18E196532C4008D7EEB /* MegaBoxTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MegaBoxTests-Info.plist"; sourceTree = "<group>"; };
+		F49DC190196532C4008D7EEB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F49DC192196532C4008D7EEB /* MegaBoxTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MegaBoxTests.m; sourceTree = "<group>"; };
+		F49DC19C196532FE008D7EEB /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Firebase.framework; path = ../Firebase.framework; sourceTree = "<group>"; };
+		F49DC1B219653395008D7EEB /* LoopPulse.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LoopPulse.xcodeproj; path = ../../LoopPulse/LoopPulse.xcodeproj; sourceTree = "<group>"; };
+		F49DC1BE196533C7008D7EEB /* LoopPulse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LoopPulse.framework; path = ../LoopPulse.framework; sourceTree = "<group>"; };
+		F49DC1C119653403008D7EEB /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		F49DC1C3196535BF008D7EEB /* MBManagedLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBManagedLog.h; sourceTree = "<group>"; };
+		F49DC1C4196535BF008D7EEB /* MBManagedLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBManagedLog.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F49DC158196532C4008D7EEB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F49DC1C219653403008D7EEB /* SystemConfiguration.framework in Frameworks */,
+				F49DC1BF196533C7008D7EEB /* LoopPulse.framework in Frameworks */,
+				F49DC19D196532FE008D7EEB /* Firebase.framework in Frameworks */,
+				F49DC161196532C4008D7EEB /* CoreGraphics.framework in Frameworks */,
+				F49DC165196532C4008D7EEB /* CoreData.framework in Frameworks */,
+				F49DC163196532C4008D7EEB /* UIKit.framework in Frameworks */,
+				F49DC15F196532C4008D7EEB /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F49DC181196532C4008D7EEB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F49DC186196532C4008D7EEB /* XCTest.framework in Frameworks */,
+				F49DC189196532C4008D7EEB /* CoreData.framework in Frameworks */,
+				F49DC188196532C4008D7EEB /* UIKit.framework in Frameworks */,
+				F49DC187196532C4008D7EEB /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F49DC152196532C4008D7EEB = {
+			isa = PBXGroup;
+			children = (
+				F49DC166196532C4008D7EEB /* MegaBox */,
+				F49DC18C196532C4008D7EEB /* MegaBoxTests */,
+				F49DC15D196532C4008D7EEB /* Frameworks */,
+				F49DC15C196532C4008D7EEB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F49DC15C196532C4008D7EEB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F49DC15B196532C4008D7EEB /* MegaBox.app */,
+				F49DC184196532C4008D7EEB /* MegaBoxTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F49DC15D196532C4008D7EEB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F49DC1C119653403008D7EEB /* SystemConfiguration.framework */,
+				F49DC1BE196533C7008D7EEB /* LoopPulse.framework */,
+				F49DC19C196532FE008D7EEB /* Firebase.framework */,
+				F49DC15E196532C4008D7EEB /* Foundation.framework */,
+				F49DC160196532C4008D7EEB /* CoreGraphics.framework */,
+				F49DC162196532C4008D7EEB /* UIKit.framework */,
+				F49DC164196532C4008D7EEB /* CoreData.framework */,
+				F49DC185196532C4008D7EEB /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F49DC166196532C4008D7EEB /* MegaBox */ = {
+			isa = PBXGroup;
+			children = (
+				F49DC1B219653395008D7EEB /* LoopPulse.xcodeproj */,
+				F49DC16F196532C4008D7EEB /* MBAppDelegate.h */,
+				F49DC170196532C4008D7EEB /* MBAppDelegate.m */,
+				F49DC1C3196535BF008D7EEB /* MBManagedLog.h */,
+				F49DC1C4196535BF008D7EEB /* MBManagedLog.m */,
+				F49DC172196532C4008D7EEB /* Main.storyboard */,
+				F49DC178196532C4008D7EEB /* MBMasterViewController.h */,
+				F49DC179196532C4008D7EEB /* MBMasterViewController.m */,
+				F49DC17B196532C4008D7EEB /* MBDetailViewController.h */,
+				F49DC17C196532C4008D7EEB /* MBDetailViewController.m */,
+				F49DC17E196532C4008D7EEB /* Images.xcassets */,
+				F49DC175196532C4008D7EEB /* MegaBox.xcdatamodeld */,
+				F49DC167196532C4008D7EEB /* Supporting Files */,
+			);
+			path = MegaBox;
+			sourceTree = "<group>";
+		};
+		F49DC167196532C4008D7EEB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F49DC168196532C4008D7EEB /* MegaBox-Info.plist */,
+				F49DC169196532C4008D7EEB /* InfoPlist.strings */,
+				F49DC16C196532C4008D7EEB /* main.m */,
+				F49DC16E196532C4008D7EEB /* MegaBox-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F49DC18C196532C4008D7EEB /* MegaBoxTests */ = {
+			isa = PBXGroup;
+			children = (
+				F49DC192196532C4008D7EEB /* MegaBoxTests.m */,
+				F49DC18D196532C4008D7EEB /* Supporting Files */,
+			);
+			path = MegaBoxTests;
+			sourceTree = "<group>";
+		};
+		F49DC18D196532C4008D7EEB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F49DC18E196532C4008D7EEB /* MegaBoxTests-Info.plist */,
+				F49DC18F196532C4008D7EEB /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F49DC1B319653395008D7EEB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F49DC1B919653395008D7EEB /* libLoopPulse.a */,
+				F49DC1BB19653395008D7EEB /* LoopPulseTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F49DC15A196532C4008D7EEB /* MegaBox */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F49DC196196532C4008D7EEB /* Build configuration list for PBXNativeTarget "MegaBox" */;
+			buildPhases = (
+				F49DC157196532C4008D7EEB /* Sources */,
+				F49DC158196532C4008D7EEB /* Frameworks */,
+				F49DC159196532C4008D7EEB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F49DC1BD196533B7008D7EEB /* PBXTargetDependency */,
+			);
+			name = MegaBox;
+			productName = MegaBox;
+			productReference = F49DC15B196532C4008D7EEB /* MegaBox.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F49DC183196532C4008D7EEB /* MegaBoxTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F49DC199196532C4008D7EEB /* Build configuration list for PBXNativeTarget "MegaBoxTests" */;
+			buildPhases = (
+				F49DC180196532C4008D7EEB /* Sources */,
+				F49DC181196532C4008D7EEB /* Frameworks */,
+				F49DC182196532C4008D7EEB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F49DC18B196532C4008D7EEB /* PBXTargetDependency */,
+			);
+			name = MegaBoxTests;
+			productName = MegaBoxTests;
+			productReference = F49DC184196532C4008D7EEB /* MegaBoxTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F49DC153196532C4008D7EEB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = MB;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Clione Labs";
+				TargetAttributes = {
+					F49DC183196532C4008D7EEB = {
+						TestTargetID = F49DC15A196532C4008D7EEB;
+					};
+				};
+			};
+			buildConfigurationList = F49DC156196532C4008D7EEB /* Build configuration list for PBXProject "MegaBox" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F49DC152196532C4008D7EEB;
+			productRefGroup = F49DC15C196532C4008D7EEB /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = F49DC1B319653395008D7EEB /* Products */;
+					ProjectRef = F49DC1B219653395008D7EEB /* LoopPulse.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				F49DC15A196532C4008D7EEB /* MegaBox */,
+				F49DC183196532C4008D7EEB /* MegaBoxTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		F49DC1B919653395008D7EEB /* libLoopPulse.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libLoopPulse.a;
+			remoteRef = F49DC1B819653395008D7EEB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F49DC1BB19653395008D7EEB /* LoopPulseTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = LoopPulseTests.xctest;
+			remoteRef = F49DC1BA19653395008D7EEB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F49DC159196532C4008D7EEB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F49DC17F196532C4008D7EEB /* Images.xcassets in Resources */,
+				F49DC16B196532C4008D7EEB /* InfoPlist.strings in Resources */,
+				F49DC174196532C4008D7EEB /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F49DC182196532C4008D7EEB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F49DC191196532C4008D7EEB /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F49DC157196532C4008D7EEB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F49DC16D196532C4008D7EEB /* main.m in Sources */,
+				F49DC17A196532C4008D7EEB /* MBMasterViewController.m in Sources */,
+				F49DC177196532C4008D7EEB /* MegaBox.xcdatamodeld in Sources */,
+				F49DC1C5196535BF008D7EEB /* MBManagedLog.m in Sources */,
+				F49DC17D196532C4008D7EEB /* MBDetailViewController.m in Sources */,
+				F49DC171196532C4008D7EEB /* MBAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F49DC180196532C4008D7EEB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F49DC193196532C4008D7EEB /* MegaBoxTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F49DC18B196532C4008D7EEB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F49DC15A196532C4008D7EEB /* MegaBox */;
+			targetProxy = F49DC18A196532C4008D7EEB /* PBXContainerItemProxy */;
+		};
+		F49DC1BD196533B7008D7EEB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Framework;
+			targetProxy = F49DC1BC196533B7008D7EEB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F49DC169196532C4008D7EEB /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F49DC16A196532C4008D7EEB /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		F49DC172196532C4008D7EEB /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F49DC173196532C4008D7EEB /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		F49DC18F196532C4008D7EEB /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F49DC190196532C4008D7EEB /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F49DC194196532C4008D7EEB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		F49DC195196532C4008D7EEB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F49DC197196532C4008D7EEB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					../,
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MegaBox/MegaBox-Prefix.pch";
+				INFOPLIST_FILE = "MegaBox/MegaBox-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		F49DC198196532C4008D7EEB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					../,
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MegaBox/MegaBox-Prefix.pch";
+				INFOPLIST_FILE = "MegaBox/MegaBox-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		F49DC19A196532C4008D7EEB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MegaBox.app/MegaBox";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MegaBox/MegaBox-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "MegaBoxTests/MegaBoxTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		F49DC19B196532C4008D7EEB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MegaBox.app/MegaBox";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MegaBox/MegaBox-Prefix.pch";
+				INFOPLIST_FILE = "MegaBoxTests/MegaBoxTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F49DC156196532C4008D7EEB /* Build configuration list for PBXProject "MegaBox" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F49DC194196532C4008D7EEB /* Debug */,
+				F49DC195196532C4008D7EEB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F49DC196196532C4008D7EEB /* Build configuration list for PBXNativeTarget "MegaBox" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F49DC197196532C4008D7EEB /* Debug */,
+				F49DC198196532C4008D7EEB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		F49DC199196532C4008D7EEB /* Build configuration list for PBXNativeTarget "MegaBoxTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F49DC19A196532C4008D7EEB /* Debug */,
+				F49DC19B196532C4008D7EEB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		F49DC175196532C4008D7EEB /* MegaBox.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F49DC176196532C4008D7EEB /* MegaBox.xcdatamodel */,
+			);
+			currentVersion = F49DC176196532C4008D7EEB /* MegaBox.xcdatamodel */;
+			path = MegaBox.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = F49DC153196532C4008D7EEB /* Project object */;
+}
