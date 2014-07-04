@@ -560,7 +560,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					../,
-					/Users/simon/Documents/looppulse/looppulse.ios.sdk,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MegaBox/MegaBox-Prefix.pch";
@@ -581,7 +580,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					../,
-					/Users/simon/Documents/looppulse/looppulse.ios.sdk,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MegaBox/MegaBox-Prefix.pch";
@@ -652,6 +650,7 @@
 				F49DC198196532C4008D7EEB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F49DC199196532C4008D7EEB /* Build configuration list for PBXNativeTarget "MegaBoxTests" */ = {
 			isa = XCConfigurationList;
@@ -660,6 +659,7 @@
 				F49DC19B196532C4008D7EEB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
