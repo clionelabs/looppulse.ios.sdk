@@ -24,7 +24,6 @@
 		F49DC189196532C4008D7EEB /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49DC164196532C4008D7EEB /* CoreData.framework */; };
 		F49DC191196532C4008D7EEB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F49DC18F196532C4008D7EEB /* InfoPlist.strings */; };
 		F49DC193196532C4008D7EEB /* MegaBoxTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DC192196532C4008D7EEB /* MegaBoxTests.m */; };
-		F49DC19D196532FE008D7EEB /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49DC19C196532FE008D7EEB /* Firebase.framework */; };
 		F49DC1BF196533C7008D7EEB /* LoopPulse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49DC1BE196533C7008D7EEB /* LoopPulse.framework */; };
 		F49DC1C219653403008D7EEB /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49DC1C119653403008D7EEB /* SystemConfiguration.framework */; };
 		F49DC1C5196535BF008D7EEB /* MBManagedLog.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DC1C4196535BF008D7EEB /* MBManagedLog.m */; };
@@ -36,6 +35,16 @@
 		F49DC1D819653BAB008D7EEB /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49DC1D719653BAB008D7EEB /* CoreLocation.framework */; };
 		F49DC1DA19653BB0008D7EEB /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49DC1D919653BB0008D7EEB /* CoreBluetooth.framework */; };
 		F49DC1DD1965575A008D7EEB /* MBLogsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F49DC1DC1965575A008D7EEB /* MBLogsTableViewCell.m */; };
+		F49DC1E019667546008D7EEB /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49DC1DF19667546008D7EEB /* Parse.framework */; };
+		F49DC1E219667574008D7EEB /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49DC1E119667574008D7EEB /* AudioToolbox.framework */; };
+		F49DC1E41966757A008D7EEB /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49DC1E31966757A008D7EEB /* CFNetwork.framework */; };
+		F49DC1E61966758B008D7EEB /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F49DC1E51966758B008D7EEB /* libz.dylib */; };
+		F49DC1E819667596008D7EEB /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49DC1E719667596008D7EEB /* MobileCoreServices.framework */; };
+		F49DC1EA196675A6008D7EEB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49DC1E9196675A6008D7EEB /* QuartzCore.framework */; };
+		F49DC1EC19667ECA008D7EEB /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49DC1EB19667ECA008D7EEB /* FacebookSDK.framework */; };
+		F49DC1EE19667EF3008D7EEB /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49DC1ED19667EF3008D7EEB /* Accounts.framework */; };
+		F49DC1F019667EFC008D7EEB /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49DC1EF19667EFC008D7EEB /* Social.framework */; };
+		F49DC1F219667F31008D7EEB /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49DC19C196532FE008D7EEB /* Firebase.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +117,15 @@
 		F49DC1D919653BB0008D7EEB /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		F49DC1DB1965575A008D7EEB /* MBLogsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBLogsTableViewCell.h; sourceTree = "<group>"; };
 		F49DC1DC1965575A008D7EEB /* MBLogsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBLogsTableViewCell.m; sourceTree = "<group>"; };
+		F49DC1DF19667546008D7EEB /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = ../Parse.framework; sourceTree = "<group>"; };
+		F49DC1E119667574008D7EEB /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		F49DC1E31966757A008D7EEB /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		F49DC1E51966758B008D7EEB /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		F49DC1E719667596008D7EEB /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		F49DC1E9196675A6008D7EEB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		F49DC1EB19667ECA008D7EEB /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../FacebookSDK.framework; sourceTree = "<group>"; };
+		F49DC1ED19667EF3008D7EEB /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		F49DC1EF19667EFC008D7EEB /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,15 +133,24 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F49DC1F019667EFC008D7EEB /* Social.framework in Frameworks */,
+				F49DC1EE19667EF3008D7EEB /* Accounts.framework in Frameworks */,
+				F49DC1D619653BA0008D7EEB /* Security.framework in Frameworks */,
+				F49DC1EA196675A6008D7EEB /* QuartzCore.framework in Frameworks */,
+				F49DC1E819667596008D7EEB /* MobileCoreServices.framework in Frameworks */,
+				F49DC1E61966758B008D7EEB /* libz.dylib in Frameworks */,
+				F49DC1E41966757A008D7EEB /* CFNetwork.framework in Frameworks */,
+				F49DC1EC19667ECA008D7EEB /* FacebookSDK.framework in Frameworks */,
+				F49DC1E219667574008D7EEB /* AudioToolbox.framework in Frameworks */,
 				F49DC1DA19653BB0008D7EEB /* CoreBluetooth.framework in Frameworks */,
 				F49DC1D819653BAB008D7EEB /* CoreLocation.framework in Frameworks */,
-				F49DC1D619653BA0008D7EEB /* Security.framework in Frameworks */,
 				F49DC1D419653B99008D7EEB /* libicucore.dylib in Frameworks */,
 				F49DC1D219653B93008D7EEB /* libc++.dylib in Frameworks */,
 				F49DC1C219653403008D7EEB /* SystemConfiguration.framework in Frameworks */,
+				F49DC1E019667546008D7EEB /* Parse.framework in Frameworks */,
 				F49DC1BF196533C7008D7EEB /* LoopPulse.framework in Frameworks */,
-				F49DC19D196532FE008D7EEB /* Firebase.framework in Frameworks */,
 				F49DC161196532C4008D7EEB /* CoreGraphics.framework in Frameworks */,
+				F49DC1F219667F31008D7EEB /* Firebase.framework in Frameworks */,
 				F49DC165196532C4008D7EEB /* CoreData.framework in Frameworks */,
 				F49DC163196532C4008D7EEB /* UIKit.framework in Frameworks */,
 				F49DC15F196532C4008D7EEB /* Foundation.framework in Frameworks */,
@@ -166,6 +193,15 @@
 		F49DC15D196532C4008D7EEB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F49DC1EF19667EFC008D7EEB /* Social.framework */,
+				F49DC1ED19667EF3008D7EEB /* Accounts.framework */,
+				F49DC1EB19667ECA008D7EEB /* FacebookSDK.framework */,
+				F49DC1E9196675A6008D7EEB /* QuartzCore.framework */,
+				F49DC1E719667596008D7EEB /* MobileCoreServices.framework */,
+				F49DC1E51966758B008D7EEB /* libz.dylib */,
+				F49DC1E31966757A008D7EEB /* CFNetwork.framework */,
+				F49DC1E119667574008D7EEB /* AudioToolbox.framework */,
+				F49DC1DF19667546008D7EEB /* Parse.framework */,
 				F49DC1D919653BB0008D7EEB /* CoreBluetooth.framework */,
 				F49DC1D719653BAB008D7EEB /* CoreLocation.framework */,
 				F49DC1D519653BA0008D7EEB /* Security.framework */,
@@ -524,6 +560,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					../,
+					/Users/simon/Documents/looppulse/looppulse.ios.sdk,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MegaBox/MegaBox-Prefix.pch";
@@ -544,6 +581,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					../,
+					/Users/simon/Documents/looppulse/looppulse.ios.sdk,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MegaBox/MegaBox-Prefix.pch";

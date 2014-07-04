@@ -11,6 +11,7 @@
 #import "MBLogsViewController.h"
 #import "MBCoreDataController.h"
 #import "MBLogController.h"
+#import <Parse/Parse.h>
 
 @interface MBAppDelegate ()
 @property (strong, nonatomic) LoopPulse *loopPulse;
@@ -23,6 +24,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 
+    [Parse setApplicationId:@"dP9yJQI58giCirVVIYeVd1YobFbIujv5wDFWA8WX"
+                  clientKey:@"hnz5gkWZ45cJkXf8yp2huHc89NG55O1ajjHSrwxh"];
+    
     self.coreDataController = [[MBCoreDataController alloc] init];
 
     // Initialize LoopPulse using debug option to change firebase URL
@@ -37,10 +41,26 @@
     UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
     MBLogsViewController *controller = (MBLogsViewController *)navigationController.topViewController;
     controller.managedObjectContext = self.coreDataController.managedObjectContext;
+    
+    [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge|
+     UIRemoteNotificationTypeAlert|
+     UIRemoteNotificationTypeSound];
 
     return YES;
 }
-							
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    NSLog(@"Register for device token succssed: %@ ", deviceToken);
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    [currentInstallation setDeviceTokenFromData:deviceToken];
+    [currentInstallation saveInBackground];
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    [PFPush handlePush:userInfo];
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
 }
