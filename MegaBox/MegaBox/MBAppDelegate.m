@@ -54,6 +54,8 @@
     NSLog(@"Register for device token succssed: %@ ", deviceToken);
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
     [currentInstallation setDeviceTokenFromData:deviceToken];
+    NSString *visitorUUID = self.loopPulse.visitor.uuid.UUIDString;
+    [currentInstallation addUniqueObject:visitorUUID forKey:@"channels"];
     [currentInstallation saveInBackground];
 }
 
