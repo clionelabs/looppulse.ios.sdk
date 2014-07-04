@@ -42,6 +42,7 @@
 		F42E86F7192DF720007EDC30 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F42E86F6192DF720007EDC30 /* CoreBluetooth.framework */; };
 		F42E86F9192DF728007EDC30 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F42E86F8192DF728007EDC30 /* CFNetwork.framework */; };
 		F42E86FB192DF808007EDC30 /* LoopPulse.h in Headers */ = {isa = PBXBuildFile; fileRef = F42E86E2192DF6A1007EDC30 /* LoopPulse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F49DC1DE19664F94008D7EEB /* LPVisitor.h in Headers */ = {isa = PBXBuildFile; fileRef = F42E86D8192DF6A1007EDC30 /* LPVisitor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -224,6 +225,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F42E86FB192DF808007EDC30 /* LoopPulse.h in Headers */,
+				F49DC1DE19664F94008D7EEB /* LPVisitor.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,12 +10,12 @@
 
 @implementation LPDataStore
 
-- (id)initWithToken:(NSString *)token
+- (id)initWithToken:(NSString *)token baseUrl:(NSString *)baseUrl
 {
     self = [super init];
     if (self) {
         _token = token;
-        _firebase = [[Firebase alloc] initWithUrl:@"https://looppulse-dev.firebaseio.com"];
+        _firebase = [[Firebase alloc] initWithUrl:baseUrl];
     }
     return self;
 }

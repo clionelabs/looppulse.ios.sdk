@@ -8,8 +8,11 @@
 
 #import "MBLogController.h"
 #import <Firebase/Firebase.h>
+#import <LoopPulse/LoopPulse.h>
 
-#define kFirechatNS @"https://looppulse-megabox.firebaseio.com/visitors/1d2adef8cbcd166574a8cc0a/logs"
+//#define kFirechatLogNS @"https://looppulse-megabox.firebaseio.com/visitors/1d2adef8cbcd166574a8cc0a/logs"
+#define kFirechatLogNS @"https://looppulse-megabox.firebaseio.com/visitors/%@/logs"
+
 #define kCoreDataEntity @"MBManagedLog"
 #define kCoreDataKeyAttribute @"name"
 
@@ -23,11 +26,16 @@
 
 @implementation MBLogController
 
+- (NSString *)firechatNamespace
+{
+    return [NSString stringWithFormat:kFirechatLogNS, self.loopPulse.visitor.uuid.UUIDString];
+}
+
 - (void)startLogMonitoring
 {
     NSLog(@"Loading log data");
 
-    self.firebase = [[Firebase alloc] initWithUrl:kFirechatNS];
+    self.firebase = [[Firebase alloc] initWithUrl:[self firechatNamespace]];
     [self deleteCoreDataManagedObjectsThatNoLongerExistInFirebase:self.firebase];
     [self observeFirebase];
 }

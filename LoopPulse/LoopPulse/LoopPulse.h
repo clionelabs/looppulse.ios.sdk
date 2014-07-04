@@ -7,13 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LPVisitor.h"
 
 @interface LoopPulse : NSObject
 
 - (id)initWithToken:(NSString*)token;
+- (id)initWithToken:(NSString*)token options:(NSDictionary *)options;   // debug
 - (void)startLocationMonitoring;
 - (void)stopLocationMonitoringAndRanging;
 - (NSArray *)availableNotifications;
 
 - (void)startLocationMonitoringAndRanging; // debug
+
+@property (readonly, retain) LPVisitor *visitor;
+
 @end

@@ -24,10 +24,13 @@
 {
 
     self.coreDataController = [[MBCoreDataController alloc] init];
-    
-    self.loopPulse = [[LoopPulse alloc] initWithToken:@"testing"];
+
+    // Initialize LoopPulse using debug option to change firebase URL
+    self.loopPulse = [[LoopPulse alloc] initWithToken:@"testing" options:@{@"baseUrl" : @"https://looppulse-megabox.firebaseio.com"}];
+    [self.loopPulse startLocationMonitoringAndRanging];
 
     self.logController = [[MBLogController alloc] init];
+    self.logController.loopPulse = self.loopPulse;
     self.logController.managedObjectContext = self.coreDataController.managedObjectContext;
     [self.logController startLogMonitoring];
 

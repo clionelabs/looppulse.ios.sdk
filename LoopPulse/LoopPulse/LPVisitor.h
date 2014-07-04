@@ -7,12 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "LPDataStore.h"
 
 @interface LPVisitor : NSObject
 
-- (id)initWithDataStore:(LPDataStore *)dataStore;
+@property (readonly, retain) NSUUID *uuid;
+
 - (void)identifyWithExternalID:(NSString *)externalID;
 
-@property (readonly, retain) NSUUID *uuid;
 @end
