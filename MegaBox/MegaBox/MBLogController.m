@@ -9,7 +9,7 @@
 #import "MBLogController.h"
 #import <Firebase/Firebase.h>
 
-#define kFirechatNS @"https://looppulse-megabox.firebaseio.com/visitors/766226021926defb20295a56/logs"
+#define kFirechatNS @"https://looppulse-megabox.firebaseio.com/visitors/1d2adef8cbcd166574a8cc0a/logs"
 #define kCoreDataEntity @"MBManagedLog"
 #define kCoreDataKeyAttribute @"name"
 
@@ -89,10 +89,12 @@
     }
     
     [managedObject setValue:snapshot.name forKey:@"name"];
-    if (snapshot.priority != [NSNull null]) {
-        [managedObject setValue:snapshot.priority forKey:@"priority"];
+    if (properties[@"sortedBy"] != [NSNull null]) {
+        [managedObject setValue:properties[@"sortedBy"] forKey:@"sortedBy"];
     }
-    [managedObject setValue:properties[@"durationInSeconds"] forKey:@"durationInSeconds"];
+    if (properties[@"durationInSeconds"] != [NSNull null]) {
+        [managedObject setValue:properties[@"durationInSeconds"] forKey:@"durationInSeconds"];
+    }
     if (properties[@"enteredAt"] != [NSNull null]) {
         NSDate *enteredAt = [NSDate dateWithTimeIntervalSince1970:[properties[@"enteredAt"] doubleValue] / 1000.0];
         [managedObject setValue:enteredAt forKey:@"enteredAt"];
@@ -101,8 +103,12 @@
         NSDate *exitedAt = [NSDate dateWithTimeIntervalSince1970:[properties[@"exitedAt"] doubleValue] / 1000.0];
         [managedObject setValue:exitedAt forKey:@"exitedAt"];
     }
-    [managedObject setValue:properties[@"location"] forKey:@"location"];
-    [managedObject setValue:properties[@"type"] forKey:@"type"];
+    if (properties[@"location"] != [NSNull null]) {
+        [managedObject setValue:properties[@"location"] forKey:@"location"];
+    }
+    if (properties[@"type"] != [NSNull null]) {
+        [managedObject setValue:properties[@"type"] forKey:@"type"];
+    }
 }
 
 - (void)deleteCoreDataManagedObjectsThatNoLongerExistInFirebase:(Firebase *)firebase

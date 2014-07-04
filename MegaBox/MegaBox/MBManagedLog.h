@@ -18,5 +18,6 @@
 @property (nonatomic, retain) NSNumber * exitedAt;
 @property (nonatomic, retain) NSString * location;
 @property (nonatomic, retain) NSString * type;
+@property (nonatomic, retain) NSNumber * sortedBy;
 
 @end

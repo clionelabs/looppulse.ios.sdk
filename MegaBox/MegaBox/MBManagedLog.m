@@ -17,5 +17,6 @@
 @dynamic exitedAt;
 @dynamic location;
 @dynamic type;
+@dynamic sortedBy;
 
 @end
