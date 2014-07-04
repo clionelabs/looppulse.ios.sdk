@@ -125,10 +125,11 @@
 - (void)locationManager:(CLLocationManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region
 {
     if ([region isLoopPulseBeaconRegion]) {
-        if ([beacons count]==0) {
-            [manager stopRangingBeaconsInRegion:region];
-            return;
-        }
+// PS: Simon: Is this too strict?
+//        if ([beacons count]==0) {
+//            [manager stopRangingBeaconsInRegion:region];
+//            return;
+//        }
 
         for (CLBeacon *beacon in beacons) {
             // Ignore beacons with unknown proximity
