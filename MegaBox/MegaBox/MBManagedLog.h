@@ -16,8 +16,9 @@
 @property (nonatomic, retain) NSNumber * durationInSeconds;
 @property (nonatomic, retain) NSDate * enteredAt;
 @property (nonatomic, retain) NSNumber * exitedAt;
+@property (nonatomic, retain) NSDate * createdAt;
 @property (nonatomic, retain) NSString * location;
 @property (nonatomic, retain) NSString * type;
 @property (nonatomic, retain) NSNumber * sortedBy;
-
+@property (nonatomic, retain) NSString * body;
 @end

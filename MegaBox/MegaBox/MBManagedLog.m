@@ -15,8 +15,10 @@
 @dynamic durationInSeconds;
 @dynamic enteredAt;
 @dynamic exitedAt;
+@dynamic createdAt;
 @dynamic location;
 @dynamic type;
 @dynamic sortedBy;
+@dynamic body;
 
 @end

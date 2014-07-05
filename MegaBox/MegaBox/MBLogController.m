@@ -111,8 +111,15 @@
         NSDate *exitedAt = [NSDate dateWithTimeIntervalSince1970:[properties[@"exitedAt"] doubleValue] / 1000.0];
         [managedObject setValue:exitedAt forKey:@"exitedAt"];
     }
+    if (properties[@"createdAt"] != [NSNull null]) {
+        NSDate *createdAt = [NSDate dateWithTimeIntervalSince1970:[properties[@"createdAt"] doubleValue] / 1000.0];
+        [managedObject setValue:createdAt forKey:@"createdAt"];
+    }
     if (properties[@"location"] != [NSNull null]) {
         [managedObject setValue:properties[@"location"] forKey:@"location"];
+    }
+    if (properties[@"body"] != [NSNull null]) {
+        [managedObject setValue:properties[@"body"] forKey:@"body"];
     }
     if (properties[@"type"] != [NSNull null]) {
         [managedObject setValue:properties[@"type"] forKey:@"type"];

@@ -137,20 +137,29 @@
 }
  */
 
+- (NSString *)formattedDate:(NSDate *)date
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateStyle = NSDateFormatterMediumStyle;
+    formatter.timeStyle = NSDateFormatterMediumStyle;
+    return [formatter stringFromDate:date];
+}
+
 - (NSDictionary *)descriptionForObject:(MBManagedLog *)log
 {
     NSMutableDictionary *description = [NSMutableDictionary new];
     if ([log.type isEqualToString:@"visit"]) {
         description[@"iconImage"] = [UIImage imageNamed:@"icon-pin"];
+        if (log.enteredAt) {
+            description[@"time"] = [self formattedDate:log.enteredAt];
+        }
     }
-    else if ([log.type isEqualToString:@"suggestion"]) {
+    else if ([log.type isEqualToString:@"suggestion"] ||
+             [log.type isEqualToString:@"message"]) {
         description[@"iconImage"] = [UIImage imageNamed:@"icon-star"];
-    }
-    if (log.enteredAt) {
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        formatter.dateStyle = NSDateFormatterMediumStyle;
-        formatter.timeStyle = NSDateFormatterMediumStyle;
-        description[@"time"] = [formatter stringFromDate:log.enteredAt];
+        if (log.createdAt) {
+            description[@"time"] = [self formattedDate:log.createdAt];
+        }
     }
     if (log.durationInSeconds) {
         if (log.durationInSeconds.floatValue >= 60) {
@@ -164,6 +173,9 @@
     }
     if (log.location) {
         description[@"title"] = log.location;
+    } else if (log.body) {
+        // HACK: display message in title.
+        description[@"title"] = log.body;
     }
     return description;
 }
