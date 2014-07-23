@@ -88,6 +88,14 @@
     }
 }
 
+- (BOOL)firstEncounteredWithBeaconRegion:(CLBeaconRegion *)beaconRegion
+{
+    // Since we only monitor specific beacon region after we range,
+    // we can tell if it's the first encounter by checking currently
+    // monitored region
+    return (![self.monitoredRegions containsObject:beaconRegion]);
+}
+
 - (void)locationManager:(CLLocationManager *)manager didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region
 {
     if (state==CLRegionStateInside) {
@@ -125,19 +133,11 @@
 - (void)locationManager:(CLLocationManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region
 {
     if ([region isLoopPulseBeaconRegion]) {
-// PS: Simon: Is this too strict?
-//        if ([beacons count]==0) {
-//            [manager stopRangingBeaconsInRegion:region];
-//            return;
-//        }
-
         for (CLBeacon *beacon in beacons) {
             // Ignore beacons with unknown proximity
             if ([[self ignoredProximity] containsObject:@(beacon.proximity)]) {
                 continue;
             }
-
-            [self.dataStore logEvent:@"didRangeBeacons" withBeacon:beacon atTime:[NSDate date]];
 
             // Monitor specific beacons
             NSString *identifier = [NSString stringWithFormat:@"LoopPulse-%@:%@", beacon.major, beacon.minor];
@@ -145,8 +145,11 @@
                                                                                    major:[beacon.major integerValue]
                                                                                    minor:[beacon.minor integerValue]
                                                                               identifier:identifier];
-            if (![self.monitoredRegions containsObject:beaconRegion]) {
+            if ([self firstEncounteredWithBeaconRegion:beaconRegion]) {
+                [self.dataStore logEvent:@"didEnterRegion" withBeacon:beacon atTime:[NSDate date]];
                 [self startMonitoringForRegion:beaconRegion];
+            } else {
+                [self.dataStore logEvent:@"didRangeBeacons" withBeacon:beacon atTime:[NSDate date]];
             }
         }
     }
