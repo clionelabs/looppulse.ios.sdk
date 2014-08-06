@@ -11,21 +11,34 @@
 #import "LPLocationManager.h"
 #import "LPDataStore.h"
 
+#define kDefaultFirebaseBaseUrl @"https://looppulse-dev.firebaseio.com"
+
 @interface LoopPulse ()
-@property (readonly, retain) NSString *token;
-@property (readonly, retain) LPDataStore *dataStore;
-@property (readonly, retain) LPVisitor *visitor;
-@property (readonly, retain) LPLocationManager *locationManager;
+@property (readonly, strong) NSString *token;
+@property (readonly, strong) LPDataStore *dataStore;
+@property (readonly, strong) LPLocationManager *locationManager;
+@property (readonly, strong) NSString *firebaseBaseUrl;
+
+@end
+
+@interface LPVisitor ()
+- (id)initWithDataStore:(LPDataStore *)dataStore;
 @end
 
 @implementation LoopPulse
 
 - (id)initWithToken:(NSString *)token
 {
+    return [self initWithToken:token options:@{}];
+}
+
+- (id)initWithToken:(NSString *)token options:(NSDictionary *)options
+{
     self = [super init];
     if (self) {
         _token = token;
-        _dataStore = [[LPDataStore alloc] initWithToken:token];
+        _firebaseBaseUrl = options[@"baseUrl"] ? options[@"baseUrl"] : kDefaultFirebaseBaseUrl;
+        _dataStore = [[LPDataStore alloc] initWithToken:token baseUrl:_firebaseBaseUrl];
         _visitor = [[LPVisitor alloc] initWithDataStore:_dataStore];
         _locationManager = [[LPLocationManager alloc] initWithDataStore:_dataStore];
         _locationManager.delegate = _locationManager;

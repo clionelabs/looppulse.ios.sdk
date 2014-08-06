@@ -11,6 +11,7 @@
 
 @interface LPVisitor ()
 @property (readonly, retain) LPDataStore *dataStore;
+- (id)initWithDataStore:(LPDataStore *)dataStore;
 @end
 
 @implementation LPVisitor
