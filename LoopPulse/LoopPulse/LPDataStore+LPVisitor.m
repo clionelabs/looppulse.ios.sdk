@@ -10,6 +10,11 @@
 
 @implementation LPDataStore (LPVisitor)
 
+- (Firebase *)visitorsRef
+{
+    return [self.firebase childByAppendingPath:@"visitors"];
+}
+
 - (void)registerVisitor:(NSUUID *)uuid
 {
     [self identifyVisitor:uuid withExternalID:NULL];
@@ -17,8 +22,7 @@
 
 - (void)identifyVisitor:(NSUUID *)uuid withExternalID:(NSString *)externalID
 {
-    Firebase *visitorsRef = [self.firebase childByAppendingPath:@"visitors"];
-    Firebase *visitorRef = [visitorsRef childByAppendingPath:[uuid UUIDString]];
+    Firebase *visitorRef = [[self visitorsRef] childByAppendingPath:[uuid UUIDString]];
     [visitorRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         if (snapshot.value == [NSNull null]) {
             // New visitor

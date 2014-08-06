@@ -13,6 +13,11 @@
 
 @implementation LPDataStore (LPLocationManager)
 
+- (Firebase *)beaconEventsRef
+{
+    return [self.firebase childByAppendingPath:@"beacon_events"];
+}
+
 - (void)logEvent:(NSString *)eventType withBeacon:(CLBeacon *)beacon atTime:(NSDate *)createdAt
 {
     [self logEvent:eventType
@@ -36,7 +41,7 @@
     NSMutableDictionary *beaconInfoAndEvent = [[NSMutableDictionary alloc] initWithDictionary:beaconInfo];
     [beaconInfoAndEvent addEntriesFromDictionary:eventInfo];
 
-    Firebase *beacon_event_ref = [[self.firebase childByAppendingPath:@"beacon_events"] childByAutoId];
+    Firebase *beacon_event_ref = [[self beaconEventsRef] childByAutoId];
     [beacon_event_ref setValue:beaconInfoAndEvent andPriority:priority];
 
     [self postNotification:eventType withDictionary:beaconInfoAndEvent];
