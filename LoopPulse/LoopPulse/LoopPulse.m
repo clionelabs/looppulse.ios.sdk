@@ -10,14 +10,14 @@
 #import "LPVisitor.h"
 #import "LPLocationManager.h"
 #import "LPDataStore.h"
-
-#define kDefaultFirebaseBaseUrl @"https://looppulse-dev.firebaseio.com"
+#import <Parse/Parse.h>
 
 @interface LoopPulse ()
 @property (readonly, strong) NSString *token;
 @property (readonly, strong) LPDataStore *dataStore;
 @property (readonly, strong) LPLocationManager *locationManager;
 @property (readonly, strong) NSString *firebaseBaseUrl;
+@property (readonly, weak) UIApplication *application;
 
 @end
 
@@ -27,17 +27,13 @@
 
 @implementation LoopPulse
 
-- (id)initWithToken:(NSString *)token
-{
-    return [self initWithToken:token options:@{}];
-}
-
-- (id)initWithToken:(NSString *)token options:(NSDictionary *)options
+- (id)initWithToken:(NSString *)token withApplication:(UIApplication *)application
 {
     self = [super init];
     if (self) {
         _token = token;
-        _firebaseBaseUrl = options[@"baseUrl"] ? options[@"baseUrl"] : kDefaultFirebaseBaseUrl;
+        _application = application;
+        _firebaseBaseUrl = @"https://looppulse-megabox.firebaseio.com";
         _dataStore = [[LPDataStore alloc] initWithToken:token baseUrl:_firebaseBaseUrl];
         _visitor = [[LPVisitor alloc] initWithDataStore:_dataStore];
         _locationManager = [[LPLocationManager alloc] initWithDataStore:_dataStore];
@@ -45,6 +41,9 @@
 
         // We may need the LPVisitor object when writing data.
         _dataStore.visitor = _visitor;
+
+        [Parse setApplicationId:@"dP9yJQI58giCirVVIYeVd1YobFbIujv5wDFWA8WX"
+                      clientKey:@"hnz5gkWZ45cJkXf8yp2huHc89NG55O1ajjHSrwxh"];
     }
     return self;
 }
@@ -59,6 +58,30 @@
     [self.locationManager stopRangingBeaconsInAllRegions];
     [self.locationManager stopMonitoringForAllRegions];
 }
+
+
+- (void)registerForRemoteNotificationTypes
+{
+    [self.application registerForRemoteNotificationTypes: UIRemoteNotificationTypeBadge|
+                                                          UIRemoteNotificationTypeAlert|
+                                                          UIRemoteNotificationTypeSound];
+}
+
+- (void)didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    NSLog(@"Register for device token succssed: %@ ", deviceToken);
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    [currentInstallation setDeviceTokenFromData:deviceToken];
+    NSString *visitorUUID = [@"VisitorUUID_" stringByAppendingString:self.visitor.uuid.UUIDString];
+    [currentInstallation addUniqueObject:visitorUUID forKey:@"channels"];
+    [currentInstallation saveInBackground];
+}
+
+- (void)didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    [PFPush handlePush:userInfo];
+}
+
 
 - (void)startLocationMonitoringAndRanging
 {

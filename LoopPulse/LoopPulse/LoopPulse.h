@@ -11,10 +11,14 @@
 
 @interface LoopPulse : NSObject
 
-- (id)initWithToken:(NSString*)token;
-- (id)initWithToken:(NSString*)token options:(NSDictionary *)options;   // debug
+- (id)initWithToken:(NSString*)token withApplication:(UIApplication *)application;
+
 - (void)startLocationMonitoring;
 - (void)stopLocationMonitoringAndRanging;
+
+- (void)registerForRemoteNotificationTypes;
+- (void)didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken;
+- (void)didReceiveRemoteNotification:(NSDictionary *)userInfo;
 
 - (void)startLocationMonitoringAndRanging; // debug
 
