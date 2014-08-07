@@ -10,12 +10,14 @@
 #import "LPVisitor.h"
 #import "LPLocationManager.h"
 #import "LPDataStore.h"
+#import "LPEngagementManager.h"
 #import <Parse/Parse.h>
 
 @interface LoopPulse ()
 @property (readonly, strong) NSString *token;
 @property (readonly, strong) LPDataStore *dataStore;
 @property (readonly, strong) LPLocationManager *locationManager;
+@property (readonly, strong) LPEngagementManager *engagementManager;
 @property (readonly, strong) NSString *firebaseBaseUrl;
 @property (readonly, weak) UIApplication *application;
 
@@ -38,10 +40,13 @@
         _visitor = [[LPVisitor alloc] initWithDataStore:_dataStore];
         _locationManager = [[LPLocationManager alloc] initWithDataStore:_dataStore];
         _locationManager.delegate = _locationManager;
+        _engagementManager = [[LPEngagementManager alloc] initWithVisitor:_visitor andApplication:application];
 
         // We may need the LPVisitor object when writing data.
         _dataStore.visitor = _visitor;
 
+        // TODO: we may want to pass these keys to LPEngagementManager as
+        // these are the only engagement related calls outside.
         [Parse setApplicationId:@"dP9yJQI58giCirVVIYeVd1YobFbIujv5wDFWA8WX"
                       clientKey:@"hnz5gkWZ45cJkXf8yp2huHc89NG55O1ajjHSrwxh"];
     }
@@ -62,24 +67,17 @@
 
 - (void)registerForRemoteNotificationTypes
 {
-    [self.application registerForRemoteNotificationTypes: UIRemoteNotificationTypeBadge|
-                                                          UIRemoteNotificationTypeAlert|
-                                                          UIRemoteNotificationTypeSound];
+    [self.engagementManager registerForRemoteNotificationTypes];
 }
 
 - (void)didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-    NSLog(@"Register for device token succssed: %@ ", deviceToken);
-    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
-    [currentInstallation setDeviceTokenFromData:deviceToken];
-    NSString *visitorUUID = [@"VisitorUUID_" stringByAppendingString:self.visitor.uuid.UUIDString];
-    [currentInstallation addUniqueObject:visitorUUID forKey:@"channels"];
-    [currentInstallation saveInBackground];
+    [self.engagementManager didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
 }
 
 - (void)didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-    [PFPush handlePush:userInfo];
+    [self.engagementManager didReceiveRemoteNotification:userInfo];
 }
 
 
