@@ -11,7 +11,6 @@
 #import "MBLogsViewController.h"
 #import "MBCoreDataController.h"
 #import "MBLogController.h"
-#import <Parse/Parse.h>
 
 @interface MBAppDelegate ()
 @property (strong, nonatomic) LoopPulse *loopPulse;
@@ -23,15 +22,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-
-    [Parse setApplicationId:@"dP9yJQI58giCirVVIYeVd1YobFbIujv5wDFWA8WX"
-                  clientKey:@"hnz5gkWZ45cJkXf8yp2huHc89NG55O1ajjHSrwxh"];
-    
     self.coreDataController = [[MBCoreDataController alloc] init];
 
     // Initialize LoopPulse using debug option to change firebase URL
-    self.loopPulse = [[LoopPulse alloc] initWithToken:@"testing" options:@{@"baseUrl" : @"https://looppulse-megabox.firebaseio.com"}];
+    self.loopPulse = [[LoopPulse alloc] initWithToken:@"testing"];
     [self.loopPulse startLocationMonitoringAndRanging];
+    [self.loopPulse registerForRemoteNotificationTypesForApplication:application];
 
     self.logController = [[MBLogController alloc] init];
     self.logController.loopPulse = self.loopPulse;
@@ -41,26 +37,18 @@
     UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
     MBLogsViewController *controller = (MBLogsViewController *)navigationController.topViewController;
     controller.managedObjectContext = self.coreDataController.managedObjectContext;
-    
-    [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge|
-     UIRemoteNotificationTypeAlert|
-     UIRemoteNotificationTypeSound];
 
     return YES;
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-    NSLog(@"Register for device token succssed: %@ ", deviceToken);
-    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
-    [currentInstallation setDeviceTokenFromData:deviceToken];
-    NSString *visitorUUID = [@"VisitorUUID_" stringByAppendingString:self.loopPulse.visitor.uuid.UUIDString];
-    [currentInstallation addUniqueObject:visitorUUID forKey:@"channels"];
-    [currentInstallation saveInBackground];
+    [self.loopPulse didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
 }
 
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    [PFPush handlePush:userInfo];
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    [self.loopPulse didReceiveRemoteNotification:userInfo];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

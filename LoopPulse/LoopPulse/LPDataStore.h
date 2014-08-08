@@ -13,10 +13,9 @@
 
 @interface LPDataStore : NSObject
 
-- (id)initWithToken:(NSString *)token baseUrl:(NSString *)baseUrl;
+- (id)initWithToken:(NSString *)token baseUrl:(NSString *)baseUrl andVisitor:(LPVisitor *) visitor;
+- (NSUUID *)visitorUUID;
 
-@property (readonly, retain) NSString *token;
 @property (readonly, retain) Firebase *firebase;
-@property (nonatomic, retain) LPVisitor *visitor;
 
 @end
