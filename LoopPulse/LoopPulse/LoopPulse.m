@@ -40,7 +40,7 @@
         _visitor = [[LPVisitor alloc] initWithDataStore:_dataStore];
         _locationManager = [[LPLocationManager alloc] initWithDataStore:_dataStore];
         _locationManager.delegate = _locationManager;
-        _engagementManager = [[LPEngagementManager alloc] initWithVisitor:_visitor andApplication:application];
+        _engagementManager = [[LPEngagementManager alloc] initWithDataStore:_dataStore];
 
         // We may need the LPVisitor object when writing data.
         _dataStore.visitor = _visitor;
@@ -65,9 +65,9 @@
 }
 
 
-- (void)registerForRemoteNotificationTypes
+- (void)registerForRemoteNotificationTypesForApplication:(UIApplication *)application
 {
-    [self.engagementManager registerForRemoteNotificationTypes];
+    [self.engagementManager registerForRemoteNotificationTypesForApplication:application];
 }
 
 - (void)didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken

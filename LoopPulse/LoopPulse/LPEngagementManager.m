@@ -7,38 +7,39 @@
 //
 
 #import "LPEngagementManager.h"
+#import "LPVisitor.h"
+#import "LPDataStore+LPEngagementManager.h"
 #import <Parse/Parse.h>
 
 @interface LPEngagementManager ()
-@property (nonatomic, retain) LPVisitor *visitor;
-@property (readonly, weak) UIApplication *application;
+@property (nonatomic, retain) LPDataStore *dataStore;
 @end
 
 @implementation LPEngagementManager
 
-- (id)initWithVisitor:(LPVisitor *)visitor andApplication:(UIApplication *)application
+- (id)initWithDataStore:(LPDataStore *)dataStore;
 {
     self = [super init];
     if (self) {
-        _visitor = visitor;
-        _application = application;
+        _dataStore = dataStore;
     }
     return self;
 }
 
-- (void)registerForRemoteNotificationTypes
+- (void)registerForRemoteNotificationTypesForApplication:(UIApplication *)application
 {
-    [self.application registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge |
-                                                         UIRemoteNotificationTypeAlert |
-                                                         UIRemoteNotificationTypeSound];
+    [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge |
+                                                    UIRemoteNotificationTypeAlert |
+                                                    UIRemoteNotificationTypeSound];
 }
 
 - (void)didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-    NSLog(@"Register for device token succssed: %@ ", deviceToken);
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
     [currentInstallation setDeviceTokenFromData:deviceToken];
-    NSString *visitorUUID = [@"VisitorUUID_" stringByAppendingString:self.visitor.uuid.UUIDString];
+
+    LPVisitor *visitor = self.dataStore.visitor;
+    NSString *visitorUUID = [@"VisitorUUID_" stringByAppendingString:visitor.uuid.UUIDString];
     [currentInstallation addUniqueObject:visitorUUID forKey:@"channels"];
     [currentInstallation saveInBackground];
 }
@@ -46,5 +47,6 @@
 - (void)didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
     [PFPush handlePush:userInfo];
+    [self.dataStore logEvent:@"engagementViewed" withEngagement:userInfo atTime:[NSDate date]];
 }
 @end

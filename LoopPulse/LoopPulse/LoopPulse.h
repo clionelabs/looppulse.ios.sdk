@@ -16,7 +16,7 @@
 - (void)startLocationMonitoring;
 - (void)stopLocationMonitoringAndRanging;
 
-- (void)registerForRemoteNotificationTypes;
+- (void)registerForRemoteNotificationTypesForApplication:(UIApplication *)application;
 - (void)didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken;
 - (void)didReceiveRemoteNotification:(NSDictionary *)userInfo;
 

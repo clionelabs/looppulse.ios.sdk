@@ -7,12 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "LPVisitor.h"
+#import "LPDataStore.h"
 
 @interface LPEngagementManager : NSObject
 
-- (id)initWithVisitor:(LPVisitor *)visitor andApplication:(UIApplication *)application;
-- (void)registerForRemoteNotificationTypes;
+- (id)initWithDataStore:(LPDataStore *)dataStore;
+- (void)registerForRemoteNotificationTypesForApplication:(UIApplication *)application;
 - (void)didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken;
 - (void)didReceiveRemoteNotification:(NSDictionary *)userInfo;
 
