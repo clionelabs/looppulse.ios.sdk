@@ -46,6 +46,6 @@
 - (void)didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
     [PFPush handlePush:userInfo];
-    [self.dataStore logEvent:@"engagementViewed" withEngagement:userInfo atTime:[NSDate date]];
+    [self.dataStore logEvent:@"didReceiveRemoteNotification" withEngagement:userInfo atTime:[NSDate date]];
 }
 @end
