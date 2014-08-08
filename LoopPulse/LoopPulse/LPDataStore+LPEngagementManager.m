@@ -20,7 +20,7 @@
 {
     NSNumber *priority = @([createdAt timeIntervalSince1970]);
     NSDictionary *eventInfo = @{@"type": eventType,
-                                @"visitor_uuid": [self.visitor.uuid UUIDString],
+                                @"visitor_uuid": [self.visitorUUID UUIDString],
                                 @"created_at": [createdAt description]};
     NSMutableDictionary *engagementInfo = [[NSMutableDictionary alloc] initWithDictionary:engagement];
     [engagementInfo addEntriesFromDictionary:eventInfo];

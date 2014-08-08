@@ -38,8 +38,7 @@
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
     [currentInstallation setDeviceTokenFromData:deviceToken];
 
-    LPVisitor *visitor = self.dataStore.visitor;
-    NSString *visitorUUID = [@"VisitorUUID_" stringByAppendingString:visitor.uuid.UUIDString];
+    NSString *visitorUUID = [@"VisitorUUID_" stringByAppendingString: [self.dataStore.visitorUUID UUIDString]];
     [currentInstallation addUniqueObject:visitorUUID forKey:@"channels"];
     [currentInstallation saveInBackground];
 }

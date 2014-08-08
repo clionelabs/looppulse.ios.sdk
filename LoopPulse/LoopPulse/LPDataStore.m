@@ -7,6 +7,12 @@
 //
 
 #import "LPDataStore.h"
+#import "LPVisitor.h"
+
+@interface LPDataStore ()
+@property (readonly, retain) NSString *token;
+@property (nonatomic, retain) LPVisitor *visitor;
+@end
 
 @implementation LPDataStore
 
@@ -19,6 +25,11 @@
         _visitor = visitor;
     }
     return self;
+}
+
+- (NSUUID *)visitorUUID
+{
+    return self.visitor.uuid;
 }
 
 @end
