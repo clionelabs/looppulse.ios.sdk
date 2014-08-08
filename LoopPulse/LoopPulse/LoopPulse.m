@@ -39,7 +39,6 @@
         _dataStore = [[LPDataStore alloc] initWithToken:token baseUrl:_firebaseBaseUrl];
         _visitor = [[LPVisitor alloc] initWithDataStore:_dataStore];
         _locationManager = [[LPLocationManager alloc] initWithDataStore:_dataStore];
-        _locationManager.delegate = _locationManager;
         _engagementManager = [[LPEngagementManager alloc] initWithDataStore:_dataStore];
 
         // We may need the LPVisitor object when writing data.
