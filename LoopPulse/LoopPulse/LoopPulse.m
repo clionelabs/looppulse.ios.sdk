@@ -19,7 +19,6 @@
 @property (readonly, strong) LPLocationManager *locationManager;
 @property (readonly, strong) LPEngagementManager *engagementManager;
 @property (readonly, strong) NSString *firebaseBaseUrl;
-@property (readonly, weak) UIApplication *application;
 
 @end
 
@@ -29,12 +28,11 @@
 
 @implementation LoopPulse
 
-- (id)initWithToken:(NSString *)token withApplication:(UIApplication *)application
+- (id)initWithToken:(NSString *)token
 {
     self = [super init];
     if (self) {
         _token = token;
-        _application = application;
         _visitor = [[LPVisitor alloc] initWithDataStore:_dataStore];
         _firebaseBaseUrl = @"https://looppulse-megabox.firebaseio.com";
         _dataStore = [[LPDataStore alloc] initWithToken:token baseUrl:_firebaseBaseUrl andVisitor:_visitor];

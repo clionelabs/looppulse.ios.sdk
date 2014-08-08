@@ -11,7 +11,7 @@
 
 @interface LoopPulse : NSObject
 
-- (id)initWithToken:(NSString*)token withApplication:(UIApplication *)application;
+- (id)initWithToken:(NSString*)token;
 
 - (void)startLocationMonitoring;
 - (void)stopLocationMonitoringAndRanging;
