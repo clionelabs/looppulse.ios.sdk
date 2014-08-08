@@ -35,14 +35,11 @@
     if (self) {
         _token = token;
         _application = application;
-        _firebaseBaseUrl = @"https://looppulse-megabox.firebaseio.com";
-        _dataStore = [[LPDataStore alloc] initWithToken:token baseUrl:_firebaseBaseUrl];
         _visitor = [[LPVisitor alloc] initWithDataStore:_dataStore];
+        _firebaseBaseUrl = @"https://looppulse-megabox.firebaseio.com";
+        _dataStore = [[LPDataStore alloc] initWithToken:token baseUrl:_firebaseBaseUrl andVisitor:_visitor];
         _locationManager = [[LPLocationManager alloc] initWithDataStore:_dataStore];
         _engagementManager = [[LPEngagementManager alloc] initWithDataStore:_dataStore];
-
-        // We may need the LPVisitor object when writing data.
-        _dataStore.visitor = _visitor;
 
         // TODO: we may want to pass these keys to LPEngagementManager as
         // these are the only engagement related calls outside.
