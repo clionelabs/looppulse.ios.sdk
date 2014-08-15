@@ -24,6 +24,8 @@
 /* Begin PBXBuildFile section */
 		244968741993C85000EBDF2C /* LPDataStore+LPEngagementManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 244968721993C85000EBDF2C /* LPDataStore+LPEngagementManager.h */; };
 		244968751993C85000EBDF2C /* LPDataStore+LPEngagementManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 244968731993C85000EBDF2C /* LPDataStore+LPEngagementManager.m */; };
+		24A01B07199B5C0700EB7C46 /* CLBeaconRegion+LoopPulseHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 24A01B05199B5C0700EB7C46 /* CLBeaconRegion+LoopPulseHelpers.h */; };
+		24A01B08199B5C0700EB7C46 /* CLBeaconRegion+LoopPulseHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A01B06199B5C0700EB7C46 /* CLBeaconRegion+LoopPulseHelpers.m */; };
 		24BA349F1993810B00500967 /* LPEngagementManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 24BA349D1993810B00500967 /* LPEngagementManager.h */; };
 		24BA34A01993810B00500967 /* LPEngagementManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 24BA349E1993810B00500967 /* LPEngagementManager.m */; };
 		F42E86B2192DF644007EDC30 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F42E86B1192DF644007EDC30 /* Foundation.framework */; };
@@ -81,6 +83,8 @@
 /* Begin PBXFileReference section */
 		244968721993C85000EBDF2C /* LPDataStore+LPEngagementManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LPDataStore+LPEngagementManager.h"; sourceTree = "<group>"; };
 		244968731993C85000EBDF2C /* LPDataStore+LPEngagementManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "LPDataStore+LPEngagementManager.m"; sourceTree = "<group>"; };
+		24A01B05199B5C0700EB7C46 /* CLBeaconRegion+LoopPulseHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLBeaconRegion+LoopPulseHelpers.h"; sourceTree = "<group>"; };
+		24A01B06199B5C0700EB7C46 /* CLBeaconRegion+LoopPulseHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLBeaconRegion+LoopPulseHelpers.m"; sourceTree = "<group>"; };
 		24BA349D1993810B00500967 /* LPEngagementManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPEngagementManager.h; sourceTree = "<group>"; };
 		24BA349E1993810B00500967 /* LPEngagementManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPEngagementManager.m; sourceTree = "<group>"; };
 		F42E86AE192DF644007EDC30 /* libLoopPulse.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLoopPulse.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -190,6 +194,8 @@
 				F42E86E0192DF6A1007EDC30 /* LPDataStore.h */,
 				F42E86E3192DF6A1007EDC30 /* CLRegion+LoopPulseHelpers.m */,
 				F42E86E4192DF6A1007EDC30 /* CLRegion+LoopPulseHelpers.h */,
+				24A01B06199B5C0700EB7C46 /* CLBeaconRegion+LoopPulseHelpers.m */,
+				24A01B05199B5C0700EB7C46 /* CLBeaconRegion+LoopPulseHelpers.h */,
 				F42E86E5192DF6A1007EDC30 /* CLBeaconRegion+FirebaseDictionary.m */,
 				F42E86E6192DF6A1007EDC30 /* CLBeaconRegion+FirebaseDictionary.h */,
 				F42E86E7192DF6A1007EDC30 /* CLBeacon+FirebaseDictionary.m */,
@@ -240,6 +246,7 @@
 				244968741993C85000EBDF2C /* LPDataStore+LPEngagementManager.h in Headers */,
 				F42E86FB192DF808007EDC30 /* LoopPulse.h in Headers */,
 				F49DC1DE19664F94008D7EEB /* LPVisitor.h in Headers */,
+				24A01B07199B5C0700EB7C46 /* CLBeaconRegion+LoopPulseHelpers.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,6 +365,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24A01B08199B5C0700EB7C46 /* CLBeaconRegion+LoopPulseHelpers.m in Sources */,
 				24BA34A01993810B00500967 /* LPEngagementManager.m in Sources */,
 				F42E86EC192DF6A1007EDC30 /* LPDataStore+LPLocationManager.m in Sources */,
 				F42E86EB192DF6A1007EDC30 /* LPDataStore+LPVisitor.m in Sources */,

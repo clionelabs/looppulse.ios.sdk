@@ -8,6 +8,7 @@
 
 #import "LPLocationManager.h"
 #import "CLRegion+LoopPulseHelpers.h"
+#import "CLBeaconRegion+LoopPulseHelpers.h"
 #import "LPDataStore+LPLocationManager.h"
 
 @interface LPLocationManager ()
@@ -15,7 +16,9 @@
 @property (readonly, retain) LPDataStore *dataStore;
 @end
 
-@implementation LPLocationManager
+@implementation LPLocationManager {
+    NSMutableDictionary *monitoredBeaconRegionsAndItsCount;
+}
 
 - (id)initWithDataStore:(LPDataStore *)dataStore
 {
@@ -23,6 +26,8 @@
     if (self) {
         _dataStore = dataStore;
         self.delegate = self;
+        monitoredBeaconRegionsAndItsCount = [NSMutableDictionary new];
+
         [self requestStateForAllRegions];
     }
     return self;
@@ -48,16 +53,10 @@
     return @[beaconRegion, beaconRegion2, beaconRegion3];
 }
 
-- (NSArray *)ignoredProximity
-{
-    return @[@(CLProximityUnknown), @(CLProximityFar), @(CLProximityNear)];
-}
-
 - (void)startMonitoringForAllRegions
 {
-    for (CLBeaconRegion *region in self.beaconRegions) {
-        [self startMonitoringForRegion:region];
-    }
+    [self startMonitoringForBeaconRegions:self.beaconRegions];
+    NSLog(@"startMonitoringForAllRegions: %@", self.monitoredRegions);
 }
 
 - (void)stopMonitoringForAllRegions
@@ -88,12 +87,100 @@
     }
 }
 
+- (NSArray *)filterByKnownProximities:(NSArray *)beacons
+{
+    NSArray *knownProximities = @[@(CLProximityImmediate), @(CLProximityNear), @(CLProximityFar)];
+    NSPredicate *knownProximityPredicate = [NSPredicate predicateWithFormat:@"proximity IN %@", knownProximities];
+    return [beacons filteredArrayUsingPredicate:knownProximityPredicate];
+}
+
+- (CLBeaconRegion *)beaconRegion:(CLBeacon *)beacon
+{
+    NSString *identifier = [NSString stringWithFormat:@"LoopPulse-%@:%@", beacon.major, beacon.minor];
+    CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:beacon.proximityUUID
+                                                                           major:[beacon.major integerValue]
+                                                                           minor:[beacon.minor integerValue]
+                                                                      identifier:identifier];
+    return beaconRegion;
+}
+
+// Based on the beacons in range, we calculate the nearby
+// beacon regions we also need to monitor.
+- (NSArray *)beaconRegionsToMonitor:(NSArray *)beaconsInRange
+{
+    NSMutableArray *beaconRegions = [[NSMutableArray alloc] initWithCapacity:beaconsInRange.count];
+    for (CLBeacon *beacon in beaconsInRange) {
+        [beaconRegions addObject:[self beaconRegion:beacon]];
+    }
+    return beaconRegions;
+}
+
 - (BOOL)firstEncounteredWithBeaconRegion:(CLBeaconRegion *)beaconRegion
 {
-    // Since we only monitor specific beacon region after we range,
-    // we can tell if it's the first encounter by checking currently
-    // monitored region
     return (![self.monitoredRegions containsObject:beaconRegion]);
+}
+
+- (void)startMonitoringForBeaconRegions:(NSArray *)beaconRegionsToMonitor
+{
+    for (CLBeaconRegion *region in beaconRegionsToMonitor) {
+        // From iOS 7.1 doc: If a region of the same type with the same
+        // identifier is already being monitored for this application,
+        // it will be removed from monitoring.
+        if (![self.monitoredRegions containsObject:region]) {
+            [self startMonitoringForRegion:region];
+        }
+    }
+}
+
+- (void)stopMonitoringAndRangingForBeaconRegions:(NSArray *)beaconRegionsToMonitor
+{
+    for (CLBeaconRegion *beaconRegion in beaconRegionsToMonitor) {
+        [self stopMonitoringForRegion:beaconRegion];
+        [self stopRangingBeaconsInRegion:beaconRegion];
+    }
+}
+
+- (NSArray *)retainBeaconRegions:(NSArray *)beaconRegions
+{
+    for (CLBeaconRegion *beaconRegion in beaconRegions) {
+        NSString *beaconRegionKey = [NSString stringWithFormat:@"%@-%@-%@", beaconRegion.proximityUUID, beaconRegion.major, beaconRegion.minor];
+        NSNumber *oldCount = [monitoredBeaconRegionsAndItsCount objectForKey:beaconRegionKey];
+        NSInteger newCountInt = [oldCount integerValue] + 1;
+        [monitoredBeaconRegionsAndItsCount setObject:[NSNumber numberWithInteger:newCountInt]
+                                             forKey:beaconRegionKey];
+    }
+    return beaconRegions;
+}
+
+// Returns newly released beacon regions
+- (NSArray *)releaseBeaconRegions:(NSArray *)beaconRegions
+{
+    NSMutableSet *deleted = [NSMutableSet new];
+    for (CLBeaconRegion *beaconRegion in beaconRegions) {
+        NSString *beaconRegionKey = [NSString stringWithFormat:@"%@-%@-%@", beaconRegion.proximityUUID, beaconRegion.major, beaconRegion.minor];
+        NSNumber *oldCount = [monitoredBeaconRegionsAndItsCount objectForKey:beaconRegionKey];
+        NSInteger newCountInt = [oldCount integerValue] - 1;
+        if (newCountInt <= 0) {
+            [monitoredBeaconRegionsAndItsCount removeObjectForKey:beaconRegionKey];
+            [deleted addObject:beaconRegion];
+        }
+    }
+    return [deleted allObjects];
+}
+
+// We use reference counting to determine when a region is good to be removed.
+- (void)startMonitoringNearbyBeaconRegions:(CLBeaconRegion *)beaconRegionInRange
+{
+    NSArray *nearbyBeaconRegions = @[beaconRegionInRange];
+    NSArray *beaconRegionsToMonitor = [self retainBeaconRegions:nearbyBeaconRegions];
+    [self startMonitoringForBeaconRegions:beaconRegionsToMonitor];
+}
+
+- (void)stopMonitoringNearbyBeaconRegions:(CLBeaconRegion *)beaconRegionExiting
+{
+    NSArray *nearbyBeaconRegions = @[beaconRegionExiting];
+    NSArray *beaconRegionsToRemove = [self releaseBeaconRegions:nearbyBeaconRegions];
+    [self stopMonitoringAndRangingForBeaconRegions:beaconRegionsToRemove];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region
@@ -110,9 +197,11 @@
 {
     if ([region isLoopPulseBeaconRegion]) {
         CLBeaconRegion *beaconRegion = (CLBeaconRegion *)region;
-        if (beaconRegion.major && beaconRegion.minor) {
+        if ([beaconRegion isLoopPulseSpecificBeaconRegion]) {
+            [self startMonitoringNearbyBeaconRegions:beaconRegion];
             [self.dataStore logEvent:@"didEnterRegion" withBeaconRegion:beaconRegion atTime:[NSDate date]];
         } else {
+            // We just entered our generic beacon region
             [self startRangingBeaconsInRegion:beaconRegion];
         }
     }
@@ -122,10 +211,9 @@
 {
     if ([region isLoopPulseBeaconRegion]) {
         CLBeaconRegion *beaconRegion = (CLBeaconRegion *)region;
-        if (beaconRegion.major && beaconRegion.minor) {
+        if ([beaconRegion isLoopPulseSpecificBeaconRegion]) {
+            [self stopMonitoringNearbyBeaconRegions:beaconRegion];
             [self.dataStore logEvent:@"didExitRegion" withBeaconRegion:beaconRegion atTime:[NSDate date]];
-            [self stopRangingBeaconsInRegion:beaconRegion];
-            [self stopMonitoringForRegion:beaconRegion];
         }
     }
 }
@@ -133,23 +221,15 @@
 - (void)locationManager:(CLLocationManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region
 {
     if ([region isLoopPulseBeaconRegion]) {
-        for (CLBeacon *beacon in beacons) {
-            // Ignore beacons with unknown proximity
-            if ([[self ignoredProximity] containsObject:@(beacon.proximity)]) {
-                continue;
-            }
-
-            // Monitor specific beacons
-            NSString *identifier = [NSString stringWithFormat:@"LoopPulse-%@:%@", beacon.major, beacon.minor];
-            CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:region.proximityUUID
-                                                                                   major:[beacon.major integerValue]
-                                                                                   minor:[beacon.minor integerValue]
-                                                                              identifier:identifier];
+        for (CLBeacon *beacon in [self filterByKnownProximities:beacons]) {
+            // If we range a specific beacon without a match from currently monitored regions,
+            // then we know we have just entered a generic beacon region.
+            CLBeaconRegion *beaconRegion = [self beaconRegion:beacon];
             if ([self firstEncounteredWithBeaconRegion:beaconRegion]) {
-                [self.dataStore logEvent:@"didEnterRegion" withBeacon:beacon atTime:[NSDate date]];
-                [self startMonitoringForRegion:beaconRegion];
+                [self startMonitoringNearbyBeaconRegions:beaconRegion];
+                [self.dataStore logEvent:@"didEnterRegion" withBeaconRegion:beaconRegion atTime:[NSDate date]];
             } else {
-                [self.dataStore logEvent:@"didRangeBeacons" withBeacon:beacon atTime:[NSDate date]];
+                [self.dataStore logEvent:@"didRangeBeacons" withBeaconRegion:beaconRegion atTime:[NSDate date]];
             }
         }
     }
