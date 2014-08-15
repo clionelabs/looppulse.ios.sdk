@@ -15,4 +15,9 @@
     BOOL specific = self.major && self.minor;
     return [self isLoopPulseBeaconRegion] && specific;
 }
+
+- (NSString *)key
+{
+    return [NSString stringWithFormat:@"%@-%@-%@",[self.proximityUUID UUIDString], self.major, self.minor];
+}
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "LPBeaconRegionManager.h"
+#import "CLBeaconRegion+LoopPulseHelpers.h"
 
 @implementation LPBeaconRegionManager {
     NSMutableDictionary *monitoredBeaconRegionsAndItsCount;
@@ -24,7 +25,7 @@
 - (NSArray *)retainBeaconRegions:(NSArray *)beaconRegions
 {
     for (CLBeaconRegion *beaconRegion in beaconRegions) {
-        NSString *beaconRegionKey = [NSString stringWithFormat:@"%@-%@-%@", beaconRegion.proximityUUID, beaconRegion.major, beaconRegion.minor];
+        NSString *beaconRegionKey = [beaconRegion key];
         NSNumber *oldCount = [monitoredBeaconRegionsAndItsCount objectForKey:beaconRegionKey];
         NSInteger newCountInt = [oldCount integerValue] + 1;
         [monitoredBeaconRegionsAndItsCount setObject:[NSNumber numberWithInteger:newCountInt]
@@ -38,10 +39,7 @@
 {
     NSMutableSet *deleted = [NSMutableSet new];
     for (CLBeaconRegion *beaconRegion in beaconRegions) {
-        NSString *beaconRegionKey = [NSString stringWithFormat:@"%@-%@-%@",
-                                     [beaconRegion.proximityUUID UUIDString],
-                                     beaconRegion.major,
-                                     beaconRegion.minor];
+        NSString *beaconRegionKey = [beaconRegion key];
         NSNumber *oldCount = [monitoredBeaconRegionsAndItsCount objectForKey:beaconRegionKey];
         NSInteger newCountInt = [oldCount integerValue] - 1;
         if (newCountInt <= 0) {
