@@ -7,6 +7,7 @@
 //
 
 #import "LPLocationManager.h"
+#import "LPBeaconRegionManager.h"
 #import "CLRegion+LoopPulseHelpers.h"
 #import "CLBeacon+LoopPulseHelpers.h"
 #import "CLBeaconRegion+LoopPulseHelpers.h"
@@ -18,7 +19,7 @@
 @end
 
 @implementation LPLocationManager {
-    NSMutableDictionary *monitoredBeaconRegionsAndItsCount;
+    LPBeaconRegionManager *beaconRegionManager;
 }
 
 - (id)initWithDataStore:(LPDataStore *)dataStore
@@ -27,7 +28,7 @@
     if (self) {
         _dataStore = dataStore;
         self.delegate = self;
-        monitoredBeaconRegionsAndItsCount = [NSMutableDictionary new];
+        beaconRegionManager = [LPBeaconRegionManager new];
 
         [self requestStateForAllRegions];
     }
@@ -102,6 +103,7 @@
 
 - (void)startMonitoringForBeaconRegions:(NSArray *)beaconRegionsToMonitor
 {
+    // TODO: should limit the number regions to monitor
     for (CLBeaconRegion *region in beaconRegionsToMonitor) {
         // From iOS 7.1 doc: If a region of the same type with the same
         // identifier is already being monitored for this application,
@@ -120,47 +122,16 @@
     }
 }
 
-- (NSArray *)retainBeaconRegions:(NSArray *)beaconRegions
-{
-    for (CLBeaconRegion *beaconRegion in beaconRegions) {
-        NSString *beaconRegionKey = [NSString stringWithFormat:@"%@-%@-%@", beaconRegion.proximityUUID, beaconRegion.major, beaconRegion.minor];
-        NSNumber *oldCount = [monitoredBeaconRegionsAndItsCount objectForKey:beaconRegionKey];
-        NSInteger newCountInt = [oldCount integerValue] + 1;
-        [monitoredBeaconRegionsAndItsCount setObject:[NSNumber numberWithInteger:newCountInt]
-                                             forKey:beaconRegionKey];
-    }
-    return beaconRegions;
-}
-
-// Returns newly released beacon regions
-- (NSArray *)releaseBeaconRegions:(NSArray *)beaconRegions
-{
-    NSMutableSet *deleted = [NSMutableSet new];
-    for (CLBeaconRegion *beaconRegion in beaconRegions) {
-        NSString *beaconRegionKey = [NSString stringWithFormat:@"%@-%@-%@", beaconRegion.proximityUUID, beaconRegion.major, beaconRegion.minor];
-        NSNumber *oldCount = [monitoredBeaconRegionsAndItsCount objectForKey:beaconRegionKey];
-        NSInteger newCountInt = [oldCount integerValue] - 1;
-        if (newCountInt <= 0) {
-            [monitoredBeaconRegionsAndItsCount removeObjectForKey:beaconRegionKey];
-            [deleted addObject:beaconRegion];
-        }
-    }
-    return [deleted allObjects];
-}
-
-// We use reference counting to determine when a region is good to be removed.
 - (void)startMonitoringNearbyBeaconRegions:(CLBeaconRegion *)beaconRegionInRange
 {
-    NSArray *nearbyBeaconRegions = @[beaconRegionInRange];
-    NSArray *beaconRegionsToMonitor = [self retainBeaconRegions:nearbyBeaconRegions];
-    [self startMonitoringForBeaconRegions:beaconRegionsToMonitor];
+    NSArray *regions = [beaconRegionManager regionsToMonitor:beaconRegionInRange];
+    [self startMonitoringForBeaconRegions:regions];
 }
 
 - (void)stopMonitoringNearbyBeaconRegions:(CLBeaconRegion *)beaconRegionExiting
 {
-    NSArray *nearbyBeaconRegions = @[beaconRegionExiting];
-    NSArray *beaconRegionsToRemove = [self releaseBeaconRegions:nearbyBeaconRegions];
-    [self stopMonitoringAndRangingForBeaconRegions:beaconRegionsToRemove];
+    NSArray *regions = [beaconRegionManager regionsToNotMonitor:beaconRegionExiting];
+    [self stopMonitoringAndRangingForBeaconRegions:regions];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region
