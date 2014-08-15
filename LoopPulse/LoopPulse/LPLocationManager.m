@@ -8,6 +8,7 @@
 
 #import "LPLocationManager.h"
 #import "CLRegion+LoopPulseHelpers.h"
+#import "CLBeacon+LoopPulseHelpers.h"
 #import "CLBeaconRegion+LoopPulseHelpers.h"
 #import "LPDataStore+LPLocationManager.h"
 
@@ -92,27 +93,6 @@
     NSArray *knownProximities = @[@(CLProximityImmediate), @(CLProximityNear), @(CLProximityFar)];
     NSPredicate *knownProximityPredicate = [NSPredicate predicateWithFormat:@"proximity IN %@", knownProximities];
     return [beacons filteredArrayUsingPredicate:knownProximityPredicate];
-}
-
-- (CLBeaconRegion *)beaconRegion:(CLBeacon *)beacon
-{
-    NSString *identifier = [NSString stringWithFormat:@"LoopPulse-%@:%@", beacon.major, beacon.minor];
-    CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:beacon.proximityUUID
-                                                                           major:[beacon.major integerValue]
-                                                                           minor:[beacon.minor integerValue]
-                                                                      identifier:identifier];
-    return beaconRegion;
-}
-
-// Based on the beacons in range, we calculate the nearby
-// beacon regions we also need to monitor.
-- (NSArray *)beaconRegionsToMonitor:(NSArray *)beaconsInRange
-{
-    NSMutableArray *beaconRegions = [[NSMutableArray alloc] initWithCapacity:beaconsInRange.count];
-    for (CLBeacon *beacon in beaconsInRange) {
-        [beaconRegions addObject:[self beaconRegion:beacon]];
-    }
-    return beaconRegions;
 }
 
 - (BOOL)firstEncounteredWithBeaconRegion:(CLBeaconRegion *)beaconRegion
@@ -224,7 +204,7 @@
         for (CLBeacon *beacon in [self filterByKnownProximities:beacons]) {
             // If we range a specific beacon without a match from currently monitored regions,
             // then we know we have just entered a generic beacon region.
-            CLBeaconRegion *beaconRegion = [self beaconRegion:beacon];
+            CLBeaconRegion *beaconRegion = [beacon beaconRegion];
             if ([self firstEncounteredWithBeaconRegion:beaconRegion]) {
                 [self startMonitoringNearbyBeaconRegions:beaconRegion];
                 [self.dataStore logEvent:@"didEnterRegion" withBeaconRegion:beaconRegion atTime:[NSDate date]];
