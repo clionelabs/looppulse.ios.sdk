@@ -162,6 +162,7 @@
 {
     if ([region isLoopPulseBeaconRegion]) {
         CLBeaconRegion *beaconRegion = (CLBeaconRegion *)region;
+        [self stopRangingBeaconsInRegion:beaconRegion];
         if ([beaconRegion isLoopPulseSpecificBeaconRegion]) {
             [self stopMonitoringNearbyBeaconRegions:beaconRegion];
             [self.dataStore logEvent:@"didExitRegion" withBeaconRegion:beaconRegion atTime:[NSDate date]];
