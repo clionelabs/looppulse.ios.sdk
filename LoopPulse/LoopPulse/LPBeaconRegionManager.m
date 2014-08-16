@@ -8,6 +8,7 @@
 
 #import "LPBeaconRegionManager.h"
 #import "CLBeaconRegion+LoopPulseHelpers.h"
+#import "LPInstallation.h"
 
 @implementation LPBeaconRegionManager {
     NSMutableDictionary *monitoredBeaconRegionKeysAndCounts;
@@ -30,9 +31,7 @@
     NSData *data = [NSData dataWithContentsOfFile:jsonPath];
     NSError *error = nil;
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:8 error:&error];
-    if (error)
-        NSLog(@"readInstallationFile: error: %@", error);
-    NSLog(@"readInstallationFile: %@", json);
+    if (error) NSLog(@"readInstallationFile: error: %@", error);
     return json;
 }
 
@@ -40,49 +39,50 @@
 - (NSDictionary *)generateBeaconRegionsNearby
 {
     NSMutableDictionary *regionsNearby = [NSMutableDictionary dictionary];
-//    NSDictionary *company = [self readInstallationFile];
-//    NSDictionary * locations = [company objectForKey:@"locations"];
-//    for (NSDictionary *location in locations) {
-//        NSDictionary *installations = [location objectForKey:@"installations"];
-//        NSDictionary *keyAndRegions = [self generateRegionKeyAndNearbyRegions:installations];
-//        [regionsNearby addEntriesFromDictionary:keyAndRegions];
-//    }
+    NSDictionary *company = [self readInstallationFile];
+    NSDictionary * locations = [company objectForKey:@"locations"];
+    [locations enumerateKeysAndObjectsUsingBlock:^(id key, id location, BOOL *stop){
+        NSArray *installations = [location objectForKey:@"installations"];
+        NSDictionary *keyAndRegions = [self generateRegionKeyAndNearbyRegions:installations];
+        [regionsNearby addEntriesFromDictionary:keyAndRegions];
+    }];
     return regionsNearby;
 }
 
-//- (CLBeaconRegion *)beaconRegionFromBeaconDictionary:(NSDictionary *)beacon
-//{
-//    NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:[beacon objectForKey:@"proximityUUID"]];
-//    NSNumber *major = [beacon objectForKey:@"major"];
-//    NSNumber *minor = [beacon objectForKey:@"minor"];
-//    NSString *identifier = [NSString stringWithFormat:@"LoopPulse-%@:%@", major, minor]; // TODO: refactor
-//    return [[CLBeaconRegion alloc] initWithProximityUUID:uuid
-//                                                   major:[major integerValue]
-//                                                   minor:[minor integerValue]
-//                                              identifier:identifier];
-//}
-//
-//- (NSDictionary *)generateRegionKeyAndNearbyRegions:(NSDictionary *)installations
-//{
-//    NSMutableDictionary *keyAndRegions = [NSMutableDictionary dictionary];
-//    for (NSDictionary *installation in installations) {
-//        NSDictionary *beacon = [installation objectForKey:@"beacon"];
-//        CLBeaconRegion *currentRegion = [self beaconRegionFromBeaconDictionary:beacon];
-//        NSString *key = [currentRegion key];
-//        // Initialize the value to be an empty array.
-//        [keyAndRegions setObject:[NSMutableArray array] forKey:key];
-//        for (NSDictionary *otherInstallation in installations) {
-//            if ([otherInstallation isEqual:installation]) {
-//                continue;
-//            }
-//            NSDictionary *otherBeacon = [otherInstallation objectForKey:@"beacon"];
-//            CLBeaconRegion *otherRegion = [self beaconRegionFromBeaconDictionary:otherBeacon];
-//            NSMutableArray *regions = [keyAndRegions objectForKey:key];
-//            [regions addObject:otherRegion];
-//        }
-//    }
-//    return keyAndRegions;
-//}
+- (NSArray *)mapDictionariesToInstallations:(NSArray *)installationsArray
+{
+    NSMutableArray *installations = [NSMutableArray array];
+    for (NSDictionary *dictionary in installationsArray) {
+        LPInstallation *installation = [[LPInstallation alloc] initWithDictionary:dictionary];
+        [installations addObject:installation];
+    }
+    return installations;
+}
+
+- (NSDictionary *)generateRegionKeyAndNearbyRegions:(NSArray *)installationsArray
+{
+    NSMutableDictionary *keyAndRegions = [NSMutableDictionary dictionary];
+    NSArray *installations = [self mapDictionariesToInstallations:installationsArray];
+    for (LPInstallation *installation in installations) {
+        NSMutableArray *regionsNearby = [NSMutableArray array];
+        for (LPInstallation *otherInstallation in installations) {
+            if ([installation isEqual:otherInstallation]) {
+                continue;
+            }
+            if ([installation isNearby:otherInstallation]) {
+                [regionsNearby addObject:otherInstallation.beaconRegion];
+            }
+        }
+        [keyAndRegions setObject:regionsNearby forKey:installation.key];
+    }
+    return keyAndRegions;
+}
+
+- (NSArray *)beaconRegionsNearby:(CLBeaconRegion *)currentRegion
+{
+    NSString *key = currentRegion.key;
+    return [beaconRegionsNearby objectForKey:key];
+}
 
 - (NSArray *)retainBeaconRegions:(NSArray *)beaconRegions
 {
@@ -116,7 +116,7 @@
 {
     // Please note regionsNearby.count <= regionsToMonitor.count
     // because regionsToMonitor contains previously monitored regions
-    NSArray *regionsNearby = @[enteredRegion];
+    NSArray *regionsNearby = [self beaconRegionsNearby:enteredRegion];
     NSArray *regionsToMonitor = [self retainBeaconRegions:regionsNearby];
 
     // Sort the regions according to the distance
@@ -128,7 +128,7 @@
     // Please note regionsNearby.count >= regionsToNotMonitor.count
     // because regions in regionsNearby could still be needed due to
     // other regions the visitor is currently at.
-    NSArray *regionsNearby = @[exitedRegion];
+    NSArray *regionsNearby = [self beaconRegionsNearby:exitedRegion];
     NSArray *regionsToNotMonitor = [self releaseBeaconRegions:regionsNearby];
 
     return regionsToNotMonitor;
