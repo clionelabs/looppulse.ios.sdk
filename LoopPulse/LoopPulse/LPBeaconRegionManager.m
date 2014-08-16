@@ -10,40 +10,102 @@
 #import "CLBeaconRegion+LoopPulseHelpers.h"
 
 @implementation LPBeaconRegionManager {
-    NSMutableDictionary *monitoredBeaconRegionsAndItsCount;
+    NSMutableDictionary *monitoredBeaconRegionKeysAndCounts;
+    NSDictionary *beaconRegionsNearby;
 }
 
 - (id)init
 {
     self = [super init];
     if (self) {
-        monitoredBeaconRegionsAndItsCount = [NSMutableDictionary new];
+        monitoredBeaconRegionKeysAndCounts = [NSMutableDictionary dictionary];
+        beaconRegionsNearby = [self generateBeaconRegionsNearby];
     }
     return self;
 }
+
+- (NSDictionary *)readInstallationFile
+{
+    NSString* jsonPath = [[NSBundle mainBundle]pathForResource:@"megabox" ofType:@"json"];
+    NSData *data = [NSData dataWithContentsOfFile:jsonPath];
+    NSError *error = nil;
+    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:8 error:&error];
+    if (error)
+        NSLog(@"readInstallationFile: error: %@", error);
+    NSLog(@"readInstallationFile: %@", json);
+    return json;
+}
+
+// Given current beacon region, return an array of possiblily overlapping regions
+- (NSDictionary *)generateBeaconRegionsNearby
+{
+    NSMutableDictionary *regionsNearby = [NSMutableDictionary dictionary];
+//    NSDictionary *company = [self readInstallationFile];
+//    NSDictionary * locations = [company objectForKey:@"locations"];
+//    for (NSDictionary *location in locations) {
+//        NSDictionary *installations = [location objectForKey:@"installations"];
+//        NSDictionary *keyAndRegions = [self generateRegionKeyAndNearbyRegions:installations];
+//        [regionsNearby addEntriesFromDictionary:keyAndRegions];
+//    }
+    return regionsNearby;
+}
+
+//- (CLBeaconRegion *)beaconRegionFromBeaconDictionary:(NSDictionary *)beacon
+//{
+//    NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:[beacon objectForKey:@"proximityUUID"]];
+//    NSNumber *major = [beacon objectForKey:@"major"];
+//    NSNumber *minor = [beacon objectForKey:@"minor"];
+//    NSString *identifier = [NSString stringWithFormat:@"LoopPulse-%@:%@", major, minor]; // TODO: refactor
+//    return [[CLBeaconRegion alloc] initWithProximityUUID:uuid
+//                                                   major:[major integerValue]
+//                                                   minor:[minor integerValue]
+//                                              identifier:identifier];
+//}
+//
+//- (NSDictionary *)generateRegionKeyAndNearbyRegions:(NSDictionary *)installations
+//{
+//    NSMutableDictionary *keyAndRegions = [NSMutableDictionary dictionary];
+//    for (NSDictionary *installation in installations) {
+//        NSDictionary *beacon = [installation objectForKey:@"beacon"];
+//        CLBeaconRegion *currentRegion = [self beaconRegionFromBeaconDictionary:beacon];
+//        NSString *key = [currentRegion key];
+//        // Initialize the value to be an empty array.
+//        [keyAndRegions setObject:[NSMutableArray array] forKey:key];
+//        for (NSDictionary *otherInstallation in installations) {
+//            if ([otherInstallation isEqual:installation]) {
+//                continue;
+//            }
+//            NSDictionary *otherBeacon = [otherInstallation objectForKey:@"beacon"];
+//            CLBeaconRegion *otherRegion = [self beaconRegionFromBeaconDictionary:otherBeacon];
+//            NSMutableArray *regions = [keyAndRegions objectForKey:key];
+//            [regions addObject:otherRegion];
+//        }
+//    }
+//    return keyAndRegions;
+//}
 
 - (NSArray *)retainBeaconRegions:(NSArray *)beaconRegions
 {
     for (CLBeaconRegion *beaconRegion in beaconRegions) {
         NSString *beaconRegionKey = [beaconRegion key];
-        NSNumber *oldCount = [monitoredBeaconRegionsAndItsCount objectForKey:beaconRegionKey];
+        NSNumber *oldCount = [monitoredBeaconRegionKeysAndCounts objectForKey:beaconRegionKey];
         NSInteger newCountInt = [oldCount integerValue] + 1;
-        [monitoredBeaconRegionsAndItsCount setObject:[NSNumber numberWithInteger:newCountInt]
+        [monitoredBeaconRegionKeysAndCounts setObject:[NSNumber numberWithInteger:newCountInt]
                                               forKey:beaconRegionKey];
     }
     return beaconRegions;
 }
 
-// Returns newly released beacon regions
+// Returns newly released beacon regions to be removed
 - (NSArray *)releaseBeaconRegions:(NSArray *)beaconRegions
 {
     NSMutableSet *deleted = [NSMutableSet new];
     for (CLBeaconRegion *beaconRegion in beaconRegions) {
         NSString *beaconRegionKey = [beaconRegion key];
-        NSNumber *oldCount = [monitoredBeaconRegionsAndItsCount objectForKey:beaconRegionKey];
+        NSNumber *oldCount = [monitoredBeaconRegionKeysAndCounts objectForKey:beaconRegionKey];
         NSInteger newCountInt = [oldCount integerValue] - 1;
         if (newCountInt <= 0) {
-            [monitoredBeaconRegionsAndItsCount removeObjectForKey:beaconRegionKey];
+            [monitoredBeaconRegionKeysAndCounts removeObjectForKey:beaconRegionKey];
             [deleted addObject:beaconRegion];
         }
     }
@@ -57,6 +119,7 @@
     NSArray *regionsNearby = @[enteredRegion];
     NSArray *regionsToMonitor = [self retainBeaconRegions:regionsNearby];
 
+    // Sort the regions according to the distance
     return regionsToMonitor;
 }
 

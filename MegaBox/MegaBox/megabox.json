@@ -1,0 +1,249 @@
+{
+  "name": "Megabox",
+  "products": {
+    "Mega Ice": {
+      "name": "Mega Ice"
+    },
+    "Coco Curry House": {
+      "name": "Coco Curry House"
+    },
+    "Tokachi Dolphin Well": {
+      "name": "Tokachi Dolphin Well"
+    },
+    "Nippon Sushi Dining": {
+      "name": "Nippon Sushi Dining"
+    },
+    "Pepper Lunch": {
+      "name": "Pepper Lunch"
+    },
+    "Café Fifty Fifty": {
+      "name": "Café Fifty Fifty"
+    },
+    "Pacific Coffee Company": {
+      "name": "Pacific Coffee Company"
+    },
+    "Tai Hing": {
+      "name": "Tai Hing"
+    },
+    "UA Cinemas": {
+      "name": "UA Cinemas"
+    },
+    "AA Mini Store": {
+      "name": "AA Mini Store"
+    },
+    "Kenting Tea House": {
+      "name": "Kenting Tea House"
+    },
+    "Thai Orchids": {
+      "name": "Thai Orchids"
+    },
+    "California Pizza Kitchen": {
+      "name": "California Pizza Kitchen"
+    },
+    "Studio City Bar & Café": {
+      "name": "Studio City Bar & Café"
+    },
+    "Noir Chocolatier": {
+      "name": "Noir Chocolatier"
+    },
+    "mr.Laksa": {
+      "name": "mr.Laksa"
+    },
+    "10th floor escalator": {
+      "name": "10th floor escalator"
+    },
+    "general push notification": {
+      "name": "general push notification"
+    }
+  },
+
+  "locations": {
+    "Megabox": {
+      "name": "Megabox",
+      "location": "Kowloon Bay",
+      "coordinate": { "latitude": 123, "longitude": 456 },
+      "installations": [
+        {
+          "product": "Mega Ice",
+          "beacon": {
+            "proximityUUID": "A2DCA1E4-0607-4F37-9FF1-825237B278FE",
+            "major": 1901,
+            "minor": 12001,
+            "power": -12
+          },
+          "coordinate": { "x": 4, "y": 8, "z": 10 }
+        },
+        {
+          "product": "Coco Curry House",
+          "beacon": {
+            "proximityUUID": "A2DCA1E4-0607-4F37-9FF1-825237B278FE",
+            "major": 1901,
+            "minor": 12101,
+            "power": -12
+          },
+          "coordinate": { "x": 12, "y": 10, "z": 10 }
+        },
+        {
+          "product": "Tokachi Dolphin Well",
+          "beacon": {
+            "proximityUUID": "A2DCA1E4-0607-4F37-9FF1-825237B278FE",
+            "major": 618,
+            "minor": 1002,
+            "power": -12
+          },
+          "coordinate": { "x": 12, "y": 8, "z": 10 }
+        },
+        {
+          "product": "Nippon Sushi Dining",
+          "beacon": {
+            "proximityUUID": "A2DCA1E4-0607-4F37-9FF1-825237B278FE",
+            "major": 1023,
+            "minor": 19101,
+            "power": -12
+          },
+          "coordinate": { "x": 12, "y": 6, "z": 10 }
+        },
+        {
+          "product": "Pepper Lunch",
+          "beacon": {
+            "proximityUUID": "A2DCA1E4-0607-4F37-9FF1-825237B278FE",
+            "major": 801,
+            "minor": 14001,
+            "power": -12
+          },
+          "coordinate": { "x": 12, "y": 9, "z": 10 }
+        },
+        {
+          "product": "Café Fifty Fifty",
+          "beacon": {
+            "proximityUUID": "A2DCA1E4-0607-4F37-9FF1-825237B278FE",
+            "major": 801,
+            "minor": 14101,
+            "power": -12
+          },
+          "coordinate": { "x": 4, "y": 6, "z": 10 }
+        },
+        {
+          "product": "Pacific Coffee Company",
+          "beacon": {
+            "proximityUUID": "A2DCA1E4-0607-4F37-9FF1-825237B278FE",
+            "major": 1213,
+            "minor": 14001,
+            "power": -12
+          },
+          "coordinate": { "x": 10, "y": 2, "z": 10 }
+        },
+        {
+          "product": "Tai Hing",
+          "beacon": {
+            "proximityUUID": "A2DCA1E4-0607-4F37-9FF1-825237B278FE",
+            "major": 1213,
+            "minor": 14101,
+            "power": -12
+          },
+          "coordinate": { "x": 12, "y": 2, "z": 10 }
+        },
+        {
+          "product": "UA Cinemas",
+          "beacon": {
+            "proximityUUID": "A2DCA1E4-0607-4F37-9FF1-825237B278FE",
+            "major": 1908,
+            "minor": 3003,
+            "power": -12
+          },
+          "coordinate": { "x": 2, "y": 6, "z": 11 }
+        },
+        {
+          "product": "AA Mini Store",
+          "beacon": {
+            "proximityUUID": "A2DCA1E4-0607-4F37-9FF1-825237B278FE",
+            "major": 214,
+            "minor": 2004,
+            "power": -12
+          },
+          "coordinate": { "x": 6, "y": 4, "z": 11 }
+        },
+        {
+          "product": "Kenting Tea House",
+          "beacon": {
+            "proximityUUID": "A2DCA1E4-0607-4F37-9FF1-825237B278FE",
+            "major": 1605,
+            "minor": 19001,
+            "power": -12
+          },
+          "coordinate": { "x": 12, "y": 8, "z": 11 }
+        },
+        {
+          "product": "Thai Orchids",
+          "beacon": {
+            "proximityUUID": "A2DCA1E4-0607-4F37-9FF1-825237B278FE",
+            "major": 1605,
+            "minor": 19101,
+            "power": -12
+          },
+          "coordinate": { "x": 12, "y": 6, "z": 11 }
+        },
+        {
+          "product": "California Pizza Kitchen",
+          "beacon": {
+            "proximityUUID": "A2DCA1E4-0607-4F37-9FF1-825237B278FE",
+            "major": 214,
+            "minor": 2104,
+            "power": -12
+          },
+          "coordinate": { "x": 12, "y": 4, "z": 11 }
+        },
+        {
+          "product": "Studio City Bar & Café",
+          "beacon": {
+            "proximityUUID": "A2DCA1E4-0607-4F37-9FF1-825237B278FE",
+            "major": 315,
+            "minor": 22101,
+            "power": -12
+          },
+          "coordinate": { "x": 6, "y": 2, "z": 11 }
+        },
+        {
+          "product": "Noir Chocolatier",
+          "beacon": {
+            "proximityUUID": "A2DCA1E4-0607-4F37-9FF1-825237B278FE",
+            "major": 1908,
+            "minor": 3001,
+            "power": -12
+          },
+          "coordinate": { "x": 8, "y": 4, "z": 11 }
+        },
+        {
+          "product": "mr.Laksa",
+          "beacon": {
+            "proximityUUID": "A2DCA1E4-0607-4F37-9FF1-825237B278FE",
+            "major": 315,
+            "minor": 22102,
+            "power": -12
+          },
+          "coordinate": { "x": 14, "y": 2, "z": 11 }
+        },
+        {
+          "product": "10th floor escalator",
+          "beacon": {
+            "proximityUUID": "A2DCA1E4-0607-4F37-9FF1-825237B278FE",
+            "major": 916,
+            "minor": 3001,
+            "power": -12
+          },
+          "coordinate": { "x": 6, "y": 6, "z": 10 }
+        },
+        {
+          "product": "general push notification",
+          "beacon": {
+            "proximityUUID": "A2DCA1E4-0607-4F37-9FF1-825237B278FE",
+            "major": 916,
+            "minor": 3101,
+            "power": -12
+          },
+          "coordinate": { "x": 0, "y": 0, "z": 0 }
+        }
+      ]
+    }
+  }
+}
