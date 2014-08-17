@@ -42,27 +42,27 @@
     NSDictionary *company = [self readInstallationFile];
     NSDictionary * locations = [company objectForKey:@"locations"];
     [locations enumerateKeysAndObjectsUsingBlock:^(id key, id location, BOOL *stop){
-        NSArray *installations = [location objectForKey:@"installations"];
+        NSDictionary *installations = [location objectForKey:@"installations"];
         NSDictionary *keyAndRegions = [self generateRegionKeyAndNearbyRegions:installations];
         [regionsNearby addEntriesFromDictionary:keyAndRegions];
     }];
     return regionsNearby;
 }
 
-- (NSArray *)mapDictionariesToInstallations:(NSArray *)installationsArray
+- (NSArray *)mapDictionariesToInstallations:(NSDictionary *)installationsDicitionary
 {
     NSMutableArray *installations = [NSMutableArray array];
-    for (NSDictionary *dictionary in installationsArray) {
+    [installationsDicitionary enumerateKeysAndObjectsUsingBlock:^(id key, id dictionary, BOOL *stop){
         LPInstallation *installation = [[LPInstallation alloc] initWithDictionary:dictionary];
         [installations addObject:installation];
-    }
+    }];
     return installations;
 }
 
-- (NSDictionary *)generateRegionKeyAndNearbyRegions:(NSArray *)installationsArray
+- (NSDictionary *)generateRegionKeyAndNearbyRegions:(NSDictionary *)installationsDictionary
 {
     NSMutableDictionary *keyAndRegions = [NSMutableDictionary dictionary];
-    NSArray *installations = [self mapDictionariesToInstallations:installationsArray];
+    NSArray *installations = [self mapDictionariesToInstallations:installationsDictionary];
     for (LPInstallation *installation in installations) {
         NSMutableArray *regionsNearby = [NSMutableArray array];
         for (LPInstallation *otherInstallation in installations) {
