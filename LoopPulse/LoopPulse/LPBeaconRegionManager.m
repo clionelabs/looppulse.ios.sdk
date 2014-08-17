@@ -15,6 +15,8 @@
     NSDictionary *beaconRegionsNearby;
 }
 
+@synthesize genericRegionsToMonitor = _genericRegionsToMonitor;
+
 - (id)init
 {
     self = [super init];
@@ -76,6 +78,30 @@
         [keyAndRegions setObject:regionsNearby forKey:installation.key];
     }
     return keyAndRegions;
+}
+
+- (NSArray *)genericRegionsToMonitor
+{
+    if (!_genericRegionsToMonitor) {
+        // TODO: This is inefficient. We should gather all the UUIDs in mapDictionariesToInstallations
+        NSMutableSet *uuids = [NSMutableSet set];
+        [beaconRegionsNearby enumerateKeysAndObjectsUsingBlock:^(id key, id regionsNearby, BOOL *stop){
+            for (CLBeaconRegion *beaconRegion in regionsNearby) {
+                [uuids addObject:beaconRegion.proximityUUID];
+            }
+        }];
+
+        // Create regions based on these unique UUIDs.
+        NSArray *uuidsArray = [NSArray arrayWithArray:[uuids allObjects]];
+        NSMutableArray *regions = [NSMutableArray arrayWithCapacity:[uuids count]];
+        [uuidsArray enumerateObjectsUsingBlock:^(NSUUID * uuid, NSUInteger index, BOOL *stop) {
+            NSString *identifier = [NSString stringWithFormat:@"LoopPulse-Generic-%d", (unsigned int)index];
+            CLBeaconRegion *region = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:identifier];
+            [regions addObject:region];
+        }];
+        _genericRegionsToMonitor = regions;
+    }
+    return _genericRegionsToMonitor;
 }
 
 - (NSArray *)beaconRegionsNearby:(CLBeaconRegion *)currentRegion

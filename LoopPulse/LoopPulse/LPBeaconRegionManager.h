@@ -11,10 +11,12 @@
 
 @interface LPBeaconRegionManager : NSObject
 
-// Both #regionsToMonitor returns list of regions which is sorted by
-// the most important to least, i.e.,
+// #regionsToMonitor and #genericRegionsToMonitor return a list of
+// regions which is sorted by the most important to least, i.e.,
 // Give preference to monitor regionsToMonitor[0] over regionsToMonitor[10]
 - (NSArray *)regionsToMonitor:(CLBeaconRegion *)enteredRegion;
 - (NSArray *)regionsToNotMonitor:(CLBeaconRegion *)exitedRegion;
+
+@property (nonatomic, readonly) NSArray *genericRegionsToMonitor;
 
 @end
