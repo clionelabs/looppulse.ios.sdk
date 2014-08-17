@@ -170,7 +170,7 @@
                 [self startMonitoringNearbyBeaconRegions:beaconRegion];
                 [self.dataStore logEvent:@"didEnterRegion" withBeaconRegion:beaconRegion atTime:[NSDate date]];
             } else {
-                [self.dataStore logEvent:@"didRangeBeacons" withBeaconRegion:beaconRegion atTime:[NSDate date]];
+                [self.dataStore logEvent:@"didRangeBeacons" withBeacon:beacon atTime:[NSDate date]];
             }
         }
     }
