@@ -32,7 +32,9 @@
     NSString* jsonPath = [[NSBundle mainBundle]pathForResource:@"megabox" ofType:@"json"];
     NSData *data = [NSData dataWithContentsOfFile:jsonPath];
     NSError *error = nil;
-    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:8 error:&error];
+    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data
+                                                         options:NSJSONReadingAllowFragments
+                                                           error:&error];
     if (error) NSLog(@"readInstallationFile: error: %@", error);
     return json;
 }
