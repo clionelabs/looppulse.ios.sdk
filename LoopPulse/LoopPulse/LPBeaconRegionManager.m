@@ -68,9 +68,6 @@
     for (LPInstallation *installation in installations) {
         NSMutableArray *regionsNearby = [NSMutableArray array];
         for (LPInstallation *otherInstallation in installations) {
-            if ([installation isEqual:otherInstallation]) {
-                continue;
-            }
             if ([installation isNearby:otherInstallation]) {
                 [regionsNearby addObject:otherInstallation.beaconRegion];
             }

@@ -37,10 +37,6 @@
 
 - (NSArray *)beaconRegions
 {
-//    // Estimote
-//    NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:@"B9407F30-F5F8-466E-AFF9-25556B57FE6D"];
-//    CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid
-//                                                                      identifier:@"LoopPulse-Generic"];
     return beaconRegionManager.genericRegionsToMonitor;
 }
 
