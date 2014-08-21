@@ -119,6 +119,13 @@
     [self stopMonitoringAndRangingForBeaconRegions:regions];
 }
 
+- (BOOL)sendBeaconEventsWithUnknownProximity
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSNumber *send = [defaults objectForKey:@"sendBeaconEventWithUnknownProximity"];
+    return [send boolValue];
+}
+
 - (void)locationManager:(CLLocationManager *)manager didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region
 {
     if (state==CLRegionStateInside) {
@@ -158,7 +165,12 @@
 - (void)locationManager:(CLLocationManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region
 {
     if ([region isLoopPulseBeaconRegion]) {
-        for (CLBeacon *beacon in [self filterByKnownProximities:beacons]) {
+        NSArray *filteredBeacons = beacons;
+        if (![self sendBeaconEventsWithUnknownProximity]) {
+            filteredBeacons = [self filterByKnownProximities:beacons];
+        }
+
+        for (CLBeacon *beacon in filteredBeacons) {
             // If we range a specific beacon without a match from currently monitored regions,
             // then we know we have just entered a generic beacon region.
             CLBeaconRegion *beaconRegion = [beacon beaconRegion];
