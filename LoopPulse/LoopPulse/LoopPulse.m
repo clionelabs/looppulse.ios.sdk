@@ -33,14 +33,14 @@
 {
     self = [super init];
     if (self) {
+        [self setDefaults];
+
         _token = token;
         _visitor = [[LPVisitor alloc] initWithDataStore:_dataStore];
         _firebaseBaseUrl = @"https://looppulse-megabox.firebaseio.com";
         _dataStore = [[LPDataStore alloc] initWithToken:token baseUrl:_firebaseBaseUrl andVisitor:_visitor];
         _locationManager = [[LPLocationManager alloc] initWithDataStore:_dataStore];
         _engagementManager = [[LPEngagementManager alloc] initWithDataStore:_dataStore];
-
-        [self setDefaults];
 
         // TODO: we may want to pass these keys to LPEngagementManager as
         // these are the only engagement related calls outside.
@@ -57,6 +57,11 @@
 {
     [LoopPulse.defaults setBool:false
                          forKey:@"onlySendBeaconEventsWithKnownProximity"];
+
+    // TODO: Get these from Loop Pulse server
+    NSURL *configurationURL = [NSURL URLWithString:@"https://looppulse-config.firebaseio.com/companies/-JUw0gTrsmeSBsbqeGif.json"];
+    [LoopPulse.defaults setURL:configurationURL
+                        forKey:@"configurationURL"];
 
     [LoopPulse.defaults synchronize];
 }
