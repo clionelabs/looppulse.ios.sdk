@@ -20,7 +20,6 @@
 @property (readonly, strong) LPLocationManager *locationManager;
 @property (readonly, strong) LPEngagementManager *engagementManager;
 @property (readonly, strong) NSString *firebaseBaseUrl;
-
 @end
 
 @interface LPVisitor ()
@@ -41,9 +40,9 @@
         }
 
         _token = token;
+        _firebaseBaseUrl = @"https://looppulse-dev-thomas.firebaseio.com";
+        _dataStore = [[LPDataStore alloc] initWithToken:token andBaseUrl:_firebaseBaseUrl];
         _visitor = [[LPVisitor alloc] initWithDataStore:_dataStore];
-        _firebaseBaseUrl = @"https://looppulse-megabox.firebaseio.com";
-        _dataStore = [[LPDataStore alloc] initWithToken:token baseUrl:_firebaseBaseUrl andVisitor:_visitor];
         _locationManager = [[LPLocationManager alloc] initWithDataStore:_dataStore];
         _engagementManager = [[LPEngagementManager alloc] initWithDataStore:_dataStore];
     }
@@ -54,7 +53,7 @@
 {
     NSDictionary *response = @{@"authenticated":@true,
                                @"defaults":@{@"onlySendBeaconEventsWithKnownProximity":@false,
-                                             @"configurationURL":@"https://looppulse-config.firebaseio.com/companies/-JUw0gTrsmeSBsbqeGif.json",
+                                             @"configurationURL":@"https://looppulse-config-thomas.firebaseio.com/companies/-JUw0gTrsmeSBsbqeGif.json",
                                              @"parse": @{@"applicationId":@"dP9yJQI58giCirVVIYeVd1YobFbIujv5wDFWA8WX",
                                                          @"clientKey":@"hnz5gkWZ45cJkXf8yp2huHc89NG55O1ajjHSrwxh"}
                                              }

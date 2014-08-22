@@ -8,28 +8,28 @@
 
 #import "LPDataStore.h"
 #import "LPVisitor.h"
+#import "LoopPulsePrivate.h"
 
 @interface LPDataStore ()
 @property (readonly, retain) NSString *token;
-@property (nonatomic, retain) LPVisitor *visitor;
 @end
 
 @implementation LPDataStore
 
-- (id)initWithToken:(NSString *)token baseUrl:(NSString *)baseUrl andVisitor:(LPVisitor *)visitor
+- (id)initWithToken:(NSString *)token andBaseUrl:(NSString *)baseUrl
 {
     self = [super init];
     if (self) {
         _token = token;
         _firebase = [[Firebase alloc] initWithUrl:baseUrl];
-        _visitor = visitor;
     }
     return self;
 }
 
 - (NSUUID *)visitorUUID
 {
-    return self.visitor.uuid;
+    NSString *uuidString = [LoopPulse.defaults objectForKey:@"visitorUUID"];
+    return [[NSUUID alloc] initWithUUIDString:uuidString];
 }
 
 @end

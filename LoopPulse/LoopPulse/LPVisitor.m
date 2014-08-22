@@ -8,10 +8,10 @@
 
 #import "LPVisitor.h"
 #import "LPDataStore+LPVisitor.h"
+#import "LoopPulsePrivate.h"
 
 @interface LPVisitor ()
 @property (readonly, retain) LPDataStore *dataStore;
-- (id)initWithDataStore:(LPDataStore *)dataStore;
 @end
 
 @implementation LPVisitor
@@ -22,19 +22,9 @@
     if (self) {
         _uuid = [[UIDevice currentDevice] identifierForVendor];
         _dataStore = dataStore;
-        [self register];
+        [LoopPulse.defaults setObject:[_uuid UUIDString] forKey:@"visitorUUID"];
     }
     return self;
-}
-
-- (void)register
-{
-    [self.dataStore registerVisitor:self.uuid];
-}
-
-- (void)identifyWithExternalID:(NSString *)externalID
-{
-    [self.dataStore identifyVisitor:self.uuid withExternalID:externalID];
 }
 
 @end

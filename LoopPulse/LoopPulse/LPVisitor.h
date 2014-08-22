@@ -12,6 +12,4 @@
 
 @property (readonly, retain) NSUUID *uuid;
 
-- (void)identifyWithExternalID:(NSString *)externalID;
-
 @end
