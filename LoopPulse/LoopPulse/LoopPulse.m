@@ -46,8 +46,6 @@
         _dataStore = [[LPDataStore alloc] initWithToken:token baseUrl:_firebaseBaseUrl andVisitor:_visitor];
         _locationManager = [[LPLocationManager alloc] initWithDataStore:_dataStore];
         _engagementManager = [[LPEngagementManager alloc] initWithDataStore:_dataStore];
-
-        [self initPush];
     }
     return self;
 }
@@ -92,15 +90,6 @@
     [LoopPulse.defaults setObject:parseDefaults forKey:@"parse"];
 
     [LoopPulse.defaults synchronize];
-}
-
-- (void)initPush
-{
-    NSDictionary *parseDefaults = [LoopPulse.defaults objectForKey:@"parse"];
-    NSString *applicationId = [parseDefaults objectForKey:@"applicationId"];
-    NSString *clienKey = [parseDefaults objectForKey:@"clientKey"];
-
-    [Parse setApplicationId:applicationId clientKey:clienKey];
 }
 
 - (void)startLocationMonitoring
