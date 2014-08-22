@@ -26,6 +26,7 @@
 		244968751993C85000EBDF2C /* LPDataStore+LPEngagementManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 244968731993C85000EBDF2C /* LPDataStore+LPEngagementManager.m */; };
 		2468336E199DC90500429B13 /* CLBeacon+LoopPulseHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 2468336C199DC90500429B13 /* CLBeacon+LoopPulseHelpers.h */; };
 		2468336F199DC90500429B13 /* CLBeacon+LoopPulseHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 2468336D199DC90500429B13 /* CLBeacon+LoopPulseHelpers.m */; };
+		247AB54E19A6F58B0065488B /* LoopPulsePrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 247AB54D19A6F58B0065488B /* LoopPulsePrivate.h */; };
 		2483A5A4199DF9590003B8FA /* LPBeaconRegionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 2483A5A2199DF9590003B8FA /* LPBeaconRegionManager.h */; };
 		2483A5A5199DF9590003B8FA /* LPBeaconRegionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2483A5A3199DF9590003B8FA /* LPBeaconRegionManager.m */; };
 		2483A5AC199F5C780003B8FA /* LPInstallation.h in Headers */ = {isa = PBXBuildFile; fileRef = 2483A5AA199F5C780003B8FA /* LPInstallation.h */; };
@@ -91,6 +92,7 @@
 		244968731993C85000EBDF2C /* LPDataStore+LPEngagementManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "LPDataStore+LPEngagementManager.m"; sourceTree = "<group>"; };
 		2468336C199DC90500429B13 /* CLBeacon+LoopPulseHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLBeacon+LoopPulseHelpers.h"; sourceTree = "<group>"; };
 		2468336D199DC90500429B13 /* CLBeacon+LoopPulseHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLBeacon+LoopPulseHelpers.m"; sourceTree = "<group>"; };
+		247AB54D19A6F58B0065488B /* LoopPulsePrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopPulsePrivate.h; sourceTree = "<group>"; };
 		2483A5A2199DF9590003B8FA /* LPBeaconRegionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPBeaconRegionManager.h; sourceTree = "<group>"; };
 		2483A5A3199DF9590003B8FA /* LPBeaconRegionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPBeaconRegionManager.m; sourceTree = "<group>"; };
 		2483A5AA199F5C780003B8FA /* LPInstallation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPInstallation.h; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 			children = (
 				F42E86E1192DF6A1007EDC30 /* LoopPulse.m */,
 				F42E86E2192DF6A1007EDC30 /* LoopPulse.h */,
+				247AB54D19A6F58B0065488B /* LoopPulsePrivate.h */,
 				F42E86D7192DF6A1007EDC30 /* LPVisitor.m */,
 				F42E86D8192DF6A1007EDC30 /* LPVisitor.h */,
 				F42E86D9192DF6A1007EDC30 /* LPLocationManager.m */,
@@ -266,6 +269,7 @@
 				F42E86FB192DF808007EDC30 /* LoopPulse.h in Headers */,
 				2483A5AC199F5C780003B8FA /* LPInstallation.h in Headers */,
 				F49DC1DE19664F94008D7EEB /* LPVisitor.h in Headers */,
+				247AB54E19A6F58B0065488B /* LoopPulsePrivate.h in Headers */,
 				24A01B07199B5C0700EB7C46 /* CLBeaconRegion+LoopPulseHelpers.h in Headers */,
 				2468336E199DC90500429B13 /* CLBeacon+LoopPulseHelpers.h in Headers */,
 			);

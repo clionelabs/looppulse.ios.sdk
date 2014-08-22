@@ -12,6 +12,7 @@
 #import "CLBeacon+LoopPulseHelpers.h"
 #import "CLBeaconRegion+LoopPulseHelpers.h"
 #import "LPDataStore+LPLocationManager.h"
+#import "LoopPulsePrivate.h"
 
 @interface LPLocationManager ()
 @property (readonly) NSArray *beaconRegions;
@@ -119,11 +120,10 @@
     [self stopMonitoringAndRangingForBeaconRegions:regions];
 }
 
-- (BOOL)sendBeaconEventsWithUnknownProximity
+- (BOOL)shouldOnlySendBeaconEventsWithKnownProximity
 {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSNumber *send = [defaults objectForKey:@"sendBeaconEventWithUnknownProximity"];
-    return [send boolValue];
+    NSUserDefaults *defaults = LoopPulse.defaults;
+    return [defaults boolForKey:@"onlySendBeaconEventsWithKnownProximity"];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region
@@ -166,7 +166,7 @@
 {
     if ([region isLoopPulseBeaconRegion]) {
         NSArray *filteredBeacons = beacons;
-        if (![self sendBeaconEventsWithUnknownProximity]) {
+        if ([self shouldOnlySendBeaconEventsWithKnownProximity]) {
             filteredBeacons = [self filterByKnownProximities:beacons];
         }
 

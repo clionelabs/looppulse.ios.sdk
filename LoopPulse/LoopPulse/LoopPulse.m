@@ -7,6 +7,7 @@
 //
 
 #import "LoopPulse.h"
+#import "LoopPulsePrivate.h"
 #import "LPVisitor.h"
 #import "LPLocationManager.h"
 #import "LPDataStore.h"
@@ -51,19 +52,13 @@
     return self;
 }
 
-- (NSUserDefaults *)defaults
-{
-    return [NSUserDefaults standardUserDefaults];
-}
-
 // Create and set user defaults
 - (void)setDefaults
 {
-    NSNumber *sendBeaconEventWithUnknownProximity = [NSNumber numberWithBool:true];
-    [[self defaults] setObject:sendBeaconEventWithUnknownProximity
-                        forKey:@"sendBeaconEventWithUnknownProximity"];
+    [LoopPulse.defaults setBool:false
+                         forKey:@"onlySendBeaconEventsWithKnownProximity"];
 
-    [[self defaults] synchronize];
+    [LoopPulse.defaults synchronize];
 }
 
 - (void)startLocationMonitoring
@@ -100,5 +95,11 @@
     [self.locationManager startRangingBeaconsInAllRegions];
 }
 
+#pragma mark Private Class Methods
+
++ (NSUserDefaults *)defaults
+{
+    return [NSUserDefaults standardUserDefaults];
+}
 
 @end
