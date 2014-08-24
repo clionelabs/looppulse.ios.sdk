@@ -11,6 +11,7 @@
 #import "LPDataStore+LPEngagementManager.h"
 #import "LoopPulsePrivate.h"
 #import <Parse/Parse.h>
+#import "LPEngagementViewController.h"
 
 @interface LPEngagementManager ()
 @property (nonatomic, retain) LPDataStore *dataStore;
@@ -62,7 +63,22 @@
 
 - (void)didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-    [PFPush handlePush:userInfo];
-    [self.dataStore logEvent:@"didReceiveRemoteNotification" withEngagement:userInfo atTime:[NSDate date]];
+    [self presentEngagement:userInfo];
+
+    [self logEngagement:userInfo];
+}
+
+- (void)logEngagement:(NSDictionary *)engagementInfo
+{
+    [self.dataStore logEvent:@"didReceiveRemoteNotification"
+              withEngagement:engagementInfo
+                      atTime:[NSDate date]];
+    NSLog(@"logEngagement: %@", engagementInfo);
+}
+
+- (void)presentEngagement:(NSDictionary *)engagementInfo
+{
+    LPEngagementViewController *vc = [[LPEngagementViewController alloc] initWithEngagement:engagementInfo];
+    [vc presentEngagement];
 }
 @end
