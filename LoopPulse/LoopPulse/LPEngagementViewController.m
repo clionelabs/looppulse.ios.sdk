@@ -9,16 +9,16 @@
 #import "LPEngagementViewController.h"
 
 @interface LPEngagementViewController ()
-@property (nonatomic, retain) NSDictionary *engagementInfo;
+@property (nonatomic, retain) LPEngagement *engagement;
 @end
 
 @implementation LPEngagementViewController
 
-- (id)initWithEngagement:(NSDictionary *)engagementInfo
+- (id)initWithEngagement:(LPEngagement *)engagement
 {
     self = [super init];
     if (self) {
-        _engagementInfo = engagementInfo;
+        _engagement = engagement;
     }
     return self;
 }

@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LPEngagement.h"
 
 @interface LPEngagementViewController : UIViewController <UIWebViewDelegate>
 
-- (id)initWithEngagement:(NSDictionary *)engagementInfo;
+- (id)initWithEngagement:(LPEngagement *)engagement;
 - (void)presentEngagement;
 
 @end
