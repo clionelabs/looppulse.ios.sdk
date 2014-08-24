@@ -23,40 +23,35 @@
     return self;
 }
 
+- (void)loadView
+{
+    // TODO: encapsulate in LPEngagementView
+    CGRect appFrame = [[UIScreen mainScreen] applicationFrame];
+    // TODO: Should handle status bar properly.
+    // https://developer.apple.com/library/ios/qa/qa1797/_index.html#//apple_ref/doc/uid/DTS40013765
+    UIWebView *engagementView = [[UIWebView alloc] initWithFrame:appFrame];
+    engagementView.delegate = self;
+    engagementView.scalesPageToFit = YES;
+    engagementView.scrollView.scrollEnabled = NO;
+    engagementView.scrollView.bounces = NO;
+
+    NSURL *url = [NSURL URLWithString:@"http://www.apple.com"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [engagementView loadRequest:request];
+
+    self.view = engagementView;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its
-
-    CGRect appFrame = [[UIScreen mainScreen] applicationFrame];
-    UIWebView *webView = [[UIWebView alloc] initWithFrame:appFrame];
-//    NSLog(@"appFrame: x %d, y %d, w %d h %d",
-//          (int)appFrame.origin.x,
-//          (int)appFrame.origin.y,
-//          (int)appFrame.size.width,
-//          (int)appFrame.size.height);
-//    UIWebView *webView = [[UIWebView alloc] init];
-    [webView setAutoresizesSubviews:UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth];
-    webView.delegate = self;
-
-    NSURL *url = [NSURL URLWithString:@"http://www.apple.com"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    [webView loadRequest:request];
-
-    [self.view addSubview:webView];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)presentEngagement
-{
-    UIWindow *window = [[UIApplication sharedApplication] keyWindow];
-    UIViewController *rootVC = window.rootViewController;
-    [rootVC presentViewController:self animated:YES completion:nil];
 }
 
 - (void)webViewDidStartLoad:(UIWebView *)webView

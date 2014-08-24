@@ -12,6 +12,5 @@
 @interface LPEngagementViewController : UIViewController <UIWebViewDelegate>
 
 - (id)initWithEngagement:(LPEngagement *)engagement;
-- (void)presentEngagement;
 
 @end

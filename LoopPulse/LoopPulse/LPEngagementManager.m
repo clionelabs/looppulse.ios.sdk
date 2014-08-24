@@ -66,21 +66,25 @@
 {
     LPEngagement *engagement = [[LPEngagement alloc] initWithPushPayload:userInfo];
     [self presentEngagement:engagement];
-
-    [self logEngagement:userInfo];
 }
 
-- (void)logEngagement:(NSDictionary *)engagementInfo
+- (void)logEngagement:(LPEngagement *)engagement
 {
     [self.dataStore logEvent:@"didReceiveRemoteNotification"
-              withEngagement:engagementInfo
+              withEngagement:engagement
                       atTime:[NSDate date]];
-    NSLog(@"logEngagement: %@", engagementInfo);
 }
 
 - (void)presentEngagement:(LPEngagement *)engagement
 {
-    LPEngagementViewController *vc = [[LPEngagementViewController alloc] initWithEngagement:engagement];
-    [vc presentEngagement];
+    UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+    UIViewController *rootVC = window.rootViewController;
+    LPEngagementViewController *engagementVC = [[LPEngagementViewController alloc] initWithEngagement:engagement];
+    [rootVC presentViewController:engagementVC
+                         animated:YES
+                       completion:^(void){
+                           [self logEngagement:engagement];
+                       }
+     ];
 }
 @end

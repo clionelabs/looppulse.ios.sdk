@@ -9,7 +9,6 @@
 #import "LPEngagement.h"
 
 @interface LPEngagement ()
-@property (nonatomic, retain) NSDictionary *payload;
 @end
 
 @implementation LPEngagement

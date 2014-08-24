@@ -7,7 +7,8 @@
 //
 
 #import "LPDataStore.h"
+#import "LPEngagement.h"
 
 @interface LPDataStore (LPEngagementManager)
-- (void)logEvent:(NSString *)eventType withEngagement:(NSDictionary *)engagement atTime:(NSDate *)createdAt;
+- (void)logEvent:(NSString *)eventType withEngagement:(LPEngagement *)engagement atTime:(NSDate *)createdAt;
 @end
