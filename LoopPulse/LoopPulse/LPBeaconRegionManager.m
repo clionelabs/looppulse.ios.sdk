@@ -9,6 +9,7 @@
 #import "LPBeaconRegionManager.h"
 #import "CLBeaconRegion+LoopPulseHelpers.h"
 #import "LPInstallation.h"
+#import "LoopPulsePrivate.h"
 
 @implementation LPBeaconRegionManager {
     NSMutableDictionary *monitoredBeaconRegionKeysAndCounts;
@@ -29,8 +30,8 @@
 
 - (NSDictionary *)readInstallationFile
 {
-    NSString* jsonPath = [[NSBundle mainBundle]pathForResource:@"megabox" ofType:@"json"];
-    NSData *data = [NSData dataWithContentsOfFile:jsonPath];
+    NSURL *configurationURL = [LoopPulse.defaults URLForKey:@"configurationURL"];
+    NSData *data = [NSData dataWithContentsOfURL:configurationURL];
     NSError *error = nil;
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data
                                                          options:NSJSONReadingAllowFragments

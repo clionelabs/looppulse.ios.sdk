@@ -29,34 +29,65 @@
 
 @implementation LoopPulse
 
-- (id)initWithToken:(NSString *)token
+- (id)initWithCompanyId:(NSString *)companyId withToken:(NSString *)token
 {
     self = [super init];
     if (self) {
+        BOOL authenticated = [self authenticateAndSetDefaults:companyId
+                                                    withToken:token];
+        // TODO: handle failed authentication more gracefully
+        if (!authenticated) {
+            return nil;
+        }
+
         _token = token;
         _visitor = [[LPVisitor alloc] initWithDataStore:_dataStore];
         _firebaseBaseUrl = @"https://looppulse-megabox.firebaseio.com";
         _dataStore = [[LPDataStore alloc] initWithToken:token baseUrl:_firebaseBaseUrl andVisitor:_visitor];
         _locationManager = [[LPLocationManager alloc] initWithDataStore:_dataStore];
         _engagementManager = [[LPEngagementManager alloc] initWithDataStore:_dataStore];
-
-        [self setDefaults];
-
-        // TODO: we may want to pass these keys to LPEngagementManager as
-        // these are the only engagement related calls outside.
-        [Parse setApplicationId:@"dP9yJQI58giCirVVIYeVd1YobFbIujv5wDFWA8WX"
-                      clientKey:@"hnz5gkWZ45cJkXf8yp2huHc89NG55O1ajjHSrwxh"];
-
-
     }
     return self;
 }
 
-// Create and set user defaults
-- (void)setDefaults
+- (NSDictionary *)authenticate:(NSString *)companyId withToken:(NSString *)token
 {
-    [LoopPulse.defaults setBool:false
+    NSDictionary *response = @{@"authenticated":@true,
+                               @"defaults":@{@"onlySendBeaconEventsWithKnownProximity":@false,
+                                             @"configurationURL":@"https://looppulse-config.firebaseio.com/companies/-JUw0gTrsmeSBsbqeGif.json",
+                                             @"parse": @{@"applicationId":@"dP9yJQI58giCirVVIYeVd1YobFbIujv5wDFWA8WX",
+                                                         @"clientKey":@"hnz5gkWZ45cJkXf8yp2huHc89NG55O1ajjHSrwxh"}
+                                             }
+                               };
+    return response;
+}
+
+- (BOOL)authenticateAndSetDefaults:(NSString *)companyId withToken:(NSString *)token
+{
+    NSDictionary *response = [self authenticate:companyId withToken:token];
+    BOOL authenticated = [[response objectForKey:@"authenticated"] boolValue];
+    if (!authenticated) {
+        return false;
+    }
+
+    [self setDefaults:[response objectForKey:@"defaults"]];
+    return true;
+}
+
+// Create and set user defaults
+- (void)setDefaults:(NSDictionary *)defaults
+{
+    BOOL onlySendKnown = [[defaults objectForKey:@"onlySendBeaconEventsWithKnownProximity"] boolValue];
+    [LoopPulse.defaults setBool:onlySendKnown
                          forKey:@"onlySendBeaconEventsWithKnownProximity"];
+
+    NSString *urlString = [defaults objectForKey:@"configurationURL"];
+    NSURL *configurationURL = [NSURL URLWithString:urlString];
+    [LoopPulse.defaults setURL:configurationURL
+                        forKey:@"configurationURL"];
+
+    NSDictionary *parseDefaults = [defaults objectForKey:@"parse"];
+    [LoopPulse.defaults setObject:parseDefaults forKey:@"parse"];
 
     [LoopPulse.defaults synchronize];
 }

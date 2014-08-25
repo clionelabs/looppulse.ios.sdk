@@ -9,6 +9,7 @@
 #import "LPEngagementManager.h"
 #import "LPVisitor.h"
 #import "LPDataStore+LPEngagementManager.h"
+#import "LoopPulsePrivate.h"
 #import <Parse/Parse.h>
 
 @interface LPEngagementManager ()
@@ -22,8 +23,18 @@
     self = [super init];
     if (self) {
         _dataStore = dataStore;
+        [self initPush];
     }
     return self;
+}
+
+- (void)initPush
+{
+    NSDictionary *parseDefaults = [LoopPulse.defaults objectForKey:@"parse"];
+    NSString *applicationId = [parseDefaults objectForKey:@"applicationId"];
+    NSString *clienKey = [parseDefaults objectForKey:@"clientKey"];
+
+    [Parse setApplicationId:applicationId clientKey:clienKey];
 }
 
 - (void)registerForRemoteNotificationTypesForApplication:(UIApplication *)application
