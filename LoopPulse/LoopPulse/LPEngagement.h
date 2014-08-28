@@ -11,6 +11,7 @@
 @interface LPEngagement : NSObject
 
 - (id)initWithPushPayload:(NSDictionary *)dictionary;
-@property (nonatomic, readonly) NSDictionary *payload;
 
+@property (nonatomic, readonly) NSDictionary *payload;
+@property (nonatomic, readonly) NSURL *engagementURL;
 @end

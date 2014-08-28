@@ -22,4 +22,10 @@
     return self;
 }
 
+- (NSURL *)engagementURL
+{
+    NSString *url = [self.payload objectForKey:@"engagement_url"];
+    return [NSURL URLWithString:url];
+}
+
 @end

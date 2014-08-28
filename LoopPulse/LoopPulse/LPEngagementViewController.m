@@ -54,7 +54,7 @@
         engagementView.scrollView.scrollEnabled = NO;
         engagementView.scrollView.bounces = NO;
 
-        NSURL *url = [NSURL URLWithString:@"http://www.apple.com"];
+        NSURL *url = self.engagement.engagementURL;
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
         [engagementView loadRequest:request];
         [self.view addSubview:engagementView];
