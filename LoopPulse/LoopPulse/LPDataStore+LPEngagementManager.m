@@ -7,7 +7,6 @@
 //
 
 #import "LPDataStore+LPEngagementManager.h"
-#import "LPVisitor.h"
 
 @implementation LPDataStore (LPEngagementManager)
 
@@ -16,13 +15,13 @@
     return [self.firebase childByAppendingPath:@"engagement_events"];
 }
 
-- (void)logEvent:(NSString *)eventType withEngagement:(NSDictionary *)engagement atTime:(NSDate *)createdAt
+- (void)logEvent:(NSString *)eventType withEngagement:(LPEngagement *)engagement atTime:(NSDate *)createdAt
 {
     NSNumber *priority = @([createdAt timeIntervalSince1970]);
     NSDictionary *eventInfo = @{@"type": eventType,
                                 @"visitor_uuid": [self.visitorUUID UUIDString],
                                 @"created_at": [createdAt description]};
-    NSMutableDictionary *engagementInfo = [[NSMutableDictionary alloc] initWithDictionary:engagement];
+    NSMutableDictionary *engagementInfo = [[NSMutableDictionary alloc] initWithDictionary:engagement.payload];
     [engagementInfo addEntriesFromDictionary:eventInfo];
 
     Firebase *engagementRef = [[self engagementEventsRef] childByAutoId];

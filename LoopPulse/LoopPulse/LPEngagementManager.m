@@ -11,6 +11,8 @@
 #import "LPDataStore+LPEngagementManager.h"
 #import "LoopPulsePrivate.h"
 #import <Parse/Parse.h>
+#import "LPEngagementViewController.h"
+#import "LPEngagement.h"
 
 @interface LPEngagementManager ()
 @property (nonatomic, retain) LPDataStore *dataStore;
@@ -44,19 +46,45 @@
                                                     UIRemoteNotificationTypeSound];
 }
 
+- (NSString *)pushChannelName
+{
+    // Can't just use UUID beacause channel name can't start with a
+    // https://github.com/clionelabs/looppulse.ios.sdk/issues/3#issuecomment-48022164
+    return [@"VisitorUUID_" stringByAppendingString: [self.dataStore.visitorUUID UUIDString]];
+}
+
 - (void)didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
     [currentInstallation setDeviceTokenFromData:deviceToken];
 
-    NSString *visitorUUID = [@"VisitorUUID_" stringByAppendingString: [self.dataStore.visitorUUID UUIDString]];
-    [currentInstallation addUniqueObject:visitorUUID forKey:@"channels"];
+    [currentInstallation addUniqueObject:[self pushChannelName] forKey:@"channels"];
     [currentInstallation saveInBackground];
 }
 
 - (void)didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-    [PFPush handlePush:userInfo];
-    [self.dataStore logEvent:@"didReceiveRemoteNotification" withEngagement:userInfo atTime:[NSDate date]];
+    LPEngagement *engagement = [[LPEngagement alloc] initWithPushPayload:userInfo];
+    [self presentEngagement:engagement];
+}
+
+- (void)logEngagement:(LPEngagement *)engagement
+{
+    [self.dataStore logEvent:@"didReceiveRemoteNotification"
+              withEngagement:engagement
+                      atTime:[NSDate date]];
+}
+
+- (void)presentEngagement:(LPEngagement *)engagement
+{
+    UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+    UIViewController *rootVC = window.rootViewController;
+    LPEngagementViewController *engagementVC = [[LPEngagementViewController alloc] initWithEngagement:engagement];
+    [rootVC presentViewController:engagementVC
+                         animated:YES
+                       completion:^(void){
+                           [self logEngagement:engagement];
+                       }
+     ];
 }
 @end
