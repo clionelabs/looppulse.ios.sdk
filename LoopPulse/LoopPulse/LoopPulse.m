@@ -37,9 +37,9 @@
         _token = token;
 
         NSDictionary *response = [self authenticate:applicationId withToken:token];
-        BOOL authenicated = [self isAuthenticated:response];
+        BOOL authenticated = [self isAuthenticated:response];
         // TODO: handle failed authentication more gracefully
-        if (!authenicated) {
+        if (!authenticated) {
             return nil;
         }
 
@@ -57,19 +57,41 @@
 
 - (NSDictionary *)authenticate:(NSString *)applicationId withToken:(NSString *)token
 {
-    NSDictionary *response = @{@"authenticated":@true,
-                               @"system":
-                                   @{@"onlySendBeaconEventsWithKnownProximity":@false,
-                                     @"configurationJSON":@"https://looppulse-config.firebaseio.com/companies/-JUw0gTrsmeSBsbqeGif.json",
-                                     @"firebase":
-                                         @{@"beacon_events": @"https://looppulse-megabox.firebaseio.com/companies/sY35Akn2TGaTnfmBX/beacon_events",
-                                           @"engagement_events": @"https://looppulse-megabox.firebaseio.com/companies/sY35Akn2TGaTnfmBX/engagement_events"},
-                                     @"parse":
-                                         @{@"applicationId":@"dP9yJQI58giCirVVIYeVd1YobFbIujv5wDFWA8WX",
-                                           @"clientKey":@"hnz5gkWZ45cJkXf8yp2huHc89NG55O1ajjHSrwxh"}
-                                    }
-                               };
-    return response;
+    NSString *url = [@"https://looppulse-megabox.meteor.com/api/authenticate/applications/" stringByAppendingString:applicationId];
+    NSURL *authenticationURL = [NSURL URLWithString:url];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:authenticationURL];
+    [request setValue:token forHTTPHeaderField:@"x-auth-token"];
+
+    NSURLResponse *response;
+    NSError *error;
+    NSData *data = [NSURLConnection sendSynchronousRequest:request
+                                         returningResponse:&response
+                                                     error:&error];
+    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data
+                                                         options:NSJSONReadingAllowFragments
+                                                           error:&error];
+    return json;
+
+//    [NSURLConnection sendAsynchronousRequest:request
+//                                       queue:[NSOperationQueue mainQueue]
+//                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+//                               NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data
+//                                                                                    options:NSJSONReadingAllowFragments
+//                                                                                      error:&error];
+//                           }];
+//    NSDictionary *response = @{@"authenticated":@true,
+//                               @"system":
+//                                   @{@"onlySendBeaconEventsWithKnownProximity":@false,
+//                                     @"configurationJSON":@"https://looppulse-config.firebaseio.com/companies/-JVf6gdZ4cxDz4ykJnlQ.json",
+//                                     @"firebase":
+//                                         @{@"beacon_events": @"https://looppulse-megabox.firebaseio.com/companies/sY35Akn2TGaTnfmBX/beacon_events",
+//                                           @"engagement_events": @"https://looppulse-megabox.firebaseio.com/companies/sY35Akn2TGaTnfmBX/engagement_events"},
+//                                     @"parse":
+//                                         @{@"applicationId":@"dP9yJQI58giCirVVIYeVd1YobFbIujv5wDFWA8WX",
+//                                           @"clientKey":@"hnz5gkWZ45cJkXf8yp2huHc89NG55O1ajjHSrwxh"}
+//                                    }
+//                               };
+//    return response;
 }
 
 - (BOOL)isAuthenticated:(NSDictionary *)response
