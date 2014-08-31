@@ -35,63 +35,50 @@
     if (self) {
         _applicationId = applicationId;
         _token = token;
-
-        NSDictionary *response = [self authenticate:applicationId withToken:token];
-        BOOL authenticated = [self isAuthenticated:response];
-        // TODO: handle failed authentication more gracefully
-        if (!authenticated) {
-            return nil;
-        }
-
-        // Authenticated so we can set defaults from the response.
-        [self setDefaults:response];
-
-        _dataStore = [[LPDataStore alloc] initWithToken:token
-                                                andURLs:[self firebaseURLs]];
-        _visitor = [[LPVisitor alloc] initWithDataStore:_dataStore];
-        _locationManager = [[LPLocationManager alloc] initWithDataStore:_dataStore];
-        _engagementManager = [[LPEngagementManager alloc] initWithDataStore:_dataStore];
+        _isAuthenticated = false;
     }
     return self;
 }
 
-- (NSDictionary *)authenticate:(NSString *)applicationId withToken:(NSString *)token
+- (void)authenticate:(void (^)(void))successHandler
 {
-    NSString *url = [@"https://looppulse-megabox.meteor.com/api/authenticate/applications/" stringByAppendingString:applicationId];
+    NSString *url = [@"https://looppulse-megabox.meteor.com/api/authenticate/applications/" stringByAppendingString:self.applicationId];
     NSURL *authenticationURL = [NSURL URLWithString:url];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:authenticationURL];
-    [request setValue:token forHTTPHeaderField:@"x-auth-token"];
+    [request setValue:self.token forHTTPHeaderField:@"x-auth-token"];
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *urlResonse, NSData *data, NSError *error) {
+                               if (error!=nil) {
+                                   NSLog(@"authentication error: %@", error);
+                               } else {
+                                   NSDictionary *response = [NSJSONSerialization JSONObjectWithData:data
+                                                                                        options:NSJSONReadingAllowFragments
+                                                                                          error:&error];
+                                   if (error!=nil) {
+                                       NSLog(@"JSON serialization error: %@", error);
+                                   } else {
+                                       // Set our defaults before calling callback.
+                                       if ([self isAuthenticated:response]) {
+                                           _isAuthenticated = true;
+                                           [self initFromDefaults:response];
 
-    NSURLResponse *response;
-    NSError *error;
-    NSData *data = [NSURLConnection sendSynchronousRequest:request
-                                         returningResponse:&response
-                                                     error:&error];
-    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data
-                                                         options:NSJSONReadingAllowFragments
-                                                           error:&error];
-    return json;
+                                           successHandler();
+                                       }
+                                   }
+                               }
+                           }];
+}
 
-//    [NSURLConnection sendAsynchronousRequest:request
-//                                       queue:[NSOperationQueue mainQueue]
-//                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-//                               NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data
-//                                                                                    options:NSJSONReadingAllowFragments
-//                                                                                      error:&error];
-//                           }];
-//    NSDictionary *response = @{@"authenticated":@true,
-//                               @"system":
-//                                   @{@"onlySendBeaconEventsWithKnownProximity":@false,
-//                                     @"configurationJSON":@"https://looppulse-config.firebaseio.com/companies/-JVf6gdZ4cxDz4ykJnlQ.json",
-//                                     @"firebase":
-//                                         @{@"beacon_events": @"https://looppulse-megabox.firebaseio.com/companies/sY35Akn2TGaTnfmBX/beacon_events",
-//                                           @"engagement_events": @"https://looppulse-megabox.firebaseio.com/companies/sY35Akn2TGaTnfmBX/engagement_events"},
-//                                     @"parse":
-//                                         @{@"applicationId":@"dP9yJQI58giCirVVIYeVd1YobFbIujv5wDFWA8WX",
-//                                           @"clientKey":@"hnz5gkWZ45cJkXf8yp2huHc89NG55O1ajjHSrwxh"}
-//                                    }
-//                               };
-//    return response;
+- (void)initFromDefaults:(NSDictionary *)defaults
+{
+    [self setDefaults:defaults];
+
+    _dataStore = [[LPDataStore alloc] initWithToken:self.token
+                                            andURLs:[self firebaseURLs]];
+    _visitor = [[LPVisitor alloc] initWithDataStore:_dataStore];
+    _locationManager = [[LPLocationManager alloc] initWithDataStore:_dataStore];
+    _engagementManager = [[LPEngagementManager alloc] initWithDataStore:_dataStore];
 }
 
 - (BOOL)isAuthenticated:(NSDictionary *)response

@@ -26,9 +26,10 @@
 
     // Initialize LoopPulse using debug option to change firebase URL
     self.loopPulse = [[LoopPulse alloc] initWithApplicationId:@"9ZFXQ2WXipQKWEP8h" withToken:@"QoLK2gs9LHL3yI4-BKQu"];
-
-    [self.loopPulse startLocationMonitoring];
-    [self.loopPulse registerForRemoteNotificationTypesForApplication:application];
+    [self.loopPulse authenticate:^(void) {
+        [self.loopPulse startLocationMonitoring];
+        [self.loopPulse registerForRemoteNotificationTypesForApplication:application];
+    }];
 
     self.logController = [[MBLogController alloc] init];
     self.logController.loopPulse = self.loopPulse;
