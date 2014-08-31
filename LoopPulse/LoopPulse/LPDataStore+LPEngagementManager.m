@@ -12,7 +12,7 @@
 
 - (Firebase *)engagementEventsRef
 {
-    return [self.firebase childByAppendingPath:@"engagement_events"];
+    return [self.firebases objectForKey:@"engagement_events"];
 }
 
 - (void)logEvent:(NSString *)eventType withEngagement:(LPEngagement *)engagement atTime:(NSDate *)createdAt

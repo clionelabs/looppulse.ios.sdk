@@ -25,7 +25,7 @@
     self.coreDataController = [[MBCoreDataController alloc] init];
 
     // Initialize LoopPulse using debug option to change firebase URL
-    self.loopPulse = [[LoopPulse alloc] initWithCompanyId:@"" withToken:@""];
+    self.loopPulse = [[LoopPulse alloc] initWithApplicationId:@"" withToken:@""];
 
     [self.loopPulse startLocationMonitoring];
     [self.loopPulse registerForRemoteNotificationTypesForApplication:application];

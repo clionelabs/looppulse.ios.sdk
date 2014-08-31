@@ -15,6 +15,7 @@
 #import <Parse/Parse.h>
 
 @interface LoopPulse ()
+@property (readonly, strong) NSString *applicationId;
 @property (readonly, strong) NSString *token;
 @property (readonly, strong) LPDataStore *dataStore;
 @property (readonly, strong) LPLocationManager *locationManager;
@@ -28,20 +29,25 @@
 
 @implementation LoopPulse
 
-- (id)initWithCompanyId:(NSString *)companyId withToken:(NSString *)token
+- (id)initWithApplicationId:(NSString *)applicationId withToken:(NSString *)token
 {
     self = [super init];
     if (self) {
-        BOOL authenticated = [self authenticateAndSetDefaults:companyId
-                                                    withToken:token];
+        _applicationId = applicationId;
+        _token = token;
+
+        NSDictionary *response = [self authenticate:applicationId withToken:token];
+        BOOL authenicated = [self isAuthenticated:response];
         // TODO: handle failed authentication more gracefully
-        if (!authenticated) {
+        if (!authenicated) {
             return nil;
         }
 
-        _token = token;
-        _firebaseBaseUrl = @"https://looppulse-dev-thomas.firebaseio.com";
-        _dataStore = [[LPDataStore alloc] initWithToken:token andBaseUrl:_firebaseBaseUrl];
+        // Authenticated so we can set defaults from the response.
+        [self setDefaults:response];
+
+        _dataStore = [[LPDataStore alloc] initWithToken:token
+                                                andURLs:[self firebaseURLs]];
         _visitor = [[LPVisitor alloc] initWithDataStore:_dataStore];
         _locationManager = [[LPLocationManager alloc] initWithDataStore:_dataStore];
         _engagementManager = [[LPEngagementManager alloc] initWithDataStore:_dataStore];
@@ -49,46 +55,57 @@
     return self;
 }
 
-- (NSDictionary *)authenticate:(NSString *)companyId withToken:(NSString *)token
+- (NSDictionary *)authenticate:(NSString *)applicationId withToken:(NSString *)token
 {
     NSDictionary *response = @{@"authenticated":@true,
-                               @"defaults":@{@"onlySendBeaconEventsWithKnownProximity":@false,
-                                             @"configurationURL":@"https://looppulse-config-thomas.firebaseio.com/companies/-JUw0gTrsmeSBsbqeGif.json",
-                                             @"parse": @{@"applicationId":@"dP9yJQI58giCirVVIYeVd1YobFbIujv5wDFWA8WX",
-                                                         @"clientKey":@"hnz5gkWZ45cJkXf8yp2huHc89NG55O1ajjHSrwxh"}
-                                             }
+                               @"system":
+                                   @{@"onlySendBeaconEventsWithKnownProximity":@false,
+                                     @"configurationJSON":@"https://looppulse-config.firebaseio.com/companies/-JUw0gTrsmeSBsbqeGif.json",
+                                     @"firebase":
+                                         @{@"beacon_events": @"https://looppulse-megabox.firebaseio.com/companies/sY35Akn2TGaTnfmBX/beacon_events",
+                                           @"engagement_events": @"https://looppulse-megabox.firebaseio.com/companies/sY35Akn2TGaTnfmBX/engagement_events"},
+                                     @"parse":
+                                         @{@"applicationId":@"dP9yJQI58giCirVVIYeVd1YobFbIujv5wDFWA8WX",
+                                           @"clientKey":@"hnz5gkWZ45cJkXf8yp2huHc89NG55O1ajjHSrwxh"}
+                                    }
                                };
     return response;
 }
 
-- (BOOL)authenticateAndSetDefaults:(NSString *)companyId withToken:(NSString *)token
+- (BOOL)isAuthenticated:(NSDictionary *)response
 {
-    NSDictionary *response = [self authenticate:companyId withToken:token];
     BOOL authenticated = [[response objectForKey:@"authenticated"] boolValue];
     if (!authenticated) {
         return false;
     }
-
-    [self setDefaults:[response objectForKey:@"defaults"]];
-    return true;
+   return true;
 }
 
-// Create and set user defaults
-- (void)setDefaults:(NSDictionary *)defaults
+// Set defaults from server response
+- (void)setDefaults:(NSDictionary *)response
 {
-    BOOL onlySendKnown = [[defaults objectForKey:@"onlySendBeaconEventsWithKnownProximity"] boolValue];
+    NSDictionary *system = [response objectForKey:@"system"];
+    BOOL onlySendKnown = [[system objectForKey:@"onlySendBeaconEventsWithKnownProximity"] boolValue];
     [LoopPulse.defaults setBool:onlySendKnown
                          forKey:@"onlySendBeaconEventsWithKnownProximity"];
 
-    NSString *urlString = [defaults objectForKey:@"configurationURL"];
-    NSURL *configurationURL = [NSURL URLWithString:urlString];
-    [LoopPulse.defaults setURL:configurationURL
-                        forKey:@"configurationURL"];
+    NSString *urlString = [system objectForKey:@"configurationJSON"];
+    NSURL *configurationJSON = [NSURL URLWithString:urlString];
+    [LoopPulse.defaults setURL:configurationJSON
+                        forKey:@"configurationJSON"];
 
-    NSDictionary *parseDefaults = [defaults objectForKey:@"parse"];
+    NSDictionary *firebaseDefaults = [system objectForKey:@"firebase"];
+    [LoopPulse.defaults setObject:firebaseDefaults forKey:@"firebase"];
+
+    NSDictionary *parseDefaults = [system objectForKey:@"parse"];
     [LoopPulse.defaults setObject:parseDefaults forKey:@"parse"];
 
     [LoopPulse.defaults synchronize];
+}
+
+- (NSDictionary *)firebaseURLs
+{
+    return [[LoopPulse defaults] objectForKey:@"firebase"];
 }
 
 - (void)startLocationMonitoring

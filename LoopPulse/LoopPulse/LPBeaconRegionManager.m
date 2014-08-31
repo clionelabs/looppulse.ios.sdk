@@ -30,8 +30,8 @@
 
 - (NSDictionary *)readInstallationFile
 {
-    NSURL *configurationURL = [LoopPulse.defaults URLForKey:@"configurationURL"];
-    NSData *data = [NSData dataWithContentsOfURL:configurationURL];
+    NSURL *configurationJSON = [LoopPulse.defaults URLForKey:@"configurationJSON"];
+    NSData *data = [NSData dataWithContentsOfURL:configurationJSON];
     NSError *error = nil;
     NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data
                                                          options:NSJSONReadingAllowFragments

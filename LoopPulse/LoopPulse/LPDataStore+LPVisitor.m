@@ -12,7 +12,7 @@
 
 - (Firebase *)visitorsRef
 {
-    return [self.firebase childByAppendingPath:@"visitors"];
+    return [self.firebases objectForKey:@"visitors"];
 }
 
 - (void)registerVisitor:(NSUUID *)uuid
