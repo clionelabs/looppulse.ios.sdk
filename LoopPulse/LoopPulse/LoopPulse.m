@@ -12,6 +12,7 @@
 #import "LPLocationManager.h"
 #import "LPDataStore.h"
 #import "LPEngagementManager.h"
+#import "LPServerResponse.h"
 #import <Parse/Parse.h>
 
 @interface LoopPulse ()
@@ -52,19 +53,12 @@
                                if (error!=nil) {
                                    NSLog(@"authentication error: %@", error);
                                } else {
-                                   NSDictionary *response = [NSJSONSerialization JSONObjectWithData:data
-                                                                                        options:NSJSONReadingAllowFragments
-                                                                                          error:&error];
-                                   if (error!=nil) {
-                                       NSLog(@"JSON serialization error: %@", error);
-                                   } else {
-                                       // Set our defaults before calling callback.
-                                       if ([self isAuthenticated:response]) {
-                                           _isAuthenticated = true;
-                                           [self initFromDefaults:response];
+                                   LPServerResponse *response = [[LPServerResponse alloc] initWithData:data];
+                                   if (response.isAuthenticated) {
+                                       _isAuthenticated = true;
+                                       [self initFromDefaults:response.defaults];
 
-                                           successHandler();
-                                       }
+                                       successHandler();
                                    }
                                }
                            }];
@@ -79,15 +73,6 @@
     _visitor = [[LPVisitor alloc] initWithDataStore:_dataStore];
     _locationManager = [[LPLocationManager alloc] initWithDataStore:_dataStore];
     _engagementManager = [[LPEngagementManager alloc] initWithDataStore:_dataStore];
-}
-
-- (BOOL)isAuthenticated:(NSDictionary *)response
-{
-    BOOL authenticated = [[response objectForKey:@"authenticated"] boolValue];
-    if (!authenticated) {
-        return false;
-    }
-   return true;
 }
 
 // Set defaults from server response
