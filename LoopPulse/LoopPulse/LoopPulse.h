@@ -11,7 +11,8 @@
 
 @interface LoopPulse : NSObject
 
-- (id)initWithCompanyId:(NSString *)companyId withToken:(NSString *)token;
+- (id)initWithApplicationId:(NSString *)applicationId withToken:(NSString *)token;
+- (void)authenticate:(void(^)(void))successHandler;
 
 - (void)startLocationMonitoring;
 - (void)stopLocationMonitoringAndRanging;
@@ -19,6 +20,8 @@
 - (void)registerForRemoteNotificationTypesForApplication:(UIApplication *)application;
 - (void)didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken;
 - (void)didReceiveRemoteNotification:(NSDictionary *)userInfo;
+
+@property (readonly, nonatomic) BOOL isAuthenticated;
 
 - (void)startLocationMonitoringAndRanging; // debug
 

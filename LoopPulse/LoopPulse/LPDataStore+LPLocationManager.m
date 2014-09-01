@@ -15,7 +15,7 @@
 
 - (Firebase *)beaconEventsRef
 {
-    return [self.firebase childByAppendingPath:@"beacon_events"];
+    return [self.firebases objectForKey:@"beacon_events"];
 }
 
 - (void)logEvent:(NSString *)eventType withBeacon:(CLBeacon *)beacon atTime:(NSDate *)createdAt

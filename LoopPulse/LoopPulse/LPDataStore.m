@@ -16,14 +16,24 @@
 
 @implementation LPDataStore
 
-- (id)initWithToken:(NSString *)token andBaseUrl:(NSString *)baseUrl
+- (id)initWithToken:(NSString *)token andURLs:(NSDictionary *)urls
 {
     self = [super init];
     if (self) {
         _token = token;
-        _firebase = [[Firebase alloc] initWithUrl:baseUrl];
+        _firebases = [self createFirebases:urls];
     }
     return self;
+}
+
+- (NSDictionary *)createFirebases:(NSDictionary *)urls
+{
+    NSMutableDictionary *firebases = [NSMutableDictionary dictionary];
+    [urls enumerateKeysAndObjectsUsingBlock:^(id key, id url, BOOL *stop){
+        Firebase *fb = [[Firebase alloc] initWithUrl:url];
+        [firebases setObject:fb forKey:key];
+    }];
+    return firebases;
 }
 
 - (NSUUID *)visitorUUID
