@@ -25,6 +25,6 @@
 
 - (void)startLocationMonitoringAndRanging; // debug
 
-@property (readonly, retain) LPVisitor *visitor;
+@property (readonly, nonatomic) NSUUID *visitorUUID;
 
 @end

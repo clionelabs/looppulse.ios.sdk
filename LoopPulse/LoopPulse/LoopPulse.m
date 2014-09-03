@@ -19,6 +19,7 @@
 @property (readonly, strong) NSString *applicationId;
 @property (readonly, strong) NSString *token;
 @property (readonly, strong) LPDataStore *dataStore;
+@property (readonly, strong) LPVisitor *visitor;
 @property (readonly, strong) LPLocationManager *locationManager;
 @property (readonly, strong) LPEngagementManager *engagementManager;
 @property (readonly, strong) NSString *firebaseBaseUrl;
@@ -43,7 +44,7 @@
 
 - (void)authenticate:(void (^)(void))successHandler
 {
-    NSString *url = [@"https://looppulse-megabox.meteor.com/api/authenticate/applications/" stringByAppendingString:self.applicationId];
+    NSString *url = [@"http://beta.looppulse.com/api/authenticate/applications/" stringByAppendingString:self.applicationId];
     NSURL *authenticationURL = [NSURL URLWithString:url];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:authenticationURL];
     [request setValue:self.token forHTTPHeaderField:@"x-auth-token"];
@@ -135,6 +136,12 @@
     [self.locationManager startMonitoringForAllRegions];
     [self.locationManager startRangingBeaconsInAllRegions];
 }
+
+- (NSUUID *)visitorUUID
+{
+    return [self.dataStore visitorUUID];
+}
+
 
 #pragma mark Private Class Methods
 

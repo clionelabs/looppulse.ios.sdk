@@ -10,7 +10,6 @@
 #import <Firebase/Firebase.h>
 #import <LoopPulse/LoopPulse.h>
 
-//#define kFirechatLogNS @"https://looppulse-megabox.firebaseio.com/visitors/1d2adef8cbcd166574a8cc0a/logs"
 #define kFirechatLogNS @"https://looppulse-megabox.firebaseio.com/visitors/%@/logs"
 
 #define kCoreDataEntity @"MBManagedLog"
@@ -28,7 +27,7 @@
 
 - (NSString *)firechatNamespace
 {
-    return [NSString stringWithFormat:kFirechatLogNS, self.loopPulse.visitor.uuid.UUIDString];
+    return [NSString stringWithFormat:kFirechatLogNS, self.loopPulse.visitorUUID.UUIDString];
 }
 
 - (void)startLogMonitoring
