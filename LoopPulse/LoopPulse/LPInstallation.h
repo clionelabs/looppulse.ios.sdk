@@ -17,5 +17,6 @@
 
 @property(readonly) CLBeaconRegion *beaconRegion;
 @property(readonly) NSString *key;
+@property(readonly) NSString *productName;
 
 @end

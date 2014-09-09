@@ -30,6 +30,8 @@
     [self logEvent:eventType
          withDictionary:[region firebaseDictionary]
                  atTime:createdAt];
+
+    [self logEventToLocalNotification:eventType withBeaconRegion:region];
 }
 
 - (void)logEvent:(NSString *)eventType withDictionary:(NSDictionary *)beaconInfo atTime:(NSDate *)createdAt
@@ -50,6 +52,13 @@
 - (void)postNotification:(NSString *)eventType withDictionary:(NSDictionary *)eventInfo
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:eventType object:self userInfo:eventInfo];
+}
+
+- (void)logEventToLocalNotification:(NSString *)eventType withBeaconRegion:(CLBeaconRegion *)region
+{
+    UILocalNotification *notification = [[UILocalNotification alloc] init];
+    notification.alertBody = [eventType stringByAppendingFormat:@" %@", region.description];
+    [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
 }
 
 @end

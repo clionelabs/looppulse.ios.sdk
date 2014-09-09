@@ -8,6 +8,7 @@
 
 #import "CLBeaconRegion+LoopPulseHelpers.h"
 #import "CLRegion+LoopPulseHelpers.h"
+#import "LoopPulsePrivate.h"
 
 @implementation CLBeaconRegion (LoopPulseHelpers)
 - (BOOL)isLoopPulseSpecificBeaconRegion
@@ -19,5 +20,11 @@
 - (NSString *)key
 {
     return [NSString stringWithFormat:@"%@-%@-%@",[self.proximityUUID UUIDString], self.major, self.minor];
+}
+
+- (NSString *)description
+{
+    NSString *productName = [[LoopPulse defaults] objectForKey:self.key];
+    return [NSString stringWithFormat:@"%@, %@:%@:%@", productName, [self.proximityUUID UUIDString], self.major, self.minor];
 }
 @end

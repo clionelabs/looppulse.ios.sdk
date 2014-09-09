@@ -47,11 +47,25 @@
     NSDictionary *company = [self readInstallationFile];
     NSDictionary * locations = [company objectForKey:@"locations"];
     [locations enumerateKeysAndObjectsUsingBlock:^(id key, id location, BOOL *stop){
-        NSDictionary *installations = [location objectForKey:@"installations"];
+        NSDictionary *installationsDictionary = [location objectForKey:@"installations"];
+        NSArray *installations = [self mapDictionariesToInstallations:installationsDictionary];
+
         NSDictionary *keyAndRegions = [self generateRegionKeyAndNearbyRegions:installations];
         [regionsNearby addEntriesFromDictionary:keyAndRegions];
+
+        // TODO: refactor this out of this method
+        [self saveProductNames:installations];
     }];
     return regionsNearby;
+}
+
+- (void)saveProductNames:(NSArray *)installations
+{
+    NSUserDefaults *defaults = [LoopPulse defaults];
+    for (LPInstallation *installation in installations) {
+        CLBeaconRegion *beaconRegion = installation.beaconRegion;
+        [defaults setObject:installation.productName forKey:beaconRegion.key];
+    }
 }
 
 - (NSArray *)mapDictionariesToInstallations:(NSDictionary *)installationsDicitionary
@@ -64,10 +78,9 @@
     return installations;
 }
 
-- (NSDictionary *)generateRegionKeyAndNearbyRegions:(NSDictionary *)installationsDictionary
+- (NSDictionary *)generateRegionKeyAndNearbyRegions:(NSArray *)installations
 {
     NSMutableDictionary *keyAndRegions = [NSMutableDictionary dictionary];
-    NSArray *installations = [self mapDictionariesToInstallations:installationsDictionary];
     for (LPInstallation *installation in installations) {
         NSMutableArray *regionsNearby = [NSMutableArray array];
         for (LPInstallation *otherInstallation in installations) {
