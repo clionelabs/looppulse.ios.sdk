@@ -10,5 +10,6 @@
 @interface LoopPulse ()
 
 + (NSUserDefaults *)defaults;
++ (void)postNotification:(NSString *)name withUserInfo:(NSDictionary *)userInfo;
 
 @end

@@ -23,11 +23,18 @@
 @property (readonly, strong) LPLocationManager *locationManager;
 @property (readonly, strong) LPEngagementManager *engagementManager;
 @property (readonly, strong) NSString *firebaseBaseUrl;
+
 @end
 
 @interface LPVisitor ()
 - (id)initWithDataStore:(LPDataStore *)dataStore;
 @end
+
+NSString *const LoopPulseDidAuthenticateSuccessfullyNotification=@"LoopPulseDidAuthenticateSuccessfullyNotification";
+NSString *const LoopPulseDidFailToAuthenticateNotification=@"LoopPulseDidFailToAuthenticateNotification";
+NSString *const LoopPulseLocationDidEnterRegionNotification=@"LoopPulseLocationDidEnterRegionNotification";
+NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDidExitRegionNotification";
+
 
 @implementation LoopPulse
 
@@ -148,6 +155,11 @@
 + (NSUserDefaults *)defaults
 {
     return [NSUserDefaults standardUserDefaults];
+}
+
++ (void)postNotification:(NSString *)name withUserInfo:(NSDictionary *)userInfo
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:name object:nil userInfo:userInfo];
 }
 
 @end

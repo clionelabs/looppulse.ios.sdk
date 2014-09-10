@@ -9,7 +9,7 @@
 #import "LPDataStore+LPLocationManager.h"
 #import "CLBeacon+FirebaseDictionary.h"
 #import "CLBeaconRegion+FirebaseDictionary.h"
-#import "LPVisitor.h"
+#import "LoopPulsePrivate.h"
 
 @implementation LPDataStore (LPLocationManager)
 
@@ -31,7 +31,7 @@
          withDictionary:[region firebaseDictionary]
                  atTime:createdAt];
 
-    [self logEventToLocalNotification:eventType withBeaconRegion:region];
+    [self postNotification:eventType withBeaconRegion:region];
 }
 
 - (void)logEvent:(NSString *)eventType withDictionary:(NSDictionary *)beaconInfo atTime:(NSDate *)createdAt
@@ -45,20 +45,25 @@
 
     Firebase *beacon_event_ref = [[self beaconEventsRef] childByAutoId];
     [beacon_event_ref setValue:beaconInfoAndEvent andPriority:priority];
-
-    [self postNotification:eventType withDictionary:beaconInfoAndEvent];
 }
 
-- (void)postNotification:(NSString *)eventType withDictionary:(NSDictionary *)eventInfo
+- (void)postNotification:(NSString *)eventType withBeaconRegion:(CLBeaconRegion *)region
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:eventType object:self userInfo:eventInfo];
+    NSString *notification = [self eventType2Notification:eventType];
+    NSDictionary *userInfo = @{@"description": [eventType stringByAppendingFormat:@" %@", region.description]};
+    [LoopPulse postNotification:notification withUserInfo:userInfo];
 }
 
-- (void)logEventToLocalNotification:(NSString *)eventType withBeaconRegion:(CLBeaconRegion *)region
+// Only deal with enter and exit events for now.
+- (NSString *)eventType2Notification:(NSString *)eventType
 {
-    UILocalNotification *notification = [[UILocalNotification alloc] init];
-    notification.alertBody = [eventType stringByAppendingFormat:@" %@", region.description];
-    [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
+    if ([eventType isEqualToString:@"didEnterRegion"]) {
+        return LoopPulseLocationDidEnterRegionNotification;
+    } else if ([eventType isEqualToString:@"didEnterRegion"]) {
+        return LoopPulseLocationDidExitRegionNotification;
+    } else {
+        return [NSString string];
+    }
 }
 
 @end

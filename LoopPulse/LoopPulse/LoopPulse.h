@@ -23,6 +23,11 @@
 
 @property (readonly, nonatomic) BOOL isAuthenticated;
 
+extern NSString *const LoopPulseDidAuthenticateSuccessfullyNotification;
+extern NSString *const LoopPulseDidFailToAuthenticateNotification;
+extern NSString *const LoopPulseLocationDidEnterRegionNotification;
+extern NSString *const LoopPulseLocationDidExitRegionNotification;
+
 - (void)startLocationMonitoringAndRanging; // debug
 
 @property (readonly, nonatomic) NSUUID *visitorUUID;
