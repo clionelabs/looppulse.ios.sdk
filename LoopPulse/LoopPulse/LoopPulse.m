@@ -35,18 +35,23 @@ NSString *const LoopPulseDidFailToAuthenticateNotification=@"LoopPulseDidFailToA
 NSString *const LoopPulseLocationDidEnterRegionNotification=@"LoopPulseLocationDidEnterRegionNotification";
 NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDidExitRegionNotification";
 
+static LoopPulse *sharedInstance = nil;
 
 @implementation LoopPulse
 
-- (id)initWithApplicationId:(NSString *)applicationId withToken:(NSString *)token
+- (id)init
 {
     self = [super init];
     if (self) {
-        _applicationId = applicationId;
-        _token = token;
         _isAuthenticated = false;
     }
     return self;
+}
+
+- (void)setApplicationId:(NSString *)applicationId andToken:(NSString *)token
+{
+    _applicationId = applicationId;
+    _token = token;
 }
 
 - (void)authenticate:(void (^)(void))successHandler
@@ -110,47 +115,55 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
     return [[LoopPulse defaults] objectForKey:@"firebase"];
 }
 
-- (void)startLocationMonitoring
-{
-    [self.locationManager startMonitoringForAllRegions];
-}
-
-- (void)stopLocationMonitoringAndRanging
-{
-    [self.locationManager stopRangingBeaconsInAllRegions];
-    [self.locationManager stopMonitoringForAllRegions];
-}
-
-
-- (void)registerForRemoteNotificationTypesForApplication:(UIApplication *)application
-{
-    [self.engagementManager registerForRemoteNotificationTypesForApplication:application];
-}
-
-- (void)didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
-{
-    [self.engagementManager didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
-}
-
-- (void)didReceiveRemoteNotification:(NSDictionary *)userInfo
-{
-    [self.engagementManager didReceiveRemoteNotification:userInfo];
-}
-
-
-- (void)startLocationMonitoringAndRanging
-{
-    [self.locationManager startMonitoringForAllRegions];
-    [self.locationManager startRangingBeaconsInAllRegions];
-}
-
 - (NSUUID *)visitorUUID
 {
     return [self.dataStore visitorUUID];
 }
 
+#pragma mark Public Interface
+
++ (void)authenticateWithApplicationId:(NSString *)applicationId
+                            withToken:(NSString *)token
+                    andSuccessHandler:(void(^)(void))successHandler
+{
+    LoopPulse *loopPulse = [LoopPulse sharedInstance];
+    [loopPulse setApplicationId:applicationId andToken:token];
+    [loopPulse authenticate:successHandler];
+}
+
++ (void)startLocationMonitoring
+{
+    LoopPulse *loopPulse = [LoopPulse sharedInstance];
+    [loopPulse.locationManager startMonitoringForAllRegions];
+}
+
++ (void)registerForRemoteNotificationTypesForApplication:(UIApplication *)application
+{
+    LoopPulse *loopPulse = [LoopPulse sharedInstance];
+    [loopPulse.engagementManager registerForRemoteNotificationTypesForApplication:application];
+}
+
++ (void)didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    LoopPulse *loopPulse = [LoopPulse sharedInstance];
+    [loopPulse.engagementManager didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
+}
+
++ (void)didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    LoopPulse *loopPulse = [LoopPulse sharedInstance];
+    [loopPulse.engagementManager didReceiveRemoteNotification:userInfo];
+}
 
 #pragma mark Private Class Methods
+
++ (LoopPulse *)sharedInstance
+{
+    if (!sharedInstance) {
+        sharedInstance = [[LoopPulse alloc] init];
+    }
+    return sharedInstance;
+}
 
 + (NSUserDefaults *)defaults
 {

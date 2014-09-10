@@ -11,25 +11,21 @@
 
 @interface LoopPulse : NSObject
 
-- (id)initWithApplicationId:(NSString *)applicationId withToken:(NSString *)token;
-- (void)authenticate:(void(^)(void))successHandler;
++ (void)authenticateWithApplicationId:(NSString *)applicationId
+                            withToken:(NSString *)token
+                    andSuccessHandler:(void(^)(void))successHandler;
++ (void)startLocationMonitoring;
 
-- (void)startLocationMonitoring;
-- (void)stopLocationMonitoringAndRanging;
-
-- (void)registerForRemoteNotificationTypesForApplication:(UIApplication *)application;
-- (void)didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken;
-- (void)didReceiveRemoteNotification:(NSDictionary *)userInfo;
++ (void)registerForRemoteNotificationTypesForApplication:(UIApplication *)application;
++ (void)didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken;
++ (void)didReceiveRemoteNotification:(NSDictionary *)userInfo;
 
 @property (readonly, nonatomic) BOOL isAuthenticated;
+@property (readonly, nonatomic) NSUUID *visitorUUID;
 
 extern NSString *const LoopPulseDidAuthenticateSuccessfullyNotification;
 extern NSString *const LoopPulseDidFailToAuthenticateNotification;
 extern NSString *const LoopPulseLocationDidEnterRegionNotification;
 extern NSString *const LoopPulseLocationDidExitRegionNotification;
-
-- (void)startLocationMonitoringAndRanging; // debug
-
-@property (readonly, nonatomic) NSUUID *visitorUUID;
 
 @end
