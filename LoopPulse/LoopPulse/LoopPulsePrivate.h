@@ -9,6 +9,7 @@
 
 @interface LoopPulse ()
 
++ (LoopPulse *)sharedInstance;
 + (NSUserDefaults *)defaults;
 
 @end
