@@ -25,6 +25,7 @@
 
 extern NSString *const LoopPulseDidAuthenticateSuccessfullyNotification;
 extern NSString *const LoopPulseDidFailToAuthenticateNotification;
+extern NSString *const LoopPulseDidReceiveAuthenticationError;
 extern NSString *const LoopPulseLocationDidEnterRegionNotification;
 extern NSString *const LoopPulseLocationDidExitRegionNotification;
 
