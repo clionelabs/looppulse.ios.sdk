@@ -50,7 +50,8 @@
 - (void)postNotification:(NSString *)eventType withBeaconRegion:(CLBeaconRegion *)region
 {
     NSString *notification = [self eventType2Notification:eventType];
-    NSDictionary *userInfo = @{@"description": [eventType stringByAppendingFormat:@" %@", region.description]};
+    NSDictionary *userInfo = @{@"eventType": eventType,
+                               @"beaconRegion": region};
     [LoopPulse postNotification:notification withUserInfo:userInfo];
 }
 
