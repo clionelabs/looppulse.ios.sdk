@@ -9,7 +9,7 @@
 
 @interface LoopPulse ()
 
-+ (LoopPulse *)sharedInstance;
 + (NSUserDefaults *)defaults;
++ (void)postNotification:(NSString *)name withUserInfo:(NSDictionary *)userInfo;
 
 @end

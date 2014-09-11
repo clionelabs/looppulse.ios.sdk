@@ -7,6 +7,8 @@
 //
 
 #import "LoopPulse/LoopPulse.h"
+#import <CoreLocation/CoreLocation.h>
+
 #import "MBAppDelegate.h"
 #import "MBLogsViewController.h"
 #import "MBCoreDataController.h"
@@ -36,12 +38,60 @@
         [self.logController startLogMonitoring];
 
     }];
+    [self observeLoopPulse];
 
     UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
     MBLogsViewController *controller = (MBLogsViewController *)navigationController.topViewController;
     controller.managedObjectContext = self.coreDataController.managedObjectContext;
 
     return YES;
+}
+
+- (void)observeLoopPulse
+{
+    // CoreLocation beacon events
+    NSArray *regionNotifications = @[LoopPulseLocationDidEnterRegionNotification,
+                                     LoopPulseLocationDidExitRegionNotification];
+    for (NSString *name in regionNotifications) {
+        [[NSNotificationCenter defaultCenter] addObserverForName:name
+                                                          object:[LoopPulse sharedInstance]
+                                                           queue:[NSOperationQueue mainQueue]
+                                                      usingBlock:^(NSNotification *notification){
+
+                                                          NSDictionary *userInfo = notification.userInfo;
+                                                          NSString *eventType = [userInfo objectForKey:@"eventType"];
+                                                          CLBeaconRegion *region = [userInfo objectForKey:@"beaconRegion"];
+                                                          NSString *alertMessage = [eventType stringByAppendingFormat:@" %@", region.description];
+                                                          [self postLocalNotification:alertMessage];
+                                                      }];
+    }
+
+    // Authentication events
+    [[NSNotificationCenter defaultCenter] addObserverForName:LoopPulseDidAuthenticateSuccessfullyNotification
+                                                      object:[LoopPulse sharedInstance]
+                                                       queue:[NSOperationQueue mainQueue]
+                                                  usingBlock:^(NSNotification *notification){
+
+                                                      NSString *alertMessage = @"Loop Pulse is authenticated.";
+                                                      [self postLocalNotification:alertMessage];
+                                                  }];
+
+    [[NSNotificationCenter defaultCenter] addObserverForName:LoopPulseDidFailToAuthenticateNotification
+                                                      object:[LoopPulse sharedInstance]
+                                                       queue:[NSOperationQueue mainQueue]
+                                                  usingBlock:^(NSNotification *notification){
+
+                                                      NSError *error = [notification.userInfo objectForKey:@"error"];
+                                                      NSString *alertMessage = [@"Loop Pulse failed to authenticate: " stringByAppendingString:error.description];
+                                                      [self postLocalNotification:alertMessage];
+                                                  }];
+}
+
+- (void)postLocalNotification:(NSString *)alertMessage
+{
+    UILocalNotification *notification = [[UILocalNotification alloc] init];
+    notification.alertBody = alertMessage;
+    [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken

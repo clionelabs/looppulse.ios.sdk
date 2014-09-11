@@ -22,6 +22,7 @@
 }
 @synthesize key = _key;
 @synthesize beaconRegion = _beaconRegion;
+@synthesize productName = _productName;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary
 {
@@ -29,6 +30,7 @@
     if (self) {
         beacon = [dictionary objectForKey:@"beacon"];
         coordinate = [dictionary objectForKey:@"coordinate"];
+        _productName = [dictionary objectForKey:@"product"];
         self.dictionary = dictionary;
     }
     return self;

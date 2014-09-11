@@ -11,6 +11,7 @@
 
 @interface LoopPulse : NSObject
 
++ (LoopPulse *)sharedInstance;
 + (void)authenticateWithApplicationId:(NSString *)applicationId
                             withToken:(NSString *)token
                     andSuccessHandler:(void(^)(void))successHandler;
@@ -22,5 +23,11 @@
 
 @property (readonly, nonatomic) BOOL isAuthenticated;
 @property (readonly, nonatomic) NSUUID *visitorUUID;
+
+extern NSString *const LoopPulseDidAuthenticateSuccessfullyNotification;
+extern NSString *const LoopPulseDidFailToAuthenticateNotification;
+extern NSString *const LoopPulseDidReceiveAuthenticationError;
+extern NSString *const LoopPulseLocationDidEnterRegionNotification;
+extern NSString *const LoopPulseLocationDidExitRegionNotification;
 
 @end

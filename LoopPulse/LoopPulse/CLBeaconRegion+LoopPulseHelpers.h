@@ -11,4 +11,5 @@
 @interface CLBeaconRegion (LoopPulseHelpers)
 - (BOOL)isLoopPulseSpecificBeaconRegion;
 - (NSString *)key;
+- (NSString *)description;
 @end

@@ -23,11 +23,18 @@
 @property (readonly, strong) LPLocationManager *locationManager;
 @property (readonly, strong) LPEngagementManager *engagementManager;
 @property (readonly, strong) NSString *firebaseBaseUrl;
+
 @end
 
 @interface LPVisitor ()
 - (id)initWithDataStore:(LPDataStore *)dataStore;
 @end
+
+NSString *const LoopPulseDidAuthenticateSuccessfullyNotification=@"LoopPulseDidAuthenticateSuccessfullyNotification";
+NSString *const LoopPulseDidFailToAuthenticateNotification=@"LoopPulseDidFailToAuthenticateNotification";
+NSString *const LoopPulseDidReceiveAuthenticationError=@"LoopPulseDidReceiveAuthenticationError";
+NSString *const LoopPulseLocationDidEnterRegionNotification=@"LoopPulseLocationDidEnterRegionNotification";
+NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDidExitRegionNotification";
 
 @implementation LoopPulse
 
@@ -55,15 +62,21 @@
     [NSURLConnection sendAsynchronousRequest:request
                                        queue:[NSOperationQueue mainQueue]
                            completionHandler:^(NSURLResponse *urlResonse, NSData *data, NSError *error) {
+
                                if (error!=nil) {
-                                   NSLog(@"authentication error: %@", error);
+                                   NSDictionary *userInfo = @{@"error":error};
+                                   [LoopPulse postNotification:LoopPulseDidReceiveAuthenticationError withUserInfo:userInfo];
+
                                } else {
                                    LPServerResponse *response = [[LPServerResponse alloc] initWithData:data];
                                    if (response.isAuthenticated) {
                                        _isAuthenticated = true;
                                        [self initFromDefaults:response.defaults];
+                                       [LoopPulse postNotification:LoopPulseDidAuthenticateSuccessfullyNotification withUserInfo:nil];
 
                                        successHandler();
+                                   } else {
+                                       [LoopPulse postNotification:LoopPulseDidFailToAuthenticateNotification withUserInfo:nil];
                                    }
                                }
                            }];
@@ -162,6 +175,14 @@
 + (NSUserDefaults *)defaults
 {
     return [NSUserDefaults standardUserDefaults];
+}
+
++ (void)postNotification:(NSString *)name withUserInfo:(NSDictionary *)userInfo
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:name
+                                                        object:[LoopPulse sharedInstance]
+                                                      userInfo:userInfo];
+    NSLog(@"Loop Pulse posted %@ with userInfo: %@", name, userInfo);
 }
 
 @end
