@@ -29,8 +29,6 @@
 - (id)initWithDataStore:(LPDataStore *)dataStore;
 @end
 
-static LoopPulse *sharedInstance = nil;
-
 @implementation LoopPulse
 
 - (id)init
@@ -153,9 +151,11 @@ static LoopPulse *sharedInstance = nil;
 
 + (LoopPulse *)sharedInstance
 {
-    if (!sharedInstance) {
-        sharedInstance = [[LoopPulse alloc] init];
-    }
+    static LoopPulse *sharedInstance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[self alloc] init];
+    });
     return sharedInstance;
 }
 
