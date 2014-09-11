@@ -13,7 +13,6 @@
 #import "MBLogController.h"
 
 @interface MBAppDelegate ()
-@property (strong, nonatomic) LoopPulse *loopPulse;
 @property (strong, strong, nonatomic) MBCoreDataController *coreDataController;
 @property (strong, nonatomic) MBLogController *logController;
 @end
@@ -24,18 +23,19 @@
 {
     self.coreDataController = [[MBCoreDataController alloc] init];
 
-    // Initialize LoopPulse using debug option to change firebase URL
-    self.loopPulse = [[LoopPulse alloc] initWithApplicationId:@"Wp3WGM2dNdaPNxMLY" withToken:@"URud-G9WQR4BxyL_CIqJ"];
-    [self.loopPulse authenticate:^(void) {
-        [self.loopPulse startLocationMonitoring];
-        [self.loopPulse registerForRemoteNotificationTypesForApplication:application];
+    [LoopPulse authenticateWithApplicationId:@"28AuRvYh3vSA3Cueq"
+                                   withToken:@"5kmjyYLKvy2xqbuZNwqe"
+                           andSuccessHandler:^(void) {
+
+        [LoopPulse startLocationMonitoring];
+        [LoopPulse registerForRemoteNotificationTypesForApplication:application];
 
         self.logController = [[MBLogController alloc] init];
         self.logController.loopPulse = self.loopPulse;
         self.logController.managedObjectContext = self.coreDataController.managedObjectContext;
         [self.logController startLogMonitoring];
-    }];
 
+    }];
 
     UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
     MBLogsViewController *controller = (MBLogsViewController *)navigationController.topViewController;
@@ -46,12 +46,12 @@
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-    [self.loopPulse didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
+    [LoopPulse didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-    [self.loopPulse didReceiveRemoteNotification:userInfo];
+    [LoopPulse didReceiveRemoteNotification:userInfo];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
