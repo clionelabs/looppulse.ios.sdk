@@ -24,7 +24,8 @@
 
 - (NSString *)description
 {
-    NSString *productName = [[LoopPulse defaults] objectForKey:self.key];
+    NSDictionary *beaconRegionKeyToProductName = [[LoopPulse defaults] objectForKey:@"beaconRegionKeyToProductName"];
+    NSString *productName = [beaconRegionKeyToProductName objectForKey:self.key];
     return [NSString stringWithFormat:@"%@, %@:%@:%@", productName, [self.proximityUUID UUIDString], self.major, self.minor];
 }
 @end

@@ -62,10 +62,12 @@
 - (void)saveProductNames:(NSArray *)installations
 {
     NSUserDefaults *defaults = [LoopPulse defaults];
+    NSMutableDictionary *keyToName = [[NSMutableDictionary alloc] initWithCapacity:installations.count];
     for (LPInstallation *installation in installations) {
         CLBeaconRegion *beaconRegion = installation.beaconRegion;
-        [defaults setObject:installation.productName forKey:beaconRegion.key];
+        [keyToName setObject:installation.productName forKey:beaconRegion.key];
     }
+    [defaults setObject:keyToName forKey:@"beaconRegionKeyToProductName"];
 }
 
 - (NSArray *)mapDictionariesToInstallations:(NSDictionary *)installationsDicitionary
