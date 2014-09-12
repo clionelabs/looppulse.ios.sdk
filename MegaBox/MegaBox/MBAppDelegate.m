@@ -33,7 +33,7 @@
         [LoopPulse registerForRemoteNotificationTypesForApplication:application];
 
         self.logController = [[MBLogController alloc] init];
-        self.logController.loopPulse = self.loopPulse;
+        self.logController.loopPulse = [LoopPulse sharedInstance];
         self.logController.managedObjectContext = self.coreDataController.managedObjectContext;
         [self.logController startLogMonitoring];
 

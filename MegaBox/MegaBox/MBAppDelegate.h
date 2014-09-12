@@ -13,7 +13,6 @@
 @interface MBAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property (readonly, strong, nonatomic) LoopPulse *loopPulse;
 @property (readonly, strong, nonatomic) MBCoreDataController *coreDataController;
 @property (readonly, strong, nonatomic) MBLogController *logController;
 
