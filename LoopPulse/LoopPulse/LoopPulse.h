@@ -22,6 +22,7 @@
 + (void)didReceiveRemoteNotification:(NSDictionary *)userInfo;
 
 @property (readonly, nonatomic) BOOL isAuthenticated;
+@property (readonly, nonatomic) BOOL isTracking;
 @property (readonly, nonatomic) NSUUID *visitorUUID;
 
 extern NSString *const LoopPulseDidAuthenticateSuccessfullyNotification;

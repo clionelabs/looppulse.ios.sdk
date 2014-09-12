@@ -14,6 +14,7 @@
 #import "LPEngagementManager.h"
 #import "LPServerResponse.h"
 #import <Parse/Parse.h>
+#import <AdSupport/AdSupport.h>
 
 @interface LoopPulse ()
 @property (readonly, strong) NSString *applicationId;
@@ -43,7 +44,10 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
     self = [super init];
     if (self) {
         _isAuthenticated = false;
-        _visitorUUID = [[UIDevice currentDevice] identifierForVendor];
+
+        ASIdentifierManager *adManager = [ASIdentifierManager sharedManager];
+        _visitorUUID = adManager.advertisingIdentifier;
+        _isTracking = adManager.advertisingTrackingEnabled;
     }
     return self;
 }
@@ -135,7 +139,12 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
 + (void)startLocationMonitoring
 {
     LoopPulse *loopPulse = [LoopPulse sharedInstance];
-    [loopPulse.locationManager startMonitoringForAllRegions];
+    if (loopPulse.isTracking) {
+        [loopPulse.locationManager startMonitoringForAllRegions];
+    } else {
+        // Respect advertisingTrackingEnabled and stop all tracking.
+        [loopPulse.locationManager stopMonitoringForAllRegions];
+    }
 }
 
 + (void)registerForRemoteNotificationTypesForApplication:(UIApplication *)application

@@ -50,21 +50,15 @@
 - (void)stopMonitoringForAllRegions
 {
     for (CLBeaconRegion *region in self.monitoredRegions) {
-        [self stopMonitoringForRegion:region];
+        if ([region isLoopPulseBeaconRegion]) {
+            [self stopMonitoringForRegion:region];
+        }
     }
-}
 
-- (void)startRangingBeaconsInAllRegions
-{
-    for (CLBeaconRegion *region in self.beaconRegions) {
-        [self startRangingBeaconsInRegion:region];
-    }
-}
-
-- (void)stopRangingBeaconsInAllRegions
-{
     for (CLBeaconRegion *region in self.rangedRegions) {
-        [self stopRangingBeaconsInRegion:region];
+        if ([region isLoopPulseBeaconRegion]) {
+            [self stopRangingBeaconsInRegion:region];
+        }
     }
 }
 

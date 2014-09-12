@@ -14,7 +14,5 @@
 - (id)initWithDataStore:(LPDataStore *)dataStore;
 - (void)startMonitoringForAllRegions;
 - (void)stopMonitoringForAllRegions;
-- (void)startRangingBeaconsInAllRegions;
-- (void)stopRangingBeaconsInAllRegions;
 
 @end
