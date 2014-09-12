@@ -7,6 +7,7 @@
 //
 
 #import "LPDataStore+LPEngagementManager.h"
+#import "LoopPulse.h"
 
 @implementation LPDataStore (LPEngagementManager)
 
@@ -17,9 +18,10 @@
 
 - (void)logEvent:(NSString *)eventType withEngagement:(LPEngagement *)engagement atTime:(NSDate *)createdAt
 {
+    NSUUID *visitorUUID = [[LoopPulse sharedInstance] visitorUUID];
     NSNumber *priority = @([createdAt timeIntervalSince1970]);
     NSDictionary *eventInfo = @{@"type": eventType,
-                                @"visitor_uuid": [self.visitorUUID UUIDString],
+                                @"visitor_uuid": [visitorUUID UUIDString],
                                 @"created_at": [createdAt description]};
     NSMutableDictionary *engagementInfo = [[NSMutableDictionary alloc] initWithDictionary:engagement.payload];
     [engagementInfo addEntriesFromDictionary:eventInfo];

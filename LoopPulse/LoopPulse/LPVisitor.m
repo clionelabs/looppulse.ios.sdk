@@ -20,9 +20,7 @@
 {
     self = [super init];
     if (self) {
-        _uuid = [[UIDevice currentDevice] identifierForVendor];
         _dataStore = dataStore;
-        [LoopPulse.defaults setObject:[_uuid UUIDString] forKey:@"visitorUUID"];
     }
     return self;
 }

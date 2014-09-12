@@ -7,7 +7,6 @@
 //
 
 #import "LPDataStore.h"
-#import "LPVisitor.h"
 #import "LoopPulsePrivate.h"
 
 @interface LPDataStore ()
@@ -34,12 +33,6 @@
         [firebases setObject:fb forKey:key];
     }];
     return firebases;
-}
-
-- (NSUUID *)visitorUUID
-{
-    NSString *uuidString = [LoopPulse.defaults objectForKey:@"visitorUUID"];
-    return [[NSUUID alloc] initWithUUIDString:uuidString];
 }
 
 @end

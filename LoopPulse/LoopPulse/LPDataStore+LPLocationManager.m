@@ -36,9 +36,10 @@
 
 - (void)logEvent:(NSString *)eventType withDictionary:(NSDictionary *)beaconInfo atTime:(NSDate *)createdAt
 {
+    NSUUID *visitorUUID = [[LoopPulse sharedInstance] visitorUUID];
     NSNumber *priority = @([createdAt timeIntervalSince1970]);
     NSDictionary *eventInfo = @{@"type": eventType,
-                                @"visitor_uuid": [self.visitorUUID UUIDString],
+                                @"visitor_uuid": [visitorUUID UUIDString],
                                 @"created_at": [createdAt description]};
     NSMutableDictionary *beaconInfoAndEvent = [[NSMutableDictionary alloc] initWithDictionary:beaconInfo];
     [beaconInfoAndEvent addEntriesFromDictionary:eventInfo];

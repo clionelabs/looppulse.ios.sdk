@@ -23,7 +23,6 @@
 @property (readonly, strong) LPLocationManager *locationManager;
 @property (readonly, strong) LPEngagementManager *engagementManager;
 @property (readonly, strong) NSString *firebaseBaseUrl;
-
 @end
 
 @interface LPVisitor ()
@@ -37,12 +36,14 @@ NSString *const LoopPulseLocationDidEnterRegionNotification=@"LoopPulseLocationD
 NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDidExitRegionNotification";
 
 @implementation LoopPulse
+@synthesize visitorUUID = _visitorUUID;
 
 - (id)init
 {
     self = [super init];
     if (self) {
         _isAuthenticated = false;
+        _visitorUUID = [[UIDevice currentDevice] identifierForVendor];
     }
     return self;
 }
@@ -118,11 +119,6 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
 - (NSDictionary *)firebaseURLs
 {
     return [[LoopPulse defaults] objectForKey:@"firebase"];
-}
-
-- (NSUUID *)visitorUUID
-{
-    return [self.dataStore visitorUUID];
 }
 
 #pragma mark Public Interface

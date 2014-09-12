@@ -7,7 +7,6 @@
 //
 
 #import "LPEngagementManager.h"
-#import "LPVisitor.h"
 #import "LPDataStore+LPEngagementManager.h"
 #import "LoopPulsePrivate.h"
 #import <Parse/Parse.h>
@@ -50,7 +49,8 @@
 {
     // Can't just use UUID beacause channel name can't start with a
     // https://github.com/clionelabs/looppulse.ios.sdk/issues/3#issuecomment-48022164
-    return [@"VisitorUUID_" stringByAppendingString: [self.dataStore.visitorUUID UUIDString]];
+    NSUUID *visitorUUID = [[LoopPulse sharedInstance] visitorUUID];
+    return [@"VisitorUUID_" stringByAppendingString: [visitorUUID UUIDString]];
 }
 
 - (void)didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
