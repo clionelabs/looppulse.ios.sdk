@@ -14,6 +14,7 @@
 #import "LPEngagementManager.h"
 #import "LPServerResponse.h"
 #import <Parse/Parse.h>
+#import <AdSupport/AdSupport.h>
 
 @interface LoopPulse ()
 @property (readonly, strong) NSString *applicationId;
@@ -23,7 +24,6 @@
 @property (readonly, strong) LPLocationManager *locationManager;
 @property (readonly, strong) LPEngagementManager *engagementManager;
 @property (readonly, strong) NSString *firebaseBaseUrl;
-
 @end
 
 @interface LPVisitor ()
@@ -37,12 +37,17 @@ NSString *const LoopPulseLocationDidEnterRegionNotification=@"LoopPulseLocationD
 NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDidExitRegionNotification";
 
 @implementation LoopPulse
+@synthesize visitorUUID = _visitorUUID;
 
 - (id)init
 {
     self = [super init];
     if (self) {
         _isAuthenticated = false;
+
+        ASIdentifierManager *adManager = [ASIdentifierManager sharedManager];
+        _visitorUUID = adManager.advertisingIdentifier;
+        _isTracking = adManager.advertisingTrackingEnabled;
     }
     return self;
 }
@@ -120,11 +125,6 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
     return [[LoopPulse defaults] objectForKey:@"firebase"];
 }
 
-- (NSUUID *)visitorUUID
-{
-    return [self.dataStore visitorUUID];
-}
-
 #pragma mark Public Interface
 
 + (void)authenticateWithApplicationId:(NSString *)applicationId
@@ -139,7 +139,12 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
 + (void)startLocationMonitoring
 {
     LoopPulse *loopPulse = [LoopPulse sharedInstance];
-    [loopPulse.locationManager startMonitoringForAllRegions];
+    if (loopPulse.isTracking) {
+        [loopPulse.locationManager startMonitoringForAllRegions];
+    } else {
+        // Respect advertisingTrackingEnabled and stop all tracking.
+        [loopPulse.locationManager stopMonitoringForAllRegions];
+    }
 }
 
 + (void)registerForRemoteNotificationTypesForApplication:(UIApplication *)application

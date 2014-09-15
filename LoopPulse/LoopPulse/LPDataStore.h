@@ -9,13 +9,10 @@
 #import <Foundation/Foundation.h>
 #import <Firebase/Firebase.h>
 
-@class LPVisitor;
-
 @interface LPDataStore : NSObject
 
 - (id)initWithToken:(NSString *)token andURLs:(NSDictionary *)urls;
 
 @property (readonly, nonatomic) NSDictionary *firebases;
-@property (readonly, nonatomic) NSUUID *visitorUUID;
 
 @end

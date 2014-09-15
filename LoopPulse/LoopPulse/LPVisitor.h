@@ -9,7 +9,4 @@
 #import <Foundation/Foundation.h>
 
 @interface LPVisitor : NSObject
-
-@property (readonly, retain) NSUUID *uuid;
-
 @end
