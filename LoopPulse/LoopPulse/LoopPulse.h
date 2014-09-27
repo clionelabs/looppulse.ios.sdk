@@ -21,6 +21,8 @@
 + (void)didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken;
 + (void)didReceiveRemoteNotification:(NSDictionary *)userInfo;
 
++ (void)setExternalId:(NSString *)externalId;
+
 @property (readonly, nonatomic) BOOL isAuthenticated;
 @property (readonly, nonatomic) BOOL isTracking;
 @property (readonly, nonatomic) NSUUID *visitorUUID;

@@ -25,4 +25,9 @@
     return self;
 }
 
+- (void)identifyVisitor:(NSUUID *)uuid withExternalID:(NSString *)externalID
+{
+    [_dataStore identifyVisitor:uuid withExternalID:externalID];
+}
+
 @end

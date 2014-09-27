@@ -9,4 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface LPVisitor : NSObject
+
+- (void)identifyVisitor:(NSUUID *)uuid withExternalID:(NSString *)externalID;
+
 @end
