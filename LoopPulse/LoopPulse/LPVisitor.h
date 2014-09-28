@@ -10,6 +10,6 @@
 
 @interface LPVisitor : NSObject
 
-- (void)identifyVisitor:(NSUUID *)uuid withExternalID:(NSString *)externalID;
+- (void)identifyWithExternalID:(NSString *)externalID;
 
 @end

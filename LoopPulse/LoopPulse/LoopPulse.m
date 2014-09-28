@@ -173,10 +173,10 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
     [loopPulse.engagementManager didReceiveRemoteNotification:userInfo];
 }
 
-+ (void)setExternalId:(NSString *)externalId
++ (void)identifyWithExternalID:(NSString *)externalId
 {
     LoopPulse *loopPulse = [LoopPulse sharedInstance];
-    [loopPulse.visitor identifyVisitor:loopPulse.visitorUUID withExternalID:externalId];
+    [loopPulse.visitor identifyWithExternalID:externalId];
 }
 
 #pragma mark Private Class Methods
