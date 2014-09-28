@@ -10,31 +10,22 @@
 
 @implementation LPDataStore (LPVisitor)
 
-- (Firebase *)visitorsRef
+- (Firebase *)visitorEventsRef
 {
-    return [self.firebases objectForKey:@"visitors"];
-}
-
-- (void)registerVisitor:(NSUUID *)uuid
-{
-    [self identifyVisitor:uuid withExternalID:NULL];
+    return [self.firebases objectForKey:@"visitor_events"];
 }
 
 - (void)identifyVisitor:(NSUUID *)uuid withExternalID:(NSString *)externalID
 {
-    Firebase *visitorRef = [[self visitorsRef] childByAppendingPath:[uuid UUIDString]];
-    [visitorRef observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-        if (snapshot.value == [NSNull null]) {
-            // New visitor
-            NSDictionary *newVisitorInfo = @{@"created_at":[[NSDate date] description]};
-            [visitorRef setValue:newVisitorInfo andPriority:kFirebaseServerValueTimestamp];
-        }
+    NSDate *createdAt = [NSDate date];
+    NSNumber *priority = @([createdAt timeIntervalSince1970]);
+    NSDictionary *eventInfo = @{@"type": @"setExternalId",
+                                @"visitor_uuid": [uuid UUIDString],
+                                @"external_id": externalID,
+                                @"created_at": [createdAt description]};
 
-        if ([externalID length]!=0) {
-            NSDictionary *visitorInfo = @{@"external_id": externalID};
-            [visitorRef updateChildValues:visitorInfo];
-        }
-    }];
+    Firebase *visitor_event_ref = [[self visitorEventsRef] childByAutoId];
+    [visitor_event_ref setValue:eventInfo andPriority:priority];
 }
 
 @end

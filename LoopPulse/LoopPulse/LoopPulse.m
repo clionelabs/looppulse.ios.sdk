@@ -61,6 +61,8 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
 - (void)authenticate:(void (^)(void))successHandler
 {
     NSString *url = [@"http://beta.looppulse.com/api/authenticate/applications/" stringByAppendingString:self.applicationId];
+//    NSString *url = [@"http://localhost:3000/api/authenticate/applications/" stringByAppendingString:self.applicationId];
+
     NSURL *authenticationURL = [NSURL URLWithString:url];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:authenticationURL];
     [request setValue:self.token forHTTPHeaderField:@"x-auth-token"];
@@ -122,7 +124,13 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
 
 - (NSDictionary *)firebaseURLs
 {
-    return [[LoopPulse defaults] objectForKey:@"firebase"];
+    NSDictionary *firebase = [[LoopPulse defaults] objectForKey:@"firebase"];
+    NSDictionary *urls = [[NSDictionary alloc] initWithObjectsAndKeys:
+                         [firebase objectForKey:@"beacon_events"], @"beacon_events",
+                         [firebase objectForKey:@"engagement_events"], @"engagement_events",
+                         [firebase objectForKey:@"visitor_events"], @"visitor_events",
+                         nil];
+    return urls;
 }
 
 #pragma mark Public Interface
@@ -163,6 +171,12 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
 {
     LoopPulse *loopPulse = [LoopPulse sharedInstance];
     [loopPulse.engagementManager didReceiveRemoteNotification:userInfo];
+}
+
++ (void)identifyWithExternalID:(NSString *)externalId
+{
+    LoopPulse *loopPulse = [LoopPulse sharedInstance];
+    [loopPulse.visitor identifyWithExternalID:externalId];
 }
 
 #pragma mark Private Class Methods
