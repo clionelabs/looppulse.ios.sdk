@@ -10,7 +10,6 @@
 
 @interface LPDataStore (LPVisitor)
 
-- (void)registerVisitor:(NSUUID *)uuid;
 - (void)identifyVisitor:(NSUUID *)uuid withExternalID:(NSString *)externalID;
 
 @end

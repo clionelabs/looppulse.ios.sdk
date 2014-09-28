@@ -15,12 +15,6 @@
     return [self.firebases objectForKey:@"visitor_events"];
 }
 
-// TODO: Calling IdentifyVisitor doesn't really make sense. What does this method intended for?
-- (void)registerVisitor:(NSUUID *)uuid
-{
-    [self identifyVisitor:uuid withExternalID:NULL];
-}
-
 - (void)identifyVisitor:(NSUUID *)uuid withExternalID:(NSString *)externalID
 {
     NSDate *createdAt = [NSDate date];
