@@ -25,8 +25,9 @@
     return self;
 }
 
-- (void)identifyVisitor:(NSUUID *)uuid withExternalID:(NSString *)externalID
+- (void)identifyWithExternalID:(NSString *)externalID
 {
+    NSUUID *uuid = [[LoopPulse sharedInstance] visitorUUID];
     [_dataStore identifyVisitor:uuid withExternalID:externalID];
 }
 
