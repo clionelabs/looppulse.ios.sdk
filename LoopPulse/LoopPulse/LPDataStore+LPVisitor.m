@@ -19,7 +19,7 @@
 {
     NSDate *createdAt = [NSDate date];
     NSNumber *priority = @([createdAt timeIntervalSince1970]);
-    NSDictionary *eventInfo = @{@"type": @"setExternalId",
+    NSDictionary *eventInfo = @{@"type": @"identify",
                                 @"visitor_uuid": [uuid UUIDString],
                                 @"external_id": externalID,
                                 @"created_at": [createdAt description]};
