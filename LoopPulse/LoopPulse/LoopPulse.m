@@ -71,19 +71,20 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
                            completionHandler:^(NSURLResponse *urlResonse, NSData *data, NSError *error) {
 
                                if (error!=nil) {
-                                   NSDictionary *userInfo = @{@"error":error};
+                                   NSDictionary *userInfo = @{@"applicationId": self.applicationId, @"error":error};
                                    [LoopPulse postNotification:LoopPulseDidReceiveAuthenticationError withUserInfo:userInfo];
 
                                } else {
+                                   NSDictionary *userInfo = @{@"applicationId": self.applicationId};
                                    LPServerResponse *response = [[LPServerResponse alloc] initWithData:data];
                                    if (response.isAuthenticated) {
                                        _isAuthenticated = true;
                                        [self initFromDefaults:response.defaults];
-                                       [LoopPulse postNotification:LoopPulseDidAuthenticateSuccessfullyNotification withUserInfo:nil];
+                                       [LoopPulse postNotification:LoopPulseDidAuthenticateSuccessfullyNotification withUserInfo:userInfo];
 
                                        successHandler();
                                    } else {
-                                       [LoopPulse postNotification:LoopPulseDidFailToAuthenticateNotification withUserInfo:nil];
+                                       [LoopPulse postNotification:LoopPulseDidFailToAuthenticateNotification withUserInfo:userInfo];
                                    }
                                }
                            }];
@@ -93,7 +94,7 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
 {
     [self setDefaults:defaults];
 
-    _dataStore = [[LPDataStore alloc] initWithToken:self.token
+    _dataStore = [[LPDataStore alloc] initWithToken:[self firebaseToken]
                                             andURLs:[self firebaseURLs]];
     _visitor = [[LPVisitor alloc] initWithDataStore:_dataStore];
     _locationManager = [[LPLocationManager alloc] initWithDataStore:_dataStore];
@@ -120,6 +121,12 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
     [LoopPulse.defaults setObject:parseDefaults forKey:@"parse"];
 
     [LoopPulse.defaults synchronize];
+}
+
+- (NSString *)firebaseToken
+{
+    NSDictionary *firebase = [[LoopPulse defaults] objectForKey:@"firebase"];
+    return [firebase objectForKey:@"token"];
 }
 
 - (NSDictionary *)firebaseURLs

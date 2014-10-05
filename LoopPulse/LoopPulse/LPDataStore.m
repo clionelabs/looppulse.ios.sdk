@@ -30,9 +30,28 @@
     NSMutableDictionary *firebases = [NSMutableDictionary dictionary];
     [urls enumerateKeysAndObjectsUsingBlock:^(id key, id url, BOOL *stop){
         Firebase *fb = [[Firebase alloc] initWithUrl:url];
-        [firebases setObject:fb forKey:key];
+        [fb authWithCustomToken:self.token
+            withCompletionBlock: ^(NSError *error , FAuthData *authData) {
+                if (error) {
+                    NSLog(@"Error in Firebase authentication for %@: %@", url, error);
+                } else {
+                    [firebases setObject:fb forKey:key];
+                    [self observeFirebaseAuthEvent:fb];
+                }
+            }];
     }];
     return firebases;
+}
+
+// https://www.firebase.com/docs/ios/guide/user-auth.html#section-monitoring-authentication
+- (FirebaseHandle)observeFirebaseAuthEvent:(Firebase *)firebase
+{
+    return [firebase observeAuthEventWithBlock:^(FAuthData *authData) {
+        if (!authData.auth) {
+            // TODO: request new token or stop all tracking
+            NSLog(@"Access revoked: %@", firebase);
+        }
+    }];
 }
 
 @end
