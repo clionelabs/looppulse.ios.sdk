@@ -93,7 +93,9 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
 
 - (void)initFromServerResponse:(LPServerResponse *)response withSuccessBlock:(void (^)(void))successBlock
 {
-    [self setDefaults:response.defaults];
+    // TODO: we should phase out the use of NSDefaults and directly set corresponsding properties:
+    [self setDefaults:response.systemConfiguration];
+
     _dataStore = [[LPDataStore alloc] initWithURLs:[self firebaseURLs]];
     [_dataStore authenticateFirebase:[self firebaseToken] withSuccessBlock:^(void){
         _visitor = [[LPVisitor alloc] initWithDataStore:_dataStore];
@@ -105,23 +107,20 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
 }
 
 // Set defaults from server response
-- (void)setDefaults:(NSDictionary *)response
+- (void)setDefaults:(NSDictionary *)system
 {
-    NSDictionary *system = [response objectForKey:@"system"];
     BOOL onlySendKnown = [[system objectForKey:@"onlySendBeaconEventsWithKnownProximity"] boolValue];
     [LoopPulse.defaults setBool:onlySendKnown
                          forKey:@"onlySendBeaconEventsWithKnownProximity"];
-
-    NSString *urlString = [system objectForKey:@"configurationJSON"];
-    NSURL *configurationJSON = [NSURL URLWithString:urlString];
-    [LoopPulse.defaults setURL:configurationJSON
-                        forKey:@"configurationJSON"];
 
     NSDictionary *firebaseDefaults = [system objectForKey:@"firebase"];
     [LoopPulse.defaults setObject:firebaseDefaults forKey:@"firebase"];
 
     NSDictionary *parseDefaults = [system objectForKey:@"parse"];
     [LoopPulse.defaults setObject:parseDefaults forKey:@"parse"];
+
+    NSDictionary *locationsDefaults = [system objectForKey:@"locations"];
+    [LoopPulse.defaults setObject:locationsDefaults forKey:@"locations"];
 
     [LoopPulse.defaults synchronize];
 }

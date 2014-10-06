@@ -8,6 +8,10 @@
 
 #import "LPServerResponse.h"
 
+@interface LPServerResponse ()
+@property(nonatomic, retain) NSDictionary *defaults;
+@end
+
 @implementation LPServerResponse
 
 - (id)initWithData:(NSData *)data
@@ -15,13 +19,14 @@
     self = [super init];
     if (self) {
         NSError *error;
-        _defaults = [NSJSONSerialization JSONObjectWithData:data
-                                                    options:NSJSONReadingAllowFragments
-                                                      error:&error];
+        self.defaults = [NSJSONSerialization JSONObjectWithData:data
+                                                        options:NSJSONReadingAllowFragments
+                                                          error:&error];
         if (error!=nil){
             NSLog(@"Error converting server response to JSON: %@", error);
         }
-        _isAuthenticated = [[_defaults objectForKey:@"authenticated"] boolValue];
+        _isAuthenticated = [[self.defaults objectForKey:@"authenticated"] boolValue];
+        _systemConfiguration = [self.defaults objectForKey:@"system"];
     }
     return self;
 }

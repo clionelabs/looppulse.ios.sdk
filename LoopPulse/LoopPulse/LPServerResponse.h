@@ -13,6 +13,6 @@
 - (id)initWithData:(NSData *)data;
 
 @property(nonatomic, readonly) BOOL isAuthenticated;
-@property(nonatomic, readonly) NSDictionary *defaults;
+@property(nonatomic, readonly) NSDictionary *systemConfiguration;
 
 @end
