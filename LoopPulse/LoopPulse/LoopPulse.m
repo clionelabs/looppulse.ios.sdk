@@ -33,6 +33,8 @@
 NSString *const LoopPulseDidAuthenticateSuccessfullyNotification=@"LoopPulseDidAuthenticateSuccessfullyNotification";
 NSString *const LoopPulseDidFailToAuthenticateNotification=@"LoopPulseDidFailToAuthenticateNotification";
 NSString *const LoopPulseDidReceiveAuthenticationError=@"LoopPulseDidReceiveAuthenticationError";
+NSString *const LoopPulseLocationAuthorizationGrantedNotification=@"LoopPulseLocationAuthorizationGrantedNotification";
+NSString *const LoopPulseLocationAuthorizationDeniedNotification=@"LoopPulseLocationAuthorizationDeniedNotification";
 NSString *const LoopPulseLocationDidEnterRegionNotification=@"LoopPulseLocationDidEnterRegionNotification";
 NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDidExitRegionNotification";
 
@@ -141,6 +143,11 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
                           [firebase objectForKey:@"visitor_events"], @"visitor_events",
                           nil];
     return urls;
+}
+
+- (BOOL)isAuthorized
+{
+    return [self.locationManager isAuthorized];
 }
 
 #pragma mark Public Interface

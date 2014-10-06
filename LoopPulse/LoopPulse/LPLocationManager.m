@@ -51,14 +51,14 @@
     }
 }
 
-- (BOOL)isAuthorizedForLoopPulseUse
+- (BOOL)isAuthorized
 {
     return (CLLocationManager.authorizationStatus == kCLAuthorizationStatusAuthorized);
 }
 
 - (void)startMonitoringForAllRegions
 {
-    if ([self isAuthorizedForLoopPulseUse]) {
+    if ([self isAuthorized]) {
         [self startMonitoringForBeaconRegions:self.beaconRegions];
     } else {
         // Monitoring will be started once we receive the right authorization.
@@ -207,10 +207,13 @@
 {
     NSLog(@"didChangeAuthorizationStatus: %d", status);
     // iOS 8 kCLAuthorizationStatusAuthorized is the same as kCLAuthorizationStatusAuthorizedAlways
-    if ([self isAuthorizedForLoopPulseUse]) {
+    if ([self isAuthorized]) {
         [self startMonitoringForBeaconRegions:self.beaconRegions];
+        [LoopPulse postNotification:LoopPulseLocationAuthorizationGrantedNotification withUserInfo:nil];
     } else {
         // TODO: What should we do if we got denied
+        NSDictionary *userInfo = @{@"authorizationStatus": @(status)};
+        [LoopPulse postNotification:LoopPulseLocationAuthorizationDeniedNotification withUserInfo:userInfo];
     }
 }
 

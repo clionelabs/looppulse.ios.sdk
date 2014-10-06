@@ -24,12 +24,15 @@
 + (void)identifyVisitorWithExternalId:(NSString *)externalId;
 
 @property (readonly, nonatomic) BOOL isAuthenticated;
+@property (readonly, nonatomic) BOOL isAuthorized; // to track location
 @property (readonly, nonatomic) BOOL isTracking;
 @property (readonly, nonatomic) NSUUID *visitorUUID;
 
 extern NSString *const LoopPulseDidAuthenticateSuccessfullyNotification;
 extern NSString *const LoopPulseDidFailToAuthenticateNotification;
 extern NSString *const LoopPulseDidReceiveAuthenticationError;
+extern NSString *const LoopPulseLocationAuthorizationGrantedNotification;
+extern NSString *const LoopPulseLocationAuthorizationDeniedNotification;
 extern NSString *const LoopPulseLocationDidEnterRegionNotification;
 extern NSString *const LoopPulseLocationDidExitRegionNotification;
 
