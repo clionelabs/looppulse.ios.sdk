@@ -11,18 +11,36 @@
 
 @interface LPDataStore ()
 @property (readonly, retain) NSString *token;
+@property (readonly, retain) NSDictionary *urls;
 @end
 
 @implementation LPDataStore
 
-- (id)initWithToken:(NSString *)token andURLs:(NSDictionary *)urls
+- (id)initWithURLs:(NSDictionary *)urls
 {
     self = [super init];
     if (self) {
-        _token = token;
-        _firebases = [self createFirebases:urls];
+        _urls = urls;
     }
     return self;
+}
+
+- (void)authenticateFirebase:(NSString *) token withSuccessBlock:(void (^)(void))successBlock
+{
+    _token = token;
+    NSString *root = [self.urls objectForKey:@"root"];
+    Firebase *firebase = [[Firebase alloc] initWithUrl:root];
+    [firebase authWithCustomToken:token
+              withCompletionBlock:^(NSError *error, FAuthData *authData){
+                  if (error) {
+                      NSLog(@"Error in Firebase authentication for %@: %@", root, error);
+                  } else {
+                      _firebases = [self createFirebases:self.urls];
+                      [self observeFirebaseAuthEvent:firebase];
+                      successBlock();
+                  }
+              }
+     ];
 }
 
 - (NSDictionary *)createFirebases:(NSDictionary *)urls
@@ -30,15 +48,7 @@
     NSMutableDictionary *firebases = [NSMutableDictionary dictionary];
     [urls enumerateKeysAndObjectsUsingBlock:^(id key, id url, BOOL *stop){
         Firebase *fb = [[Firebase alloc] initWithUrl:url];
-        [fb authWithCustomToken:self.token
-            withCompletionBlock: ^(NSError *error , FAuthData *authData) {
-                if (error) {
-                    NSLog(@"Error in Firebase authentication for %@: %@", url, error);
-                } else {
-                    [firebases setObject:fb forKey:key];
-                    [self observeFirebaseAuthEvent:fb];
-                }
-            }];
+        [firebases setObject:fb forKey:key];
     }];
     return firebases;
 }

@@ -60,8 +60,8 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
 
 - (void)authenticate:(void (^)(void))successHandler
 {
-    NSString *url = [@"http://beta.looppulse.com/api/authenticate/applications/" stringByAppendingString:self.applicationId];
-//    NSString *url = [@"http://localhost:3000/api/authenticate/applications/" stringByAppendingString:self.applicationId];
+//    NSString *url = [@"http://beta.looppulse.com/api/authenticate/applications/" stringByAppendingString:self.applicationId];
+    NSString *url = [@"http://localhost:3000/api/authenticate/applications/" stringByAppendingString:self.applicationId];
 
     NSURL *authenticationURL = [NSURL URLWithString:url];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:authenticationURL];
@@ -78,11 +78,12 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
                                    NSDictionary *userInfo = @{@"applicationId": self.applicationId};
                                    LPServerResponse *response = [[LPServerResponse alloc] initWithData:data];
                                    if (response.isAuthenticated) {
-                                       _isAuthenticated = true;
-                                       [self initFromDefaults:response.defaults];
-                                       [LoopPulse postNotification:LoopPulseDidAuthenticateSuccessfullyNotification withUserInfo:userInfo];
+                                       [self initFromServerResponse:response withSuccessBlock:^(void){
+                                           _isAuthenticated = true;
+                                           [LoopPulse postNotification:LoopPulseDidAuthenticateSuccessfullyNotification withUserInfo:userInfo];
 
-                                       successHandler();
+                                           successHandler();
+                                       }];
                                    } else {
                                        [LoopPulse postNotification:LoopPulseDidFailToAuthenticateNotification withUserInfo:userInfo];
                                    }
@@ -90,15 +91,17 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
                            }];
 }
 
-- (void)initFromDefaults:(NSDictionary *)defaults
+- (void)initFromServerResponse:(LPServerResponse *)response withSuccessBlock:(void (^)(void))successBlock
 {
-    [self setDefaults:defaults];
+    [self setDefaults:response.defaults];
+    _dataStore = [[LPDataStore alloc] initWithURLs:[self firebaseURLs]];
+    [_dataStore authenticateFirebase:[self firebaseToken] withSuccessBlock:^(void){
+        _visitor = [[LPVisitor alloc] initWithDataStore:_dataStore];
+        _locationManager = [[LPLocationManager alloc] initWithDataStore:_dataStore];
+        _engagementManager = [[LPEngagementManager alloc] initWithDataStore:_dataStore];
 
-    _dataStore = [[LPDataStore alloc] initWithToken:[self firebaseToken]
-                                            andURLs:[self firebaseURLs]];
-    _visitor = [[LPVisitor alloc] initWithDataStore:_dataStore];
-    _locationManager = [[LPLocationManager alloc] initWithDataStore:_dataStore];
-    _engagementManager = [[LPEngagementManager alloc] initWithDataStore:_dataStore];
+        successBlock();
+    }];
 }
 
 // Set defaults from server response
@@ -133,10 +136,11 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
 {
     NSDictionary *firebase = [[LoopPulse defaults] objectForKey:@"firebase"];
     NSDictionary *urls = [[NSDictionary alloc] initWithObjectsAndKeys:
-                         [firebase objectForKey:@"beacon_events"], @"beacon_events",
-                         [firebase objectForKey:@"engagement_events"], @"engagement_events",
-                         [firebase objectForKey:@"visitor_events"], @"visitor_events",
-                         nil];
+                          [firebase objectForKey:@"root"], @"root",
+                          [firebase objectForKey:@"beacon_events"], @"beacon_events",
+                          [firebase objectForKey:@"engagement_events"], @"engagement_events",
+                          [firebase objectForKey:@"visitor_events"], @"visitor_events",
+                          nil];
     return urls;
 }
 
