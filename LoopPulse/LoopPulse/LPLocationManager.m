@@ -41,10 +41,29 @@
     return beaconRegionManager.genericRegionsToMonitor;
 }
 
+- (void)requestAuthorization
+{
+    // http://stackoverflow.com/questions/7848766/how-can-we-programmatically-detect-which-ios-version-is-device-running-on
+    if ([NSProcessInfo instancesRespondToSelector:@selector(isOperatingSystemAtLeastVersion:)]) {
+        [self requestAlwaysAuthorization];
+    } else {
+        // we're on iOS 7 or below
+    }
+}
+
+- (BOOL)isAuthorizedForLoopPulseUse
+{
+    return (CLLocationManager.authorizationStatus == kCLAuthorizationStatusAuthorized);
+}
+
 - (void)startMonitoringForAllRegions
 {
-    [self startMonitoringForBeaconRegions:self.beaconRegions];
-    NSLog(@"startMonitoringForAllRegions: %@", self.monitoredRegions);
+    if ([self isAuthorizedForLoopPulseUse]) {
+        [self startMonitoringForBeaconRegions:self.beaconRegions];
+    } else {
+        // Monitoring will be started once we receive the right authorization.
+        [self requestAuthorization];
+    }
 }
 
 - (void)stopMonitoringForAllRegions
@@ -92,6 +111,7 @@
             [self startMonitoringForRegion:region];
         }
     }
+    NSLog(@"startMonitoringForBeaconRegions: %@", self.monitoredRegions);
 }
 
 - (void)stopMonitoringAndRangingForBeaconRegions:(NSArray *)beaconRegionsToMonitor
@@ -175,6 +195,22 @@
                 [self.dataStore logEvent:@"didRangeBeacons" withBeacon:beacon atTime:[NSDate date]];
             }
         }
+    }
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    NSLog(@"didFailWithError: %@", error);
+}
+
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
+{
+    NSLog(@"didChangeAuthorizationStatus: %d", status);
+    // iOS 8 kCLAuthorizationStatusAuthorized is the same as kCLAuthorizationStatusAuthorizedAlways
+    if ([self isAuthorizedForLoopPulseUse]) {
+        [self startMonitoringForBeaconRegions:self.beaconRegions];
+    } else {
+        // TODO: What should we do if we got denied
     }
 }
 
