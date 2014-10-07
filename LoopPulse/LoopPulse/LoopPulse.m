@@ -60,14 +60,19 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
     _token = token;
 }
 
-- (void)authenticate:(void (^)(void))successHandler
+- (NSURLRequest *)authenticationRequest
 {
     NSString *url = [@"http://beta.looppulse.com/api/authenticate/applications/" stringByAppendingString:self.applicationId];
 //    NSString *url = [@"http://localhost:3000/api/authenticate/applications/" stringByAppendingString:self.applicationId];
-
     NSURL *authenticationURL = [NSURL URLWithString:url];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:authenticationURL];
     [request setValue:self.token forHTTPHeaderField:@"x-auth-token"];
+    return request;
+}
+
+- (void)authenticate:(void (^)(void))successHandler
+{
+    NSURLRequest *request = [self authenticationRequest];
     [NSURLConnection sendAsynchronousRequest:request
                                        queue:[NSOperationQueue mainQueue]
                            completionHandler:^(NSURLResponse *urlResonse, NSData *data, NSError *error) {
