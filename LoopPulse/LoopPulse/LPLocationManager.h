@@ -14,5 +14,6 @@
 - (id)initWithDataStore:(LPDataStore *)dataStore;
 - (void)startMonitoringForAllRegions;
 - (void)stopMonitoringForAllRegions;
+- (BOOL)isAuthorized;
 
 @end
