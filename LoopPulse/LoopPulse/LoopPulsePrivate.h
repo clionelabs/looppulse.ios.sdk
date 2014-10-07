@@ -9,6 +9,8 @@
 
 @interface LoopPulse ()
 
+@property (readonly, nonatomic) NSString *session;
+
 + (NSUserDefaults *)defaults;
 + (void)postNotification:(NSString *)name withUserInfo:(NSDictionary *)userInfo;
 

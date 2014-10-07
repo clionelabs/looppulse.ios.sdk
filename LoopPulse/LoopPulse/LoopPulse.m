@@ -109,6 +109,7 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
                                    if (response.isAuthenticated) {
                                        [self initFromServerResponse:response withSuccessBlock:^(void){
                                            _isAuthenticated = true;
+                                           _session = response.session;
                                            [LoopPulse postNotification:LoopPulseDidAuthenticateSuccessfullyNotification withUserInfo:userInfo];
 
                                            successHandler();
