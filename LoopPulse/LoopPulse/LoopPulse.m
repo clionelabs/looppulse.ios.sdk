@@ -67,6 +67,7 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
     NSURL *authenticationURL = [NSURL URLWithString:url];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:authenticationURL];
     [request setValue:self.token forHTTPHeaderField:@"x-auth-token"];
+    [request setHTTPMethod:@"POST"];
     return request;
 }
 
