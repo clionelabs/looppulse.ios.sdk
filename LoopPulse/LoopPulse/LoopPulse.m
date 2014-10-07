@@ -71,47 +71,47 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
                            completionHandler:^(NSURLResponse *urlResonse, NSData *data, NSError *error) {
 
                                if (error!=nil) {
-                                   NSDictionary *userInfo = @{@"error":error};
+                                   NSDictionary *userInfo = @{@"applicationId": self.applicationId, @"error":error};
                                    [LoopPulse postNotification:LoopPulseDidReceiveAuthenticationError withUserInfo:userInfo];
 
                                } else {
+                                   NSDictionary *userInfo = @{@"applicationId": self.applicationId};
                                    LPServerResponse *response = [[LPServerResponse alloc] initWithData:data];
                                    if (response.isAuthenticated) {
-                                       _isAuthenticated = true;
-                                       [self initFromDefaults:response.defaults];
-                                       [LoopPulse postNotification:LoopPulseDidAuthenticateSuccessfullyNotification withUserInfo:nil];
+                                       [self initFromServerResponse:response withSuccessBlock:^(void){
+                                           _isAuthenticated = true;
+                                           [LoopPulse postNotification:LoopPulseDidAuthenticateSuccessfullyNotification withUserInfo:userInfo];
 
-                                       successHandler();
+                                           successHandler();
+                                       }];
                                    } else {
-                                       [LoopPulse postNotification:LoopPulseDidFailToAuthenticateNotification withUserInfo:nil];
+                                       [LoopPulse postNotification:LoopPulseDidFailToAuthenticateNotification withUserInfo:userInfo];
                                    }
                                }
                            }];
 }
 
-- (void)initFromDefaults:(NSDictionary *)defaults
+- (void)initFromServerResponse:(LPServerResponse *)response withSuccessBlock:(void (^)(void))successBlock
 {
-    [self setDefaults:defaults];
+    // TODO: we should phase out the use of NSDefaults and directly set corresponsding properties:
+    [self setDefaults:response.systemConfiguration];
 
-    _dataStore = [[LPDataStore alloc] initWithToken:self.token
-                                            andURLs:[self firebaseURLs]];
-    _visitor = [[LPVisitor alloc] initWithDataStore:_dataStore];
-    _locationManager = [[LPLocationManager alloc] initWithDataStore:_dataStore];
-    _engagementManager = [[LPEngagementManager alloc] initWithDataStore:_dataStore];
+    _dataStore = [[LPDataStore alloc] initWithURLs:[self firebaseURLs]];
+    [_dataStore authenticateFirebase:[self firebaseToken] withSuccessBlock:^(void){
+        _visitor = [[LPVisitor alloc] initWithDataStore:_dataStore];
+        _locationManager = [[LPLocationManager alloc] initWithDataStore:_dataStore];
+        _engagementManager = [[LPEngagementManager alloc] initWithDataStore:_dataStore];
+
+        successBlock();
+    }];
 }
 
 // Set defaults from server response
-- (void)setDefaults:(NSDictionary *)response
+- (void)setDefaults:(NSDictionary *)system
 {
-    NSDictionary *system = [response objectForKey:@"system"];
     BOOL onlySendKnown = [[system objectForKey:@"onlySendBeaconEventsWithKnownProximity"] boolValue];
     [LoopPulse.defaults setBool:onlySendKnown
                          forKey:@"onlySendBeaconEventsWithKnownProximity"];
-
-    NSString *urlString = [system objectForKey:@"configurationJSON"];
-    NSURL *configurationJSON = [NSURL URLWithString:urlString];
-    [LoopPulse.defaults setURL:configurationJSON
-                        forKey:@"configurationJSON"];
 
     NSDictionary *firebaseDefaults = [system objectForKey:@"firebase"];
     [LoopPulse.defaults setObject:firebaseDefaults forKey:@"firebase"];
@@ -119,17 +119,27 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
     NSDictionary *parseDefaults = [system objectForKey:@"parse"];
     [LoopPulse.defaults setObject:parseDefaults forKey:@"parse"];
 
+    NSDictionary *locationsDefaults = [system objectForKey:@"locations"];
+    [LoopPulse.defaults setObject:locationsDefaults forKey:@"locations"];
+
     [LoopPulse.defaults synchronize];
+}
+
+- (NSString *)firebaseToken
+{
+    NSDictionary *firebase = [[LoopPulse defaults] objectForKey:@"firebase"];
+    return [firebase objectForKey:@"token"];
 }
 
 - (NSDictionary *)firebaseURLs
 {
     NSDictionary *firebase = [[LoopPulse defaults] objectForKey:@"firebase"];
     NSDictionary *urls = [[NSDictionary alloc] initWithObjectsAndKeys:
-                         [firebase objectForKey:@"beacon_events"], @"beacon_events",
-                         [firebase objectForKey:@"engagement_events"], @"engagement_events",
-                         [firebase objectForKey:@"visitor_events"], @"visitor_events",
-                         nil];
+                          [firebase objectForKey:@"root"], @"root",
+                          [firebase objectForKey:@"beacon_events"], @"beacon_events",
+                          [firebase objectForKey:@"engagement_events"], @"engagement_events",
+                          [firebase objectForKey:@"visitor_events"], @"visitor_events",
+                          nil];
     return urls;
 }
 

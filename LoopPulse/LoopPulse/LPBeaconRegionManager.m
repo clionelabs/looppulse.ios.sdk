@@ -40,12 +40,16 @@
     return json;
 }
 
+- (NSDictionary *)locationsJSON
+{
+    return [LoopPulse.defaults objectForKey:@"locations"];
+}
+
 // Given current beacon region, return an array of possiblily overlapping regions
 - (NSDictionary *)generateBeaconRegionsNearby
 {
     NSMutableDictionary *regionsNearby = [NSMutableDictionary dictionary];
-    NSDictionary *company = [self readInstallationFile];
-    NSDictionary * locations = [company objectForKey:@"locations"];
+    NSDictionary * locations = [self locationsJSON];
     [locations enumerateKeysAndObjectsUsingBlock:^(id key, id location, BOOL *stop){
         NSDictionary *installationsDictionary = [location objectForKey:@"installations"];
         NSArray *installations = [self mapDictionariesToInstallations:installationsDictionary];

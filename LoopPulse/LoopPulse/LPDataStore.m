@@ -11,18 +11,36 @@
 
 @interface LPDataStore ()
 @property (readonly, retain) NSString *token;
+@property (readonly, retain) NSDictionary *urls;
 @end
 
 @implementation LPDataStore
 
-- (id)initWithToken:(NSString *)token andURLs:(NSDictionary *)urls
+- (id)initWithURLs:(NSDictionary *)urls
 {
     self = [super init];
     if (self) {
-        _token = token;
-        _firebases = [self createFirebases:urls];
+        _urls = urls;
     }
     return self;
+}
+
+- (void)authenticateFirebase:(NSString *) token withSuccessBlock:(void (^)(void))successBlock
+{
+    _token = token;
+    NSString *root = [self.urls objectForKey:@"root"];
+    Firebase *firebase = [[Firebase alloc] initWithUrl:root];
+    [firebase authWithCustomToken:token
+              withCompletionBlock:^(NSError *error, FAuthData *authData){
+                  if (error) {
+                      NSLog(@"Error in Firebase authentication for %@: %@", root, error);
+                  } else {
+                      _firebases = [self createFirebases:self.urls];
+                      [self observeFirebaseAuthEvent:firebase];
+                      successBlock();
+                  }
+              }
+     ];
 }
 
 - (NSDictionary *)createFirebases:(NSDictionary *)urls
@@ -33,6 +51,17 @@
         [firebases setObject:fb forKey:key];
     }];
     return firebases;
+}
+
+// https://www.firebase.com/docs/ios/guide/user-auth.html#section-monitoring-authentication
+- (FirebaseHandle)observeFirebaseAuthEvent:(Firebase *)firebase
+{
+    return [firebase observeAuthEventWithBlock:^(FAuthData *authData) {
+        if (!authData.auth) {
+            // TODO: request new token or stop all tracking
+            NSLog(@"Access revoked: %@", firebase);
+        }
+    }];
 }
 
 @end
