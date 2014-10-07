@@ -14,5 +14,6 @@
 
 @property(nonatomic, readonly) BOOL isAuthenticated;
 @property(nonatomic, readonly) NSDictionary *systemConfiguration;
+@property(nonatomic, readonly) NSString *session;
 
 @end

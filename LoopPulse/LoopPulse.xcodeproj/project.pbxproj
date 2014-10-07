@@ -26,6 +26,8 @@
 		244968751993C85000EBDF2C /* LPDataStore+LPEngagementManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 244968731993C85000EBDF2C /* LPDataStore+LPEngagementManager.m */; };
 		2468336E199DC90500429B13 /* CLBeacon+LoopPulseHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 2468336C199DC90500429B13 /* CLBeacon+LoopPulseHelpers.h */; };
 		2468336F199DC90500429B13 /* CLBeacon+LoopPulseHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 2468336D199DC90500429B13 /* CLBeacon+LoopPulseHelpers.m */; };
+		247A975619E3BFD100DECE18 /* NSDictionary+LoopPulseHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = 247A975419E3BFD100DECE18 /* NSDictionary+LoopPulseHelpers.h */; };
+		247A975719E3BFD100DECE18 /* NSDictionary+LoopPulseHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 247A975519E3BFD100DECE18 /* NSDictionary+LoopPulseHelpers.m */; };
 		247AB54E19A6F58B0065488B /* LoopPulsePrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 247AB54D19A6F58B0065488B /* LoopPulsePrivate.h */; };
 		247AB55719A8F4730065488B /* LPEngagementViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 247AB55419A8F4730065488B /* LPEngagementViewController.h */; };
 		247AB55819A8F4730065488B /* LPEngagementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 247AB55519A8F4730065488B /* LPEngagementViewController.m */; };
@@ -99,6 +101,8 @@
 		244968731993C85000EBDF2C /* LPDataStore+LPEngagementManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "LPDataStore+LPEngagementManager.m"; sourceTree = "<group>"; };
 		2468336C199DC90500429B13 /* CLBeacon+LoopPulseHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLBeacon+LoopPulseHelpers.h"; sourceTree = "<group>"; };
 		2468336D199DC90500429B13 /* CLBeacon+LoopPulseHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLBeacon+LoopPulseHelpers.m"; sourceTree = "<group>"; };
+		247A975419E3BFD100DECE18 /* NSDictionary+LoopPulseHelpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+LoopPulseHelpers.h"; sourceTree = "<group>"; };
+		247A975519E3BFD100DECE18 /* NSDictionary+LoopPulseHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+LoopPulseHelpers.m"; sourceTree = "<group>"; };
 		247AB54D19A6F58B0065488B /* LoopPulsePrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoopPulsePrivate.h; sourceTree = "<group>"; };
 		247AB55419A8F4730065488B /* LPEngagementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPEngagementViewController.h; sourceTree = "<group>"; };
 		247AB55519A8F4730065488B /* LPEngagementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPEngagementViewController.m; sourceTree = "<group>"; };
@@ -247,6 +251,8 @@
 				2468336C199DC90500429B13 /* CLBeacon+LoopPulseHelpers.h */,
 				F42E86E7192DF6A1007EDC30 /* CLBeacon+FirebaseDictionary.m */,
 				F42E86E8192DF6A1007EDC30 /* CLBeacon+FirebaseDictionary.h */,
+				247A975419E3BFD100DECE18 /* NSDictionary+LoopPulseHelpers.h */,
+				247A975519E3BFD100DECE18 /* NSDictionary+LoopPulseHelpers.m */,
 				F42E86B4192DF644007EDC30 /* Supporting Files */,
 			);
 			path = LoopPulse;
@@ -286,6 +292,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				24BA349F1993810B00500967 /* LPEngagementManager.h in Headers */,
+				247A975619E3BFD100DECE18 /* NSDictionary+LoopPulseHelpers.h in Headers */,
 				244968741993C85000EBDF2C /* LPDataStore+LPEngagementManager.h in Headers */,
 				24AB534A19B45550003C0940 /* LPServerResponse.h in Headers */,
 				24B5FB8919A9A686008C1ED3 /* LPEngagement.h in Headers */,
@@ -416,6 +423,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				24A01B08199B5C0700EB7C46 /* CLBeaconRegion+LoopPulseHelpers.m in Sources */,
+				247A975719E3BFD100DECE18 /* NSDictionary+LoopPulseHelpers.m in Sources */,
 				24BA34A01993810B00500967 /* LPEngagementManager.m in Sources */,
 				24B5FB8A19A9A686008C1ED3 /* LPEngagement.m in Sources */,
 				24AB534B19B45550003C0940 /* LPServerResponse.m in Sources */,
