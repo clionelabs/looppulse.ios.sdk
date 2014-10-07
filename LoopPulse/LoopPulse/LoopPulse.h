@@ -12,6 +12,8 @@
 @interface LoopPulse : NSObject
 
 + (LoopPulse *)sharedInstance;
++ (NSString *)version;
+
 + (void)authenticateWithApplicationId:(NSString *)applicationId
                             withToken:(NSString *)token
                     andSuccessHandler:(void(^)(void))successHandler;

@@ -13,6 +13,7 @@
 #import "LPDataStore.h"
 #import "LPEngagementManager.h"
 #import "LPServerResponse.h"
+#import "NSDictionary+LoopPulseHelpers.h"
 #import <Parse/Parse.h>
 #import <AdSupport/AdSupport.h>
 
@@ -60,14 +61,40 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
     _token = token;
 }
 
-- (void)authenticate:(void (^)(void))successHandler
+- (NSDictionary *)authenticationPayload
 {
-    NSString *url = [@"http://beta.looppulse.com/api/authenticate/applications/" stringByAppendingString:self.applicationId];
-//    NSString *url = [@"http://localhost:3000/api/authenticate/applications/" stringByAppendingString:self.applicationId];
+    // sdk
+    NSDictionary *sdk = @{@"version": [LoopPulse version]};
 
+    // device
+    // https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIDevice_Class/index.html#//apple_ref/occ/instp/UIDevice/name
+    UIDevice *uiDevice = [UIDevice currentDevice];
+    NSDictionary *device = @{@"model": [uiDevice model],
+                             @"systemVersion": [uiDevice systemVersion]};
+
+    NSDictionary *payload = @{@"visitorUUID": [[[LoopPulse sharedInstance] visitorUUID] UUIDString],
+                              @"sdk": sdk,
+                              @"device": device};
+    return payload;
+}
+
+- (NSURLRequest *)authenticationRequest
+{
+//    NSString *url = [@"http://beta.looppulse.com/api/authenticate/applications/" stringByAppendingString:self.applicationId];
+    NSString *url = [@"http://localhost:3000/api/authenticate/applications/" stringByAppendingString:self.applicationId];
     NSURL *authenticationURL = [NSURL URLWithString:url];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:authenticationURL];
     [request setValue:self.token forHTTPHeaderField:@"x-auth-token"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    NSString *jsonString = [[self authenticationPayload] jsonString:@"session"];
+    [request setHTTPBody:[jsonString dataUsingEncoding:NSUTF8StringEncoding]];
+    [request setHTTPMethod:@"POST"];
+    return request;
+}
+
+- (void)authenticate:(void (^)(void))successHandler
+{
+    NSURLRequest *request = [self authenticationRequest];
     [NSURLConnection sendAsynchronousRequest:request
                                        queue:[NSOperationQueue mainQueue]
                            completionHandler:^(NSURLResponse *urlResonse, NSData *data, NSError *error) {
@@ -82,6 +109,7 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
                                    if (response.isAuthenticated) {
                                        [self initFromServerResponse:response withSuccessBlock:^(void){
                                            _isAuthenticated = true;
+                                           _session = response.session;
                                            [LoopPulse postNotification:LoopPulseDidAuthenticateSuccessfullyNotification withUserInfo:userInfo];
 
                                            successHandler();
@@ -151,6 +179,11 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
 }
 
 #pragma mark Public Interface
+
++ (NSString *)version
+{
+    return @"0.5";
+}
 
 + (void)authenticateWithApplicationId:(NSString *)applicationId
                             withToken:(NSString *)token
