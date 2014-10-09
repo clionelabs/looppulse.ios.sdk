@@ -24,6 +24,7 @@
 + (void)didReceiveRemoteNotification:(NSDictionary *)userInfo;
 
 + (void)identifyVisitorWithExternalId:(NSString *)externalId;
++ (void)tagVisitorWithProperities:(NSDictionary *)properties;
 
 @property (readonly, nonatomic) BOOL isAuthenticated;
 @property (readonly, nonatomic) BOOL isAuthorized; // to track location

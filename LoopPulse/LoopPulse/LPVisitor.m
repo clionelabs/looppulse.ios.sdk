@@ -25,10 +25,19 @@
     return self;
 }
 
+- (NSUUID *)uuid
+{
+    return [[LoopPulse sharedInstance] visitorUUID];
+}
+
 - (void)identifyWithExternalID:(NSString *)externalID
 {
-    NSUUID *uuid = [[LoopPulse sharedInstance] visitorUUID];
-    [_dataStore identifyVisitor:uuid withExternalID:externalID];
+    [self.dataStore identifyVisitor:self.uuid withExternalID:externalID];
+}
+
+- (void)tagWithProperties:(NSDictionary *)properties
+{
+    [self.dataStore tagVisitor:self.uuid withProperties:properties];
 }
 
 @end

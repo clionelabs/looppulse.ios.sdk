@@ -17,15 +17,28 @@
 
 - (void)identifyVisitor:(NSUUID *)uuid withExternalID:(NSString *)externalID
 {
+    [self pushVisitorEvent:@{@"type": @"identify",
+                             @"visitor_uuid": [uuid UUIDString],
+                             @"external_id": externalID}];
+}
+
+- (void)tagVisitor:(NSUUID *)uuid withProperties:(NSDictionary *)properties
+{
+    [self pushVisitorEvent:@{@"type": @"tag",
+                             @"visitor_uuid": [uuid UUIDString],
+                             @"properties": properties}];
+}
+
+// Automatically add created_at and priority before pushing to Firebase
+- (void)pushVisitorEvent:(NSDictionary *)event
+{
     NSDate *createdAt = [NSDate date];
-    NSNumber *priority = @([createdAt timeIntervalSince1970]);
-    NSDictionary *eventInfo = @{@"type": @"identify",
-                                @"visitor_uuid": [uuid UUIDString],
-                                @"external_id": externalID,
-                                @"created_at": [createdAt description]};
+    NSMutableDictionary *finalEvent = [NSMutableDictionary dictionaryWithDictionary:@{@"created_at": [createdAt description]}];
+    [finalEvent addEntriesFromDictionary:event];
 
     Firebase *visitor_event_ref = [[self visitorEventsRef] childByAutoId];
-    [visitor_event_ref setValue:eventInfo andPriority:priority];
+    NSNumber *priority = @([createdAt timeIntervalSince1970]);
+    [visitor_event_ref setValue:finalEvent andPriority:priority];
 }
 
 @end

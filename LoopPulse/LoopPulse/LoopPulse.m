@@ -229,6 +229,12 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
     [loopPulse.visitor identifyWithExternalID:externalId];
 }
 
++ (void)tagVisitorWithProperities:(NSDictionary *)properties
+{
+    LoopPulse *loopPulse = [LoopPulse sharedInstance];
+    [loopPulse.visitor tagWithProperties:properties];
+}
+
 #pragma mark Private Class Methods
 
 + (LoopPulse *)sharedInstance
