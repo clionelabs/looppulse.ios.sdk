@@ -28,7 +28,8 @@
     [LoopPulse authenticateWithApplicationId:@"28AuRvYh3vSA3Cueq"
                                    withToken:@"5kmjyYLKvy2xqbuZNwqe"
                            andSuccessHandler:^(void) {
-
+        int points = arc4random() % 2000;
+        [LoopPulse tagVisitorWithProperities:@{@"membership": @{@"tier": @"gold", @"points": @(points)}}];
         [LoopPulse startLocationMonitoring];
         [LoopPulse registerForRemoteNotificationTypesForApplication:application];
 
