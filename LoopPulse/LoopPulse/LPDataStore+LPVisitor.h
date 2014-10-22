@@ -11,5 +11,6 @@
 @interface LPDataStore (LPVisitor)
 
 - (void)identifyVisitor:(NSUUID *)uuid withExternalID:(NSString *)externalID;
+- (void)tagVisitor:(NSUUID *)uuid withProperties:(NSDictionary *)properties;
 
 @end

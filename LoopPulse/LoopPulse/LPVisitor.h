@@ -11,5 +11,6 @@
 @interface LPVisitor : NSObject
 
 - (void)identifyWithExternalID:(NSString *)externalID;
+- (void)tagWithProperties:(NSDictionary *)properties;
 
 @end
