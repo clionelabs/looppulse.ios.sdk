@@ -25,14 +25,13 @@
 {
     self.coreDataController = [[MBCoreDataController alloc] init];
 
-    [LoopPulse authenticateWithApplicationId:@"28AuRvYh3vSA3Cueq"
-                                   withToken:@"5kmjyYLKvy2xqbuZNwqe"
+    [LoopPulse authenticateWithApplicationId:@"5of345ljkfaLKJKJL"
+                                   withToken:@"34LKJ043nkjajoifuer9"
                            andSuccessHandler:^(void) {
         int points = arc4random() % 2000;
-        [LoopPulse tagVisitorWithProperities:@{@"membership": @{@"tier": @"gold", @"points": @(points)}}];
+        [LoopPulse tagVisitorWithProperities:@{@"membership": @{@"tier": @"gold", @"points": @(points)}}];                               
         [LoopPulse startLocationMonitoring];
         [LoopPulse registerForRemoteNotificationTypesForApplication:application];
-
         self.logController = [[MBLogController alloc] init];
         self.logController.loopPulse = [LoopPulse sharedInstance];
         self.logController.managedObjectContext = self.coreDataController.managedObjectContext;
@@ -93,6 +92,11 @@
     UILocalNotification *notification = [[UILocalNotification alloc] init];
     notification.alertBody = alertMessage;
     [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
+}
+
+// IOS >= 8
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
+    [LoopPulse didRegisterUserNotificationSettings:notificationSettings withApplication:application];
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
