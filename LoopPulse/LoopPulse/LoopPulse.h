@@ -22,6 +22,7 @@
 + (void)registerForRemoteNotificationTypesForApplication:(UIApplication *)application;
 + (void)didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken;
 + (void)didReceiveRemoteNotification:(NSDictionary *)userInfo;
++ (void)didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings withApplication:(UIApplication *)application;
 
 + (void)identifyVisitorWithExternalId:(NSString *)externalId;
 + (void)tagVisitorWithProperities:(NSDictionary *)properties;

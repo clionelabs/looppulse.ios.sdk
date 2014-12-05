@@ -217,6 +217,12 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
     [loopPulse.engagementManager didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
 }
 
++ (void)didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings withApplication:(UIApplication *)application
+{
+    LoopPulse *loopPulse = [LoopPulse sharedInstance];
+    [loopPulse.engagementManager didRegisterUserNotificationSettings:notificationSettings withApplication:application];
+}
+
 + (void)didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
     LoopPulse *loopPulse = [LoopPulse sharedInstance];
