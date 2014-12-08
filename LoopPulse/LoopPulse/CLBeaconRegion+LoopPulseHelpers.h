@@ -9,7 +9,9 @@
 #import <CoreLocation/CoreLocation.h>
 
 @interface CLBeaconRegion (LoopPulseHelpers)
-- (BOOL)isLoopPulseSpecificBeaconRegion;
 - (NSString *)key;
 - (NSString *)description;
+
+- (instancetype)initGenericWithProximityUUID:(NSUUID *)proximityUUID major:(CLBeaconMajorValue)major;
+- (instancetype)initSpecificWithProximityUUID:(NSUUID *)proximityUUID major:(CLBeaconMajorValue)major minor:(CLBeaconMinorValue)minor;
 @end

@@ -41,29 +41,27 @@
     return beaconRegionManager.genericRegionsToMonitor;
 }
 
-- (void)requestAuthorization
-{
-    // http://stackoverflow.com/questions/7848766/how-can-we-programmatically-detect-which-ios-version-is-device-running-on
-    if ([NSProcessInfo instancesRespondToSelector:@selector(isOperatingSystemAtLeastVersion:)]) {
-        [self requestAlwaysAuthorization];
-    } else {
-        // we're on iOS 7 or below
-    }
-}
-
-- (BOOL)isAuthorized
-{
-    return (CLLocationManager.authorizationStatus == kCLAuthorizationStatusAuthorized);
-}
-
 - (void)startMonitoringForAllRegions
 {
-    if ([self isAuthorized]) {
-        [self startMonitoringForBeaconRegions:self.beaconRegions];
-    } else {
-        // Monitoring will be started once we receive the right authorization.
-        [self requestAuthorization];
+    // For iOS 8, we need to call requestAlwaysAuthorization explicity for permission
+    //   It's okay we call it everytime without checking the authorization status, because it won't prompt again once it's authorized.
+    // For iOS 7, we just need to call startMonitoring, and iOS will prompt the permission dialog automatically
+    if ([self respondsToSelector: @selector(requestAlwaysAuthorization)]) {
+        [self requestAlwaysAuthorization];
     }
+    [self startMonitoringForBeaconRegions:self.beaconRegions];
+    
+//    // We do a random ranging purely for the purpose of speeding up responsiveness.
+//    // Due to the underlying implementation of iOS monitoring, a ranging event will force the
+//    // system to do bluetooth scan immediately, which as a side effect, will trigger didEnter/ didExit events if there are ones.
+//    if ([self.beaconRegions count] > 0) {
+//        // Just build a random region to range. Doesn't really matter what it is.
+//        CLBeaconRegion *firstRegion = [self.beaconRegions firstObject];
+//        CLBeaconRegion *randomRegion = [[CLBeaconRegion alloc] initWithProximityUUID:firstRegion.proximityUUID identifier:[NSString stringWithFormat:@"%@:%@", LP_REGION_IDENTIFIER_PREFIX, firstRegion.proximityUUID]];
+//        [self startRangingBeaconsInRegion:randomRegion];
+//    }
+    
+    [self trackCurrentMonitoredRegions];
 }
 
 - (void)stopMonitoringForAllRegions
@@ -79,6 +77,8 @@
             [self stopRangingBeaconsInRegion:region];
         }
     }
+    
+    [self trackCurrentMonitoredRegions];
 }
 
 - (void)requestStateForAllRegions
@@ -86,18 +86,6 @@
     for (CLBeaconRegion *beaconRegion in [self beaconRegions]) {
         [self requestStateForRegion:beaconRegion];
     }
-}
-
-- (NSArray *)filterByKnownProximities:(NSArray *)beacons
-{
-    NSArray *knownProximities = @[@(CLProximityImmediate), @(CLProximityNear), @(CLProximityFar)];
-    NSPredicate *knownProximityPredicate = [NSPredicate predicateWithFormat:@"proximity IN %@", knownProximities];
-    return [beacons filteredArrayUsingPredicate:knownProximityPredicate];
-}
-
-- (BOOL)firstEncounteredWithBeaconRegion:(CLBeaconRegion *)beaconRegion
-{
-    return (![self.monitoredRegions containsObject:beaconRegion]);
 }
 
 - (void)startMonitoringForBeaconRegions:(NSArray *)beaconRegionsToMonitor
@@ -111,90 +99,74 @@
             [self startMonitoringForRegion:region];
         }
     }
-    NSLog(@"startMonitoringForBeaconRegions: %@", self.monitoredRegions);
 }
 
-- (void)stopMonitoringAndRangingForBeaconRegions:(NSArray *)beaconRegionsToMonitor
+#pragma mark Region Events - Generic and Specific
+- (void)didEnterGenericRegion:(CLRegion *)region
 {
-    for (CLBeaconRegion *beaconRegion in beaconRegionsToMonitor) {
-        [self stopMonitoringForRegion:beaconRegion];
-        [self stopRangingBeaconsInRegion:beaconRegion];
+    [self startRangingBeaconsInRegion:(CLBeaconRegion *)region];
+}
+- (void)didExitGenericRegion:(CLRegion *)region
+{
+    // Do Nothing
+}
+- (void)didRangeBeacons:(NSArray *)beacons inGenericRegion:(CLRegion *)region
+{
+    for (CLBeacon *beacon in beacons) {
+        CLBeaconRegion *beaconRegion = [beacon beaconRegion];
+        if (![self.monitoredRegions containsObject:beaconRegion]) {
+            [self.dataStore logEvent:@"didEnterRegion" withBeaconRegion:beaconRegion atTime:[NSDate date]];
+            [self startMonitoringForRegion:beaconRegion];
+        }
     }
 }
 
-- (void)startMonitoringNearbyBeaconRegions:(CLBeaconRegion *)beaconRegionInRange
+- (void)didEnterSpecificRegion:(CLRegion *)region
 {
-    NSArray *regions = [beaconRegionManager regionsToMonitor:beaconRegionInRange];
-    [self startMonitoringForBeaconRegions:regions];
+    // Do Nothing
+}
+- (void)didExitSpecificRegion:(CLRegion *)region
+{
+    CLBeaconRegion *beaconRegion = (CLBeaconRegion *)region;
+    [self.dataStore logEvent:@"didExitRegion" withBeaconRegion:beaconRegion atTime:[NSDate date]];
+    [self stopMonitoringForRegion:beaconRegion];
+}
+- (void)didRangeBeacons:(NSArray *)beacons inSpecificRegion:(CLRegion *)region
+{
+    // Do Nothing - We won't range specific beacon regions anyway.
 }
 
-- (void)stopMonitoringNearbyBeaconRegions:(CLBeaconRegion *)beaconRegionExiting
-{
-    NSArray *regions = [beaconRegionManager regionsToNotMonitor:beaconRegionExiting];
-    [self stopMonitoringAndRangingForBeaconRegions:regions];
-}
-
-- (BOOL)shouldOnlySendBeaconEventsWithKnownProximity
-{
-    NSUserDefaults *defaults = LoopPulse.defaults;
-    return [defaults boolForKey:@"onlySendBeaconEventsWithKnownProximity"];
-}
-
+#pragma mark - locationManager Delegate
 - (void)locationManager:(CLLocationManager *)manager didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region
 {
-    if (state==CLRegionStateInside) {
-        if ([region isLoopPulseBeaconRegion]) {
-            CLBeaconRegion *beaconRegion = (CLBeaconRegion *)region;
-            [self startRangingBeaconsInRegion:beaconRegion];
+    NSLog(@"didDetermineState in Region: %@, state: %d", region, state);
+    if (state == CLRegionStateInside) {
+        if ([region isLoopPulseGenericBeaconRegion]) {
+            [self didEnterGenericRegion:region];
+        } else if ([region isLoopPulseSpecificBeaconRegion]) {
+            [self didEnterSpecificRegion:region];
         }
-    }
-}
+    } else if (state == CLRegionStateOutside) {
+        if ([region isLoopPulseGenericBeaconRegion]) {
+            [self didExitGenericRegion:region];
+        } else if ([region isLoopPulseSpecificBeaconRegion]) {
+            [self didExitSpecificRegion:region];
+        }
 
-- (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region
-{
-    if ([region isLoopPulseBeaconRegion]) {
-        CLBeaconRegion *beaconRegion = (CLBeaconRegion *)region;
-        if ([beaconRegion isLoopPulseSpecificBeaconRegion]) {
-            [self startMonitoringNearbyBeaconRegions:beaconRegion];
-            [self.dataStore logEvent:@"didEnterRegion" withBeaconRegion:beaconRegion atTime:[NSDate date]];
-        } else {
-            // We just entered our generic beacon region
-            [self startRangingBeaconsInRegion:beaconRegion];
-        }
-    }
-}
-
-- (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region
-{
-    if ([region isLoopPulseBeaconRegion]) {
-        CLBeaconRegion *beaconRegion = (CLBeaconRegion *)region;
-        [self stopRangingBeaconsInRegion:beaconRegion];
-        if ([beaconRegion isLoopPulseSpecificBeaconRegion]) {
-            [self stopMonitoringNearbyBeaconRegions:beaconRegion];
-            [self.dataStore logEvent:@"didExitRegion" withBeaconRegion:beaconRegion atTime:[NSDate date]];
-        }
     }
 }
 
 - (void)locationManager:(CLLocationManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region
 {
-    if ([region isLoopPulseBeaconRegion]) {
-        NSArray *filteredBeacons = beacons;
-        if ([self shouldOnlySendBeaconEventsWithKnownProximity]) {
-            filteredBeacons = [self filterByKnownProximities:beacons];
-        }
-
-        for (CLBeacon *beacon in filteredBeacons) {
-            // If we range a specific beacon without a match from currently monitored regions,
-            // then we know we have just entered a generic beacon region.
-            CLBeaconRegion *beaconRegion = [beacon beaconRegion];
-            if ([self firstEncounteredWithBeaconRegion:beaconRegion]) {
-                [self startMonitoringNearbyBeaconRegions:beaconRegion];
-                [self.dataStore logEvent:@"didEnterRegion" withBeaconRegion:beaconRegion atTime:[NSDate date]];
-            } else {
-                [self.dataStore logEvent:@"didRangeBeacons" withBeacon:beacon atTime:[NSDate date]];
-            }
-        }
+    NSLog(@"didRange in Region: %@", region);
+    NSArray *filteredBeacons = beacons;
+    if ([self shouldOnlySendBeaconEventsWithKnownProximity]) {
+        filteredBeacons = [self filterByKnownProximities:beacons];
+    }
+    if ([region isLoopPulseGenericBeaconRegion]) {
+        [self didRangeBeacons:beacons inGenericRegion:region];
+    } else if ([region isLoopPulseSpecificBeaconRegion]) {
+        [self didRangeBeacons:beacons inSpecificRegion:region];
     }
 }
 
@@ -205,16 +177,45 @@
 
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
 {
-    NSLog(@"didChangeAuthorizationStatus: %d", status);
-    // iOS 8 kCLAuthorizationStatusAuthorized is the same as kCLAuthorizationStatusAuthorizedAlways
+    [[LoopPulse sharedInstance] track:@"didChangeAuthorizationStatus" withProperties:@{@"status": [NSString stringWithFormat:@"%D", status]}];
+    
     if ([self isAuthorized]) {
-        [self startMonitoringForBeaconRegions:self.beaconRegions];
+        [self startMonitoringForAllRegions];
         [LoopPulse postNotification:LoopPulseLocationAuthorizationGrantedNotification withUserInfo:nil];
     } else {
-        // TODO: What should we do if we got denied
-        NSDictionary *userInfo = @{@"authorizationStatus": @(status)};
-        [LoopPulse postNotification:LoopPulseLocationAuthorizationDeniedNotification withUserInfo:userInfo];
+        [self stopMonitoringForAllRegions];
+        [LoopPulse postNotification:LoopPulseLocationAuthorizationDeniedNotification withUserInfo:@{@"authorizationStatus": @(status)}];
     }
+}
+
+#pragma mark - utils
+- (BOOL)isAuthorized
+{
+    // IOS 7: kCLAuthorizationStatusAuthorized
+    // IOS 8: kCLAuthorizationStatusAuthorizedAlways
+    return (CLLocationManager.authorizationStatus == kCLAuthorizationStatusAuthorized
+            || CLLocationManager.authorizationStatus == kCLAuthorizationStatusAuthorizedAlways);
+}
+
+- (NSArray *)filterByKnownProximities:(NSArray *)beacons
+{
+    NSArray *knownProximities = @[@(CLProximityImmediate), @(CLProximityNear), @(CLProximityFar)];
+    NSPredicate *knownProximityPredicate = [NSPredicate predicateWithFormat:@"proximity IN %@", knownProximities];
+    return [beacons filteredArrayUsingPredicate:knownProximityPredicate];
+}
+
+- (BOOL)shouldOnlySendBeaconEventsWithKnownProximity
+{
+    return [LoopPulse.defaults boolForKey:@"onlySendBeaconEventsWithKnownProximity"];
+}
+
+- (void)trackCurrentMonitoredRegions
+{
+    NSMutableArray *regions = [[NSMutableArray alloc] init];
+    for (CLBeaconRegion *region in [self monitoredRegions]) {
+        [regions addObject:region.identifier];
+    }
+    [[LoopPulse sharedInstance] track:@"monitoredRegions" withProperties:@{@"regions": regions}];
 }
 
 @end

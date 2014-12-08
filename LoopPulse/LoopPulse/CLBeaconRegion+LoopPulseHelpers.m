@@ -11,10 +11,22 @@
 #import "LoopPulsePrivate.h"
 
 @implementation CLBeaconRegion (LoopPulseHelpers)
-- (BOOL)isLoopPulseSpecificBeaconRegion
+
+- (instancetype)initGenericWithProximityUUID:(NSUUID *)proximityUUID major:(CLBeaconMajorValue)major
 {
-    BOOL specific = self.major && self.minor;
-    return [self isLoopPulseBeaconRegion] && specific;
+    NSString *identifier = [NSString stringWithFormat:@"%@:%@:%d", LP_GENERIC_REGION_IDENTIFIER_PREFIX, [proximityUUID UUIDString], major];
+    CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:proximityUUID
+                                                                           major:major                                                                       identifier:identifier];
+    return beaconRegion;
+}
+
+- (instancetype)initSpecificWithProximityUUID:(NSUUID *)proximityUUID major:(CLBeaconMajorValue)major minor:(CLBeaconMinorValue)minor
+{
+    NSString *identifier = [NSString stringWithFormat:@"%@:%@:%d:%d", LP_SPECIFIC_REGION_IDENTIFIER_PREFIX, [proximityUUID UUIDString], major, minor];
+    CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:proximityUUID
+                                                                           major:major
+                                                                           minor:minor identifier:identifier];
+    return beaconRegion;
 }
 
 - (NSString *)key

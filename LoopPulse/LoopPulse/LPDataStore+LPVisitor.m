@@ -29,6 +29,14 @@
                              @"properties": properties}];
 }
 
+- (void)trackVisitor:(NSUUID *)uuid withEventName:(NSString *)eventName andProperties:(NSDictionary *)properties
+{
+    [self pushVisitorEvent:@{@"type": @"track",
+                             @"event_name": eventName,
+                             @"visitor_uuid": [uuid UUIDString],
+                             @"properties": properties}];
+}
+
 // Automatically add created_at and priority before pushing to Firebase
 - (void)pushVisitorEvent:(NSDictionary *)event
 {

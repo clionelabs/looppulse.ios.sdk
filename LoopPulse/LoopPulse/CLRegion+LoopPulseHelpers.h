@@ -10,4 +10,6 @@
 
 @interface CLRegion (LoopPulseHelpers)
 - (BOOL)isLoopPulseBeaconRegion;
+- (BOOL)isLoopPulseSpecificBeaconRegion;
+- (BOOL)isLoopPulseGenericBeaconRegion;
 @end

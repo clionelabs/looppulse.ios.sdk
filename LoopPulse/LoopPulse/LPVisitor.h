@@ -12,5 +12,6 @@
 
 - (void)identifyWithExternalID:(NSString *)externalID;
 - (void)tagWithProperties:(NSDictionary *)properties;
+- (void)track:(NSString *)eventName WithProperties:(NSDictionary *)properties;
 
 @end
