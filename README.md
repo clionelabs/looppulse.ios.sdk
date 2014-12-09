@@ -37,11 +37,11 @@
 
     2. The "Generic Region" is counter-intuitive in the following sense:
         - In usual thinkings, a "generic" region is location-bound, meaning that all beacons under the same region should be located without certain physical boundary, and generic reagion A and generic region B would mean two mutually exclusive physical boundaries. It would be a logical groupings of beacons, since a pair of UUID and major would provide insights on the physical locations of beacons.
-        - In our unusual settings, the "Generic Region" has `NO` such meaning. Beacons within the same region do not mean they fall into the same physical boundary. On the contrary, we enforced a special rule that beacons having the same UUID and major `CANNOT` contain overlapping area.
+        - In our unusual settings, the "Generic Region" has `NO` such meaning. Beacons within the same region do not mean they sit inside the same physical boundary. On the contrary, we enforced a special rule that beacons having the same UUID and major `CANNOT` contain overlapping area.
 
     3. The reason for enforcing this special rule is to ease the monitoring logic in order to tackle the problem mentioned in the above section.
-        - With the above rule enforced, it means that we can simply monitor all UUID-major pairs as region, instead of monitor each beacons individually. Note: You can choose to monitor `UUID`, `UUID + major`, or `UUID + major + minor` in IOS.
-        - So our approach is to monitor these "Generic Region". When didEnterRegion event is triggered, we then do a Ranging without that region, and locating which specific beacon's area we are in. We will at the same time monitor that specific beacon's region for the didExitRegion event, after which we will unmonitor the specific region. By this, we will be able to capture the entering and exiting time of each individual beacon.
+        - With the above rule enforced, it means that we can simply monitor all UUID-major pairs, instead of each beacons individually. Note: You can choose to monitor `UUID`, `UUID + major`, or `UUID + major + minor` in IOS.
+        - So our approach is to monitor these "Generic Region". When didEnterRegion event is triggered, we then do a Ranging within that region, and locate which specific beacon's area we are in. We will at the same time monitor that specific beacon's region for the didExitRegion event, after which we will unmonitor the specific region. By this, we will be able to capture the entering and exiting time of each individual beacon.
         - With this approach, the number of monitoring regions required is the number of "Generic Regions" plus the number of individual beacons' area we could get into at a particular time. Given the fact that in real situation, the number of beacons having overlapped area shouldn't be a lot, meaning that we only need a small number of UUID-major pairs.
 
 3. Limitations
