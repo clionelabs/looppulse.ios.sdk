@@ -82,8 +82,8 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
 {
 //    NSString *url = [@"http://beta.looppulse.com/api/authenticate/applications/" stringByAppendingString:self.applicationId];
 //    NSString *url = [@"http://localhost:3000/api/authenticate/applications/" stringByAppendingString:self.applicationId];
-    NSString *url = [@"http://192.168.0.104:3000/api/authenticate/applications/" stringByAppendingString:self.applicationId];
-//    NSString *url = [@"https://hdwbunalxr.localtunnel.me/api/authenticate/applications/" stringByAppendingString:self.applicationId];
+//    NSString *url = [@"http://192.168.0.104:3000/api/authenticate/applications/" stringByAppendingString:self.applicationId];
+    NSString *url = [@"https://povaxticcn.localtunnel.me/api/authenticate/applications/" stringByAppendingString:self.applicationId];
 
     NSURL *authenticationURL = [NSURL URLWithString:url];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:authenticationURL];

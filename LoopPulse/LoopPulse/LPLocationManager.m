@@ -5,6 +5,9 @@
 //  Created by Thomas Pun on 5/2/14.
 //  Copyright (c) 2014 Clione Labs. All rights reserved.
 //
+//  Please refer to the README file in repository for detailed explanation on the monitoring logic.
+//  Especially the concept of generic regions is very counter-intuitive.
+//
 
 #import "LPLocationManager.h"
 #import "LPBeaconRegionManager.h"
@@ -49,18 +52,9 @@
     if ([self respondsToSelector: @selector(requestAlwaysAuthorization)]) {
         [self requestAlwaysAuthorization];
     }
+    
+    // Noted that the you can set monitoredRegions before authorization, but they won't function until it's authorized
     [self startMonitoringForBeaconRegions:self.beaconRegions];
-    
-//    // We do a random ranging purely for the purpose of speeding up responsiveness.
-//    // Due to the underlying implementation of iOS monitoring, a ranging event will force the
-//    // system to do bluetooth scan immediately, which as a side effect, will trigger didEnter/ didExit events if there are ones.
-//    if ([self.beaconRegions count] > 0) {
-//        // Just build a random region to range. Doesn't really matter what it is.
-//        CLBeaconRegion *firstRegion = [self.beaconRegions firstObject];
-//        CLBeaconRegion *randomRegion = [[CLBeaconRegion alloc] initWithProximityUUID:firstRegion.proximityUUID identifier:[NSString stringWithFormat:@"%@:%@", LP_REGION_IDENTIFIER_PREFIX, firstRegion.proximityUUID]];
-//        [self startRangingBeaconsInRegion:randomRegion];
-//    }
-    
     [self trackCurrentMonitoredRegions];
 }
 
@@ -102,6 +96,7 @@
 }
 
 #pragma mark Region Events - Generic and Specific
+// Please refer to the README under the source repository in order the understand the following logic
 - (void)didEnterGenericRegion:(CLRegion *)region
 {
     [self startRangingBeaconsInRegion:(CLBeaconRegion *)region];
