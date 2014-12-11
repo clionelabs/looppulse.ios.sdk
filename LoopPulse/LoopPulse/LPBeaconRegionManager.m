@@ -10,7 +10,6 @@
 #import "CLBeaconRegion+LoopPulseHelpers.h"
 #import "LPInstallation.h"
 #import "LoopPulsePrivate.h"
-#import "LPInstallation.h"
 
 @implementation LPBeaconRegionManager
 
