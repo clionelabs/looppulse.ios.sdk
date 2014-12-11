@@ -12,11 +12,10 @@
 
 @implementation CLBeaconRegion (LoopPulseHelpers)
 
-- (instancetype)initGenericWithProximityUUID:(NSUUID *)proximityUUID major:(CLBeaconMajorValue)major
+- (instancetype)initGenericWithProximityUUID:(NSUUID *)proximityUUID
 {
-    NSString *identifier = [NSString stringWithFormat:@"%@:%@:%d", LP_GENERIC_REGION_IDENTIFIER_PREFIX, [proximityUUID UUIDString], major];
-    CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:proximityUUID
-                                                                           major:major                                                                       identifier:identifier];
+    NSString *identifier = [NSString stringWithFormat:@"%@:%@", LP_GENERIC_REGION_IDENTIFIER_PREFIX, [proximityUUID UUIDString]];
+    CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:proximityUUID identifier:identifier];
     return beaconRegion;
 }
 

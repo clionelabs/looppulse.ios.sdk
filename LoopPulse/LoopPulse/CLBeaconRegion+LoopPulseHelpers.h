@@ -12,6 +12,6 @@
 - (NSString *)key;
 - (NSString *)description;
 
-- (instancetype)initGenericWithProximityUUID:(NSUUID *)proximityUUID major:(CLBeaconMajorValue)major;
+- (instancetype)initGenericWithProximityUUID:(NSUUID *)proximityUUID;
 - (instancetype)initSpecificWithProximityUUID:(NSUUID *)proximityUUID major:(CLBeaconMajorValue)major minor:(CLBeaconMinorValue)minor;
 @end

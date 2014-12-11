@@ -42,7 +42,7 @@
 }
 
 // Return a list of generic regions, using all installations' beacons
-// A generic region is a UUID-major pairs
+// Each unique UUID is a generic region
 - (NSArray *)generateGenericBeaconRegions
 {
     NSDictionary * locations = [self locationsJSON];
@@ -52,8 +52,7 @@
         NSDictionary *installationsDictionary = [location objectForKey:@"installations"];
         [installationsDictionary enumerateKeysAndObjectsUsingBlock:^(id key, id dictionary, BOOL *stop){
             LPInstallation *installation = [[LPInstallation alloc] initWithDictionary:dictionary];
-
-            CLBeaconRegion *region = [[CLBeaconRegion alloc] initGenericWithProximityUUID:installation.beaconRegion.proximityUUID major:[installation.beaconRegion.major integerValue]];            
+            CLBeaconRegion *region = [[CLBeaconRegion alloc] initGenericWithProximityUUID:installation.beaconRegion.proximityUUID];
             if (![genericRegionIdentifiers containsObject:region.identifier]) {
                 [genericRegions addObject:region];
                 [genericRegionIdentifiers addObject:region.identifier];
