@@ -12,5 +12,6 @@
 
 - (void)identifyVisitor:(NSUUID *)uuid withExternalID:(NSString *)externalID;
 - (void)tagVisitor:(NSUUID *)uuid withProperties:(NSDictionary *)properties;
+- (void)trackVisitor:(NSUUID *)uuid withEventName:(NSString *)eventName andProperties:(NSDictionary *)properties;
 
 @end

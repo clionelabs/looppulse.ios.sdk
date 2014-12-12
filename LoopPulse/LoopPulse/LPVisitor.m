@@ -40,4 +40,9 @@
     [self.dataStore tagVisitor:self.uuid withProperties:properties];
 }
 
+- (void)track:(NSString *)eventName WithProperties:(NSDictionary *)properties
+{
+    [self.dataStore trackVisitor:self.uuid withEventName:eventName andProperties:properties];
+}
+
 @end

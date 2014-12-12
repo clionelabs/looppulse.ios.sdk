@@ -18,6 +18,7 @@
                             withToken:(NSString *)token
                     andSuccessHandler:(void(^)(void))successHandler;
 + (void)startLocationMonitoring;
++ (void)stopLocationMonitoring;
 
 + (void)registerForRemoteNotificationTypesForApplication:(UIApplication *)application;
 + (void)didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken;
@@ -26,6 +27,8 @@
 
 + (void)identifyVisitorWithExternalId:(NSString *)externalId;
 + (void)tagVisitorWithProperities:(NSDictionary *)properties;
+
+- (void)track:(NSString *)eventName withProperties:(NSDictionary *)properties;
 
 @property (readonly, nonatomic) BOOL isAuthenticated;
 @property (readonly, nonatomic) BOOL isAuthorized; // to track location

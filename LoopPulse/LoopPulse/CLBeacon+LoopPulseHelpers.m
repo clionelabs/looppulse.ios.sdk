@@ -7,17 +7,12 @@
 //
 
 #import "CLBeacon+LoopPulseHelpers.h"
+#import "CLBeaconRegion+LoopPulseHelpers.h"
 
 @implementation CLBeacon (LoopPulseHelpers)
 
 - (CLBeaconRegion *)beaconRegion
 {
-    NSString *identifier = [NSString stringWithFormat:@"LoopPulse-%@:%@", self.major, self.minor];
-    CLBeaconRegion *beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:self.proximityUUID
-                                                                           major:[self.major integerValue]
-                                                                           minor:[self.minor integerValue]
-                                                                      identifier:identifier];
-    return beaconRegion;
+    return [[CLBeaconRegion alloc] initSpecificWithProximityUUID:self.proximityUUID major:[self.major integerValue] minor:[self.minor integerValue]];
 }
-
 @end

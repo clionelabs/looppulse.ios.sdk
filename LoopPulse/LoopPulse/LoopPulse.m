@@ -81,7 +81,10 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
 - (NSURLRequest *)authenticationRequest
 {
 //    NSString *url = [@"http://beta.looppulse.com/api/authenticate/applications/" stringByAppendingString:self.applicationId];
-    NSString *url = [@"http://localhost:3000/api/authenticate/applications/" stringByAppendingString:self.applicationId];
+//    NSString *url = [@"http://localhost:3000/api/authenticate/applications/" stringByAppendingString:self.applicationId];
+    NSString *url = [@"http://192.168.0.102:3000/api/authenticate/applications/" stringByAppendingString:self.applicationId];
+//    NSString *url = [@"https://povaxticcn.localtunnel.me/api/authenticate/applications/" stringByAppendingString:self.applicationId];
+
     NSURL *authenticationURL = [NSURL URLWithString:url];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:authenticationURL];
     [request setValue:self.token forHTTPHeaderField:@"x-auth-token"];
@@ -178,6 +181,10 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
     return [self.locationManager isAuthorized];
 }
 
+- (void)track:(NSString *)eventName withProperties:(NSDictionary *)properties {
+    [self.visitor track:eventName WithProperties:properties];
+}
+
 #pragma mark Public Interface
 
 + (NSString *)version
@@ -203,6 +210,11 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
         // Respect advertisingTrackingEnabled and stop all tracking.
         [loopPulse.locationManager stopMonitoringForAllRegions];
     }
+}
+
++ (void)stopLocationMonitoring {
+    LoopPulse *loopPulse = [LoopPulse sharedInstance];
+    [loopPulse.locationManager stopMonitoringForAllRegions];
 }
 
 + (void)registerForRemoteNotificationTypesForApplication:(UIApplication *)application

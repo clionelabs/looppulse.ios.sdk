@@ -347,9 +347,10 @@
 				ORGANIZATIONNAME = "Clione Labs";
 				TargetAttributes = {
 					F49DC15A196532C4008D7EEB = {
-						DevelopmentTeam = 2DL9RWWZYS;
+						DevelopmentTeam = 4A495UQWUS;
 					};
 					F49DC183196532C4008D7EEB = {
+						DevelopmentTeam = 4A495UQWUS;
 						TestTargetID = F49DC15A196532C4008D7EEB;
 					};
 				};
@@ -569,7 +570,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MegaBox/MegaBox-Prefix.pch";
 				INFOPLIST_FILE = "MegaBox/MegaBox-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -592,7 +593,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MegaBox/MegaBox-Prefix.pch";
 				INFOPLIST_FILE = "MegaBox/MegaBox-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

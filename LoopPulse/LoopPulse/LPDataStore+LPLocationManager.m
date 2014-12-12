@@ -30,7 +30,7 @@
     [self logEvent:eventType
          withDictionary:[region firebaseDictionary]
                  atTime:createdAt];
-
+    NSLog(@"%@ %@", eventType, region);
     [self postNotification:eventType withBeaconRegion:region];
 }
 

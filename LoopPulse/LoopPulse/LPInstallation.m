@@ -57,11 +57,9 @@
         NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:[beacon objectForKey:@"proximityUUID"]];
         NSNumber *major = [beacon objectForKey:@"major"];
         NSNumber *minor = [beacon objectForKey:@"minor"];
-        NSString *identifier = [NSString stringWithFormat:@"LoopPulse-%@:%@", major, minor]; // TODO: refactor
-        _beaconRegion = [[CLBeaconRegion alloc] initWithProximityUUID:uuid
-                                                                major:[major integerValue]
-                                                                minor:[minor integerValue]
-                                                           identifier:identifier];
+        _beaconRegion = [[CLBeaconRegion alloc] initSpecificWithProximityUUID:uuid
+                                                                        major:[major integerValue]
+                                                                        minor:[minor integerValue]];
     }
     return _beaconRegion;
 }

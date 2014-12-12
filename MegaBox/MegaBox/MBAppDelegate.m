@@ -29,14 +29,14 @@
                                    withToken:@"34LKJ043nkjajoifuer9"
                            andSuccessHandler:^(void) {
         int points = arc4random() % 2000;
-        [LoopPulse tagVisitorWithProperities:@{@"membership": @{@"tier": @"gold", @"points": @(points)}}];                               
+        [LoopPulse tagVisitorWithProperities:@{@"membership": @{@"tier": @"gold", @"points": @(points)}}];
+        [LoopPulse stopLocationMonitoring];
         [LoopPulse startLocationMonitoring];
         [LoopPulse registerForRemoteNotificationTypesForApplication:application];
         self.logController = [[MBLogController alloc] init];
         self.logController.loopPulse = [LoopPulse sharedInstance];
         self.logController.managedObjectContext = self.coreDataController.managedObjectContext;
         [self.logController startLogMonitoring];
-
     }];
     [self observeLoopPulse];
 

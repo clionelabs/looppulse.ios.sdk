@@ -12,7 +12,19 @@
 
 - (BOOL)isLoopPulseBeaconRegion
 {
-    return ([self.identifier hasPrefix:@"LoopPulse"] &&
+    return ([self.identifier hasPrefix:LP_REGION_IDENTIFIER_PREFIX] &&
+            [self isKindOfClass:[CLBeaconRegion class]]);
+}
+
+- (BOOL)isLoopPulseSpecificBeaconRegion
+{
+    return ([self.identifier hasPrefix:LP_SPECIFIC_REGION_IDENTIFIER_PREFIX] &&
+            [self isKindOfClass:[CLBeaconRegion class]]);
+}
+
+- (BOOL)isLoopPulseGenericBeaconRegion
+{
+    return ([self.identifier hasPrefix:LP_GENERIC_REGION_IDENTIFIER_PREFIX] &&
             [self isKindOfClass:[CLBeaconRegion class]]);
 }
 @end
