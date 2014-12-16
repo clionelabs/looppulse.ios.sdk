@@ -11,6 +11,9 @@
 #import <LoopPulse/LoopPulse.h>
 
 #define kFirechatLogNS @"https://looppulse-megabox.firebaseio.com/visitors/%@/logs"
+#define kFirechatLogToken @"ha5jJXD3ac6DzOWoNfxPunOvrfvK68gQXwodfnn9"
+//#define kFirechatLogNS @"https://hiukim-lp-dev-beacon.firebaseio.com/visitors/%@/logs"
+//#define kFirechatLogToken @"a8heWtUdnNAGliQwJ25cX7UWGy5cYwWf4EYegtQB"
 
 #define kCoreDataEntity @"MBManagedLog"
 #define kCoreDataKeyAttribute @"name"
@@ -35,8 +38,16 @@
     NSLog(@"Loading log data");
 
     self.firebase = [[Firebase alloc] initWithUrl:[self firechatNamespace]];
-    [self deleteCoreDataManagedObjectsThatNoLongerExistInFirebase:self.firebase];
-    [self observeFirebase];
+    [self.firebase authWithCustomToken:kFirechatLogToken
+              withCompletionBlock:^(NSError *error, FAuthData *authData){
+                  if (error) {
+                      NSLog(@"Error in Firebase authentication for %@: %@", [self firechatNamespace], error);
+                  } else {
+                      [self deleteCoreDataManagedObjectsThatNoLongerExistInFirebase:self.firebase];
+                      [self observeFirebase];
+                  }
+              }
+     ];
 }
 
 - (void)stopLogMonitoring
