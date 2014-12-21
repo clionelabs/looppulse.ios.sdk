@@ -2,11 +2,11 @@
 
 # Install the SDK
 
-1. Download the LoopPulse SDK
+1. Download the LoopPulse and [Firebase](https://www.firebase.com/docs/) SDK
 
 	Make sure you are using latest version of Xcode (5.1+) and targeting iOS 7.0 or higher.
 
-2. Add the SDK to your app
+2. Add the SDKs to your app
 
 	Drag the LoopPulse.framework and Firebase.framework folders you downloaded into your Xcode project folder target.
 	
