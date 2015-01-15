@@ -10,6 +10,7 @@
 #import "CLBeaconRegion+LoopPulseHelpers.h"
 #import "LPInstallation.h"
 #import "LoopPulsePrivate.h"
+#import "LPPoi.h"
 
 @implementation LPBeaconRegionManager
 
@@ -23,74 +24,106 @@
     return self;
 }
 
-- (NSDictionary *)readInstallationFile
+//- (NSDictionary *)readInstallationFile
+//{
+//    NSURL *configurationJSON = [LoopPulse.defaults URLForKey:@"configurationJSON"];
+//    NSData *data = [NSData dataWithContentsOfURL:configurationJSON];
+//    NSError *error = nil;
+//    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data
+//                                                         options:NSJSONReadingAllowFragments
+//                                                           error:&error];
+//    if (error) NSLog(@"readInstallationFile: error: %@", error);
+//    return json;
+//}
+
+- (NSArray *)poisJSON
 {
-    NSURL *configurationJSON = [LoopPulse.defaults URLForKey:@"configurationJSON"];
-    NSData *data = [NSData dataWithContentsOfURL:configurationJSON];
-    NSError *error = nil;
-    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data
-                                                         options:NSJSONReadingAllowFragments
-                                                           error:&error];
-    if (error) NSLog(@"readInstallationFile: error: %@", error);
-    return json;
+    return [LoopPulse.defaults objectForKey:@"pois"];
 }
 
-- (NSDictionary *)locationsJSON
-{
-    return [LoopPulse.defaults objectForKey:@"locations"];
-}
-
-// Return a list of generic regions, using all installations' beacons
-// Each unique UUID is a generic region
 - (NSArray *)generateGenericBeaconRegions
 {
-    NSDictionary * locations = [self locationsJSON];
+    NSArray *pois = [self poisJSON];
     NSMutableSet *genericRegionIdentifiers = [[NSMutableSet alloc] init];
     NSMutableArray *genericRegions = [[NSMutableArray alloc] init];
-    [locations enumerateKeysAndObjectsUsingBlock:^(id key, id location, BOOL *stop){
-        NSDictionary *installationsDictionary = [location objectForKey:@"installations"];
-        [installationsDictionary enumerateKeysAndObjectsUsingBlock:^(id key, id dictionary, BOOL *stop){
-            LPInstallation *installation = [[LPInstallation alloc] initWithDictionary:dictionary];
-            CLBeaconRegion *region = [[CLBeaconRegion alloc] initGenericWithProximityUUID:installation.beaconRegion.proximityUUID];
-            if (![genericRegionIdentifiers containsObject:region.identifier]) {
-                [genericRegions addObject:region];
-                [genericRegionIdentifiers addObject:region.identifier];
-            }
-        }];
-    }];
+    for (NSDictionary *poi in pois) {
+        NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:[[poi objectForKey:@"beacon"] objectForKey:@"uuid"]];
+        CLBeaconRegion *region = [[CLBeaconRegion alloc] initGenericWithProximityUUID:uuid];
+        if (![genericRegionIdentifiers containsObject:region.identifier]) {
+            [genericRegions addObject:region];
+            [genericRegionIdentifiers addObject:region.identifier];
+        }
+    }
     return genericRegions;
 }
 
-- (void)saveProductNames {
-    NSDictionary * locations = [self locationsJSON];
-    [locations enumerateKeysAndObjectsUsingBlock:^(id key, id location, BOOL *stop){
-        NSDictionary *installationsDictionary = [location objectForKey:@"installations"];
-        NSArray *installations = [self mapDictionariesToInstallations:installationsDictionary];
-        // TODO: refactor this out of this method
-        [self saveProductNames:installations];
-    }];
-}
+//- (NSDictionary *)locationsJSON
+//{
+//    return [LoopPulse.defaults objectForKey:@"locations"];
+//}
+//
+//// Return a list of generic regions, using all installations' beacons
+//// Each unique UUID is a generic region
+//- (NSArray *)generateGenericBeaconRegions
+//{
+//    NSDictionary * locations = [self locationsJSON];
+//    NSMutableSet *genericRegionIdentifiers = [[NSMutableSet alloc] init];
+//    NSMutableArray *genericRegions = [[NSMutableArray alloc] init];
+//    [locations enumerateKeysAndObjectsUsingBlock:^(id key, id location, BOOL *stop){
+//        NSDictionary *installationsDictionary = [location objectForKey:@"installations"];
+//        [installationsDictionary enumerateKeysAndObjectsUsingBlock:^(id key, id dictionary, BOOL *stop){
+//            LPInstallation *installation = [[LPInstallation alloc] initWithDictionary:dictionary];
+//            CLBeaconRegion *region = [[CLBeaconRegion alloc] initGenericWithProximityUUID:installation.beaconRegion.proximityUUID];
+//            if (![genericRegionIdentifiers containsObject:region.identifier]) {
+//                [genericRegions addObject:region];
+//                [genericRegionIdentifiers addObject:region.identifier];
+//            }
+//        }];
+//    }];
+//    return genericRegions;
+//}
 
-- (void)saveProductNames:(NSArray *)installations
-{
+- (void)saveProductNames {
     NSUserDefaults *defaults = [LoopPulse defaults];
-    NSMutableDictionary *keyToName = [[NSMutableDictionary alloc] initWithCapacity:installations.count];
-    for (LPInstallation *installation in installations) {
-        CLBeaconRegion *beaconRegion = installation.beaconRegion;
-        [keyToName setObject:installation.productName forKey:beaconRegion.key];
+    NSArray *poisJSON = [self poisJSON];
+    NSMutableDictionary *keyToName = [[NSMutableDictionary alloc] initWithCapacity:poisJSON.count];
+    for (NSDictionary *poiJSON in poisJSON) {
+        LPPoi *poi = [[LPPoi alloc] initWithDictionary:poiJSON];
+        [keyToName setObject:poi.productName forKey:poi.beaconRegion.key];
     }
     [defaults setObject:keyToName forKey:@"beaconRegionKeyToProductName"];
 }
 
-- (NSArray *)mapDictionariesToInstallations:(NSDictionary *)installationsDicitionary
-{
-    NSMutableArray *installations = [NSMutableArray array];
-    [installationsDicitionary enumerateKeysAndObjectsUsingBlock:^(id key, id dictionary, BOOL *stop){
-        LPInstallation *installation = [[LPInstallation alloc] initWithDictionary:dictionary];
-        [installations addObject:installation];
-    }];
-    return installations;
-}
+//- (void)saveProductNames {
+//    NSDictionary * locations = [self locationsJSON];
+//    [locations enumerateKeysAndObjectsUsingBlock:^(id key, id location, BOOL *stop){
+//        NSDictionary *installationsDictionary = [location objectForKey:@"installations"];
+//        NSArray *installations = [self mapDictionariesToInstallations:installationsDictionary];
+//        // TODO: refactor this out of this method
+//        [self saveProductNames:installations];
+//    }];
+//}
+//
+//- (void)saveProductNames:(NSArray *)installations
+//{
+//    NSUserDefaults *defaults = [LoopPulse defaults];
+//    NSMutableDictionary *keyToName = [[NSMutableDictionary alloc] initWithCapacity:installations.count];
+//    for (LPInstallation *installation in installations) {
+//        CLBeaconRegion *beaconRegion = installation.beaconRegion;
+//        [keyToName setObject:installation.productName forKey:beaconRegion.key];
+//    }
+//    [defaults setObject:keyToName forKey:@"beaconRegionKeyToProductName"];
+//}
+//
+//- (NSArray *)mapDictionariesToInstallations:(NSDictionary *)installationsDicitionary
+//{
+//    NSMutableArray *installations = [NSMutableArray array];
+//    [installationsDicitionary enumerateKeysAndObjectsUsingBlock:^(id key, id dictionary, BOOL *stop){
+//        LPInstallation *installation = [[LPInstallation alloc] initWithDictionary:dictionary];
+//        [installations addObject:installation];
+//    }];
+//    return installations;
+//}
 
 - (NSArray *)genericRegionsToMonitor
 {

@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 Clione Labs. All rights reserved.
 //
 //  Please refer to the README file in repository for detailed explanation on the monitoring logic.
-//  Especially the concept of generic regions is very counter-intuitive.
 //
 
 #import "LPLocationManager.h"
@@ -53,7 +52,7 @@
         [self requestAlwaysAuthorization];
     }
     
-    // Noted that the you can set monitoredRegions before authorization, but they won't function until it's authorized
+    // Noted that you can set monitoredRegions before authorization, but they won't function until it's authorized
     [self startMonitoringForBeaconRegions:self.beaconRegions];
     [self trackCurrentMonitoredRegions];
 }
@@ -88,7 +87,7 @@
     for (CLBeaconRegion *region in beaconRegionsToMonitor) {
         // From iOS 7.1 doc: If a region of the same type with the same
         // identifier is already being monitored for this application,
-        // it will be removed from monitoring.
+        // it will be replaced by the new one.
         if (![self.monitoredRegions containsObject:region]) {
             [self startMonitoringForRegion:region];
         }
@@ -147,7 +146,6 @@
         } else if ([region isLoopPulseSpecificBeaconRegion]) {
             [self didExitSpecificRegion:region];
         }
-
     }
 }
 

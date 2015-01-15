@@ -44,6 +44,8 @@
 		24BA349F1993810B00500967 /* LPEngagementManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 24BA349D1993810B00500967 /* LPEngagementManager.h */; };
 		24BA34A01993810B00500967 /* LPEngagementManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 24BA349E1993810B00500967 /* LPEngagementManager.m */; };
 		24F3D01219C2ED2F005C0866 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24F3D01119C2ED2F005C0866 /* AdSupport.framework */; };
+		CB09A7A31A5DE3800037A1FE /* LPPoi.h in Headers */ = {isa = PBXBuildFile; fileRef = CB09A7A11A5DE3800037A1FE /* LPPoi.h */; };
+		CB09A7A41A5DE3800037A1FE /* LPPoi.m in Sources */ = {isa = PBXBuildFile; fileRef = CB09A7A21A5DE3800037A1FE /* LPPoi.m */; };
 		CB4616591A35954E00625DEB /* LPConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = CB4616571A35954E00625DEB /* LPConstants.h */; };
 		CB46165A1A35954E00625DEB /* LPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4616581A35954E00625DEB /* LPConstants.m */; };
 		F42E86B2192DF644007EDC30 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F42E86B1192DF644007EDC30 /* Foundation.framework */; };
@@ -121,6 +123,8 @@
 		24BA349D1993810B00500967 /* LPEngagementManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPEngagementManager.h; sourceTree = "<group>"; };
 		24BA349E1993810B00500967 /* LPEngagementManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPEngagementManager.m; sourceTree = "<group>"; };
 		24F3D01119C2ED2F005C0866 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		CB09A7A11A5DE3800037A1FE /* LPPoi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPPoi.h; sourceTree = "<group>"; };
+		CB09A7A21A5DE3800037A1FE /* LPPoi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPPoi.m; sourceTree = "<group>"; };
 		CB4616571A35954E00625DEB /* LPConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPConstants.h; sourceTree = "<group>"; };
 		CB4616581A35954E00625DEB /* LPConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPConstants.m; sourceTree = "<group>"; };
 		F42E86AE192DF644007EDC30 /* libLoopPulse.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLoopPulse.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -229,6 +233,8 @@
 				F42E86DA192DF6A1007EDC30 /* LPLocationManager.h */,
 				2483A5A3199DF9590003B8FA /* LPBeaconRegionManager.m */,
 				2483A5A2199DF9590003B8FA /* LPBeaconRegionManager.h */,
+				CB09A7A21A5DE3800037A1FE /* LPPoi.m */,
+				CB09A7A11A5DE3800037A1FE /* LPPoi.h */,
 				2483A5AB199F5C780003B8FA /* LPInstallation.m */,
 				2483A5AA199F5C780003B8FA /* LPInstallation.h */,
 				F42E86DF192DF6A1007EDC30 /* LPDataStore.m */,
@@ -309,6 +315,7 @@
 				247AB54E19A6F58B0065488B /* LoopPulsePrivate.h in Headers */,
 				CB4616591A35954E00625DEB /* LPConstants.h in Headers */,
 				24A01B07199B5C0700EB7C46 /* CLBeaconRegion+LoopPulseHelpers.h in Headers */,
+				CB09A7A31A5DE3800037A1FE /* LPPoi.h in Headers */,
 				247AB55719A8F4730065488B /* LPEngagementViewController.h in Headers */,
 				2468336E199DC90500429B13 /* CLBeacon+LoopPulseHelpers.h in Headers */,
 			);
@@ -441,6 +448,7 @@
 				F42E86EE192DF6A1007EDC30 /* LoopPulse.m in Sources */,
 				CB46165A1A35954E00625DEB /* LPConstants.m in Sources */,
 				2468336F199DC90500429B13 /* CLBeacon+LoopPulseHelpers.m in Sources */,
+				CB09A7A41A5DE3800037A1FE /* LPPoi.m in Sources */,
 				F42E86F1192DF6A1007EDC30 /* CLBeacon+FirebaseDictionary.m in Sources */,
 				F42E86EF192DF6A1007EDC30 /* CLRegion+LoopPulseHelpers.m in Sources */,
 				244968751993C85000EBDF2C /* LPDataStore+LPEngagementManager.m in Sources */,

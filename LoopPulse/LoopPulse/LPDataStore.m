@@ -16,26 +16,27 @@
 
 @implementation LPDataStore
 
-- (id)initWithURLs:(NSDictionary *)urls
+- (id)initWithFirebaseConfig:(NSDictionary *)firebaseConfig
 {
     self = [super init];
     if (self) {
-        _urls = urls;
+        _firebaseConfig = firebaseConfig;
     }
     return self;
 }
 
-- (void)authenticateFirebase:(NSString *) token withSuccessBlock:(void (^)(void))successBlock
-{
-    _token = token;
-    NSString *root = [self.urls objectForKey:@"root"];
+- (void)authenticateFirebase:(void (^)(void))successBlock {
+    NSString *root = [_firebaseConfig objectForKey:@"root"];
+    NSString *token = [_firebaseConfig objectForKey:@"token"];
+    NSDictionary *paths = [_firebaseConfig objectForKey:@"paths"];
+
     Firebase *firebase = [[Firebase alloc] initWithUrl:root];
     [firebase authWithCustomToken:token
               withCompletionBlock:^(NSError *error, FAuthData *authData){
                   if (error) {
                       NSLog(@"Error in Firebase authentication for %@: %@", root, error);
                   } else {
-                      _firebases = [self createFirebases:self.urls];
+                      _firebases = [self createFirebases:paths];
                       [self observeFirebaseAuthEvent:firebase];
                       successBlock();
                   }

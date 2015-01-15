@@ -25,8 +25,8 @@
 {
     self.coreDataController = [[MBCoreDataController alloc] init];
 
-    [LoopPulse authenticateWithApplicationId:@"5of345ljkfaLKJKJL"
-                                   withToken:@"34LKJ043nkjajoifuer9"
+    [LoopPulse authenticateWithApplicationId:@"nLcA3ewKgGQdSAkPS"
+                                   withToken:@"wefijoweifj"
                            andSuccessHandler:^(void) {
         int points = arc4random() % 2000;
         [LoopPulse tagVisitorWithProperities:@{@"membership": @{@"tier": @"gold", @"points": @(points)}}];

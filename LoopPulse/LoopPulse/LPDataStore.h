@@ -11,9 +11,9 @@
 
 @interface LPDataStore : NSObject
 
-- (id)initWithURLs:(NSDictionary *)urls;
-- (void)authenticateFirebase:(NSString *) token withSuccessBlock:(void (^)(void))successBlock;
-
+- (id)initWithFirebaseConfig:(NSDictionary *)firebaseConfig;
+- (void)authenticateFirebase:(void (^)(void))successBlock;
+@property (readonly, nonatomic) NSDictionary *firebaseConfig;
 @property (readonly, nonatomic) NSDictionary *firebases;
 
 @end

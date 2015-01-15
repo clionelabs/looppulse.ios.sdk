@@ -12,7 +12,7 @@
 
 - (Firebase *)visitorEventsRef
 {
-    return [self.firebases objectForKey:@"visitor_events"];
+    return [self.firebases objectForKey:@"visitorEvents"];
 }
 
 - (void)identifyVisitor:(NSUUID *)uuid withExternalID:(NSString *)externalID
