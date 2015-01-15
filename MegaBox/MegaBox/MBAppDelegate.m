@@ -25,7 +25,7 @@
 {
     self.coreDataController = [[MBCoreDataController alloc] init];
 
-    [LoopPulse authenticateWithApplicationId:@"nLcA3ewKgGQdSAkPS"
+    [LoopPulse authenticateWithApplicationId:@"HHog73MZQh3Wb8hTJ"
                                    withToken:@"wefijoweifj"
                            andSuccessHandler:^(void) {
         int points = arc4random() % 2000;

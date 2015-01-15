@@ -82,14 +82,14 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
 {
 //    NSString *url = [@"http://beta.looppulse.com/api/authenticate/applications/" stringByAppendingString:self.applicationId];
 //    NSString *url = [@"http://localhost:3000/api/authenticate/applications/" stringByAppendingString:self.applicationId];
-//    NSString *url = [@"http://192.168.0.103:3000/api/authenticate/applications/" stringByAppendingString:self.applicationId];
-    NSString *url = [@"https://ouuyckfgsv.localtunnel.me/api/authenticate/applications/" stringByAppendingString:self.applicationId];
+    NSString *url = [@"http://192.168.0.102:3000/api/authenticate/applications/" stringByAppendingString:self.applicationId];
+//    NSString *url = [@"https://ouuyckfgsv.localtunnel.me/api/authenticate/applications/" stringByAppendingString:self.applicationId];
 
     NSURL *authenticationURL = [NSURL URLWithString:url];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:authenticationURL];
     [request setValue:self.token forHTTPHeaderField:@"x-auth-token"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    NSString *jsonString = [[self authenticationPayload] jsonString:@"session"];
+    NSString *jsonString = [[self authenticationPayload] jsonString:@"capture"];
     [request setHTTPBody:[jsonString dataUsingEncoding:NSUTF8StringEncoding]];
     [request setHTTPMethod:@"POST"];
     return request;
@@ -112,7 +112,7 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
                                    if (response.isAuthenticated) {
                                        [self initFromServerResponse:response withSuccessBlock:^(void){
                                            _isAuthenticated = true;
-                                           _session = response.session;
+                                           _captureId = response.captureId;
                                            [LoopPulse postNotification:LoopPulseDidAuthenticateSuccessfullyNotification withUserInfo:userInfo];
 
                                            successHandler();
