@@ -11,7 +11,6 @@
 #import "LPVisitor.h"
 #import "LPLocationManager.h"
 #import "LPDataStore.h"
-#import "LPEngagementManager.h"
 #import "LPServerResponse.h"
 #import "NSDictionary+LoopPulseHelpers.h"
 #import <Parse/Parse.h>
@@ -23,7 +22,6 @@
 @property (readonly, strong) LPDataStore *dataStore;
 @property (readonly, strong) LPVisitor *visitor;
 @property (readonly, strong) LPLocationManager *locationManager;
-@property (readonly, strong) LPEngagementManager *engagementManager;
 @property (readonly, strong) NSString *firebaseBaseUrl;
 @end
 
@@ -82,7 +80,7 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
 {
 //    NSString *url = [@"http://beta.looppulse.com/api/authenticate/applications/" stringByAppendingString:self.applicationId];
 //    NSString *url = [@"http://localhost:3000/api/authenticate/applications/" stringByAppendingString:self.applicationId];
-    NSString *url = [@"http://192.168.0.102:3000/api/authenticate/applications/" stringByAppendingString:self.applicationId];
+    NSString *url = [@"http://192.168.0.103:3000/api/authenticate/applications/" stringByAppendingString:self.applicationId];
 //    NSString *url = [@"https://ouuyckfgsv.localtunnel.me/api/authenticate/applications/" stringByAppendingString:self.applicationId];
 
     NSURL *authenticationURL = [NSURL URLWithString:url];
@@ -152,9 +150,6 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
     NSDictionary *poisDefaults = [system objectForKey:@"pois"];
     [LoopPulse.defaults setObject:poisDefaults forKey:@"pois"];
 
-//    NSDictionary *parseDefaults = [system objectForKey:@"parse"];
-//    [LoopPulse.defaults setObject:parseDefaults forKey:@"parse"];
-
     [LoopPulse.defaults synchronize];
 }
 
@@ -206,26 +201,18 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
 
 + (void)registerForRemoteNotificationTypesForApplication:(UIApplication *)application
 {
-    LoopPulse *loopPulse = [LoopPulse sharedInstance];
-    [loopPulse.engagementManager registerForRemoteNotificationTypesForApplication:application];
 }
 
 + (void)didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-    LoopPulse *loopPulse = [LoopPulse sharedInstance];
-    [loopPulse.engagementManager didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
 }
 
 + (void)didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings withApplication:(UIApplication *)application
 {
-    LoopPulse *loopPulse = [LoopPulse sharedInstance];
-    [loopPulse.engagementManager didRegisterUserNotificationSettings:notificationSettings withApplication:application];
 }
 
 + (void)didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-    LoopPulse *loopPulse = [LoopPulse sharedInstance];
-    [loopPulse.engagementManager didReceiveRemoteNotification:userInfo];
 }
 
 + (void)identifyVisitorWithExternalId:(NSString *)externalId
