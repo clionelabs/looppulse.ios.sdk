@@ -27,7 +27,7 @@
         }
         _isAuthenticated = [[self.defaults objectForKey:@"authenticated"] boolValue];
         _systemConfiguration = [self.defaults objectForKey:@"system"];
-        _session = [self.defaults objectForKey:@"session"];
+        _captureId = [self.defaults objectForKey:@"captureId"];
     }
     return self;
 }

@@ -9,7 +9,7 @@
 
 @interface LoopPulse ()
 
-@property (readonly, nonatomic) NSString *session;
+@property (readonly, nonatomic) NSString *captureId;
 
 + (NSUserDefaults *)defaults;
 + (void)postNotification:(NSString *)name withUserInfo:(NSDictionary *)userInfo;

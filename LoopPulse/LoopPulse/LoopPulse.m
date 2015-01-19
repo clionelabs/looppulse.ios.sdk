@@ -11,7 +11,6 @@
 #import "LPVisitor.h"
 #import "LPLocationManager.h"
 #import "LPDataStore.h"
-#import "LPEngagementManager.h"
 #import "LPServerResponse.h"
 #import "NSDictionary+LoopPulseHelpers.h"
 #import <Parse/Parse.h>
@@ -23,7 +22,6 @@
 @property (readonly, strong) LPDataStore *dataStore;
 @property (readonly, strong) LPVisitor *visitor;
 @property (readonly, strong) LPLocationManager *locationManager;
-@property (readonly, strong) LPEngagementManager *engagementManager;
 @property (readonly, strong) NSString *firebaseBaseUrl;
 @end
 
@@ -82,14 +80,14 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
 {
 //    NSString *url = [@"http://beta.looppulse.com/api/authenticate/applications/" stringByAppendingString:self.applicationId];
 //    NSString *url = [@"http://localhost:3000/api/authenticate/applications/" stringByAppendingString:self.applicationId];
-//    NSString *url = [@"http://192.168.0.102:3000/api/authenticate/applications/" stringByAppendingString:self.applicationId];
-    NSString *url = [@"https://cxjvlpcqvw.localtunnel.me/api/authenticate/applications/" stringByAppendingString:self.applicationId];
+    NSString *url = [@"http://192.168.0.103:3000/api/authenticate/applications/" stringByAppendingString:self.applicationId];
+//    NSString *url = [@"https://ouuyckfgsv.localtunnel.me/api/authenticate/applications/" stringByAppendingString:self.applicationId];
 
     NSURL *authenticationURL = [NSURL URLWithString:url];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:authenticationURL];
     [request setValue:self.token forHTTPHeaderField:@"x-auth-token"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    NSString *jsonString = [[self authenticationPayload] jsonString:@"session"];
+    NSString *jsonString = [[self authenticationPayload] jsonString:@"capture"];
     [request setHTTPBody:[jsonString dataUsingEncoding:NSUTF8StringEncoding]];
     [request setHTTPMethod:@"POST"];
     return request;
@@ -112,7 +110,7 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
                                    if (response.isAuthenticated) {
                                        [self initFromServerResponse:response withSuccessBlock:^(void){
                                            _isAuthenticated = true;
-                                           _session = response.session;
+                                           _captureId = response.captureId;
                                            [LoopPulse postNotification:LoopPulseDidAuthenticateSuccessfullyNotification withUserInfo:userInfo];
 
                                            successHandler();
@@ -126,15 +124,15 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
 
 - (void)initFromServerResponse:(LPServerResponse *)response withSuccessBlock:(void (^)(void))successBlock
 {
+    NSLog(@"updating system configuration: %@", response.systemConfiguration);
     // TODO: we should phase out the use of NSDefaults and directly set corresponsding properties:
     [self setDefaults:response.systemConfiguration];
 
-    _dataStore = [[LPDataStore alloc] initWithURLs:[self firebaseURLs]];
-    [_dataStore authenticateFirebase:[self firebaseToken] withSuccessBlock:^(void){
+    _dataStore = [[LPDataStore alloc] initWithFirebaseConfig:[self firebaseConfig]];
+    [_dataStore authenticateFirebase:^(void){
         _visitor = [[LPVisitor alloc] initWithDataStore:_dataStore];
         _locationManager = [[LPLocationManager alloc] initWithDataStore:_dataStore];
-        _engagementManager = [[LPEngagementManager alloc] initWithDataStore:_dataStore];
-
+//        _engagementManager = [[LPEngagementManager alloc] initWithDataStore:_dataStore];
         successBlock();
     }];
 }
@@ -149,31 +147,15 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
     NSDictionary *firebaseDefaults = [system objectForKey:@"firebase"];
     [LoopPulse.defaults setObject:firebaseDefaults forKey:@"firebase"];
 
-    NSDictionary *parseDefaults = [system objectForKey:@"parse"];
-    [LoopPulse.defaults setObject:parseDefaults forKey:@"parse"];
-
-    NSDictionary *locationsDefaults = [system objectForKey:@"locations"];
-    [LoopPulse.defaults setObject:locationsDefaults forKey:@"locations"];
+    NSDictionary *poisDefaults = [system objectForKey:@"pois"];
+    [LoopPulse.defaults setObject:poisDefaults forKey:@"pois"];
 
     [LoopPulse.defaults synchronize];
 }
 
-- (NSString *)firebaseToken
+- (NSDictionary *)firebaseConfig
 {
-    NSDictionary *firebase = [[LoopPulse defaults] objectForKey:@"firebase"];
-    return [firebase objectForKey:@"token"];
-}
-
-- (NSDictionary *)firebaseURLs
-{
-    NSDictionary *firebase = [[LoopPulse defaults] objectForKey:@"firebase"];
-    NSDictionary *urls = [[NSDictionary alloc] initWithObjectsAndKeys:
-                          [firebase objectForKey:@"root"], @"root",
-                          [firebase objectForKey:@"beacon_events"], @"beacon_events",
-                          [firebase objectForKey:@"engagement_events"], @"engagement_events",
-                          [firebase objectForKey:@"visitor_events"], @"visitor_events",
-                          nil];
-    return urls;
+    return [[LoopPulse defaults] objectForKey:@"firebase"];
 }
 
 - (BOOL)isAuthorized
@@ -219,26 +201,18 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
 
 + (void)registerForRemoteNotificationTypesForApplication:(UIApplication *)application
 {
-    LoopPulse *loopPulse = [LoopPulse sharedInstance];
-    [loopPulse.engagementManager registerForRemoteNotificationTypesForApplication:application];
 }
 
 + (void)didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-    LoopPulse *loopPulse = [LoopPulse sharedInstance];
-    [loopPulse.engagementManager didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
 }
 
 + (void)didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings withApplication:(UIApplication *)application
 {
-    LoopPulse *loopPulse = [LoopPulse sharedInstance];
-    [loopPulse.engagementManager didRegisterUserNotificationSettings:notificationSettings withApplication:application];
 }
 
 + (void)didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-    LoopPulse *loopPulse = [LoopPulse sharedInstance];
-    [loopPulse.engagementManager didReceiveRemoteNotification:userInfo];
 }
 
 + (void)identifyVisitorWithExternalId:(NSString *)externalId

@@ -15,7 +15,7 @@
 
 - (Firebase *)beaconEventsRef
 {
-    return [self.firebases objectForKey:@"beacon_events"];
+    return [self.firebases objectForKey:@"beaconEvents"];
 }
 
 - (void)logEvent:(NSString *)eventType withBeacon:(CLBeacon *)beacon atTime:(NSDate *)createdAt
@@ -39,7 +39,7 @@
     NSUUID *visitorUUID = [[LoopPulse sharedInstance] visitorUUID];
     NSNumber *priority = @([createdAt timeIntervalSince1970]);
     NSDictionary *eventInfo = @{@"type": eventType,
-                                @"session_id": [[LoopPulse sharedInstance] session],
+                                @"capture_id": [[LoopPulse sharedInstance] captureId],
                                 @"visitor_uuid": [visitorUUID UUIDString],
                                 @"created_at": [createdAt description]};
     NSMutableDictionary *beaconInfoAndEvent = [[NSMutableDictionary alloc] initWithDictionary:beaconInfo];
