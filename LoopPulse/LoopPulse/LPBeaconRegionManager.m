@@ -23,19 +23,23 @@
     return self;
 }
 
-- (NSArray *)poisJSON
+- (NSArray *)pois
 {
-    return [LoopPulse.defaults objectForKey:@"pois"];
+    NSArray *poisJSON = [LoopPulse.defaults objectForKey:@"pois"];
+    NSMutableArray *pois = [[NSMutableArray alloc] initWithCapacity:poisJSON.count];
+    for (NSDictionary *poiJSON in poisJSON) {
+        [pois addObject:[[LPPoi alloc] initWithDictionary:poiJSON]];
+    }
+    return pois;
 }
 
 - (NSArray *)generateGenericBeaconRegions
 {
-    NSArray *pois = [self poisJSON];
+    NSArray *pois = [self pois];
     NSMutableSet *genericRegionIdentifiers = [[NSMutableSet alloc] init];
     NSMutableArray *genericRegions = [[NSMutableArray alloc] init];
-    for (NSDictionary *poi in pois) {
-        NSUUID *uuid = [[NSUUID alloc] initWithUUIDString:[[poi objectForKey:@"beacon"] objectForKey:@"uuid"]];
-        CLBeaconRegion *region = [[CLBeaconRegion alloc] initGenericWithProximityUUID:uuid];
+    for (LPPoi *poi in pois) {
+        CLBeaconRegion *region = [[CLBeaconRegion alloc] initGenericWithProximityUUID:[[poi beaconRegion] proximityUUID]];
         if (![genericRegionIdentifiers containsObject:region.identifier]) {
             [genericRegions addObject:region];
             [genericRegionIdentifiers addObject:region.identifier];
@@ -46,10 +50,9 @@
 
 - (void)saveProductNames {
     NSUserDefaults *defaults = [LoopPulse defaults];
-    NSArray *poisJSON = [self poisJSON];
-    NSMutableDictionary *keyToName = [[NSMutableDictionary alloc] initWithCapacity:poisJSON.count];
-    for (NSDictionary *poiJSON in poisJSON) {
-        LPPoi *poi = [[LPPoi alloc] initWithDictionary:poiJSON];
+    NSArray *pois = [self pois];
+    NSMutableDictionary *keyToName = [[NSMutableDictionary alloc] initWithCapacity:pois.count];
+    for (LPPoi *poi in pois) {
         [keyToName setObject:poi.productName forKey:poi.beaconRegion.key];
     }
     [defaults setObject:keyToName forKey:@"beaconRegionKeyToProductName"];
