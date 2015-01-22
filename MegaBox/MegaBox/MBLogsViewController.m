@@ -62,8 +62,9 @@
     }
     
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"MBManagedLog"];;
-    fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"sortedBy" ascending:NO]];
-    
+//    fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"sortedBy" ascending:NO]];
+    fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"createdAt" ascending:NO]];
+
     NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:@"Master"];
     aFetchedResultsController.delegate = self;
     self.fetchedResultsController = aFetchedResultsController;
@@ -177,6 +178,9 @@
         // HACK: display message in title.
         description[@"title"] = log.body;
     }
+
+    description[@"time"] = [self formattedDate:log.createdAt];
+
     return description;
 }
 

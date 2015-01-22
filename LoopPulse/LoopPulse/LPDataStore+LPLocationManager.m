@@ -62,7 +62,7 @@
 {
     if ([eventType isEqualToString:@"didEnterRegion"]) {
         return LoopPulseLocationDidEnterRegionNotification;
-    } else if ([eventType isEqualToString:@"didEnterRegion"]) {
+    } else if ([eventType isEqualToString:@"didExitRegion"]) {
         return LoopPulseLocationDidExitRegionNotification;
     } else {
         return [NSString string];

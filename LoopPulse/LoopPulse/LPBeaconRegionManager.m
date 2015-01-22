@@ -48,20 +48,9 @@
     return genericRegions;
 }
 
-- (void)saveProductNames {
-    NSUserDefaults *defaults = [LoopPulse defaults];
-    NSArray *pois = [self pois];
-    NSMutableDictionary *keyToName = [[NSMutableDictionary alloc] initWithCapacity:pois.count];
-    for (LPPoi *poi in pois) {
-        [keyToName setObject:poi.productName forKey:poi.beaconRegion.key];
-    }
-    [defaults setObject:keyToName forKey:@"beaconRegionKeyToProductName"];
-}
-
 - (NSArray *)genericRegionsToMonitor
 {
     if (!_genericRegionsToMonitor) {
-        [self saveProductNames];
         _genericRegionsToMonitor = [self generateGenericBeaconRegions];
     }
     return _genericRegionsToMonitor;

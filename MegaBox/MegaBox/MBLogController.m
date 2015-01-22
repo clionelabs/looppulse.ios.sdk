@@ -9,6 +9,7 @@
 #import "MBLogController.h"
 #import <Firebase/Firebase.h>
 #import <LoopPulse/LoopPulse.h>
+#import <CoreLocation/CoreLocation.h>
 
 #define kFirechatLogNS @"https://looppulse-megabox.firebaseio.com/visitors/%@/logs"
 #define kFirechatLogToken @"ha5jJXD3ac6DzOWoNfxPunOvrfvK68gQXwodfnn9"
@@ -91,6 +92,18 @@
     if (managedObject) {
         [self.managedObjectContext deleteObject:managedObject];
     }
+}
+
+- (void)addEventWithType:(NSString *)eventType andMsg:(NSString *)msg
+{
+//    NSString *eventType = [userInfo objectForKey:@"eventType"];
+//    CLBeaconRegion *region = [userInfo objectForKey:@"beaconRegion"];
+
+    NSManagedObject *managedObject = [NSEntityDescription insertNewObjectForEntityForName:kCoreDataEntity inManagedObjectContext:self.managedObjectContext];
+    [managedObject setValue:eventType forKey:@"type"];
+    [managedObject setValue:msg forKey:@"body"];
+    [managedObject setValue:[NSDate date] forKey:@"createdAt"];
+    [self saveContext];
 }
 
 - (void)updateCoreDataEntity:(NSString *)entityName snapshot:(FDataSnapshot *)snapshot

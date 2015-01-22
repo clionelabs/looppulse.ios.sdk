@@ -15,6 +15,7 @@
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (strong, nonatomic) LoopPulse *loopPulse;
 
+- (void)addEventWithType:(NSString *)eventType andMsg:(NSString *)msg;
 - (void)startLogMonitoring;
 - (void)stopLogMonitoring;
 
