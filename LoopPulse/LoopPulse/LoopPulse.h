@@ -29,7 +29,6 @@
 
 - (void)track:(NSString *)eventName withProperties:(NSDictionary *)properties;
 
-@property (readonly, nonatomic) BOOL isComponentsInitialized; // keep track of whether LP components (e.g. dataStore) has been initialized with server authenticated response
 @property (readonly, nonatomic) BOOL isAuthorized; // to track location
 @property (readonly, nonatomic) BOOL isTracking;
 @property (readonly, nonatomic) NSUUID *visitorUUID;

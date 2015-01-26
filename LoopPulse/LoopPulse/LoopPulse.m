@@ -20,7 +20,7 @@
 @interface LoopPulse ()
 @property (readonly, strong) NSString *applicationId;
 @property (readonly, strong) NSString *token;
-@property (readonly, strong) LPAuthManager *authManager;
+@property (strong, strong) LPAuthManager *authManager;
 @property (readonly, strong) LPDataStore *dataStore;
 @property (readonly, strong) LPVisitor *visitor;
 @property (readonly, strong) LPLocationManager *locationManager;
@@ -57,16 +57,16 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
 {
     _applicationId = applicationId;
     _token = token;
-    _authManager = [[LPAuthManager alloc] initWithApplicadtionId:applicationId andToken:token andVisitorUUID:[_visitorUUID UUIDString]];
+    self.authManager = [[LPAuthManager alloc] initWithApplicadtionId:applicationId andToken:token andVisitorUUID:[_visitorUUID UUIDString]];
 
     // If the client app has been authenticated before, then we have to make sure two things:
     //   i) check whether the authentication has expired (i.e. need to re-authenticate)
     //      To expire the previous authentication as to refresh the cached response data (e.g. poi list)
     //   ii) check wehther looppulse components (e.g. dataStore) has been initialized
     //      It could happen if the app was killed by system.
-    if ([_authManager isAuthenticated]) {
-        if ([_authManager isAuthenticationExpired]) {
-            [_authManager authenticate:^(NSError *error) {
+    if ([self.authManager isAuthenticated]) {
+        if ([self.authManager isAuthenticationExpired]) {
+            [self.authManager authenticate:^(NSError *error) {
                 if (error == nil) {
                     [self initComponents:^{}];
                 }
@@ -81,13 +81,13 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
 {
     // If looppulse has been authenticated before, then we skip the authentication and simply call the completionHandler right away.
     // Maybe we should still do the authentication, since the client app explicitly ask?
-    if ([_authManager isAuthenticated]) {
+    if ([self.authManager isAuthenticated]) {
         completionHandler(nil);
         return;
     }
 
     // Authenticate
-    [_authManager authenticate:^(NSError *error) {
+    [self.authManager authenticate:^(NSError *error) {
         if (error != nil) {
             completionHandler(error);
         } else {
@@ -100,7 +100,7 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
 
 - (void)startLocationMonitoring
 {
-    if (![_authManager isAuthenticated]) {
+    if (![self.authManager isAuthenticated]) {
         @throw([self notAuthenticatedException]);
     }
 
@@ -111,15 +111,12 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
 
 - (void)stopLocationMonitoring
 {
-    if (![_authManager isAuthenticated]) {
-        @throw([self notAuthenticatedException]);
-    }
     [self.locationManager stopMonitoringForAllRegions];
 }
 
 - (void)initComponents:(void (^)(void))completionHandler
 {
-    if (![_authManager isAuthenticated]) {
+    if (![self.authManager isAuthenticated]) {
         @throw([self notAuthenticatedException]);
     }
 
