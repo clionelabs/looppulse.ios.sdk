@@ -16,7 +16,8 @@
 
 - (id)initWithApplicadtionId:(NSString *)applicationId andToken:(NSString *)token andVisitorUUID:(NSString *)visitorUUID;
 - (void)authenticate:(void (^)(NSError *error))completionHandler;
+- (void)refreshSavedResponse:(void (^)(NSError *error))completionHandler;
 - (BOOL)isAuthenticated;
-- (BOOL)isAuthenticationExpired;
+- (BOOL)isSavedResponseNeedRefresh;
 
 @end

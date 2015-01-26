@@ -14,7 +14,7 @@
 #import "CLBeaconRegion+LoopPulseHelpers.h"
 
 NSString *const LoopPulseAuthenticationEndPoint = @"http://192.168.0.103:3000/api/authenticate/applications/";
-NSInteger const AuthExpiredSec = 60;
+NSInteger const AuthResponseRefreshSec = 60;
 
 @implementation LPAuthManager;
 
@@ -52,6 +52,13 @@ NSInteger const AuthExpiredSec = 60;
                            }];
 }
 
+- (void)refreshSavedResponse:(void (^)(NSError *error))completionHandler
+{
+    [self authenticate:^(NSError *error) {
+        completionHandler(error);
+    }];
+}
+
 - (NSURLRequest *)authenticationRequest
 {
     NSString *url = [NSString stringWithFormat:@"%@%@", LoopPulseAuthenticationEndPoint, self.applicationId];
@@ -81,16 +88,16 @@ NSInteger const AuthExpiredSec = 60;
 
 - (BOOL)isAuthenticated
 {
-    return [LoopPulse.defaults objectForKey:@"lastAuthenticatedTime"] != nil;
+    return [LoopPulse.defaults objectForKey:@"lastResponseSavedTime"] != nil;
 }
 
-- (BOOL)isAuthenticationExpired
+- (BOOL)isSavedResponseNeedRefresh
 {
     if (![self isAuthenticated]) return NO;
-    NSDate *last = [LoopPulse.defaults objectForKey:@"lastAuthenticatedTime"];
+    NSDate *last = [LoopPulse.defaults objectForKey:@"lastResponseSavedTime"];
     NSTimeInterval interval = [[NSDate date] timeIntervalSinceDate:last];
     NSLog(@"auth interval: %f", interval);
-    return interval > AuthExpiredSec;
+    return interval > AuthResponseRefreshSec;
 }
 
 // Set defaults with server response
@@ -99,7 +106,7 @@ NSInteger const AuthExpiredSec = 60;
     NSDictionary *system = response.systemConfiguration;
 
     NSDate *curr = [NSDate date];
-    [LoopPulse.defaults setObject:curr forKey:@"lastAuthenticatedTime"];
+    [LoopPulse.defaults setObject:curr forKey:@"lastResponseSavedTime"];
 
     [LoopPulse.defaults setObject:response.captureId forKey:@"captureId"];
 

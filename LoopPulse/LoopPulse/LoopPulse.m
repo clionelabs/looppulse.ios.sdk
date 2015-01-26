@@ -65,8 +65,8 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
     //   ii) check wehther looppulse components (e.g. dataStore) has been initialized
     //      It could happen if the app was killed by system.
     if ([self.authManager isAuthenticated]) {
-        if ([self.authManager isAuthenticationExpired]) {
-            [self.authManager authenticate:^(NSError *error) {
+        if ([self.authManager isSavedResponseNeedRefresh]) {
+            [self.authManager refreshSavedResponse:^(NSError *error) {
                 if (error == nil) {
                     [self initComponents:^{}];
                 }
