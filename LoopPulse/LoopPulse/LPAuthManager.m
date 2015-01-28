@@ -14,7 +14,7 @@
 #import "CLBeaconRegion+LoopPulseHelpers.h"
 
 NSString *const LoopPulseAuthenticationEndPoint = @"http://192.168.0.103:3000/api/authenticate/applications/";
-NSInteger const AuthResponseRefreshSec = 60;
+NSInteger const RefreshPeriodInSeconds = 246060;
 
 @implementation LPAuthManager;
 
@@ -91,13 +91,13 @@ NSInteger const AuthResponseRefreshSec = 60;
     return [LoopPulse.defaults objectForKey:@"lastResponseSavedTime"] != nil;
 }
 
-- (BOOL)isSavedResponseNeedRefresh
+- (BOOL)updateAvailable
 {
     if (![self isAuthenticated]) return NO;
     NSDate *last = [LoopPulse.defaults objectForKey:@"lastResponseSavedTime"];
     NSTimeInterval interval = [[NSDate date] timeIntervalSinceDate:last];
     NSLog(@"auth interval: %f", interval);
-    return interval > AuthResponseRefreshSec;
+    return interval > RefreshPeriodInSeconds;
 }
 
 // Set defaults with server response

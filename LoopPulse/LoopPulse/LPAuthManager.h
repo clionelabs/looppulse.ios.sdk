@@ -18,6 +18,6 @@
 - (void)authenticate:(void (^)(NSError *error))completionHandler;
 - (void)refreshSavedResponse:(void (^)(NSError *error))completionHandler;
 - (BOOL)isAuthenticated;
-- (BOOL)isSavedResponseNeedRefresh;
+- (BOOL)updateAvailable;
 
 @end
