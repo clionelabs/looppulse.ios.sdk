@@ -16,6 +16,7 @@
 
 + (void)setApplicationId:(NSString *)applicationId withToken:(NSString *)token;
 + (void)authenticate:(void (^)(NSError *error))completionHandler;
++ (BOOL)isSupported;
 + (BOOL)isAuthenticated;
 + (void)startLocationMonitoring;
 + (void)stopLocationMonitoring;
