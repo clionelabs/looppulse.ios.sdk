@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "LPVisitor.h"
 
 @interface LoopPulse : NSObject
 
