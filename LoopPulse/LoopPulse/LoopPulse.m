@@ -13,12 +13,14 @@
 #import "LPDataStore.h"
 #import "LPServerResponse.h"
 #import "NSDictionary+LoopPulseHelpers.h"
+#import "LPAuthManager.h"
 #import <Parse/Parse.h>
 #import <AdSupport/AdSupport.h>
 
 @interface LoopPulse ()
 @property (readonly, strong) NSString *applicationId;
 @property (readonly, strong) NSString *token;
+@property (strong, strong) LPAuthManager *authManager;
 @property (readonly, strong) LPDataStore *dataStore;
 @property (readonly, strong) LPVisitor *visitor;
 @property (readonly, strong) LPLocationManager *locationManager;
@@ -29,9 +31,6 @@
 - (id)initWithDataStore:(LPDataStore *)dataStore;
 @end
 
-NSString *const LoopPulseDidAuthenticateSuccessfullyNotification=@"LoopPulseDidAuthenticateSuccessfullyNotification";
-NSString *const LoopPulseDidFailToAuthenticateNotification=@"LoopPulseDidFailToAuthenticateNotification";
-NSString *const LoopPulseDidReceiveAuthenticationError=@"LoopPulseDidReceiveAuthenticationError";
 NSString *const LoopPulseLocationAuthorizationGrantedNotification=@"LoopPulseLocationAuthorizationGrantedNotification";
 NSString *const LoopPulseLocationAuthorizationDeniedNotification=@"LoopPulseLocationAuthorizationDeniedNotification";
 NSString *const LoopPulseLocationDidEnterRegionNotification=@"LoopPulseLocationDidEnterRegionNotification";
@@ -44,8 +43,6 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
 {
     self = [super init];
     if (self) {
-        _isAuthenticated = false;
-
         ASIdentifierManager *adManager = [ASIdentifierManager sharedManager];
         _visitorUUID = adManager.advertisingIdentifier;
         _isTracking = adManager.advertisingTrackingEnabled;
@@ -53,109 +50,92 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
     return self;
 }
 
+/*
+ * This function is supposed to be called by client app everytime on didFinishLaunchingWithOptions
+ */
 - (void)setApplicationId:(NSString *)applicationId andToken:(NSString *)token
 {
     _applicationId = applicationId;
     _token = token;
+    self.authManager = [[LPAuthManager alloc] initWithApplicadtionId:applicationId andToken:token andVisitorUUID:[_visitorUUID UUIDString]];
+
+    // If the client app has been authenticated before, then we have to make sure two things:
+    //   i) check whether the authentication has expired (i.e. need to re-authenticate)
+    //      To expire the previous authentication as to refresh the cached response data (e.g. poi list)
+    //   ii) check wehther looppulse components (e.g. dataStore) has been initialized
+    //      It could happen if the app was killed by system.
+    if ([self.authManager isAuthenticated]) {
+        if ([self.authManager updateAvailable]) {
+            [self.authManager refreshSavedResponse:^(NSError *error) {
+                if (error == nil) {
+                    [self initComponents:^{}];
+                }
+            }];
+        } else if (!_isComponentsInitialized){
+            [self initComponents:^{}];
+        }
+    }
 }
 
-- (NSDictionary *)authenticationPayload
+- (void)authenticate:(void (^)(NSError *error))completionHandler
 {
-    // sdk
-    NSDictionary *sdk = @{@"version": [LoopPulse version]};
+    // If looppulse has been authenticated before, then we skip the authentication and simply call the completionHandler right away.
+    // Maybe we should still do the authentication, since the client app explicitly ask?
+    if ([self.authManager isAuthenticated]) {
+        completionHandler(nil);
+        return;
+    }
 
-    // device
-    // https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIDevice_Class/index.html#//apple_ref/occ/instp/UIDevice/name
-    UIDevice *uiDevice = [UIDevice currentDevice];
-    NSDictionary *device = @{@"model": [uiDevice model],
-                             @"systemVersion": [uiDevice systemVersion]};
-
-    NSDictionary *payload = @{@"visitorUUID": [[[LoopPulse sharedInstance] visitorUUID] UUIDString],
-                              @"sdk": sdk,
-                              @"device": device};
-    return payload;
-}
-
-- (NSURLRequest *)authenticationRequest
-{
-//    NSString *url = [@"http://beta.looppulse.com/api/authenticate/applications/" stringByAppendingString:self.applicationId];
-//    NSString *url = [@"http://localhost:3000/api/authenticate/applications/" stringByAppendingString:self.applicationId];
-    NSString *url = [@"http://192.168.0.103:3000/api/authenticate/applications/" stringByAppendingString:self.applicationId];
-//    NSString *url = [@"https://ouuyckfgsv.localtunnel.me/api/authenticate/applications/" stringByAppendingString:self.applicationId];
-
-    NSURL *authenticationURL = [NSURL URLWithString:url];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:authenticationURL];
-    [request setValue:self.token forHTTPHeaderField:@"x-auth-token"];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    NSString *jsonString = [[self authenticationPayload] jsonString:@"capture"];
-    [request setHTTPBody:[jsonString dataUsingEncoding:NSUTF8StringEncoding]];
-    [request setHTTPMethod:@"POST"];
-    return request;
-}
-
-- (void)authenticate:(void (^)(void))successHandler
-{
-    NSURLRequest *request = [self authenticationRequest];
-    [NSURLConnection sendAsynchronousRequest:request
-                                       queue:[NSOperationQueue mainQueue]
-                           completionHandler:^(NSURLResponse *urlResonse, NSData *data, NSError *error) {
-
-                               if (error!=nil) {
-                                   NSDictionary *userInfo = @{@"applicationId": self.applicationId, @"error":error};
-                                   [LoopPulse postNotification:LoopPulseDidReceiveAuthenticationError withUserInfo:userInfo];
-
-                               } else {
-                                   NSDictionary *userInfo = @{@"applicationId": self.applicationId};
-                                   LPServerResponse *response = [[LPServerResponse alloc] initWithData:data];
-                                   if (response.isAuthenticated) {
-                                       [self initFromServerResponse:response withSuccessBlock:^(void){
-                                           _isAuthenticated = true;
-                                           _captureId = response.captureId;
-                                           [LoopPulse postNotification:LoopPulseDidAuthenticateSuccessfullyNotification withUserInfo:userInfo];
-
-                                           successHandler();
-                                       }];
-                                   } else {
-                                       [LoopPulse postNotification:LoopPulseDidFailToAuthenticateNotification withUserInfo:userInfo];
-                                   }
-                               }
-                           }];
-}
-
-- (void)initFromServerResponse:(LPServerResponse *)response withSuccessBlock:(void (^)(void))successBlock
-{
-    NSLog(@"updating system configuration: %@", response.systemConfiguration);
-    // TODO: we should phase out the use of NSDefaults and directly set corresponsding properties:
-    [self setDefaults:response.systemConfiguration];
-
-    _dataStore = [[LPDataStore alloc] initWithFirebaseConfig:[self firebaseConfig]];
-    [_dataStore authenticateFirebase:^(void){
-        _visitor = [[LPVisitor alloc] initWithDataStore:_dataStore];
-        _locationManager = [[LPLocationManager alloc] initWithDataStore:_dataStore];
-//        _engagementManager = [[LPEngagementManager alloc] initWithDataStore:_dataStore];
-        successBlock();
+    // Authenticate
+    [self.authManager authenticate:^(NSError *error) {
+        if (error != nil) {
+            completionHandler(error);
+        } else {
+            [self initComponents:^{
+                completionHandler(nil);
+            }];
+        }
     }];
 }
 
-// Set defaults from server response
-- (void)setDefaults:(NSDictionary *)system
+- (void)startLocationMonitoring
 {
-    BOOL onlySendKnown = [[system objectForKey:@"onlySendBeaconEventsWithKnownProximity"] boolValue];
-    [LoopPulse.defaults setBool:onlySendKnown
-                         forKey:@"onlySendBeaconEventsWithKnownProximity"];
+    if (![self.authManager isAuthenticated]) {
+        @throw([self notAuthenticatedException]);
+    }
 
-    NSDictionary *firebaseDefaults = [system objectForKey:@"firebase"];
-    [LoopPulse.defaults setObject:firebaseDefaults forKey:@"firebase"];
-
-    NSDictionary *poisDefaults = [system objectForKey:@"pois"];
-    [LoopPulse.defaults setObject:poisDefaults forKey:@"pois"];
-
-    [LoopPulse.defaults synchronize];
+    if (self.isTracking) {
+        [self.locationManager startMonitoringForAllRegions];
+    }
 }
 
-- (NSDictionary *)firebaseConfig
+- (void)stopLocationMonitoring
 {
-    return [[LoopPulse defaults] objectForKey:@"firebase"];
+    [self.locationManager stopMonitoringForAllRegions];
+}
+
+- (void)initComponents:(void (^)(void))completionHandler
+{
+    if (![self.authManager isAuthenticated]) {
+        @throw([self notAuthenticatedException]);
+    }
+
+    _captureId = [[LoopPulse defaults] objectForKey:@"captureId"];
+    _dataStore = [[LPDataStore alloc] initWithFirebaseConfig:[[LoopPulse defaults] objectForKey:@"firebase"]];
+    [_dataStore authenticateFirebase:^(void){
+        _visitor = [[LPVisitor alloc] initWithDataStore:_dataStore];
+        _locationManager = [[LPLocationManager alloc] initWithDataStore:_dataStore];
+        _isComponentsInitialized = YES;
+        completionHandler();
+    }];
+}
+
+- (NSException *)notAuthenticatedException
+{
+    return [NSException
+            exceptionWithName:@"NotAuthenticatedException"
+            reason:@"LoopPulse has not yet been authenticated"
+            userInfo:nil];
 }
 
 - (BOOL)isAuthorized
@@ -174,31 +154,6 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
     return @"0.5";
 }
 
-+ (void)authenticateWithApplicationId:(NSString *)applicationId
-                            withToken:(NSString *)token
-                    andSuccessHandler:(void(^)(void))successHandler
-{
-    LoopPulse *loopPulse = [LoopPulse sharedInstance];
-    [loopPulse setApplicationId:applicationId andToken:token];
-    [loopPulse authenticate:successHandler];
-}
-
-+ (void)startLocationMonitoring
-{
-    LoopPulse *loopPulse = [LoopPulse sharedInstance];
-    if (loopPulse.isTracking) {
-        [loopPulse.locationManager startMonitoringForAllRegions];
-    } else {
-        // Respect advertisingTrackingEnabled and stop all tracking.
-        [loopPulse.locationManager stopMonitoringForAllRegions];
-    }
-}
-
-+ (void)stopLocationMonitoring {
-    LoopPulse *loopPulse = [LoopPulse sharedInstance];
-    [loopPulse.locationManager stopMonitoringForAllRegions];
-}
-
 + (void)registerForRemoteNotificationTypesForApplication:(UIApplication *)application
 {
 }
@@ -215,6 +170,30 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
 {
 }
 
++ (void)setApplicationId:(NSString *)applicationId withToken:(NSString *)token
+{
+    LoopPulse *loopPulse = [LoopPulse sharedInstance];
+    [loopPulse setApplicationId:applicationId andToken:token];
+}
+
++ (void)authenticate:(void (^)(NSError *error))completionHandler
+{
+    LoopPulse *loopPulse = [LoopPulse sharedInstance];
+    [loopPulse authenticate:completionHandler];
+}
+
++ (void)startLocationMonitoring
+{
+    LoopPulse *loopPulse = [LoopPulse sharedInstance];
+    [loopPulse startLocationMonitoring];
+}
+
++ (void)stopLocationMonitoring
+{
+    LoopPulse *loopPulse = [LoopPulse sharedInstance];
+    [loopPulse stopLocationMonitoring];
+}
+
 + (void)identifyVisitorWithExternalId:(NSString *)externalId
 {
     LoopPulse *loopPulse = [LoopPulse sharedInstance];
@@ -225,6 +204,12 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
 {
     LoopPulse *loopPulse = [LoopPulse sharedInstance];
     [loopPulse.visitor tagWithProperties:properties];
+}
+
++ (BOOL)isAuthenticated
+{
+    LoopPulse *loopPulse = [LoopPulse sharedInstance];
+    return [loopPulse.authManager isAuthenticated];
 }
 
 #pragma mark Private Class Methods

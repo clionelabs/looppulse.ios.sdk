@@ -51,7 +51,7 @@
     if ([self respondsToSelector: @selector(requestAlwaysAuthorization)]) {
         [self requestAlwaysAuthorization];
     }
-    
+
     // Noted that you can set monitoredRegions before authorization, but they won't function until it's authorized
     [self startMonitoringForBeaconRegions:self.beaconRegions];
     [self trackCurrentMonitoredRegions];

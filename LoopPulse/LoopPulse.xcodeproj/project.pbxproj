@@ -36,6 +36,8 @@
 		24F3D01219C2ED2F005C0866 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24F3D01119C2ED2F005C0866 /* AdSupport.framework */; };
 		CB09A7A31A5DE3800037A1FE /* LPPoi.h in Headers */ = {isa = PBXBuildFile; fileRef = CB09A7A11A5DE3800037A1FE /* LPPoi.h */; };
 		CB09A7A41A5DE3800037A1FE /* LPPoi.m in Sources */ = {isa = PBXBuildFile; fileRef = CB09A7A21A5DE3800037A1FE /* LPPoi.m */; };
+		CB1135981A6EB4B500D7E164 /* LPAuthManager.h in Headers */ = {isa = PBXBuildFile; fileRef = CB1135961A6EB4B500D7E164 /* LPAuthManager.h */; };
+		CB1135991A6EB4B500D7E164 /* LPAuthManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1135971A6EB4B500D7E164 /* LPAuthManager.m */; };
 		CB4616591A35954E00625DEB /* LPConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = CB4616571A35954E00625DEB /* LPConstants.h */; };
 		CB46165A1A35954E00625DEB /* LPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4616581A35954E00625DEB /* LPConstants.m */; };
 		F42E86B2192DF644007EDC30 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F42E86B1192DF644007EDC30 /* Foundation.framework */; };
@@ -105,6 +107,8 @@
 		24F3D01119C2ED2F005C0866 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		CB09A7A11A5DE3800037A1FE /* LPPoi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPPoi.h; sourceTree = "<group>"; };
 		CB09A7A21A5DE3800037A1FE /* LPPoi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPPoi.m; sourceTree = "<group>"; };
+		CB1135961A6EB4B500D7E164 /* LPAuthManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPAuthManager.h; sourceTree = "<group>"; };
+		CB1135971A6EB4B500D7E164 /* LPAuthManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPAuthManager.m; sourceTree = "<group>"; };
 		CB4616571A35954E00625DEB /* LPConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPConstants.h; sourceTree = "<group>"; };
 		CB4616581A35954E00625DEB /* LPConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPConstants.m; sourceTree = "<group>"; };
 		F42E86AE192DF644007EDC30 /* libLoopPulse.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLoopPulse.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -207,6 +211,8 @@
 				F42E86E1192DF6A1007EDC30 /* LoopPulse.m */,
 				F42E86E2192DF6A1007EDC30 /* LoopPulse.h */,
 				247AB54D19A6F58B0065488B /* LoopPulsePrivate.h */,
+				CB1135961A6EB4B500D7E164 /* LPAuthManager.h */,
+				CB1135971A6EB4B500D7E164 /* LPAuthManager.m */,
 				F42E86D7192DF6A1007EDC30 /* LPVisitor.m */,
 				F42E86D8192DF6A1007EDC30 /* LPVisitor.h */,
 				F42E86D9192DF6A1007EDC30 /* LPLocationManager.m */,
@@ -278,6 +284,7 @@
 				2483A5A4199DF9590003B8FA /* LPBeaconRegionManager.h in Headers */,
 				F42E86FB192DF808007EDC30 /* LoopPulse.h in Headers */,
 				F49DC1DE19664F94008D7EEB /* LPVisitor.h in Headers */,
+				CB1135981A6EB4B500D7E164 /* LPAuthManager.h in Headers */,
 				247AB54E19A6F58B0065488B /* LoopPulsePrivate.h in Headers */,
 				CB4616591A35954E00625DEB /* LPConstants.h in Headers */,
 				24A01B07199B5C0700EB7C46 /* CLBeaconRegion+LoopPulseHelpers.h in Headers */,
@@ -404,6 +411,7 @@
 				24A01B08199B5C0700EB7C46 /* CLBeaconRegion+LoopPulseHelpers.m in Sources */,
 				247A975719E3BFD100DECE18 /* NSDictionary+LoopPulseHelpers.m in Sources */,
 				24AB534B19B45550003C0940 /* LPServerResponse.m in Sources */,
+				CB1135991A6EB4B500D7E164 /* LPAuthManager.m in Sources */,
 				F42E86EC192DF6A1007EDC30 /* LPDataStore+LPLocationManager.m in Sources */,
 				F42E86EB192DF6A1007EDC30 /* LPDataStore+LPVisitor.m in Sources */,
 				F42E86ED192DF6A1007EDC30 /* LPDataStore.m in Sources */,

@@ -14,30 +14,25 @@
 + (LoopPulse *)sharedInstance;
 + (NSString *)version;
 
-+ (void)authenticateWithApplicationId:(NSString *)applicationId
-                            withToken:(NSString *)token
-                    andSuccessHandler:(void(^)(void))successHandler;
++ (void)setApplicationId:(NSString *)applicationId withToken:(NSString *)token;
++ (void)authenticate:(void (^)(NSError *error))completionHandler;
++ (BOOL)isAuthenticated;
 + (void)startLocationMonitoring;
 + (void)stopLocationMonitoring;
++ (void)identifyVisitorWithExternalId:(NSString *)externalId;
++ (void)tagVisitorWithProperities:(NSDictionary *)properties;
 
 + (void)registerForRemoteNotificationTypesForApplication:(UIApplication *)application;
 + (void)didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken;
 + (void)didReceiveRemoteNotification:(NSDictionary *)userInfo;
 + (void)didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings withApplication:(UIApplication *)application;
 
-+ (void)identifyVisitorWithExternalId:(NSString *)externalId;
-+ (void)tagVisitorWithProperities:(NSDictionary *)properties;
-
 - (void)track:(NSString *)eventName withProperties:(NSDictionary *)properties;
 
-@property (readonly, nonatomic) BOOL isAuthenticated;
 @property (readonly, nonatomic) BOOL isAuthorized; // to track location
 @property (readonly, nonatomic) BOOL isTracking;
 @property (readonly, nonatomic) NSUUID *visitorUUID;
 
-extern NSString *const LoopPulseDidAuthenticateSuccessfullyNotification;
-extern NSString *const LoopPulseDidFailToAuthenticateNotification;
-extern NSString *const LoopPulseDidReceiveAuthenticationError;
 extern NSString *const LoopPulseLocationAuthorizationGrantedNotification;
 extern NSString *const LoopPulseLocationAuthorizationDeniedNotification;
 extern NSString *const LoopPulseLocationDidEnterRegionNotification;

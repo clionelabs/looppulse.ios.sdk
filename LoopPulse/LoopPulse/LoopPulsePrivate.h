@@ -10,6 +10,7 @@
 @interface LoopPulse ()
 
 @property (readonly, nonatomic) NSString *captureId;
+@property (readonly, nonatomic) BOOL isComponentsInitialized; // keep track of whether LP components (e.g. dataStore) has been initialized with server authenticated response
 
 + (NSUserDefaults *)defaults;
 + (void)postNotification:(NSString *)name withUserInfo:(NSDictionary *)userInfo;
