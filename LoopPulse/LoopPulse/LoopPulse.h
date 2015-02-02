@@ -27,8 +27,6 @@
 + (void)didReceiveRemoteNotification:(NSDictionary *)userInfo;
 + (void)didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings withApplication:(UIApplication *)application;
 
-- (void)track:(NSString *)eventName withProperties:(NSDictionary *)properties;
-
 @property (readonly, nonatomic) BOOL isAuthorized; // to track location
 @property (readonly, nonatomic) BOOL isTracking;
 @property (readonly, nonatomic) NSUUID *visitorUUID;
