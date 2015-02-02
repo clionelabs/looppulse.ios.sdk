@@ -27,10 +27,6 @@
 @property (readonly, strong) NSString *firebaseBaseUrl;
 @end
 
-@interface LPVisitor ()
-- (id)initWithDataStore:(LPDataStore *)dataStore;
-@end
-
 NSString *const LoopPulseLocationAuthorizationGrantedNotification=@"LoopPulseLocationAuthorizationGrantedNotification";
 NSString *const LoopPulseLocationAuthorizationDeniedNotification=@"LoopPulseLocationAuthorizationDeniedNotification";
 NSString *const LoopPulseLocationDidEnterRegionNotification=@"LoopPulseLocationDidEnterRegionNotification";

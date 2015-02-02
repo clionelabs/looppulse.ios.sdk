@@ -7,7 +7,6 @@
 //
 
 #import "LPVisitor.h"
-#import "LPDataStore+LPVisitor.h"
 #import "LoopPulsePrivate.h"
 
 @interface LPVisitor ()

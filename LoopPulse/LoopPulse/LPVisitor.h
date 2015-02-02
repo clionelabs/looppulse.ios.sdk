@@ -7,9 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LPDataStore+LPVisitor.h"
 
 @interface LPVisitor : NSObject
 
+- (id)initWithDataStore:(LPDataStore *)dataStore;
 - (void)identifyWithExternalID:(NSString *)externalID;
 - (void)tagWithProperties:(NSDictionary *)properties;
 - (void)track:(NSString *)eventName WithProperties:(NSDictionary *)properties;
