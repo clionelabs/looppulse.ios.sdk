@@ -206,6 +206,13 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
     [loopPulse.visitor tagWithProperties:properties];
 }
 
++ (BOOL)isSupported
+{
+    // https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/TransitionGuide/SupportingEarlieriOS.html#//apple_ref/doc/uid/TP40013174-CH14-SW3
+    // We need iOS 7 and up for iBeacon region monitoring.
+    return (floor(NSFoundationVersionNumber) >= NSFoundationVersionNumber_iOS_7_0);
+}
+
 + (BOOL)isAuthenticated
 {
     LoopPulse *loopPulse = [LoopPulse sharedInstance];
@@ -216,6 +223,12 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
 
 + (LoopPulse *)sharedInstance
 {
+    // If the current installation does not support iBeacon calls,
+    // we will just set the sharedInstance to nil so all messages
+    // passed in will do nothing.
+    if (![LoopPulse isSupported])
+        return nil;
+
     static LoopPulse *sharedInstance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
