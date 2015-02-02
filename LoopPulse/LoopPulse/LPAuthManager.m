@@ -13,9 +13,6 @@
 #import "LPPoi.h"
 #import "CLBeaconRegion+LoopPulseHelpers.h"
 
-NSString *const LoopPulseAuthenticationEndPoint = @"http://192.168.0.103:3000/api/authenticate/applications/";
-NSInteger const RefreshPeriodInSeconds = 246060;
-
 @implementation LPAuthManager;
 
 - (id)initWithApplicadtionId:(NSString *)applicationId andToken:(NSString *)token andVisitorUUID:(NSString *)visitorUUID
@@ -61,7 +58,7 @@ NSInteger const RefreshPeriodInSeconds = 246060;
 
 - (NSURLRequest *)authenticationRequest
 {
-    NSString *url = [NSString stringWithFormat:@"%@%@", LoopPulseAuthenticationEndPoint, self.applicationId];
+    NSString *url = [NSString stringWithFormat:@"%@%@", LPAuthenticationEndPoint, self.applicationId];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:url]];
     [request setValue:self.token forHTTPHeaderField:@"x-auth-token"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -97,7 +94,7 @@ NSInteger const RefreshPeriodInSeconds = 246060;
     NSDate *last = [LoopPulse.defaults objectForKey:@"lastResponseSavedTime"];
     NSTimeInterval interval = [[NSDate date] timeIntervalSinceDate:last];
     NSLog(@"auth interval: %f", interval);
-    return interval > RefreshPeriodInSeconds;
+    return interval > LPRefreshPeriodInSeconds;
 }
 
 // Set defaults with server response
