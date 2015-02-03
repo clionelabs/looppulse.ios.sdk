@@ -43,13 +43,23 @@
     return beaconRegionManager.genericRegionsToMonitor;
 }
 
-- (void)startMonitoringForAllRegions
+- (void)requestAuthorization
 {
     // For iOS 8, we need to call requestAlwaysAuthorization explicity for permission
     //   It's okay we call it everytime without checking the authorization status, because it won't prompt again once it's authorized.
     // For iOS 7, we just need to call startMonitoring, and iOS will prompt the permission dialog automatically
     if ([self respondsToSelector: @selector(requestAlwaysAuthorization)]) {
         [self requestAlwaysAuthorization];
+        [[LoopPulse sharedInstance] track:@"requestAlwaysAuthorization" withProperties:@{}];
+    } else {
+        [[LoopPulse sharedInstance] track:@"requestAuthorization" withProperties:@{}];
+    }
+}
+
+- (void)startMonitoringForAllRegions
+{
+    if (!self.isAuthorized) {
+        [self requestAuthorization];
     }
 
     // Noted that you can set monitoredRegions before authorization, but they won't function until it's authorized
