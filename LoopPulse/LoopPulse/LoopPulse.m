@@ -206,7 +206,7 @@ NSString *const LoopPulseLocationDidExitRegionNotification=@"LoopPulseLocationDi
 {
     // https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/TransitionGuide/SupportingEarlieriOS.html#//apple_ref/doc/uid/TP40013174-CH14-SW3
     // We need iOS 7 and up for iBeacon region monitoring.
-    return (floor(NSFoundationVersionNumber) >= NSFoundationVersionNumber_iOS_7_0);
+    return (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1);
 }
 
 + (BOOL)isAuthenticated
