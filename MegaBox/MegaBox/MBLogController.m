@@ -88,7 +88,7 @@
 
 - (void)removeCoreDataEntity:(NSString *)entityName snapshot:(FDataSnapshot *)snapshot
 {
-    NSManagedObject *managedObject = [self fetchCoreDataManagedObjectWithEntityName:kCoreDataEntity firebaseKey:snapshot.name];
+    NSManagedObject *managedObject = [self fetchCoreDataManagedObjectWithEntityName:kCoreDataEntity firebaseKey:snapshot.key];
     if (managedObject) {
         [self.managedObjectContext deleteObject:managedObject];
     }
@@ -108,7 +108,7 @@
 
 - (void)updateCoreDataEntity:(NSString *)entityName snapshot:(FDataSnapshot *)snapshot
 {
-    NSString *firebaseKey = snapshot.name;
+    NSString *firebaseKey = snapshot.key;
     NSDictionary *properties = snapshot.value;
 
     if ((id)properties == [NSNull null]) return;
@@ -119,7 +119,7 @@
         [managedObject setValue:firebaseKey forKey:kCoreDataKeyAttribute];
     }
     
-    [managedObject setValue:snapshot.name forKey:@"name"];
+    [managedObject setValue:snapshot.key forKey:@"name"];
     if (properties[@"sortedBy"] != [NSNull null]) {
         [managedObject setValue:properties[@"sortedBy"] forKey:@"sortedBy"];
     }
@@ -154,7 +154,7 @@
     void (^identifierBlock)(FDataSnapshot *snapshot) = ^(FDataSnapshot *snapshot) {
         NSMutableArray *uniqueIdentifiers = [[NSMutableArray alloc] init];
         for (FDataSnapshot *child in snapshot.children) {
-            [uniqueIdentifiers addObject:child.name];
+            [uniqueIdentifiers addObject:child.key];
         };
         
         NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:kCoreDataEntity];
