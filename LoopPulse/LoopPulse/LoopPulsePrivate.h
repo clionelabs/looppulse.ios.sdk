@@ -14,5 +14,6 @@
 
 + (NSUserDefaults *)defaults;
 + (void)postNotification:(NSString *)name withUserInfo:(NSDictionary *)userInfo;
+- (void)track:(NSString *)eventName withProperties:(NSDictionary *)properties;
 
 @end
