@@ -138,6 +138,7 @@
 - (void)didRangeBeacons:(NSArray *)beacons inSpecificRegion:(CLRegion *)region
 {
     // Do Nothing - We won't range specific beacon regions anyway.
+    NSAssert(![region isLoopPulseSpecificBeaconRegion], @"Tried to range a specific region. %@", region);
 }
 
 #pragma mark - locationManager Delegate
@@ -161,17 +162,21 @@
 
 - (void)locationManager:(CLLocationManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region
 {
-    NSLog(@"didRange in Region: %@", region);
-    NSArray *filteredBeacons = beacons;
+    // Only deal with beacons from given POIs.
+    NSArray *filteredBeacons = [self filterByKnownBeacons:beacons];
     if ([self shouldOnlySendBeaconEventsWithKnownProximity]) {
-        filteredBeacons = [self filterByKnownProximities:beacons];
+        filteredBeacons = [self filterByKnownProximities:filteredBeacons];
     }
-    if ([region isLoopPulseGenericBeaconRegion]) {
-        [self didRangeBeacons:beacons inGenericRegion:region];
-    } else if ([region isLoopPulseSpecificBeaconRegion]) {
-        [self didRangeBeacons:beacons inSpecificRegion:region];
+    if (filteredBeacons.count > 0) {
+        if ([region isLoopPulseGenericBeaconRegion]) {
+            [self didRangeBeacons:filteredBeacons inGenericRegion:region];
+        } else if ([region isLoopPulseSpecificBeaconRegion]) {
+            [self didRangeBeacons:filteredBeacons inSpecificRegion:region];
+        }
     }
 }
+
+
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
@@ -198,6 +203,24 @@
     // IOS 8: kCLAuthorizationStatusAuthorizedAlways
     return (CLLocationManager.authorizationStatus == kCLAuthorizationStatusAuthorized
             || CLLocationManager.authorizationStatus == kCLAuthorizationStatusAuthorizedAlways);
+}
+
+// Ensure we only deal with the beacons we expected
+- (NSArray *)filterByKnownBeacons:(NSArray *)beacons
+{
+    NSArray *pois = [LoopPulse.defaults objectForKey:@"pois"];
+    NSPredicate *isKnownBeacon = [NSPredicate predicateWithBlock:^BOOL(CLBeacon * beacon, NSDictionary *bindings) {
+        for (NSDictionary *poi in pois) {
+            NSDictionary *knownBeacon = [poi objectForKey:@"beacon"];
+            if ([[beacon.proximityUUID UUIDString] isEqualToString:[knownBeacon objectForKey:@"uuid"]] &&
+                beacon.major == [knownBeacon objectForKey:@"major"] &&
+                beacon.minor == [knownBeacon objectForKey:@"minor"]) {
+                return true;
+            }
+        }
+        return false;
+    }];
+    return [beacons filteredArrayUsingPredicate:isKnownBeacon];
 }
 
 - (NSArray *)filterByKnownProximities:(NSArray *)beacons
