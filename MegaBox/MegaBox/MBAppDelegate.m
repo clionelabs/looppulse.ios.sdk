@@ -24,7 +24,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.coreDataController = [[MBCoreDataController alloc] init];
-    [LoopPulse setApplicationId:@"N8e5qhjSfikWYZXHK" withToken:@"lkdjfklj3eo"];
+    [LoopPulse setApplicationId:@"DwH9BHGgxrcMzwDTB" withToken:@"lkdjfklj3eo"];
 
     if (![LoopPulse isAuthenticated]) {
         [LoopPulse authenticate:^(NSError *error) {

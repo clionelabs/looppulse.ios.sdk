@@ -79,7 +79,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		F49DC15B196532C4008D7EEB /* MegaBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MegaBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F49DC15B196532C4008D7EEB /* LoopPulse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoopPulse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F49DC15E196532C4008D7EEB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F49DC160196532C4008D7EEB /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		F49DC162196532C4008D7EEB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -184,7 +184,7 @@
 		F49DC15C196532C4008D7EEB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F49DC15B196532C4008D7EEB /* MegaBox.app */,
+				F49DC15B196532C4008D7EEB /* LoopPulse.app */,
 				F49DC184196532C4008D7EEB /* MegaBoxTests.xctest */,
 			);
 			name = Products;
@@ -300,9 +300,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F49DC15A196532C4008D7EEB /* LoopPulse */ = {
+		F49DC15A196532C4008D7EEB /* 91mai x LP */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F49DC196196532C4008D7EEB /* Build configuration list for PBXNativeTarget "LoopPulse" */;
+			buildConfigurationList = F49DC196196532C4008D7EEB /* Build configuration list for PBXNativeTarget "91mai x LP" */;
 			buildPhases = (
 				F49DC157196532C4008D7EEB /* Sources */,
 				F49DC159196532C4008D7EEB /* Resources */,
@@ -313,9 +313,9 @@
 			dependencies = (
 				F49DC1BD196533B7008D7EEB /* PBXTargetDependency */,
 			);
-			name = LoopPulse;
+			name = "91mai x LP";
 			productName = MegaBox;
-			productReference = F49DC15B196532C4008D7EEB /* MegaBox.app */;
+			productReference = F49DC15B196532C4008D7EEB /* LoopPulse.app */;
 			productType = "com.apple.product-type.application";
 		};
 		F49DC183196532C4008D7EEB /* MegaBoxTests */ = {
@@ -374,7 +374,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				F49DC15A196532C4008D7EEB /* LoopPulse */,
+				F49DC15A196532C4008D7EEB /* 91mai x LP */,
 				F49DC183196532C4008D7EEB /* MegaBoxTests */,
 			);
 		};
@@ -447,7 +447,7 @@
 /* Begin PBXTargetDependency section */
 		F49DC18B196532C4008D7EEB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = F49DC15A196532C4008D7EEB /* LoopPulse */;
+			target = F49DC15A196532C4008D7EEB /* 91mai x LP */;
 			targetProxy = F49DC18A196532C4008D7EEB /* PBXContainerItemProxy */;
 		};
 		F49DC1BD196533B7008D7EEB /* PBXTargetDependency */ = {
@@ -653,7 +653,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F49DC196196532C4008D7EEB /* Build configuration list for PBXNativeTarget "LoopPulse" */ = {
+		F49DC196196532C4008D7EEB /* Build configuration list for PBXNativeTarget "91mai x LP" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F49DC197196532C4008D7EEB /* Debug */,
