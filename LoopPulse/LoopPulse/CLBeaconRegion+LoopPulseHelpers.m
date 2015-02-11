@@ -37,6 +37,9 @@
 {
     NSDictionary *beaconRegionKeyToProductName = [[LoopPulse defaults] objectForKey:@"beaconRegionKeyToProductName"];
     NSString *productName = [beaconRegionKeyToProductName objectForKey:self.key];
+    if (!productName) {
+        return self.key;
+    }
     return productName;
 //    return [NSString stringWithFormat:@"%@, %@:%@:%@", productName, [self.proximityUUID UUIDString], self.major, self.minor];
 }
