@@ -11,7 +11,7 @@
 #import <LoopPulse/LoopPulse.h>
 #import <CoreLocation/CoreLocation.h>
 
-#define kFirechatLogNS @"https://looppulse-megabox.firebaseio.com/visitors/%@/logs"
+#define kFirechatLogNS @"https://looppulse-beta.firebaseio.com/visitors/%@/logs"
 #define kFirechatLogToken @"ha5jJXD3ac6DzOWoNfxPunOvrfvK68gQXwodfnn9"
 //#define kFirechatLogNS @"https://hiukim-lp-dev-beacon.firebaseio.com/visitors/%@/logs"
 //#define kFirechatLogToken @"a8heWtUdnNAGliQwJ25cX7UWGy5cYwWf4EYegtQB"
