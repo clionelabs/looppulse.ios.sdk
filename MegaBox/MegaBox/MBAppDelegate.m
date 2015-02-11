@@ -42,9 +42,11 @@
         }];
     }
 
-    self.logController = [[MBLogController alloc] init];
-    self.logController.loopPulse = [LoopPulse sharedInstance];
-    self.logController.managedObjectContext = self.coreDataController.managedObjectContext;
+//    self.logController = [[MBLogController alloc] init];
+//    self.logController.loopPulse = [LoopPulse sharedInstance];
+//    self.logController.managedObjectContext = self.coreDataController.managedObjectContext;
+
+    [self requestNotificationPermission];
     [self observeLoopPulse];
 
     UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
@@ -52,6 +54,13 @@
     controller.managedObjectContext = self.coreDataController.managedObjectContext;
 
     return YES;
+}
+
+- (void)requestNotificationPermission
+{
+    UIUserNotificationType types = UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+    UIUserNotificationSettings *mySettings = [UIUserNotificationSettings settingsForTypes:types categories:nil];
+    [[UIApplication sharedApplication] registerUserNotificationSettings:mySettings];
 }
 
 - (void)observeLoopPulse
