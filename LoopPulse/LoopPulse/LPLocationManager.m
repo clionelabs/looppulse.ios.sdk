@@ -212,7 +212,7 @@
     NSPredicate *isKnownBeacon = [NSPredicate predicateWithBlock:^BOOL(CLBeacon * beacon, NSDictionary *bindings) {
         for (NSDictionary *poi in pois) {
             NSDictionary *knownBeacon = [poi objectForKey:@"beacon"];
-            if ([[beacon.proximityUUID UUIDString] isEqualToString:[knownBeacon objectForKey:@"uuid"]] &&
+            if ([[beacon.proximityUUID UUIDString] caseInsensitiveCompare:[knownBeacon objectForKey:@"uuid"]]==NSOrderedSame &&
                 beacon.major == [knownBeacon objectForKey:@"major"] &&
                 beacon.minor == [knownBeacon objectForKey:@"minor"]) {
                 return true;
