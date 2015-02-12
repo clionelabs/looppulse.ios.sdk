@@ -42,9 +42,9 @@
         }];
     }
 
-    self.logController = [[MBLogController alloc] init];
-    self.logController.loopPulse = [LoopPulse sharedInstance];
-    self.logController.managedObjectContext = self.coreDataController.managedObjectContext;
+//    self.logController = [[MBLogController alloc] init];
+//    self.logController.loopPulse = [LoopPulse sharedInstance];
+//    self.logController.managedObjectContext = self.coreDataController.managedObjectContext;
 
     [self requestNotificationPermission];
     [self observeLoopPulse];
