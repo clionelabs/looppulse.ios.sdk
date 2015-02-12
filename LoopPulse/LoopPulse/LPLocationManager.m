@@ -213,8 +213,8 @@
         for (NSDictionary *poi in pois) {
             NSDictionary *knownBeacon = [poi objectForKey:@"beacon"];
             if ([[beacon.proximityUUID UUIDString] caseInsensitiveCompare:[knownBeacon objectForKey:@"uuid"]]==NSOrderedSame &&
-                beacon.major == [knownBeacon objectForKey:@"major"] &&
-                beacon.minor == [knownBeacon objectForKey:@"minor"]) {
+                [beacon.major isEqualToNumber:[knownBeacon objectForKey:@"major"]] &&
+                [beacon.minor isEqualToNumber:[knownBeacon objectForKey:@"minor"]]) {
                 return true;
             }
         }
