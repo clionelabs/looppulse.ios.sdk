@@ -79,7 +79,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		F49DC15B196532C4008D7EEB /* MegaBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = MegaBox.app; path = LoopPulse.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F49DC15B196532C4008D7EEB /* EZTABLE x LP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EZTABLE x LP.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F49DC15E196532C4008D7EEB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F49DC160196532C4008D7EEB /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		F49DC162196532C4008D7EEB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -184,7 +184,7 @@
 		F49DC15C196532C4008D7EEB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F49DC15B196532C4008D7EEB /* MegaBox.app */,
+				F49DC15B196532C4008D7EEB /* EZTABLE x LP.app */,
 				F49DC184196532C4008D7EEB /* MegaBoxTests.xctest */,
 			);
 			name = Products;
@@ -315,7 +315,7 @@
 			);
 			name = "EZTABLE x LP";
 			productName = MegaBox;
-			productReference = F49DC15B196532C4008D7EEB /* MegaBox.app */;
+			productReference = F49DC15B196532C4008D7EEB /* EZTABLE x LP.app */;
 			productType = "com.apple.product-type.application";
 		};
 		F49DC183196532C4008D7EEB /* MegaBoxTests */ = {
